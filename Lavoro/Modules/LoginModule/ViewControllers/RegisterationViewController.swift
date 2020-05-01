@@ -16,7 +16,6 @@ class RegisterationViewController: BaseViewController {
     var textFieldPlacehoders = ["Username", "Password", "Email", "Phone", "Gender", "Date of birth"]
     override func viewDidLoad() {
         super.viewDidLoad()
-        IQKeyboardManager.shared.enable = true
     }
     
     @objc func imageSelectionButton(button: UIButton) {

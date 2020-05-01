@@ -30,6 +30,8 @@
 		136F3277245B0490006939ED /* WorkCheckIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 136F3276245B0490006939ED /* WorkCheckIn.storyboard */; };
 		136F327C245B1012006939ED /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136F327B245B1012006939ED /* ProfileViewController.swift */; };
 		136F327E245B13C6006939ED /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136F327D245B13C6006939ED /* ProfileTableViewCell.swift */; };
+		136F3282245B4195006939ED /* MyScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136F3281245B4195006939ED /* MyScheduleViewController.swift */; };
+		136F3284245B4D42006939ED /* UIDate+Exts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136F3283245B4D42006939ED /* UIDate+Exts.swift */; };
 		1378AA892459E75700131BEB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1378AA882459E75700131BEB /* AppDelegate.swift */; };
 		1378AA8D2459E75700131BEB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1378AA8C2459E75700131BEB /* ViewController.swift */; };
 		1378AA902459E75700131BEB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1378AA8E2459E75700131BEB /* Main.storyboard */; };
@@ -65,6 +67,8 @@
 		136F3276245B0490006939ED /* WorkCheckIn.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WorkCheckIn.storyboard; sourceTree = "<group>"; };
 		136F327B245B1012006939ED /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		136F327D245B13C6006939ED /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
+		136F3281245B4195006939ED /* MyScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyScheduleViewController.swift; sourceTree = "<group>"; };
+		136F3283245B4D42006939ED /* UIDate+Exts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDate+Exts.swift"; sourceTree = "<group>"; };
 		1378AA852459E75700131BEB /* Lavoro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lavoro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1378AA882459E75700131BEB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1378AA8C2459E75700131BEB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -211,6 +215,7 @@
 			isa = PBXGroup;
 			children = (
 				136F327B245B1012006939ED /* ProfileViewController.swift */,
+				136F3281245B4195006939ED /* MyScheduleViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -262,6 +267,7 @@
 				1378AAAA2459F5EE00131BEB /* UIResponder+Exts.swift */,
 				1378AAAC2459FFEC00131BEB /* UIColor+Exts.swift */,
 				136F3230245AC0BA006939ED /* BaseViewController.swift */,
+				136F3283245B4D42006939ED /* UIDate+Exts.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -411,6 +417,7 @@
 				1378AA892459E75700131BEB /* AppDelegate.swift in Sources */,
 				1378AAAD2459FFEC00131BEB /* UIColor+Exts.swift in Sources */,
 				136F3258245B032F006939ED /* AccountTypeTableViewCell.swift in Sources */,
+				136F3282245B4195006939ED /* MyScheduleViewController.swift in Sources */,
 				136F325B245B032F006939ED /* RegisterationImageTableViewCell.swift in Sources */,
 				136F325D245B032F006939ED /* Onboarding.swift in Sources */,
 				136F3231245AC0BA006939ED /* BaseViewController.swift in Sources */,
@@ -418,6 +425,7 @@
 				136F325E245B032F006939ED /* AccountType.swift in Sources */,
 				136F3262245B032F006939ED /* EnterMobileViewController.swift in Sources */,
 				136F3259245B032F006939ED /* OnboardingCollectionViewCell.swift in Sources */,
+				136F3284245B4D42006939ED /* UIDate+Exts.swift in Sources */,
 				136F3263245B032F006939ED /* OnboardingViewController.swift in Sources */,
 				136F327E245B13C6006939ED /* ProfileTableViewCell.swift in Sources */,
 				136F3264245B032F006939ED /* MobileVerificationViewController.swift in Sources */,

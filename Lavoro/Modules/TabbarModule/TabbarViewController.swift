@@ -17,6 +17,7 @@ class TabbarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTabbar()
+        self.selectedIndex = 4
         // Do any additional setup after loading the view.
     }
     

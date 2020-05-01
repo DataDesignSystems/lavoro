@@ -30,7 +30,19 @@
                     <view key="view" contentMode="scaleToFill" id="c5d-vJ-fyI">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JCO-KK-kI5">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="5p6-Wn-Bfa" firstAttribute="bottom" secondItem="JCO-KK-kI5" secondAttribute="bottom" id="Gv2-VL-ON3"/>
+                            <constraint firstItem="JCO-KK-kI5" firstAttribute="leading" secondItem="5p6-Wn-Bfa" secondAttribute="leading" id="rKr-6s-yNS"/>
+                            <constraint firstItem="5p6-Wn-Bfa" firstAttribute="trailing" secondItem="JCO-KK-kI5" secondAttribute="trailing" id="sXB-m7-y6h"/>
+                            <constraint firstItem="JCO-KK-kI5" firstAttribute="top" secondItem="5p6-Wn-Bfa" secondAttribute="top" id="tg2-tA-M9l"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="5p6-Wn-Bfa"/>
                     </view>
                     <navigationItem key="navigationItem" id="oDh-Ee-Aia"/>

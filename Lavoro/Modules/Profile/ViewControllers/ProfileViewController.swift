@@ -32,7 +32,7 @@ class ProfileViewController: BaseViewController {
         setupView()
         // Do any additional setup after loading the view.
     }
-    
+        
     func setupView() {
         userImage.setLayer(cornerRadius: 6.0)
         editButton.setLayer(cornerRadius: 10.0)
@@ -59,7 +59,13 @@ extension ProfileViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        let object = profileInfo[indexPath.section][indexPath.row]
+        switch object.type {
+        case .mySchedule:
+            self.performSegue(withIdentifier: "mySchedule", sender: self)
+        default:
+            print(object.title)
+        }
     }
 }
 

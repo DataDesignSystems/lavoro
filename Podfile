@@ -8,6 +8,6 @@ target 'Lavoro' do
   # Pods for Lavoro
   pod 'SkyFloatingLabelTextField', '~> 3.0'
   pod 'IQKeyboardManagerSwift', '6.3.0'
-
-
+  pod 'KVKCalendar'
+  pod 'SnapKit', '~> 5.0.0'
 end

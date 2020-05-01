@@ -195,14 +195,92 @@
                         <outlet property="tableView" destination="k15-ep-6BI" id="ejW-Yh-wDE"/>
                         <outlet property="userImage" destination="VCc-IW-qiH" id="8qn-mE-Ji5"/>
                         <outlet property="usernameLabel" destination="Sfm-Hk-AVH" id="Wsd-oL-kfR"/>
+                        <segue destination="HSC-tk-CCO" kind="show" identifier="mySchedule" id="557-ms-gwV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t0X-9R-SlJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="123.18840579710145" y="130.58035714285714"/>
         </scene>
+        <!--My Schedule View Controller-->
+        <scene sceneID="oFF-lW-wVu">
+            <objects>
+                <viewController id="HSC-tk-CCO" customClass="MyScheduleViewController" customModule="Lavoro" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="m5f-le-fJs">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Schedule" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5qQ-pF-1m2">
+                                <rect key="frame" x="156.5" y="63.5" width="101.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rFu-oD-x2K">
+                                <rect key="frame" x="16" y="54" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="PPy-hc-xey"/>
+                                    <constraint firstAttribute="height" constant="40" id="oTD-Hh-q8y"/>
+                                </constraints>
+                                <state key="normal" image="ic_back"/>
+                                <connections>
+                                    <action selector="backButton" destination="HSC-tk-CCO" eventType="touchUpInside" id="4kI-gl-m4T"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dsx-zt-7DF">
+                                <rect key="frame" x="185.5" y="100.5" width="43" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                <color key="textColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ojo-hl-YzL">
+                                <rect key="frame" x="355" y="91" width="43" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="3ye-5u-K3h"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                <state key="normal" title="Today">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="todayButtonTap" destination="HSC-tk-CCO" eventType="touchUpInside" id="K9d-08-QHS"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oVe-tg-RPb">
+                                <rect key="frame" x="0.0" y="131.5" width="414" height="730.5"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.96862745098039216" green="0.97254901960784312" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Gom-hb-kRd" firstAttribute="trailing" secondItem="Ojo-hl-YzL" secondAttribute="trailing" constant="16" id="2gx-TN-6gJ"/>
+                            <constraint firstItem="5qQ-pF-1m2" firstAttribute="centerX" secondItem="m5f-le-fJs" secondAttribute="centerX" id="3Ey-ll-fs1"/>
+                            <constraint firstItem="Dsx-zt-7DF" firstAttribute="centerX" secondItem="m5f-le-fJs" secondAttribute="centerX" id="8fe-Hu-doo"/>
+                            <constraint firstItem="5qQ-pF-1m2" firstAttribute="centerY" secondItem="rFu-oD-x2K" secondAttribute="centerY" id="FZ6-rp-onb"/>
+                            <constraint firstItem="oVe-tg-RPb" firstAttribute="top" secondItem="Dsx-zt-7DF" secondAttribute="bottom" constant="10" id="VuG-BV-xOM"/>
+                            <constraint firstItem="rFu-oD-x2K" firstAttribute="top" secondItem="Gom-hb-kRd" secondAttribute="top" constant="10" id="XSz-K2-GUM"/>
+                            <constraint firstItem="Gom-hb-kRd" firstAttribute="bottom" secondItem="oVe-tg-RPb" secondAttribute="bottom" id="hK5-W0-uFp"/>
+                            <constraint firstItem="oVe-tg-RPb" firstAttribute="leading" secondItem="Gom-hb-kRd" secondAttribute="leading" id="jT4-W4-nCy"/>
+                            <constraint firstItem="Dsx-zt-7DF" firstAttribute="top" secondItem="5qQ-pF-1m2" secondAttribute="bottom" constant="16" id="pUc-z0-Aua"/>
+                            <constraint firstItem="rFu-oD-x2K" firstAttribute="leading" secondItem="Gom-hb-kRd" secondAttribute="leading" constant="16" id="pua-a8-ypO"/>
+                            <constraint firstItem="Gom-hb-kRd" firstAttribute="trailing" secondItem="oVe-tg-RPb" secondAttribute="trailing" id="slh-0c-FtF"/>
+                            <constraint firstItem="Ojo-hl-YzL" firstAttribute="centerY" secondItem="Dsx-zt-7DF" secondAttribute="centerY" id="xHS-iZ-cqx"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Gom-hb-kRd"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="oFK-gF-yV7"/>
+                    <connections>
+                        <outlet property="calendarParentView" destination="oVe-tg-RPb" id="zME-Fa-ZCy"/>
+                        <outlet property="monthLabel" destination="Dsx-zt-7DF" id="ddJ-wI-KW8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="v64-PT-xzZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="844" y="137"/>
+        </scene>
     </scenes>
     <resources>
         <image name="dummyUser" width="105" height="105"/>
+        <image name="ic_back" width="11" height="18"/>
     </resources>
 </document>
