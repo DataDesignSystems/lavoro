@@ -43,7 +43,7 @@ DerivedData
 *.xcuserstate
 
 # CocoaPods
-Pods/
+# Pods/
 
 
 ### Xcode ###

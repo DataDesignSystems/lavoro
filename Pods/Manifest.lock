@@ -1,0 +1,28 @@
+PODS:
+  - IQKeyboardManagerSwift (6.3.0)
+  - KVKCalendar (0.2.9)
+  - SkyFloatingLabelTextField (3.8.0)
+  - SnapKit (5.0.1)
+
+DEPENDENCIES:
+  - IQKeyboardManagerSwift (= 6.3.0)
+  - KVKCalendar
+  - SkyFloatingLabelTextField (~> 3.0)
+  - SnapKit (~> 5.0.0)
+
+SPEC REPOS:
+  trunk:
+    - IQKeyboardManagerSwift
+    - KVKCalendar
+    - SkyFloatingLabelTextField
+    - SnapKit
+
+SPEC CHECKSUMS:
+  IQKeyboardManagerSwift: a8228c257614af98743b4cd8584637025f36358f
+  KVKCalendar: 0cf91e3db666a044f2c59cf3feb3b3c5114aef05
+  SkyFloatingLabelTextField: 5a338412114808e961fe2d14ea2c5452c8b6e4aa
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+
+PODFILE CHECKSUM: 8074197b339535433759757a8e395abb722257b7
+
+COCOAPODS: 1.9.1
