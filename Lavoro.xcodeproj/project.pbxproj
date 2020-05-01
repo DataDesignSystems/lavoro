@@ -40,6 +40,9 @@
 		1378AAAB2459F5EE00131BEB /* UIResponder+Exts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1378AAAA2459F5EE00131BEB /* UIResponder+Exts.swift */; };
 		1378AAAD2459FFEC00131BEB /* UIColor+Exts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1378AAAC2459FFEC00131BEB /* UIColor+Exts.swift */; };
 		13C3525D94BE24BBD94682BB /* Pods_Lavoro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD31EEAD4AE9165735295736 /* Pods_Lavoro.framework */; };
+		13D0579B245C7A6600227E15 /* HomeFeedsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D0579A245C7A6600227E15 /* HomeFeedsViewController.swift */; };
+		13D0579F245C7B2D00227E15 /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D0579E245C7B2D00227E15 /* Feed.swift */; };
+		13D057A1245C7B4700227E15 /* CheckInFeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D057A0245C7B4700227E15 /* CheckInFeedTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +81,9 @@
 		1378AA962459E75A00131BEB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1378AAAA2459F5EE00131BEB /* UIResponder+Exts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIResponder+Exts.swift"; sourceTree = "<group>"; };
 		1378AAAC2459FFEC00131BEB /* UIColor+Exts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Exts.swift"; sourceTree = "<group>"; };
+		13D0579A245C7A6600227E15 /* HomeFeedsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedsViewController.swift; sourceTree = "<group>"; };
+		13D0579E245C7B2D00227E15 /* Feed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
+		13D057A0245C7B4700227E15 /* CheckInFeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInFeedTableViewCell.swift; sourceTree = "<group>"; };
 		628B0437F4A76385A5B384A6 /* Pods-Lavoro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lavoro.debug.xcconfig"; path = "Target Support Files/Pods-Lavoro/Pods-Lavoro.debug.xcconfig"; sourceTree = "<group>"; };
 		FD31EEAD4AE9165735295736 /* Pods_Lavoro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lavoro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -191,6 +197,9 @@
 		136F326C245B045B006939ED /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				13D05797245C7A4C00227E15 /* Cells */,
+				13D05799245C7A4C00227E15 /* Models */,
+				13D05798245C7A4C00227E15 /* ViewControllers */,
 				136F326E245B0464006939ED /* Home.storyboard */,
 			);
 			path = Home;
@@ -270,6 +279,30 @@
 				136F3283245B4D42006939ED /* UIDate+Exts.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		13D05797245C7A4C00227E15 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				13D057A0245C7B4700227E15 /* CheckInFeedTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		13D05798245C7A4C00227E15 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				13D0579A245C7A6600227E15 /* HomeFeedsViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		13D05799245C7A4C00227E15 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				13D0579E245C7B2D00227E15 /* Feed.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		9CFFC5FFA7986660006D978B /* Pods */ = {
@@ -416,7 +449,9 @@
 				1378AA8D2459E75700131BEB /* ViewController.swift in Sources */,
 				1378AA892459E75700131BEB /* AppDelegate.swift in Sources */,
 				1378AAAD2459FFEC00131BEB /* UIColor+Exts.swift in Sources */,
+				13D0579F245C7B2D00227E15 /* Feed.swift in Sources */,
 				136F3258245B032F006939ED /* AccountTypeTableViewCell.swift in Sources */,
+				13D0579B245C7A6600227E15 /* HomeFeedsViewController.swift in Sources */,
 				136F3282245B4195006939ED /* MyScheduleViewController.swift in Sources */,
 				136F325B245B032F006939ED /* RegisterationImageTableViewCell.swift in Sources */,
 				136F325D245B032F006939ED /* Onboarding.swift in Sources */,
@@ -429,6 +464,7 @@
 				136F3263245B032F006939ED /* OnboardingViewController.swift in Sources */,
 				136F327E245B13C6006939ED /* ProfileTableViewCell.swift in Sources */,
 				136F3264245B032F006939ED /* MobileVerificationViewController.swift in Sources */,
+				13D057A1245C7B4700227E15 /* CheckInFeedTableViewCell.swift in Sources */,
 				1378AAAB2459F5EE00131BEB /* UIResponder+Exts.swift in Sources */,
 				136F3260245B032F006939ED /* RegisterationViewController.swift in Sources */,
 				136F325C245B032F006939ED /* User.swift in Sources */,
