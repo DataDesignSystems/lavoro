@@ -66,7 +66,7 @@ extension MyScheduleViewController: CalendarDelegate {
     }
     
     func didAddEvent(_ date: Date?) {
-        print(date)
+        print(date ?? Date())
     }
     
     func didSelectDate(_ date: Date?, type: CalendarType, frame: CGRect?) {

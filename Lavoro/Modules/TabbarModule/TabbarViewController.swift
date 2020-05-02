@@ -17,6 +17,7 @@ class TabbarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTabbar()
+        self.delegate = self
         // Do any additional setup after loading the view.
     }
     
@@ -36,6 +37,17 @@ class TabbarViewController: UITabBarController {
         viewControllers = viewControllerList
 
     }
+    
+    func presentWebCheckIn() {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "WorkCheckIn", bundle: nil)
+        let initialVC = storyBoard.instantiateViewController(withIdentifier: "WorkCheckInModule") as? UINavigationController ?? UIViewController()
+        initialVC.modalPresentationStyle = .fullScreen
+        self.present(initialVC, animated: true, completion: nil)
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default
+    }
 }
 
 struct Tabbar {
@@ -43,4 +55,14 @@ struct Tabbar {
     var initialViewControllerIdentifier: String
     var iconName: String
     var title: String
+}
+
+extension TabbarViewController: UITabBarControllerDelegate {
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        if let nc = viewController as? UINavigationController, let _ = nc.viewControllers.first as? WorkCheckInViewController {
+            presentWebCheckIn()
+            return false
+        }
+        return true
+    }
 }

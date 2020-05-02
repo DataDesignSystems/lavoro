@@ -18,6 +18,7 @@ class CheckInFeedTableViewCell: UITableViewCell {
     @IBOutlet weak var commentsCount: UILabel!
     @IBOutlet weak var locationNameBackgroundView: UIView!
     @IBOutlet weak var locationName: UILabel!
+    @IBOutlet weak var message: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,6 +26,7 @@ class CheckInFeedTableViewCell: UITableViewCell {
         userImage.setLayer(cornerRadius: 25)
         checkInImage.setLayer(cornerRadius: 4)
         locationNameBackgroundView.setLayer(cornerRadius: 4)
+        parentView.outerShadow(shadowOpacity: 0.1, shadowColor: .black)
         // Initialization code
     }
 
@@ -33,9 +35,27 @@ class CheckInFeedTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    func setupCell(with object: Feed) {
+        username.text = object.username
+        time.text = object.dateInString
+        likesCount.text = "\(object.likesCount)"
+        commentsCount.text = "\(object.commentsCount)"
+        locationName.text = object.locationName
+        var userMessage = ""
+        switch object.feedType {
+        case .checkIn:
+            userMessage = "Checked in at\n"
+            locationNameBackgroundView.backgroundColor = UIColor(hexString: "4CD964")
+        case .checkOut:
+            userMessage = "Checked Out of\n"
+            locationNameBackgroundView.backgroundColor = UIColor(hexString: "FF2D55")
+        }
+        message.text = userMessage + object.message
+    }
 
     @IBAction func likesButtonTap(button: UIButton) {
-        
+        button.isSelected = !button.isSelected
     }
     
     @IBAction func commentsButtonTap(button: UIButton) {
