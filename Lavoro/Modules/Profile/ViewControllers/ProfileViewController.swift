@@ -57,12 +57,14 @@ extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let object = profileInfo[indexPath.section][indexPath.row]
         switch object.type {
         case .mySchedule:
             self.performSegue(withIdentifier: "mySchedule", sender: self)
+        case .myWorkLocations:
+            self.performSegue(withIdentifier: "myWorkLocations", sender: self)
         default:
             print(object.title)
         }

@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1317B81E2460963600AD9AC8 /* MyWorkLocationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1317B81D2460963600AD9AC8 /* MyWorkLocationsViewController.swift */; };
+		1317B82224609D4700AD9AC8 /* WorkCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1317B82124609D4700AD9AC8 /* WorkCategories.swift */; };
+		1317B82424609D6300AD9AC8 /* WorkLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1317B82324609D6300AD9AC8 /* WorkLocation.swift */; };
+		1317B8262460A16B00AD9AC8 /* WorkCategoriesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1317B8252460A16B00AD9AC8 /* WorkCategoriesCollectionViewCell.swift */; };
+		1317B8282460A42400AD9AC8 /* WorkLocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1317B8272460A42400AD9AC8 /* WorkLocationTableViewCell.swift */; };
 		136F3231245AC0BA006939ED /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136F3230245AC0BA006939ED /* BaseViewController.swift */; };
 		136F3258245B032F006939ED /* AccountTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136F3248245B032E006939ED /* AccountTypeTableViewCell.swift */; };
 		136F3259245B032F006939ED /* OnboardingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136F3249245B032E006939ED /* OnboardingCollectionViewCell.swift */; };
@@ -88,6 +93,11 @@
 
 /* Begin PBXFileReference section */
 		0E14D8A558B0D4E9EFCF519F /* Pods-Lavoro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lavoro.release.xcconfig"; path = "Target Support Files/Pods-Lavoro/Pods-Lavoro.release.xcconfig"; sourceTree = "<group>"; };
+		1317B81D2460963600AD9AC8 /* MyWorkLocationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyWorkLocationsViewController.swift; sourceTree = "<group>"; };
+		1317B82124609D4700AD9AC8 /* WorkCategories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkCategories.swift; sourceTree = "<group>"; };
+		1317B82324609D6300AD9AC8 /* WorkLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkLocation.swift; sourceTree = "<group>"; };
+		1317B8252460A16B00AD9AC8 /* WorkCategoriesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkCategoriesCollectionViewCell.swift; sourceTree = "<group>"; };
+		1317B8272460A42400AD9AC8 /* WorkLocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkLocationTableViewCell.swift; sourceTree = "<group>"; };
 		136F3230245AC0BA006939ED /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		136F3248245B032E006939ED /* AccountTypeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountTypeTableViewCell.swift; sourceTree = "<group>"; };
 		136F3249245B032E006939ED /* OnboardingCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -299,6 +309,8 @@
 		136F3278245B0AC7006939ED /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1317B82124609D4700AD9AC8 /* WorkCategories.swift */,
+				1317B82324609D6300AD9AC8 /* WorkLocation.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -308,6 +320,7 @@
 			children = (
 				136F327B245B1012006939ED /* ProfileViewController.swift */,
 				136F3281245B4195006939ED /* MyScheduleViewController.swift */,
+				1317B81D2460963600AD9AC8 /* MyWorkLocationsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -316,6 +329,8 @@
 			isa = PBXGroup;
 			children = (
 				136F327D245B13C6006939ED /* ProfileTableViewCell.swift */,
+				1317B8252460A16B00AD9AC8 /* WorkCategoriesCollectionViewCell.swift */,
+				1317B8272460A42400AD9AC8 /* WorkLocationTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -721,6 +736,7 @@
 				13D05800245CA09B00227E15 /* IGHomeView.swift in Sources */,
 				136F3261245B032F006939ED /* AccountTypeViewController.swift in Sources */,
 				13D057F8245C9FFC00227E15 /* IGStoryPreviewModel.swift in Sources */,
+				1317B82224609D4700AD9AC8 /* WorkCategories.swift in Sources */,
 				136F327C245B1012006939ED /* ProfileViewController.swift in Sources */,
 				13D057EE245C9DF800227E15 /* AnimatedCollectionViewLayout.swift in Sources */,
 				1378AA8D2459E75700131BEB /* ViewController.swift in Sources */,
@@ -750,6 +766,7 @@
 				136F3259245B032F006939ED /* OnboardingCollectionViewCell.swift in Sources */,
 				13D05809245D755B00227E15 /* BaseNavigationViewController.swift in Sources */,
 				13D057DC245C9DF800227E15 /* IGSnap.swift in Sources */,
+				1317B8282460A42400AD9AC8 /* WorkLocationTableViewCell.swift in Sources */,
 				136F3284245B4D42006939ED /* UIDate+Exts.swift in Sources */,
 				13D05802245CA0B000227E15 /* IGHomeViewModel.swift in Sources */,
 				13D057DF245C9DF800227E15 /* IGResult.swift in Sources */,
@@ -758,6 +775,7 @@
 				13D057DB245C9DF800227E15 /* IGStories.swift in Sources */,
 				13D057D3245C9DF800227E15 /* IGStoryPreviewCell.swift in Sources */,
 				13D057E9245C9DF800227E15 /* IGRetryButton.swift in Sources */,
+				1317B82424609D6300AD9AC8 /* WorkLocation.swift in Sources */,
 				13D057FE245CA09B00227E15 /* IGStoryListCell.swift in Sources */,
 				13D057E5245C9DF800227E15 /* IGVideoCacheManager.swift in Sources */,
 				13D057E7245C9DF800227E15 /* IGCommon.swift in Sources */,
@@ -774,7 +792,9 @@
 				1378AAAB2459F5EE00131BEB /* UIResponder+Exts.swift in Sources */,
 				13D057D7245C9DF800227E15 /* ImageView+Additions.swift in Sources */,
 				13D057DD245C9DF800227E15 /* IGUser.swift in Sources */,
+				1317B81E2460963600AD9AC8 /* MyWorkLocationsViewController.swift in Sources */,
 				136F3260245B032F006939ED /* RegisterationViewController.swift in Sources */,
+				1317B8262460A16B00AD9AC8 /* WorkCategoriesCollectionViewCell.swift in Sources */,
 				136F325C245B032F006939ED /* User.swift in Sources */,
 				136F325A245B032F006939ED /* RegisterationTextTableViewCell.swift in Sources */,
 			);
