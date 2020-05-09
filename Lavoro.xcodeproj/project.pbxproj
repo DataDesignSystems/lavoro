@@ -19,6 +19,9 @@
 		1327EB7B2466A80300BA4805 /* RecommendedCollectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1327EB7A2466A80300BA4805 /* RecommendedCollectionTableViewCell.swift */; };
 		1327EB7D2466A8A900BA4805 /* RecommendedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1327EB7C2466A8A900BA4805 /* RecommendedCollectionViewCell.swift */; };
 		136EBD952466D91E00C27589 /* FollowersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136EBD942466D91E00C27589 /* FollowersViewController.swift */; };
+		136EBD9A24670A5F00C27589 /* MessageListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136EBD9924670A5F00C27589 /* MessageListViewController.swift */; };
+		136EBD9C246710D900C27589 /* MessageThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136EBD9B246710D900C27589 /* MessageThread.swift */; };
+		136EBD9E2467123000C27589 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136EBD9D2467123000C27589 /* MessageTableViewCell.swift */; };
 		136F3231245AC0BA006939ED /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136F3230245AC0BA006939ED /* BaseViewController.swift */; };
 		136F3258245B032F006939ED /* AccountTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136F3248245B032E006939ED /* AccountTypeTableViewCell.swift */; };
 		136F3259245B032F006939ED /* OnboardingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136F3249245B032E006939ED /* OnboardingCollectionViewCell.swift */; };
@@ -112,6 +115,9 @@
 		1327EB7A2466A80300BA4805 /* RecommendedCollectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedCollectionTableViewCell.swift; sourceTree = "<group>"; };
 		1327EB7C2466A8A900BA4805 /* RecommendedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedCollectionViewCell.swift; sourceTree = "<group>"; };
 		136EBD942466D91E00C27589 /* FollowersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersViewController.swift; sourceTree = "<group>"; };
+		136EBD9924670A5F00C27589 /* MessageListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageListViewController.swift; sourceTree = "<group>"; };
+		136EBD9B246710D900C27589 /* MessageThread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageThread.swift; sourceTree = "<group>"; };
+		136EBD9D2467123000C27589 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		136F3230245AC0BA006939ED /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		136F3248245B032E006939ED /* AccountTypeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountTypeTableViewCell.swift; sourceTree = "<group>"; };
 		136F3249245B032E006939ED /* OnboardingCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -206,6 +212,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		136EBD9624670A5100C27589 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				136EBD9D2467123000C27589 /* MessageTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		136EBD9724670A5100C27589 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				136EBD9B246710D900C27589 /* MessageThread.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		136EBD9824670A5100C27589 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				136EBD9924670A5F00C27589 /* MessageListViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
 		136F3245245B032E006939ED /* Modules */ = {
 			isa = PBXGroup;
 			children = (
@@ -296,6 +326,9 @@
 		136F326B245B045B006939ED /* Messages */ = {
 			isa = PBXGroup;
 			children = (
+				136EBD9624670A5100C27589 /* Cells */,
+				136EBD9724670A5100C27589 /* Model */,
+				136EBD9824670A5100C27589 /* ViewControllers */,
 				136F3270245B046E006939ED /* Messages.storyboard */,
 			);
 			path = Messages;
@@ -749,10 +782,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				136EBD9A24670A5F00C27589 /* MessageListViewController.swift in Sources */,
 				136F3265245B032F006939ED /* LoginViewController.swift in Sources */,
 				1317B82A24630EFA00AD9AC8 /* WhoCanIFollowViewController.swift in Sources */,
 				13D057E6245C9DF800227E15 /* IGPlayerView.swift in Sources */,
 				13D057E0245C9DF800227E15 /* IGRoundedView.swift in Sources */,
+				136EBD9E2467123000C27589 /* MessageTableViewCell.swift in Sources */,
 				13D057ED245C9DF800227E15 /* CubeAttributesAnimator.swift in Sources */,
 				13D057D4245C9DF800227E15 /* UIView+Extension.swift in Sources */,
 				13D05800245CA09B00227E15 /* IGHomeView.swift in Sources */,
@@ -819,6 +854,7 @@
 				1327EB7D2466A8A900BA4805 /* RecommendedCollectionViewCell.swift in Sources */,
 				13D057D7245C9DF800227E15 /* ImageView+Additions.swift in Sources */,
 				13D057DD245C9DF800227E15 /* IGUser.swift in Sources */,
+				136EBD9C246710D900C27589 /* MessageThread.swift in Sources */,
 				1317B81E2460963600AD9AC8 /* MyWorkLocationsViewController.swift in Sources */,
 				1317B82E2463142900AD9AC8 /* OtherUser.swift in Sources */,
 				136F3260245B032F006939ED /* RegisterationViewController.swift in Sources */,

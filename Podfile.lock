@@ -1,10 +1,16 @@
 PODS:
+  - Applozic (7.5.0):
+    - SDWebImage (~> 5.7.2)
   - IQKeyboardManagerSwift (6.3.0)
   - KVKCalendar (0.2.9)
+  - SDWebImage (5.7.4):
+    - SDWebImage/Core (= 5.7.4)
+  - SDWebImage/Core (5.7.4)
   - SkyFloatingLabelTextField (3.8.0)
   - SnapKit (5.0.1)
 
 DEPENDENCIES:
+  - Applozic
   - IQKeyboardManagerSwift (= 6.3.0)
   - KVKCalendar
   - SkyFloatingLabelTextField (~> 3.0)
@@ -12,17 +18,21 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - Applozic
     - IQKeyboardManagerSwift
     - KVKCalendar
+    - SDWebImage
     - SkyFloatingLabelTextField
     - SnapKit
 
 SPEC CHECKSUMS:
+  Applozic: ced133d36471279637cfbadc00833d91ca591c46
   IQKeyboardManagerSwift: a8228c257614af98743b4cd8584637025f36358f
   KVKCalendar: 0cf91e3db666a044f2c59cf3feb3b3c5114aef05
+  SDWebImage: 48b88379b798fd1e4298f95bb25d2cdabbf4deb3
   SkyFloatingLabelTextField: 5a338412114808e961fe2d14ea2c5452c8b6e4aa
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
 
-PODFILE CHECKSUM: 8074197b339535433759757a8e395abb722257b7
+PODFILE CHECKSUM: 7d3db11dca6a47f6699a666a889c697a24b2cf5a
 
 COCOAPODS: 1.9.1

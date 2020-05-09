@@ -26,9 +26,9 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>Lavoro need for your capturing photo</string>
+	<string>Allow Camera</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Lavoro need for your accessing photo</string>
+	<string>Allow Photos</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -54,5 +54,13 @@
 	<string>Light</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
+	<key>NSContactsUsageDescription</key>
+	<string>Allow Contacts</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Allow location sharing!!</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Allow MicroPhone</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Allow write access</string>
 </dict>
 </plist>

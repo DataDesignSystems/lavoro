@@ -10,4 +10,5 @@ target 'Lavoro' do
   pod 'IQKeyboardManagerSwift', '6.3.0'
   pod 'KVKCalendar'
   pod 'SnapKit', '~> 5.0.0'
+  pod 'Applozic'
 end
