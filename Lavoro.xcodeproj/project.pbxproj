@@ -12,6 +12,12 @@
 		1317B82424609D6300AD9AC8 /* WorkLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1317B82324609D6300AD9AC8 /* WorkLocation.swift */; };
 		1317B8262460A16B00AD9AC8 /* WorkCategoriesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1317B8252460A16B00AD9AC8 /* WorkCategoriesCollectionViewCell.swift */; };
 		1317B8282460A42400AD9AC8 /* WorkLocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1317B8272460A42400AD9AC8 /* WorkLocationTableViewCell.swift */; };
+		1317B82A24630EFA00AD9AC8 /* WhoCanIFollowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1317B82924630EFA00AD9AC8 /* WhoCanIFollowViewController.swift */; };
+		1317B82C2463132D00AD9AC8 /* FollowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1317B82B2463132D00AD9AC8 /* FollowTableViewCell.swift */; };
+		1317B82E2463142900AD9AC8 /* OtherUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1317B82D2463142900AD9AC8 /* OtherUser.swift */; };
+		1327EB792466A61900BA4805 /* UIButton+Exts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1327EB782466A61900BA4805 /* UIButton+Exts.swift */; };
+		1327EB7B2466A80300BA4805 /* RecommendedCollectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1327EB7A2466A80300BA4805 /* RecommendedCollectionTableViewCell.swift */; };
+		1327EB7D2466A8A900BA4805 /* RecommendedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1327EB7C2466A8A900BA4805 /* RecommendedCollectionViewCell.swift */; };
 		136F3231245AC0BA006939ED /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136F3230245AC0BA006939ED /* BaseViewController.swift */; };
 		136F3258245B032F006939ED /* AccountTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136F3248245B032E006939ED /* AccountTypeTableViewCell.swift */; };
 		136F3259245B032F006939ED /* OnboardingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136F3249245B032E006939ED /* OnboardingCollectionViewCell.swift */; };
@@ -98,6 +104,12 @@
 		1317B82324609D6300AD9AC8 /* WorkLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkLocation.swift; sourceTree = "<group>"; };
 		1317B8252460A16B00AD9AC8 /* WorkCategoriesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkCategoriesCollectionViewCell.swift; sourceTree = "<group>"; };
 		1317B8272460A42400AD9AC8 /* WorkLocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkLocationTableViewCell.swift; sourceTree = "<group>"; };
+		1317B82924630EFA00AD9AC8 /* WhoCanIFollowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoCanIFollowViewController.swift; sourceTree = "<group>"; };
+		1317B82B2463132D00AD9AC8 /* FollowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowTableViewCell.swift; sourceTree = "<group>"; };
+		1317B82D2463142900AD9AC8 /* OtherUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherUser.swift; sourceTree = "<group>"; };
+		1327EB782466A61900BA4805 /* UIButton+Exts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Exts.swift"; sourceTree = "<group>"; };
+		1327EB7A2466A80300BA4805 /* RecommendedCollectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedCollectionTableViewCell.swift; sourceTree = "<group>"; };
+		1327EB7C2466A8A900BA4805 /* RecommendedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedCollectionViewCell.swift; sourceTree = "<group>"; };
 		136F3230245AC0BA006939ED /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		136F3248245B032E006939ED /* AccountTypeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountTypeTableViewCell.swift; sourceTree = "<group>"; };
 		136F3249245B032E006939ED /* OnboardingCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -311,6 +323,7 @@
 			children = (
 				1317B82124609D4700AD9AC8 /* WorkCategories.swift */,
 				1317B82324609D6300AD9AC8 /* WorkLocation.swift */,
+				1317B82D2463142900AD9AC8 /* OtherUser.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -321,6 +334,7 @@
 				136F327B245B1012006939ED /* ProfileViewController.swift */,
 				136F3281245B4195006939ED /* MyScheduleViewController.swift */,
 				1317B81D2460963600AD9AC8 /* MyWorkLocationsViewController.swift */,
+				1317B82924630EFA00AD9AC8 /* WhoCanIFollowViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -331,6 +345,9 @@
 				136F327D245B13C6006939ED /* ProfileTableViewCell.swift */,
 				1317B8252460A16B00AD9AC8 /* WorkCategoriesCollectionViewCell.swift */,
 				1317B8272460A42400AD9AC8 /* WorkLocationTableViewCell.swift */,
+				1317B82B2463132D00AD9AC8 /* FollowTableViewCell.swift */,
+				1327EB7A2466A80300BA4805 /* RecommendedCollectionTableViewCell.swift */,
+				1327EB7C2466A8A900BA4805 /* RecommendedCollectionViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -379,6 +396,7 @@
 				136F3230245AC0BA006939ED /* BaseViewController.swift */,
 				136F3283245B4D42006939ED /* UIDate+Exts.swift */,
 				13D05808245D755B00227E15 /* BaseNavigationViewController.swift */,
+				1327EB782466A61900BA4805 /* UIButton+Exts.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -729,6 +747,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				136F3265245B032F006939ED /* LoginViewController.swift in Sources */,
+				1317B82A24630EFA00AD9AC8 /* WhoCanIFollowViewController.swift in Sources */,
 				13D057E6245C9DF800227E15 /* IGPlayerView.swift in Sources */,
 				13D057E0245C9DF800227E15 /* IGRoundedView.swift in Sources */,
 				13D057ED245C9DF800227E15 /* CubeAttributesAnimator.swift in Sources */,
@@ -757,12 +776,14 @@
 				13D057DE245C9DF800227E15 /* UIImageView+Extension.swift in Sources */,
 				13D057E8245C9DF800227E15 /* IGConstants.swift in Sources */,
 				13D057D8245C9DF800227E15 /* IGSnapProgressView.swift in Sources */,
+				1317B82C2463132D00AD9AC8 /* FollowTableViewCell.swift in Sources */,
 				136F3268245B036B006939ED /* TabbarViewController.swift in Sources */,
 				13D05807245CB14A00227E15 /* WorkCheckInViewController.swift in Sources */,
 				13D057FA245CA03200227E15 /* IGAppUtility.swift in Sources */,
 				13D057D5245C9DF800227E15 /* IGAdditions.swift in Sources */,
 				136F325E245B032F006939ED /* AccountType.swift in Sources */,
 				136F3262245B032F006939ED /* EnterMobileViewController.swift in Sources */,
+				1327EB7B2466A80300BA4805 /* RecommendedCollectionTableViewCell.swift in Sources */,
 				136F3259245B032F006939ED /* OnboardingCollectionViewCell.swift in Sources */,
 				13D05809245D755B00227E15 /* BaseNavigationViewController.swift in Sources */,
 				13D057DC245C9DF800227E15 /* IGSnap.swift in Sources */,
@@ -786,13 +807,16 @@
 				13D057EF245C9DF800227E15 /* UIView+Anchor.swift in Sources */,
 				13D057F6245C9FDC00227E15 /* IGStoryPreviewController.swift in Sources */,
 				136F3264245B032F006939ED /* MobileVerificationViewController.swift in Sources */,
+				1327EB792466A61900BA4805 /* UIButton+Exts.swift in Sources */,
 				13D057A1245C7B4700227E15 /* CheckInFeedTableViewCell.swift in Sources */,
 				13D057E2245C9DF800227E15 /* IGError.swift in Sources */,
 				13D057D6245C9DF800227E15 /* Color+Additions.swift in Sources */,
 				1378AAAB2459F5EE00131BEB /* UIResponder+Exts.swift in Sources */,
+				1327EB7D2466A8A900BA4805 /* RecommendedCollectionViewCell.swift in Sources */,
 				13D057D7245C9DF800227E15 /* ImageView+Additions.swift in Sources */,
 				13D057DD245C9DF800227E15 /* IGUser.swift in Sources */,
 				1317B81E2460963600AD9AC8 /* MyWorkLocationsViewController.swift in Sources */,
+				1317B82E2463142900AD9AC8 /* OtherUser.swift in Sources */,
 				136F3260245B032F006939ED /* RegisterationViewController.swift in Sources */,
 				1317B8262460A16B00AD9AC8 /* WorkCategoriesCollectionViewCell.swift in Sources */,
 				136F325C245B032F006939ED /* User.swift in Sources */,

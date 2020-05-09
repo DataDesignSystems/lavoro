@@ -65,6 +65,8 @@ extension ProfileViewController: UITableViewDelegate {
             self.performSegue(withIdentifier: "mySchedule", sender: self)
         case .myWorkLocations:
             self.performSegue(withIdentifier: "myWorkLocations", sender: self)
+        case .whoIFollow:
+            self.performSegue(withIdentifier: "findFriends", sender: self)
         default:
             print(object.title)
         }
