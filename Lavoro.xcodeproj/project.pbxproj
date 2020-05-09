@@ -18,6 +18,7 @@
 		1327EB792466A61900BA4805 /* UIButton+Exts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1327EB782466A61900BA4805 /* UIButton+Exts.swift */; };
 		1327EB7B2466A80300BA4805 /* RecommendedCollectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1327EB7A2466A80300BA4805 /* RecommendedCollectionTableViewCell.swift */; };
 		1327EB7D2466A8A900BA4805 /* RecommendedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1327EB7C2466A8A900BA4805 /* RecommendedCollectionViewCell.swift */; };
+		136EBD952466D91E00C27589 /* FollowersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136EBD942466D91E00C27589 /* FollowersViewController.swift */; };
 		136F3231245AC0BA006939ED /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136F3230245AC0BA006939ED /* BaseViewController.swift */; };
 		136F3258245B032F006939ED /* AccountTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136F3248245B032E006939ED /* AccountTypeTableViewCell.swift */; };
 		136F3259245B032F006939ED /* OnboardingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136F3249245B032E006939ED /* OnboardingCollectionViewCell.swift */; };
@@ -110,6 +111,7 @@
 		1327EB782466A61900BA4805 /* UIButton+Exts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Exts.swift"; sourceTree = "<group>"; };
 		1327EB7A2466A80300BA4805 /* RecommendedCollectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedCollectionTableViewCell.swift; sourceTree = "<group>"; };
 		1327EB7C2466A8A900BA4805 /* RecommendedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedCollectionViewCell.swift; sourceTree = "<group>"; };
+		136EBD942466D91E00C27589 /* FollowersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersViewController.swift; sourceTree = "<group>"; };
 		136F3230245AC0BA006939ED /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		136F3248245B032E006939ED /* AccountTypeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountTypeTableViewCell.swift; sourceTree = "<group>"; };
 		136F3249245B032E006939ED /* OnboardingCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -335,6 +337,7 @@
 				136F3281245B4195006939ED /* MyScheduleViewController.swift */,
 				1317B81D2460963600AD9AC8 /* MyWorkLocationsViewController.swift */,
 				1317B82924630EFA00AD9AC8 /* WhoCanIFollowViewController.swift */,
+				136EBD942466D91E00C27589 /* FollowersViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -770,6 +773,7 @@
 				13D057F0245C9DF800227E15 /* LayoutAttributesAnimator.swift in Sources */,
 				136F3282245B4195006939ED /* MyScheduleViewController.swift in Sources */,
 				136F325B245B032F006939ED /* RegisterationImageTableViewCell.swift in Sources */,
+				136EBD952466D91E00C27589 /* FollowersViewController.swift in Sources */,
 				136F325D245B032F006939ED /* Onboarding.swift in Sources */,
 				136F3231245AC0BA006939ED /* BaseViewController.swift in Sources */,
 				13D057E3245C9DF800227E15 /* IGURLSession.swift in Sources */,
