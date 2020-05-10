@@ -61,6 +61,7 @@
 		137938C924681FA600AB2C46 /* AddLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137938C824681FA600AB2C46 /* AddLocationViewController.swift */; };
 		137938CB2468213C00AB2C46 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137938CA2468213B00AB2C46 /* LocationManager.swift */; };
 		137938CD2468254D00AB2C46 /* AddLocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137938CC2468254D00AB2C46 /* AddLocationTableViewCell.swift */; };
+		137938D224682B2700AB2C46 /* ALChatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137938D024682B2700AB2C46 /* ALChatManager.swift */; };
 		13C3525D94BE24BBD94682BB /* Pods_Lavoro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD31EEAD4AE9165735295736 /* Pods_Lavoro.framework */; };
 		13D0579B245C7A6600227E15 /* HomeFeedsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D0579A245C7A6600227E15 /* HomeFeedsViewController.swift */; };
 		13D0579F245C7B2D00227E15 /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D0579E245C7B2D00227E15 /* Feed.swift */; };
@@ -166,6 +167,7 @@
 		137938C824681FA600AB2C46 /* AddLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationViewController.swift; sourceTree = "<group>"; };
 		137938CA2468213B00AB2C46 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		137938CC2468254D00AB2C46 /* AddLocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationTableViewCell.swift; sourceTree = "<group>"; };
+		137938D024682B2700AB2C46 /* ALChatManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ALChatManager.swift; sourceTree = "<group>"; };
 		13D0579A245C7A6600227E15 /* HomeFeedsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedsViewController.swift; sourceTree = "<group>"; };
 		13D0579E245C7B2D00227E15 /* Feed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
 		13D057A0245C7B4700227E15 /* CheckInFeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInFeedTableViewCell.swift; sourceTree = "<group>"; };
@@ -458,6 +460,14 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		137938CE24682B2700AB2C46 /* Applozic */ = {
+			isa = PBXGroup;
+			children = (
+				137938D024682B2700AB2C46 /* ALChatManager.swift */,
+			);
+			path = Applozic;
+			sourceTree = "<group>";
+		};
 		13D05797245C7A4C00227E15 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -490,6 +500,7 @@
 		13D057A2245C9DF700227E15 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				137938CE24682B2700AB2C46 /* Applozic */,
 				13D057A3245C9DF700227E15 /* Stories */,
 			);
 			path = External;
@@ -833,6 +844,7 @@
 				136F325B245B032F006939ED /* RegisterationImageTableViewCell.swift in Sources */,
 				136EBD952466D91E00C27589 /* FollowersViewController.swift in Sources */,
 				136F325D245B032F006939ED /* Onboarding.swift in Sources */,
+				137938D224682B2700AB2C46 /* ALChatManager.swift in Sources */,
 				136F3231245AC0BA006939ED /* BaseViewController.swift in Sources */,
 				13D057E3245C9DF800227E15 /* IGURLSession.swift in Sources */,
 				137938C924681FA600AB2C46 /* AddLocationViewController.swift in Sources */,

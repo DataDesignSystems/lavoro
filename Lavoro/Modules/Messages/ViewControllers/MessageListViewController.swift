@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Applozic
 
 class MessageListViewController: BaseViewController {
     @IBOutlet weak var tableview: UITableView!
@@ -29,5 +30,13 @@ extension MessageListViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 92
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        /*
+        let message = messageThreads[indexPath.row] as! ALMessage
+        let chatManager = ALChatManager(applicationKey: ALChatManager.applicationId as NSString)
+        chatManager.launchChatForUser(message.to, fromViewController: self)
+         */ //will add once API and user created
     }
 }
