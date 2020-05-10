@@ -58,6 +58,9 @@
 		137938C32468083800AB2C46 /* AddScheduleImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137938C22468083800AB2C46 /* AddScheduleImageTableViewCell.swift */; };
 		137938C52468114000AB2C46 /* AddScheduleDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137938C42468114000AB2C46 /* AddScheduleDataTableViewCell.swift */; };
 		137938C72468125200AB2C46 /* AddScheduleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137938C62468125200AB2C46 /* AddScheduleType.swift */; };
+		137938C924681FA600AB2C46 /* AddLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137938C824681FA600AB2C46 /* AddLocationViewController.swift */; };
+		137938CB2468213C00AB2C46 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137938CA2468213B00AB2C46 /* LocationManager.swift */; };
+		137938CD2468254D00AB2C46 /* AddLocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137938CC2468254D00AB2C46 /* AddLocationTableViewCell.swift */; };
 		13C3525D94BE24BBD94682BB /* Pods_Lavoro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD31EEAD4AE9165735295736 /* Pods_Lavoro.framework */; };
 		13D0579B245C7A6600227E15 /* HomeFeedsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D0579A245C7A6600227E15 /* HomeFeedsViewController.swift */; };
 		13D0579F245C7B2D00227E15 /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D0579E245C7B2D00227E15 /* Feed.swift */; };
@@ -160,6 +163,9 @@
 		137938C22468083800AB2C46 /* AddScheduleImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScheduleImageTableViewCell.swift; sourceTree = "<group>"; };
 		137938C42468114000AB2C46 /* AddScheduleDataTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScheduleDataTableViewCell.swift; sourceTree = "<group>"; };
 		137938C62468125200AB2C46 /* AddScheduleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScheduleType.swift; sourceTree = "<group>"; };
+		137938C824681FA600AB2C46 /* AddLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationViewController.swift; sourceTree = "<group>"; };
+		137938CA2468213B00AB2C46 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		137938CC2468254D00AB2C46 /* AddLocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationTableViewCell.swift; sourceTree = "<group>"; };
 		13D0579A245C7A6600227E15 /* HomeFeedsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedsViewController.swift; sourceTree = "<group>"; };
 		13D0579E245C7B2D00227E15 /* Feed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
 		13D057A0245C7B4700227E15 /* CheckInFeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInFeedTableViewCell.swift; sourceTree = "<group>"; };
@@ -381,6 +387,7 @@
 				1317B82924630EFA00AD9AC8 /* WhoCanIFollowViewController.swift */,
 				136EBD942466D91E00C27589 /* FollowersViewController.swift */,
 				136EBD9F2468034400C27589 /* AddScheduleViewController.swift */,
+				137938C824681FA600AB2C46 /* AddLocationViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -396,6 +403,7 @@
 				1327EB7C2466A8A900BA4805 /* RecommendedCollectionViewCell.swift */,
 				137938C22468083800AB2C46 /* AddScheduleImageTableViewCell.swift */,
 				137938C42468114000AB2C46 /* AddScheduleDataTableViewCell.swift */,
+				137938CC2468254D00AB2C46 /* AddLocationTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -438,6 +446,7 @@
 		1378AAA92459F5EE00131BEB /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				137938CA2468213B00AB2C46 /* LocationManager.swift */,
 				13D057F9245CA03200227E15 /* IGAppUtility.swift */,
 				1378AAAA2459F5EE00131BEB /* UIResponder+Exts.swift */,
 				1378AAAC2459FFEC00131BEB /* UIColor+Exts.swift */,
@@ -816,6 +825,7 @@
 				13D057EA245C9DF800227E15 /* IGStoryPreviewView.swift in Sources */,
 				13D0579F245C7B2D00227E15 /* Feed.swift in Sources */,
 				13D057D9245C9DF800227E15 /* IGStoryPreviewHeaderView.swift in Sources */,
+				137938CD2468254D00AB2C46 /* AddLocationTableViewCell.swift in Sources */,
 				136F3258245B032F006939ED /* AccountTypeTableViewCell.swift in Sources */,
 				13D0579B245C7A6600227E15 /* HomeFeedsViewController.swift in Sources */,
 				13D057F0245C9DF800227E15 /* LayoutAttributesAnimator.swift in Sources */,
@@ -825,6 +835,7 @@
 				136F325D245B032F006939ED /* Onboarding.swift in Sources */,
 				136F3231245AC0BA006939ED /* BaseViewController.swift in Sources */,
 				13D057E3245C9DF800227E15 /* IGURLSession.swift in Sources */,
+				137938C924681FA600AB2C46 /* AddLocationViewController.swift in Sources */,
 				13D057DE245C9DF800227E15 /* UIImageView+Extension.swift in Sources */,
 				137938C52468114000AB2C46 /* AddScheduleDataTableViewCell.swift in Sources */,
 				13D057E8245C9DF800227E15 /* IGConstants.swift in Sources */,
@@ -845,6 +856,7 @@
 				13D05802245CA0B000227E15 /* IGHomeViewModel.swift in Sources */,
 				136EBDA02468034400C27589 /* AddScheduleViewController.swift in Sources */,
 				13D057DF245C9DF800227E15 /* IGResult.swift in Sources */,
+				137938CB2468213C00AB2C46 /* LocationManager.swift in Sources */,
 				13D057DA245C9DF800227E15 /* IGStory.swift in Sources */,
 				13D057E1245C9DF800227E15 /* IGImageRequestable.swift in Sources */,
 				13D057DB245C9DF800227E15 /* IGStories.swift in Sources */,

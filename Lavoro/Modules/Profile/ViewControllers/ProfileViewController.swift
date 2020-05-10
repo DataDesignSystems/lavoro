@@ -72,6 +72,7 @@ extension ProfileViewController: UITableViewDelegate {
         default:
             print(object.title)
         }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 

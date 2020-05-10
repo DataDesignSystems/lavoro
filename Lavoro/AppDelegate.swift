@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.presentLoginFlow()
         self.window?.makeKeyAndVisible()
         IQKeyboardManager.shared.enable = true
+        LocationManager.shared.startLocation()
         return true
     }
     
