@@ -1,5 +1,8 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+ platform :ios, '13.0'
+
+# ignore all warnings from all pods
+inhibit_all_warnings!
 
 target 'Lavoro' do
   # Comment the next line if you don't want to use dynamic frameworks
@@ -10,5 +13,6 @@ target 'Lavoro' do
   pod 'IQKeyboardManagerSwift', '6.3.0'
   pod 'KVKCalendar'
   pod 'SnapKit', '~> 5.0.0'
+  pod 'MaterialComponents/BottomSheet'
   pod 'Applozic'
 end

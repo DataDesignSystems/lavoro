@@ -3,6 +3,35 @@ PODS:
     - SDWebImage (~> 5.7.2)
   - IQKeyboardManagerSwift (6.3.0)
   - KVKCalendar (0.2.9)
+  - MaterialComponents/Availability (109.2.0)
+  - MaterialComponents/BottomSheet (109.2.0):
+    - MaterialComponents/Elevation
+    - MaterialComponents/private/KeyboardWatcher
+    - MaterialComponents/private/Math
+    - MaterialComponents/ShadowElevations
+    - MaterialComponents/ShadowLayer
+    - MaterialComponents/ShapeLibrary
+    - MaterialComponents/Shapes
+  - MaterialComponents/Elevation (109.2.0):
+    - MaterialComponents/Availability
+    - MaterialComponents/private/Color
+    - MaterialComponents/private/Math
+  - MaterialComponents/private/Application (109.2.0)
+  - MaterialComponents/private/Color (109.2.0):
+    - MaterialComponents/Availability
+  - MaterialComponents/private/KeyboardWatcher (109.2.0):
+    - MaterialComponents/private/Application
+  - MaterialComponents/private/Math (109.2.0)
+  - MaterialComponents/ShadowElevations (109.2.0)
+  - MaterialComponents/ShadowLayer (109.2.0):
+    - MaterialComponents/ShadowElevations
+  - MaterialComponents/ShapeLibrary (109.2.0):
+    - MaterialComponents/private/Math
+    - MaterialComponents/Shapes
+  - MaterialComponents/Shapes (109.2.0):
+    - MaterialComponents/private/Color
+    - MaterialComponents/private/Math
+    - MaterialComponents/ShadowLayer
   - SDWebImage (5.7.4):
     - SDWebImage/Core (= 5.7.4)
   - SDWebImage/Core (5.7.4)
@@ -13,6 +42,7 @@ DEPENDENCIES:
   - Applozic
   - IQKeyboardManagerSwift (= 6.3.0)
   - KVKCalendar
+  - MaterialComponents/BottomSheet
   - SkyFloatingLabelTextField (~> 3.0)
   - SnapKit (~> 5.0.0)
 
@@ -21,6 +51,7 @@ SPEC REPOS:
     - Applozic
     - IQKeyboardManagerSwift
     - KVKCalendar
+    - MaterialComponents
     - SDWebImage
     - SkyFloatingLabelTextField
     - SnapKit
@@ -29,10 +60,11 @@ SPEC CHECKSUMS:
   Applozic: ced133d36471279637cfbadc00833d91ca591c46
   IQKeyboardManagerSwift: a8228c257614af98743b4cd8584637025f36358f
   KVKCalendar: 0cf91e3db666a044f2c59cf3feb3b3c5114aef05
+  MaterialComponents: 59bfbfe08fc1ac204b21ba69100beabb932e3699
   SDWebImage: 48b88379b798fd1e4298f95bb25d2cdabbf4deb3
   SkyFloatingLabelTextField: 5a338412114808e961fe2d14ea2c5452c8b6e4aa
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
 
-PODFILE CHECKSUM: 7d3db11dca6a47f6699a666a889c697a24b2cf5a
+PODFILE CHECKSUM: cf68d002876a46dc6e942e610b30b8d839c7ae0c
 
 COCOAPODS: 1.9.1

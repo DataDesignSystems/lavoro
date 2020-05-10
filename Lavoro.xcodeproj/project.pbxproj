@@ -22,6 +22,7 @@
 		136EBD9A24670A5F00C27589 /* MessageListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136EBD9924670A5F00C27589 /* MessageListViewController.swift */; };
 		136EBD9C246710D900C27589 /* MessageThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136EBD9B246710D900C27589 /* MessageThread.swift */; };
 		136EBD9E2467123000C27589 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136EBD9D2467123000C27589 /* MessageTableViewCell.swift */; };
+		136EBDA02468034400C27589 /* AddScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136EBD9F2468034400C27589 /* AddScheduleViewController.swift */; };
 		136F3231245AC0BA006939ED /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136F3230245AC0BA006939ED /* BaseViewController.swift */; };
 		136F3258245B032F006939ED /* AccountTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136F3248245B032E006939ED /* AccountTypeTableViewCell.swift */; };
 		136F3259245B032F006939ED /* OnboardingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136F3249245B032E006939ED /* OnboardingCollectionViewCell.swift */; };
@@ -54,6 +55,9 @@
 		1378AA952459E75A00131BEB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1378AA932459E75A00131BEB /* LaunchScreen.storyboard */; };
 		1378AAAB2459F5EE00131BEB /* UIResponder+Exts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1378AAAA2459F5EE00131BEB /* UIResponder+Exts.swift */; };
 		1378AAAD2459FFEC00131BEB /* UIColor+Exts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1378AAAC2459FFEC00131BEB /* UIColor+Exts.swift */; };
+		137938C32468083800AB2C46 /* AddScheduleImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137938C22468083800AB2C46 /* AddScheduleImageTableViewCell.swift */; };
+		137938C52468114000AB2C46 /* AddScheduleDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137938C42468114000AB2C46 /* AddScheduleDataTableViewCell.swift */; };
+		137938C72468125200AB2C46 /* AddScheduleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137938C62468125200AB2C46 /* AddScheduleType.swift */; };
 		13C3525D94BE24BBD94682BB /* Pods_Lavoro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD31EEAD4AE9165735295736 /* Pods_Lavoro.framework */; };
 		13D0579B245C7A6600227E15 /* HomeFeedsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D0579A245C7A6600227E15 /* HomeFeedsViewController.swift */; };
 		13D0579F245C7B2D00227E15 /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D0579E245C7B2D00227E15 /* Feed.swift */; };
@@ -118,6 +122,7 @@
 		136EBD9924670A5F00C27589 /* MessageListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageListViewController.swift; sourceTree = "<group>"; };
 		136EBD9B246710D900C27589 /* MessageThread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageThread.swift; sourceTree = "<group>"; };
 		136EBD9D2467123000C27589 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
+		136EBD9F2468034400C27589 /* AddScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScheduleViewController.swift; sourceTree = "<group>"; };
 		136F3230245AC0BA006939ED /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		136F3248245B032E006939ED /* AccountTypeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountTypeTableViewCell.swift; sourceTree = "<group>"; };
 		136F3249245B032E006939ED /* OnboardingCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -152,6 +157,9 @@
 		1378AA962459E75A00131BEB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1378AAAA2459F5EE00131BEB /* UIResponder+Exts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIResponder+Exts.swift"; sourceTree = "<group>"; };
 		1378AAAC2459FFEC00131BEB /* UIColor+Exts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Exts.swift"; sourceTree = "<group>"; };
+		137938C22468083800AB2C46 /* AddScheduleImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScheduleImageTableViewCell.swift; sourceTree = "<group>"; };
+		137938C42468114000AB2C46 /* AddScheduleDataTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScheduleDataTableViewCell.swift; sourceTree = "<group>"; };
+		137938C62468125200AB2C46 /* AddScheduleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScheduleType.swift; sourceTree = "<group>"; };
 		13D0579A245C7A6600227E15 /* HomeFeedsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedsViewController.swift; sourceTree = "<group>"; };
 		13D0579E245C7B2D00227E15 /* Feed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
 		13D057A0245C7B4700227E15 /* CheckInFeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInFeedTableViewCell.swift; sourceTree = "<group>"; };
@@ -359,6 +367,7 @@
 				1317B82124609D4700AD9AC8 /* WorkCategories.swift */,
 				1317B82324609D6300AD9AC8 /* WorkLocation.swift */,
 				1317B82D2463142900AD9AC8 /* OtherUser.swift */,
+				137938C62468125200AB2C46 /* AddScheduleType.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -371,6 +380,7 @@
 				1317B81D2460963600AD9AC8 /* MyWorkLocationsViewController.swift */,
 				1317B82924630EFA00AD9AC8 /* WhoCanIFollowViewController.swift */,
 				136EBD942466D91E00C27589 /* FollowersViewController.swift */,
+				136EBD9F2468034400C27589 /* AddScheduleViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -384,6 +394,8 @@
 				1317B82B2463132D00AD9AC8 /* FollowTableViewCell.swift */,
 				1327EB7A2466A80300BA4805 /* RecommendedCollectionTableViewCell.swift */,
 				1327EB7C2466A8A900BA4805 /* RecommendedCollectionViewCell.swift */,
+				137938C22468083800AB2C46 /* AddScheduleImageTableViewCell.swift */,
+				137938C42468114000AB2C46 /* AddScheduleDataTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -785,6 +797,7 @@
 				136EBD9A24670A5F00C27589 /* MessageListViewController.swift in Sources */,
 				136F3265245B032F006939ED /* LoginViewController.swift in Sources */,
 				1317B82A24630EFA00AD9AC8 /* WhoCanIFollowViewController.swift in Sources */,
+				137938C32468083800AB2C46 /* AddScheduleImageTableViewCell.swift in Sources */,
 				13D057E6245C9DF800227E15 /* IGPlayerView.swift in Sources */,
 				13D057E0245C9DF800227E15 /* IGRoundedView.swift in Sources */,
 				136EBD9E2467123000C27589 /* MessageTableViewCell.swift in Sources */,
@@ -813,6 +826,7 @@
 				136F3231245AC0BA006939ED /* BaseViewController.swift in Sources */,
 				13D057E3245C9DF800227E15 /* IGURLSession.swift in Sources */,
 				13D057DE245C9DF800227E15 /* UIImageView+Extension.swift in Sources */,
+				137938C52468114000AB2C46 /* AddScheduleDataTableViewCell.swift in Sources */,
 				13D057E8245C9DF800227E15 /* IGConstants.swift in Sources */,
 				13D057D8245C9DF800227E15 /* IGSnapProgressView.swift in Sources */,
 				1317B82C2463132D00AD9AC8 /* FollowTableViewCell.swift in Sources */,
@@ -829,6 +843,7 @@
 				1317B8282460A42400AD9AC8 /* WorkLocationTableViewCell.swift in Sources */,
 				136F3284245B4D42006939ED /* UIDate+Exts.swift in Sources */,
 				13D05802245CA0B000227E15 /* IGHomeViewModel.swift in Sources */,
+				136EBDA02468034400C27589 /* AddScheduleViewController.swift in Sources */,
 				13D057DF245C9DF800227E15 /* IGResult.swift in Sources */,
 				13D057DA245C9DF800227E15 /* IGStory.swift in Sources */,
 				13D057E1245C9DF800227E15 /* IGImageRequestable.swift in Sources */,
@@ -856,6 +871,7 @@
 				13D057DD245C9DF800227E15 /* IGUser.swift in Sources */,
 				136EBD9C246710D900C27589 /* MessageThread.swift in Sources */,
 				1317B81E2460963600AD9AC8 /* MyWorkLocationsViewController.swift in Sources */,
+				137938C72468125200AB2C46 /* AddScheduleType.swift in Sources */,
 				1317B82E2463142900AD9AC8 /* OtherUser.swift in Sources */,
 				136F3260245B032F006939ED /* RegisterationViewController.swift in Sources */,
 				1317B8262460A16B00AD9AC8 /* WorkCategoriesCollectionViewCell.swift in Sources */,

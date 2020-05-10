@@ -59,7 +59,10 @@ class MyScheduleViewController: BaseViewController {
     @IBAction func todayButtonTap() {
         calendarView.scrollTo(Date())
     }
-
+    
+    @IBAction func addSchedule() {
+        self.performSegue(withIdentifier: "addSchedule", sender: self)
+    }
 }
 extension MyScheduleViewController: CalendarDelegate {
     func didChangeEvent(_ event: Event, start: Date?, end: Date?) {

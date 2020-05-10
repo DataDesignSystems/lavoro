@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MaterialComponents.MaterialBottomSheet
 
 class WorkCheckInViewController: UIViewController {
     @IBOutlet weak var gradientTopView: UIView!
@@ -36,6 +37,14 @@ class WorkCheckInViewController: UIViewController {
     
     @IBAction func checkInNotify() {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func selectLocation() {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Profile", bundle: nil)
+        let viewController = storyBoard.instantiateViewController(withIdentifier: "MyWorkLocationsViewController") as! MyWorkLocationsViewController
+        viewController.isOpenedAsBottomSheet = true
+        let bottomSheet: MDCBottomSheetController = MDCBottomSheetController(contentViewController: viewController)
+        present(bottomSheet, animated: true, completion: nil)
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {

@@ -13,6 +13,10 @@ class MyWorkLocationsViewController: BaseViewController {
     @IBOutlet weak var collectionview: UICollectionView!
     @IBOutlet weak var tableview: UITableView!
     @IBOutlet weak var collectionviewBackgroundView: UIView!
+    @IBOutlet weak var topHeaderView: UIView!
+    @IBOutlet weak var topTableHeaderConstraint: NSLayoutConstraint!
+    var isOpenedAsBottomSheet = false
+
     var widthConstraint: Constraint?
     var leadingConstraint: Constraint?
     var selectedCategoryBottomView: UIView = {
@@ -42,6 +46,14 @@ class MyWorkLocationsViewController: BaseViewController {
             widthConstraint = make.width.equalTo(32).constraint
             make.bottom.equalTo(collectionview.snp.bottom).offset(40)
         }
+        if isOpenedAsBottomSheet {
+            setupViewForBottomSheet()
+        }
+    }
+    
+    func setupViewForBottomSheet() {
+        topHeaderView.isHidden = true
+        topTableHeaderConstraint.constant = -102
     }
     
     func filteredItems(){
