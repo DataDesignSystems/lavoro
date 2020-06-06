@@ -33,6 +33,7 @@ extension MessageListViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         /*
         let message = messageThreads[indexPath.row] as! ALMessage
         let chatManager = ALChatManager(applicationKey: ALChatManager.applicationId as NSString)

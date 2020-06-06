@@ -14,11 +14,13 @@ class LoginViewController: BaseViewController {
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordtextField: UITextField!
+    let loginService = LoginService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         // Do any additional setup after loading the view.
+        testUser()
     }
     
     func setupView() {
@@ -35,7 +37,31 @@ class LoginViewController: BaseViewController {
         passwordtextField.leftPadding()
     }
     
+    func testUser() {
+        emailTextField.text = "brad@datadesignsystems.com"
+        passwordtextField.text = "GoJackets2018!"
+    }
+    
     @IBAction func signInButtonTap() {
-        self.navigationController?.popViewController(animated: true)
+        if Validation.email(emailTextField.text ?? "") {
+            if Validation.password(passwordtextField.text ?? "") {
+                showLoadingView()
+                loginService.login(with: emailTextField.text ?? "", password: passwordtextField.text ?? "") { [weak self] (success, user, message) in
+                    self?.stopLoadingView()
+                    if success {
+                        self?.appDelegate.presentUserFLow()
+                        MessageViewAlert.showSuccess(with: message ?? Validation.SuccessMessage.loginSuccessfull.rawValue)
+                    } else if message?.isEmpty ?? true {
+                        MessageViewAlert.showError(with: Validation.Error.loginError.rawValue)
+                    } else {
+                        MessageViewAlert.showError(with: message ?? "")
+                    }
+                }
+            } else {
+                MessageViewAlert.showError(with: Validation.ValidationError.password.rawValue)
+            }
+        } else {
+            MessageViewAlert.showError(with: Validation.ValidationError.email.rawValue)
+        }
     }
 }

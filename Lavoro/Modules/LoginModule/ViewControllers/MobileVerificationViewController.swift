@@ -9,14 +9,17 @@
 import UIKit
 
 class MobileVerificationViewController: BaseViewController {
-    @IBOutlet weak var fbSignInButton: UIButton!
+    @IBOutlet weak var resendNewCode: UIButton!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var hiddenTextField: UITextField!
+    @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var otp0Button: UIButton!
     @IBOutlet weak var otp1Button: UIButton!
     @IBOutlet weak var otp2Button: UIButton!
     @IBOutlet weak var otp3Button: UIButton!
-
+    var phoneNumber: String?
+    let loginService = LoginService()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -29,15 +32,16 @@ class MobileVerificationViewController: BaseViewController {
         let suffix = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17, weight: .regular), NSAttributedString.Key.foregroundColor: UIColor(hexString: "FF2D55")]
         let string = NSMutableAttributedString(string: "Didn't you received any code?\n", attributes: prefix)
         string.append(NSMutableAttributedString(string: "Resend a new code.", attributes: suffix))
-        fbSignInButton.titleLabel?.numberOfLines = 0
-        fbSignInButton.titleLabel?.textAlignment = .center
-        fbSignInButton.setAttributedTitle(string, for: .normal)
+        resendNewCode.titleLabel?.numberOfLines = 0
+        resendNewCode.titleLabel?.textAlignment = .center
+        resendNewCode.setAttributedTitle(string, for: .normal)
         hiddenTextField.becomeFirstResponder()
         otp0Button.setLayer(cornerRadius: 6)
         otp1Button.setLayer(cornerRadius: 6)
         otp2Button.setLayer(cornerRadius: 6)
         otp3Button.setLayer(cornerRadius: 6)
         resetButton(with: "")
+        messageLabel.text = "We have sent you an SMS with a code to number \(phoneNumber?.applyPatternOnNumbers(pattern: "(###) ###-####", replacmentCharacter: "#") ?? "")\nEnter your OTP code here"
     }
     
     func resetButton(with text: String) {
@@ -113,5 +117,40 @@ extension MobileVerificationViewController: UITextFieldDelegate {
             }
         }
         return false
+    }
+}
+
+extension MobileVerificationViewController {
+    @IBAction func resendOTPTap() {
+        self.showLoadingView()
+        loginService.requestOTP(with: phoneNumber ?? "") { [weak self] (success, message) in
+            self?.stopLoadingView()
+            if success {
+                MessageViewAlert.showSuccess(with: message ?? Validation.SuccessMessage.loginSuccessfull.rawValue)
+            } else if message?.isEmpty ?? true {
+                MessageViewAlert.showError(with: Validation.Error.genericError.rawValue)
+            } else {
+                MessageViewAlert.showError(with: message ?? "")
+            }
+        }
+    }
+    
+    @IBAction func nextTap() {
+        guard let otp = hiddenTextField.text, Validation.pin(otp) else {
+            MessageViewAlert.showError(with: Validation.ValidationError.pin.rawValue)
+            return
+        }
+        self.showLoadingView()
+        loginService.validateOTP(with: otp, phone: phoneNumber ?? "") { [weak self] (success, message) in
+            self?.stopLoadingView()
+            if success {
+                self?.performSegue(withIdentifier: "selectType", sender: self)
+                MessageViewAlert.showSuccess(with: message ?? Validation.SuccessMessage.pinValidated.rawValue)
+            } else if message?.isEmpty ?? true {
+                MessageViewAlert.showError(with: Validation.Error.genericError.rawValue)
+            } else {
+                MessageViewAlert.showError(with: message ?? "")
+            }
+        }
     }
 }

@@ -7,14 +7,31 @@
 //
 
 import UIKit
+import NVActivityIndicatorView
+import SnapKit
 
 class BaseViewController: UIViewController {
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    var activityIndicatorView: NVActivityIndicatorView = NVActivityIndicatorView(frame: CGRect.zero, type: .circleStrokeSpin, color: UIColor(hexString: "#FF2D55"), padding: 12.0)
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        setupActivityIndicator()
+    }
+    
+    func setupActivityIndicator() {
+        activityIndicatorView.backgroundColor = UIColor(white: 0, alpha: 0.65)
+        activityIndicatorView.setLayer(cornerRadius: 8.0)
+        self.view.addSubview(activityIndicatorView)
+        activityIndicatorView.snp.makeConstraints { (make) in
+            make.center.equalToSuperview()
+            make.size.equalTo(CGSize(width: 56, height: 56))
+        }
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        view.bringSubviewToFront(activityIndicatorView)
     }
     
     func addkeyboardObserver() {
@@ -119,4 +136,17 @@ extension BaseViewController : UIImagePickerControllerDelegate, UINavigationCont
             
         }
     }
+}
+
+extension BaseViewController {
+    public func showLoadingView() {
+        self.view.isUserInteractionEnabled = false
+        self.activityIndicatorView.startAnimating()
+        
+    }
+    public func stopLoadingView() {
+        self.view.isUserInteractionEnabled = true
+        self.activityIndicatorView.stopAnimating()
+    }
+
 }

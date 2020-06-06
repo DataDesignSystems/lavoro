@@ -12,11 +12,13 @@ class EnterMobileViewController: BaseViewController {
     @IBOutlet weak var fbSignInButton: UIButton!
     @IBOutlet weak var phoneNumberTextField: UITextField!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
-
+    let loginService = LoginService()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         addkeyboardObserver()
+        testNumber()
         // Do any additional setup after loading the view.
     }
     
@@ -29,6 +31,11 @@ class EnterMobileViewController: BaseViewController {
         phoneNumberTextField.setLayer(cornerRadius: 6.0)
         phoneNumberTextField.leftPadding()
         phoneNumberTextField.becomeFirstResponder()
+    }
+    
+    
+    func testNumber() {
+        self.phoneNumberTextField.text = "2243238312"
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -50,6 +57,33 @@ class EnterMobileViewController: BaseViewController {
         if ((notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) != nil
         {
             bottomConstraint.constant = 0
+        }
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "verifyOTP" {
+            if let vc = segue.destination as? MobileVerificationViewController {
+                vc.phoneNumber = phoneNumberTextField.text ?? ""
+            }
+        }
+    }
+    
+    @IBAction func requestOTPTap() {
+        if Validation.phone(phoneNumberTextField.text ?? "") {
+            showLoadingView()
+            loginService.requestOTP(with: phoneNumberTextField.text ?? "") { [weak self] (success, message) in
+                self?.stopLoadingView()
+                if success {
+                    self?.performSegue(withIdentifier: "verifyOTP", sender: self)
+                    MessageViewAlert.showSuccess(with: message ?? Validation.SuccessMessage.loginSuccessfull.rawValue)
+                } else if message?.isEmpty ?? true {
+                    MessageViewAlert.showError(with: Validation.Error.genericError.rawValue)
+                } else {
+                    MessageViewAlert.showError(with: message ?? "")
+                }
+            }
+        } else {
+            MessageViewAlert.showError(with: Validation.ValidationError.phoneNo.rawValue)
         }
     }
 }

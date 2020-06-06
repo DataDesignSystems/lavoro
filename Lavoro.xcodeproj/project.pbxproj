@@ -62,6 +62,13 @@
 		137938CB2468213C00AB2C46 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137938CA2468213B00AB2C46 /* LocationManager.swift */; };
 		137938CD2468254D00AB2C46 /* AddLocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137938CC2468254D00AB2C46 /* AddLocationTableViewCell.swift */; };
 		137938D224682B2700AB2C46 /* ALChatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137938D024682B2700AB2C46 /* ALChatManager.swift */; };
+		13B531B1248BF6E300C6C8FF /* NetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B531B0248BF6E300C6C8FF /* NetworkConfig.swift */; };
+		13B531B3248BF8B800C6C8FF /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B531B2248BF8B800C6C8FF /* NetworkService.swift */; };
+		13B531B6248BFD8300C6C8FF /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B531B5248BFD8300C6C8FF /* LoginService.swift */; };
+		13B531B8248BFDD500C6C8FF /* BaseModuleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B531B7248BFDD500C6C8FF /* BaseModuleService.swift */; };
+		13B531BA248BFF0E00C6C8FF /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B531B9248BFF0E00C6C8FF /* Validation.swift */; };
+		13B531BD248C040000C6C8FF /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B531BC248C040000C6C8FF /* MessageView.swift */; };
+		13B531BF248C1C7C00C6C8FF /* String+Exts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B531BE248C1C7C00C6C8FF /* String+Exts.swift */; };
 		13C3525D94BE24BBD94682BB /* Pods_Lavoro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD31EEAD4AE9165735295736 /* Pods_Lavoro.framework */; };
 		13D0579B245C7A6600227E15 /* HomeFeedsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D0579A245C7A6600227E15 /* HomeFeedsViewController.swift */; };
 		13D0579F245C7B2D00227E15 /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D0579E245C7B2D00227E15 /* Feed.swift */; };
@@ -168,6 +175,13 @@
 		137938CA2468213B00AB2C46 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		137938CC2468254D00AB2C46 /* AddLocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationTableViewCell.swift; sourceTree = "<group>"; };
 		137938D024682B2700AB2C46 /* ALChatManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ALChatManager.swift; sourceTree = "<group>"; };
+		13B531B0248BF6E300C6C8FF /* NetworkConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConfig.swift; sourceTree = "<group>"; };
+		13B531B2248BF8B800C6C8FF /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		13B531B5248BFD8300C6C8FF /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
+		13B531B7248BFDD500C6C8FF /* BaseModuleService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseModuleService.swift; sourceTree = "<group>"; };
+		13B531B9248BFF0E00C6C8FF /* Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
+		13B531BC248C040000C6C8FF /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
+		13B531BE248C1C7C00C6C8FF /* String+Exts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Exts.swift"; sourceTree = "<group>"; };
 		13D0579A245C7A6600227E15 /* HomeFeedsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedsViewController.swift; sourceTree = "<group>"; };
 		13D0579E245C7B2D00227E15 /* Feed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
 		13D057A0245C7B4700227E15 /* CheckInFeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInFeedTableViewCell.swift; sourceTree = "<group>"; };
@@ -255,6 +269,7 @@
 		136F3245245B032E006939ED /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				13B531AF248BF6B400C6C8FF /* Network */,
 				136F326C245B045B006939ED /* Home */,
 				136F326B245B045B006939ED /* Messages */,
 				136F326D245B045B006939ED /* Notification */,
@@ -269,6 +284,7 @@
 		136F3246245B032E006939ED /* LoginModule */ = {
 			isa = PBXGroup;
 			children = (
+				13B531B4248BFBD600C6C8FF /* Services */,
 				136F3247245B032E006939ED /* Cells */,
 				136F324C245B032E006939ED /* Models */,
 				136F3250245B032E006939ED /* Login.storyboard */,
@@ -456,6 +472,9 @@
 				136F3283245B4D42006939ED /* UIDate+Exts.swift */,
 				13D05808245D755B00227E15 /* BaseNavigationViewController.swift */,
 				1327EB782466A61900BA4805 /* UIButton+Exts.swift */,
+				13B531B9248BFF0E00C6C8FF /* Validation.swift */,
+				13B531BC248C040000C6C8FF /* MessageView.swift */,
+				13B531BE248C1C7C00C6C8FF /* String+Exts.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -466,6 +485,24 @@
 				137938D024682B2700AB2C46 /* ALChatManager.swift */,
 			);
 			path = Applozic;
+			sourceTree = "<group>";
+		};
+		13B531AF248BF6B400C6C8FF /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				13B531B0248BF6E300C6C8FF /* NetworkConfig.swift */,
+				13B531B2248BF8B800C6C8FF /* NetworkService.swift */,
+				13B531B7248BFDD500C6C8FF /* BaseModuleService.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		13B531B4248BFBD600C6C8FF /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				13B531B5248BFD8300C6C8FF /* LoginService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		13D05797245C7A4C00227E15 /* Cells */ = {
@@ -826,12 +863,14 @@
 				13D05800245CA09B00227E15 /* IGHomeView.swift in Sources */,
 				136F3261245B032F006939ED /* AccountTypeViewController.swift in Sources */,
 				13D057F8245C9FFC00227E15 /* IGStoryPreviewModel.swift in Sources */,
+				13B531BF248C1C7C00C6C8FF /* String+Exts.swift in Sources */,
 				1317B82224609D4700AD9AC8 /* WorkCategories.swift in Sources */,
 				136F327C245B1012006939ED /* ProfileViewController.swift in Sources */,
 				13D057EE245C9DF800227E15 /* AnimatedCollectionViewLayout.swift in Sources */,
 				1378AA8D2459E75700131BEB /* ViewController.swift in Sources */,
 				1378AA892459E75700131BEB /* AppDelegate.swift in Sources */,
 				1378AAAD2459FFEC00131BEB /* UIColor+Exts.swift in Sources */,
+				13B531BD248C040000C6C8FF /* MessageView.swift in Sources */,
 				13D057E4245C9DF800227E15 /* IGCache.swift in Sources */,
 				13D057EA245C9DF800227E15 /* IGStoryPreviewView.swift in Sources */,
 				13D0579F245C7B2D00227E15 /* Feed.swift in Sources */,
@@ -872,6 +911,7 @@
 				13D057DA245C9DF800227E15 /* IGStory.swift in Sources */,
 				13D057E1245C9DF800227E15 /* IGImageRequestable.swift in Sources */,
 				13D057DB245C9DF800227E15 /* IGStories.swift in Sources */,
+				13B531BA248BFF0E00C6C8FF /* Validation.swift in Sources */,
 				13D057D3245C9DF800227E15 /* IGStoryPreviewCell.swift in Sources */,
 				13D057E9245C9DF800227E15 /* IGRetryButton.swift in Sources */,
 				1317B82424609D6300AD9AC8 /* WorkLocation.swift in Sources */,
@@ -881,17 +921,21 @@
 				13D057EB245C9DF800227E15 /* Reachability.swift in Sources */,
 				13D057D2245C9DF800227E15 /* IGMockLoader.swift in Sources */,
 				136F3263245B032F006939ED /* OnboardingViewController.swift in Sources */,
+				13B531B6248BFD8300C6C8FF /* LoginService.swift in Sources */,
 				136F327E245B13C6006939ED /* ProfileTableViewCell.swift in Sources */,
 				13D057EF245C9DF800227E15 /* UIView+Anchor.swift in Sources */,
 				13D057F6245C9FDC00227E15 /* IGStoryPreviewController.swift in Sources */,
 				136F3264245B032F006939ED /* MobileVerificationViewController.swift in Sources */,
+				13B531B8248BFDD500C6C8FF /* BaseModuleService.swift in Sources */,
 				1327EB792466A61900BA4805 /* UIButton+Exts.swift in Sources */,
 				13D057A1245C7B4700227E15 /* CheckInFeedTableViewCell.swift in Sources */,
 				13D057E2245C9DF800227E15 /* IGError.swift in Sources */,
 				13D057D6245C9DF800227E15 /* Color+Additions.swift in Sources */,
 				1378AAAB2459F5EE00131BEB /* UIResponder+Exts.swift in Sources */,
 				1327EB7D2466A8A900BA4805 /* RecommendedCollectionViewCell.swift in Sources */,
+				13B531B3248BF8B800C6C8FF /* NetworkService.swift in Sources */,
 				13D057D7245C9DF800227E15 /* ImageView+Additions.swift in Sources */,
+				13B531B1248BF6E300C6C8FF /* NetworkConfig.swift in Sources */,
 				13D057DD245C9DF800227E15 /* IGUser.swift in Sources */,
 				136EBD9C246710D900C27589 /* MessageThread.swift in Sources */,
 				1317B81E2460963600AD9AC8 /* MyWorkLocationsViewController.swift in Sources */,

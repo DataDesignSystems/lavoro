@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -214,7 +214,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="GQF-Pz-W5t" kind="show" id="SJZ-7z-kuS"/>
+                                    <action selector="requestOTPTap" destination="kwB-gf-hZB" eventType="touchUpInside" id="JOb-Lz-5JG"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iMQ-ZK-tKS">
@@ -245,6 +245,7 @@
                         <outlet property="bottomConstraint" destination="ArL-AR-UIx" id="GE6-Rf-jYp"/>
                         <outlet property="fbSignInButton" destination="iMQ-ZK-tKS" id="uZa-fv-eOx"/>
                         <outlet property="phoneNumberTextField" destination="ZaL-cM-eFK" id="c5j-WL-xuX"/>
+                        <segue destination="GQF-Pz-W5t" kind="show" identifier="verifyOTP" id="oq2-oc-juA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uxd-bO-pCw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -289,6 +290,9 @@
                                         <state key="normal" title="Sign In">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="signInButtonTap" destination="oCi-1T-kfk" eventType="touchUpInside" id="vDj-cX-rfi"/>
+                                        </connections>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HM3-Nz-9X4">
                                         <rect key="frame" x="30" y="231" width="314" height="44"/>
@@ -415,12 +419,15 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="dwg-Yf-9XD" kind="show" id="gCC-SN-Z1P"/>
+                                    <action selector="nextTap" destination="GQF-Pz-W5t" eventType="touchUpInside" id="9t8-ga-DxM"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k5m-Sz-FZ7">
                                 <rect key="frame" x="93.5" y="781" width="227" height="30"/>
                                 <state key="normal" title="Already have an account? Sign In"/>
+                                <connections>
+                                    <action selector="resendOTPTap" destination="GQF-Pz-W5t" eventType="touchUpInside" id="Zqy-K2-Onv"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We have sent you an SMS with a code to number (513) 555-1212 Enter your OTP code here" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eMl-ir-X1N">
                                 <rect key="frame" x="28" y="173" width="354" height="61"/>
@@ -523,12 +530,14 @@
                     <navigationItem key="navigationItem" id="eS6-Hs-89j"/>
                     <connections>
                         <outlet property="bottomConstraint" destination="ndd-Yq-M9M" id="TLb-uZ-Qpf"/>
-                        <outlet property="fbSignInButton" destination="k5m-Sz-FZ7" id="zH1-Zw-Jmi"/>
                         <outlet property="hiddenTextField" destination="bQJ-NG-SYJ" id="NxA-La-mfH"/>
+                        <outlet property="messageLabel" destination="eMl-ir-X1N" id="Dot-OM-McU"/>
                         <outlet property="otp0Button" destination="1tX-L4-Duo" id="eZW-PQ-JZ0"/>
                         <outlet property="otp1Button" destination="PXj-7F-EOz" id="lL7-Wi-IkM"/>
                         <outlet property="otp2Button" destination="UJN-rZ-3pP" id="3I8-dt-QCo"/>
                         <outlet property="otp3Button" destination="yZm-eP-aOM" id="Hf2-ou-KS1"/>
+                        <outlet property="resendNewCode" destination="k5m-Sz-FZ7" id="X2i-a5-Gox"/>
+                        <segue destination="dwg-Yf-9XD" kind="show" identifier="selectType" id="nTS-D1-Pfh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vZd-5j-gwj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

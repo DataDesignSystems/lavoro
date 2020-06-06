@@ -31,6 +31,7 @@ class OnboardingViewController: UIViewController {
         signInButton.setAttributedTitle(string, for: .normal)
         pageControl.numberOfPages = onboardingInfo.count
     }
+    
     func getCurrentPage() -> Int {
         return Int((collectionView.contentOffset.x + collectionView.bounds.size.width / 2) / collectionView.bounds.size.width)
     }

@@ -15,4 +15,7 @@ target 'Lavoro' do
   pod 'SnapKit', '~> 5.0.0'
   pod 'MaterialComponents/BottomSheet'
   pod 'Applozic'
+  pod 'Alamofire', '~> 5.2'
+  pod 'SwiftMessages'
+  pod 'NVActivityIndicatorView'
 end
