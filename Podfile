@@ -18,4 +18,5 @@ target 'Lavoro' do
   pod 'Alamofire', '~> 5.2'
   pod 'SwiftMessages'
   pod 'NVActivityIndicatorView'
+  pod 'FBSDKLoginKit'
 end

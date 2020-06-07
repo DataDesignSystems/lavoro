@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EnterMobileViewController: BaseViewController {
+class EnterMobileViewController: BaseFacebookViewController {
     @IBOutlet weak var fbSignInButton: UIButton!
     @IBOutlet weak var phoneNumberTextField: UITextField!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
@@ -66,6 +66,10 @@ class EnterMobileViewController: BaseViewController {
                 vc.phoneNumber = phoneNumberTextField.text ?? ""
             }
         }
+    }
+    
+    @IBAction func facebookLoginTap() {
+        self.facebookLogin()
     }
     
     @IBAction func requestOTPTap() {

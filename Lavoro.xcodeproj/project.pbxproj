@@ -69,6 +69,7 @@
 		13B531BA248BFF0E00C6C8FF /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B531B9248BFF0E00C6C8FF /* Validation.swift */; };
 		13B531BD248C040000C6C8FF /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B531BC248C040000C6C8FF /* MessageView.swift */; };
 		13B531BF248C1C7C00C6C8FF /* String+Exts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B531BE248C1C7C00C6C8FF /* String+Exts.swift */; };
+		13B531C1248C260B00C6C8FF /* BaseFacebookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B531C0248C260B00C6C8FF /* BaseFacebookViewController.swift */; };
 		13C3525D94BE24BBD94682BB /* Pods_Lavoro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD31EEAD4AE9165735295736 /* Pods_Lavoro.framework */; };
 		13D0579B245C7A6600227E15 /* HomeFeedsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D0579A245C7A6600227E15 /* HomeFeedsViewController.swift */; };
 		13D0579F245C7B2D00227E15 /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D0579E245C7B2D00227E15 /* Feed.swift */; };
@@ -182,6 +183,7 @@
 		13B531B9248BFF0E00C6C8FF /* Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
 		13B531BC248C040000C6C8FF /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		13B531BE248C1C7C00C6C8FF /* String+Exts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Exts.swift"; sourceTree = "<group>"; };
+		13B531C0248C260B00C6C8FF /* BaseFacebookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFacebookViewController.swift; sourceTree = "<group>"; };
 		13D0579A245C7A6600227E15 /* HomeFeedsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedsViewController.swift; sourceTree = "<group>"; };
 		13D0579E245C7B2D00227E15 /* Feed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
 		13D057A0245C7B4700227E15 /* CheckInFeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInFeedTableViewCell.swift; sourceTree = "<group>"; };
@@ -323,6 +325,7 @@
 				136F3255245B032E006939ED /* OnboardingViewController.swift */,
 				136F3256245B032E006939ED /* MobileVerificationViewController.swift */,
 				136F3257245B032E006939ED /* LoginViewController.swift */,
+				13B531C0248C260B00C6C8FF /* BaseFacebookViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -860,6 +863,7 @@
 				136EBD9E2467123000C27589 /* MessageTableViewCell.swift in Sources */,
 				13D057ED245C9DF800227E15 /* CubeAttributesAnimator.swift in Sources */,
 				13D057D4245C9DF800227E15 /* UIView+Extension.swift in Sources */,
+				13B531C1248C260B00C6C8FF /* BaseFacebookViewController.swift in Sources */,
 				13D05800245CA09B00227E15 /* IGHomeView.swift in Sources */,
 				136F3261245B032F006939ED /* AccountTypeViewController.swift in Sources */,
 				13D057F8245C9FFC00227E15 /* IGStoryPreviewModel.swift in Sources */,

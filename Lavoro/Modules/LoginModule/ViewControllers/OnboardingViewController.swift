@@ -8,7 +8,7 @@
 
 import UIKit
 
-class OnboardingViewController: UIViewController {
+class OnboardingViewController: BaseFacebookViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var phoneButton: UIButton!
     @IBOutlet weak var fbButton: UIButton!
@@ -34,6 +34,10 @@ class OnboardingViewController: UIViewController {
     
     func getCurrentPage() -> Int {
         return Int((collectionView.contentOffset.x + collectionView.bounds.size.width / 2) / collectionView.bounds.size.width)
+    }
+    
+    @IBAction func facebookLoginTap() {
+        self.facebookLogin()
     }
 }
 

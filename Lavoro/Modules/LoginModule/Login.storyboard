@@ -122,7 +122,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Of6-PU-NkQ" kind="show" id="bW6-Q5-1Jw"/>
+                                    <action selector="facebookLoginTap" destination="svy-hN-vXM" eventType="touchUpInside" id="PFv-51-pWZ"/>
                                 </connections>
                             </button>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="YDl-vU-lTb">
@@ -220,6 +220,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iMQ-ZK-tKS">
                                 <rect key="frame" x="93.5" y="781" width="227" height="30"/>
                                 <state key="normal" title="Already have an account? Sign In"/>
+                                <connections>
+                                    <action selector="facebookLoginTap" destination="kwB-gf-hZB" eventType="touchUpInside" id="nyD-p1-Ggc"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -845,9 +848,6 @@
             <point key="canvasLocation" x="2388.4057971014495" y="846.42857142857144"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="bW6-Q5-1Jw"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <image name="fbIcon" width="20" height="20"/>
         <image name="ic_back" width="11" height="18"/>

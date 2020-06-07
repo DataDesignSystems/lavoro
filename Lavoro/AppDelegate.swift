@@ -8,6 +8,7 @@
 
 import UIKit
 import IQKeyboardManagerSwift
+import FBSDKCoreKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.makeKeyAndVisible()
         IQKeyboardManager.shared.enable = true
         LocationManager.shared.startLocation()
+        ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         return true
     }
     
@@ -32,6 +34,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func presentUserFLow() {
         self.window?.rootViewController = TabbarViewController()
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        ApplicationDelegate.shared.application(app, open: url, sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String, annotation: options[UIApplication.OpenURLOptionsKey.annotation]
+        )
     }
 }
 
