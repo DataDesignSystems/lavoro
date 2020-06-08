@@ -13,6 +13,9 @@ class LoginService: BaseModuleService {
     static let password: String = "password"
     static let phone: String = "phone"
     static let pin: String = "pin"
+    static let firstName: String = "first"
+    static let lastName: String = "last"
+    static let facebookToken: String = "facebookToken"
     
     func login(with email: String, password: String, completionHandler: @escaping ((Bool, User?, String?) -> ())) {
         NS.getRequest(with: .login, parameters: [LoginService.email: email, LoginService.password: password]) { [weak self] (response) in
@@ -58,4 +61,27 @@ class LoginService: BaseModuleService {
             }
         }
     }
+    //(success, message, auth user, is new user)
+    func facebookAuthenticate(with user: FBUser, completionHandler: @escaping ((Bool, String?, AuthUser?, Bool?) -> ())) {
+        let params = [LoginService.firstName:user.firstName, LoginService.lastName:user.lastName, LoginService.email:user.email, LoginService.facebookToken:user.token].compactMapValues({ $0 })
+        NS.getRequest(with: .facebookAuthentication, parameters: params) { [weak self] (response) in
+            switch response.result {
+            case .success(let json):
+                if self?.getCode(from: json) == 201 {
+                    if let data = json as? [String: Any], let dataObj = data["data"] as? [String: Any], let profileData = dataObj["profile"]  as? [String: Any] {
+                        let isNewUser = !(profileData["didRegister"] as? Bool ?? false)
+                        let authUser = AuthUser(json: profileData)
+                        completionHandler(true, self?.getMessage(from: json), authUser, isNewUser)
+                    } else {
+                        completionHandler(false, self?.getMessage(from: json), nil, nil)
+                    }
+                } else {
+                    completionHandler(false, self?.getMessage(from: json), nil, nil)
+                }
+            case .failure( _):
+                completionHandler(false, "", nil, nil)
+            }
+        }
+    }
+
 }

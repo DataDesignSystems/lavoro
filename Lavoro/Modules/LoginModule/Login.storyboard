@@ -163,6 +163,7 @@
                         <outlet property="pageControl" destination="YDl-vU-lTb" id="Ee7-VF-tbf"/>
                         <outlet property="phoneButton" destination="kK5-08-rf3" id="imj-jx-ETS"/>
                         <outlet property="signInButton" destination="djS-PJ-URp" id="tV8-y6-rjP"/>
+                        <segue destination="dwg-Yf-9XD" kind="show" identifier="registerFlow" id="XC3-m1-2II"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nyz-3K-WiN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -249,6 +250,7 @@
                         <outlet property="fbSignInButton" destination="iMQ-ZK-tKS" id="uZa-fv-eOx"/>
                         <outlet property="phoneNumberTextField" destination="ZaL-cM-eFK" id="c5j-WL-xuX"/>
                         <segue destination="GQF-Pz-W5t" kind="show" identifier="verifyOTP" id="oq2-oc-juA"/>
+                        <segue destination="dwg-Yf-9XD" kind="show" identifier="registerFlow" id="vLo-Ph-5U7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uxd-bO-pCw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -848,6 +850,9 @@
             <point key="canvasLocation" x="2388.4057971014495" y="846.42857142857144"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="vLo-Ph-5U7"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="fbIcon" width="20" height="20"/>
         <image name="ic_back" width="11" height="18"/>

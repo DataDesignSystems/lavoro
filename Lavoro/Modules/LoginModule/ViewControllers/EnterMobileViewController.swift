@@ -12,7 +12,6 @@ class EnterMobileViewController: BaseFacebookViewController {
     @IBOutlet weak var fbSignInButton: UIButton!
     @IBOutlet weak var phoneNumberTextField: UITextField!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
-    let loginService = LoginService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,7 +68,13 @@ class EnterMobileViewController: BaseFacebookViewController {
     }
     
     @IBAction func facebookLoginTap() {
-        self.facebookLogin()
+        self.facebookLogin { [weak self] (success, authUser, isNewUser) in
+            if isNewUser {
+                self?.performSegue(withIdentifier: "registerFlow", sender: self)
+            } else {
+                self?.appDelegate.presentUserFLow()
+            }
+        }
     }
     
     @IBAction func requestOTPTap() {

@@ -18,6 +18,8 @@
 		1327EB792466A61900BA4805 /* UIButton+Exts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1327EB782466A61900BA4805 /* UIButton+Exts.swift */; };
 		1327EB7B2466A80300BA4805 /* RecommendedCollectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1327EB7A2466A80300BA4805 /* RecommendedCollectionTableViewCell.swift */; };
 		1327EB7D2466A8A900BA4805 /* RecommendedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1327EB7C2466A8A900BA4805 /* RecommendedCollectionViewCell.swift */; };
+		1353F24F248E84EB00AA59F6 /* FacebookUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1353F24E248E84EB00AA59F6 /* FacebookUser.swift */; };
+		1353F251248E8D6E00AA59F6 /* AuthUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1353F250248E8D6E00AA59F6 /* AuthUser.swift */; };
 		136EBD952466D91E00C27589 /* FollowersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136EBD942466D91E00C27589 /* FollowersViewController.swift */; };
 		136EBD9A24670A5F00C27589 /* MessageListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136EBD9924670A5F00C27589 /* MessageListViewController.swift */; };
 		136EBD9C246710D900C27589 /* MessageThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136EBD9B246710D900C27589 /* MessageThread.swift */; };
@@ -130,6 +132,8 @@
 		1327EB782466A61900BA4805 /* UIButton+Exts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Exts.swift"; sourceTree = "<group>"; };
 		1327EB7A2466A80300BA4805 /* RecommendedCollectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedCollectionTableViewCell.swift; sourceTree = "<group>"; };
 		1327EB7C2466A8A900BA4805 /* RecommendedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedCollectionViewCell.swift; sourceTree = "<group>"; };
+		1353F24E248E84EB00AA59F6 /* FacebookUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookUser.swift; sourceTree = "<group>"; };
+		1353F250248E8D6E00AA59F6 /* AuthUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUser.swift; sourceTree = "<group>"; };
 		136EBD942466D91E00C27589 /* FollowersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersViewController.swift; sourceTree = "<group>"; };
 		136EBD9924670A5F00C27589 /* MessageListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageListViewController.swift; sourceTree = "<group>"; };
 		136EBD9B246710D900C27589 /* MessageThread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageThread.swift; sourceTree = "<group>"; };
@@ -312,6 +316,8 @@
 				136F324D245B032E006939ED /* User.swift */,
 				136F324E245B032E006939ED /* Onboarding.swift */,
 				136F324F245B032E006939ED /* AccountType.swift */,
+				1353F24E248E84EB00AA59F6 /* FacebookUser.swift */,
+				1353F250248E8D6E00AA59F6 /* AuthUser.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -860,6 +866,7 @@
 				137938C32468083800AB2C46 /* AddScheduleImageTableViewCell.swift in Sources */,
 				13D057E6245C9DF800227E15 /* IGPlayerView.swift in Sources */,
 				13D057E0245C9DF800227E15 /* IGRoundedView.swift in Sources */,
+				1353F24F248E84EB00AA59F6 /* FacebookUser.swift in Sources */,
 				136EBD9E2467123000C27589 /* MessageTableViewCell.swift in Sources */,
 				13D057ED245C9DF800227E15 /* CubeAttributesAnimator.swift in Sources */,
 				13D057D4245C9DF800227E15 /* UIView+Extension.swift in Sources */,
@@ -914,6 +921,7 @@
 				137938CB2468213C00AB2C46 /* LocationManager.swift in Sources */,
 				13D057DA245C9DF800227E15 /* IGStory.swift in Sources */,
 				13D057E1245C9DF800227E15 /* IGImageRequestable.swift in Sources */,
+				1353F251248E8D6E00AA59F6 /* AuthUser.swift in Sources */,
 				13D057DB245C9DF800227E15 /* IGStories.swift in Sources */,
 				13B531BA248BFF0E00C6C8FF /* Validation.swift in Sources */,
 				13D057D3245C9DF800227E15 /* IGStoryPreviewCell.swift in Sources */,
