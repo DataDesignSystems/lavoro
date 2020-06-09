@@ -21,6 +21,16 @@ class BaseModuleService: NSObject {
         return nil
     }
     
+    func getToken(from data: Any) -> String? {
+        guard let json = data as? [String: Any], let data = json["data"] as? [String: Any] else {
+            return nil
+        }
+        if let token = data["token"] as? String {
+            return token
+        }
+        return nil
+    }
+    
     func getMessage(from data: Any) -> String? {
         guard let json = data as? [String: Any], let data = json["data"] as? [String: Any] else {
             return nil

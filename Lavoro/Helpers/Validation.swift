@@ -13,6 +13,7 @@ struct Validation {
         case password = "Password should be atleast 6 digit!"
         case phoneNo = "Enter phone number is not correct!"
         case pin = "Pin should be atleast 4 characters!"
+        case username = "username is mandatory!"
     }
     
     enum Error: String {
@@ -22,6 +23,7 @@ struct Validation {
     
     enum SuccessMessage: String {
         case loginSuccessfull = "Logged in successfully!"
+        case profileUpdatedSuccessfully = "Profile updated successfully!"
         case pinValidated = "pin validated!"
     }
     
@@ -46,5 +48,9 @@ struct Validation {
         let pinValid = (pin.count == 4)
         return pinValid
     }
-
+    
+    static func username(_ username: String) -> Bool{
+        let usernameValid = (username.count > 0)
+        return usernameValid
+    }
 }

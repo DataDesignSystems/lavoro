@@ -10,7 +10,7 @@ import UIKit
 
 class RegisterationImageTableViewCell: UITableViewCell {
     @IBOutlet weak var imageSelectionButton: UIButton!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         imageSelectionButton.setLayer(cornerRadius: 16)

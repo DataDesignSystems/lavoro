@@ -16,6 +16,11 @@ class LoginService: BaseModuleService {
     static let firstName: String = "first"
     static let lastName: String = "last"
     static let facebookToken: String = "facebookToken"
+    static let userTypeId: String = "userTypeId"
+    static let username: String = "username"
+    static let gender: String = "gender"
+    static let dob: String = "dob"
+    static let avatar: String = "avatar"
     
     func login(with email: String, password: String, completionHandler: @escaping ((Bool, User?, String?) -> ())) {
         NS.getRequest(with: .login, parameters: [LoginService.email: email, LoginService.password: password]) { [weak self] (response) in
@@ -48,7 +53,7 @@ class LoginService: BaseModuleService {
     }
     
     func validateOTP(with pin: String, phone: String, completionHandler: @escaping ((Bool, String?) -> ())) {
-        NS.getRequest(with: .pinRequest, parameters: [LoginService.pin: pin, LoginService.phone: phone]) { [weak self] (response) in
+        NS.getRequest(with: .pinValidation, parameters: [LoginService.pin: pin, LoginService.phone: phone]) { [weak self] (response) in
             switch response.result {
             case .success(let json):
                 if self?.getCode(from: json) == 201 {
@@ -70,7 +75,8 @@ class LoginService: BaseModuleService {
                 if self?.getCode(from: json) == 201 {
                     if let data = json as? [String: Any], let dataObj = data["data"] as? [String: Any], let profileData = dataObj["profile"]  as? [String: Any] {
                         let isNewUser = !(profileData["didRegister"] as? Bool ?? false)
-                        let authUser = AuthUser(json: profileData)
+                        let authUser = AuthUser(json: profileData, token: self?.getToken(from: json) ?? "")
+                        authUser.saveUser()
                         completionHandler(true, self?.getMessage(from: json), authUser, isNewUser)
                     } else {
                         completionHandler(false, self?.getMessage(from: json), nil, nil)
@@ -84,4 +90,34 @@ class LoginService: BaseModuleService {
         }
     }
 
+    func updateUserAccountType(with typeId: String, completionHandler: @escaping ((Bool, String?) -> ())) {
+        NS.getRequest(with: .updateUserAccountType, parameters: [LoginService.userTypeId: typeId], authToken: true) { [weak self] (response) in
+            switch response.result {
+            case .success(let json):
+                if self?.getCode(from: json) == 201 {
+                    completionHandler(true, self?.getMessage(from: json))
+                } else {
+                    completionHandler(false, self?.getMessage(from: json))
+                }
+            case .failure( _):
+                completionHandler(false, "")
+            }
+        }
+    }
+    
+    func updateUserProfile(with username: String?, password: String?, email: String?, phone: String?, gender: String?, dob: String?, imageURL: String?, completionHandler: @escaping ((Bool, String?) -> ())) {
+        let params = [LoginService.username: username, LoginService.email: email, LoginService.password:password, LoginService.phone: phone, LoginService.gender: gender, LoginService.dob: dob, LoginService.avatar: imageURL].compactMapValues({ $0 })
+        NS.getRequest(with: .updateUserProfile, parameters: params, authToken: true) { [weak self] (response) in
+            switch response.result {
+            case .success(let json):
+                if self?.getCode(from: json) == 201 {
+                    completionHandler(true, self?.getMessage(from: json))
+                } else {
+                    completionHandler(false, self?.getMessage(from: json))
+                }
+            case .failure( _):
+                completionHandler(false, "")
+            }
+        }
+    }
 }

@@ -12,6 +12,7 @@ class AccountTypeViewController: BaseViewController {
     let accountType = [AccountType(imageName: "customer", title: "CUSTOMER"),
                        AccountType(imageName: "serviceProfessional", title: "SERVICE PROFESSIONAL")]
     @IBOutlet weak var cancelButton: UIButton!
+    let loginService = LoginService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +32,23 @@ class AccountTypeViewController: BaseViewController {
     }
     
     @objc func continueButton(button: UIButton) {
-        self.performSegue(withIdentifier: "showRegisterationPage", sender: self)
+        self.accuntTypeSelected(item: button.tag)
+    }
+    
+    func accuntTypeSelected(item: Int) {
+        showLoadingView()
+        loginService.updateUserAccountType(with: "\(item+2)") { [weak self] (success, message) in
+            self?.stopLoadingView()
+            if success {
+                self?.performSegue(withIdentifier: "showRegisterationPage", sender: self)
+            } else {
+                if message?.isEmpty ?? true {
+                    MessageViewAlert.showError(with: Validation.Error.loginError.rawValue)
+                } else {
+                    MessageViewAlert.showError(with: message ?? "")
+                }
+            }
+        }
     }
 }
 
@@ -43,6 +60,7 @@ extension AccountTypeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "accountTypeCell", for: indexPath) as! AccountTypeTableViewCell
         cell.setupCell(with: accountType[indexPath.row])
+        cell.continueButton.tag = indexPath.row
         cell.continueButton.addTarget(self, action: #selector(continueButton(button:)), for: .touchUpInside)
         return cell
     }

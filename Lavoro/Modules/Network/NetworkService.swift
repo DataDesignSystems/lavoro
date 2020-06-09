@@ -10,8 +10,9 @@ import Foundation
 import Alamofire
 
 class NetworkService {
-    func getRequest(with endpoint: NetworkConfig.Endpoint, parameters: [String: String], completionHandler: @escaping ((AFDataResponse<Any>) -> ())) {
-        guard let url = URL(string: NetworkConfig.baseURL + endpoint.rawValue) else {
+    func getRequest(with endpoint: NetworkConfig.Endpoint, parameters: [String: String], authToken: Bool = false, completionHandler: @escaping ((AFDataResponse<Any>) -> ())) {
+        let token = AuthUser.getAuthUser()?.authToken ?? ""
+        guard let url = URL(string: NetworkConfig.baseURL + endpoint.rawValue + (authToken ? token : "")) else {
             return
         }
         AF.request(url, method: .get, parameters: parameters).responseJSON { response in
