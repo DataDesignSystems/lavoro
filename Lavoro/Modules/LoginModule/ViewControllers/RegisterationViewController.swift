@@ -36,8 +36,9 @@ class RegisterationViewController: BaseViewController {
             let email: String? = user.email.isEmpty ? nil : user.email
             let password: String? = user.password.isEmpty ? nil : user.password
             let phone: String? = user.phone.isEmpty ? nil : user.phone
+            let gender: String? = user.gender.isEmpty ? nil : user.gender
             showLoadingView()
-            loginService.updateUserProfile(with: username, password: password, email: email, phone: phone, gender: nil, dob: nil, imageURL: nil) { [weak self] (success, message) in
+            loginService.updateUserProfile(with: username, password: password, email: email, phone: phone, gender: gender, dob: nil, imageURL: nil) { [weak self] (success, message) in
                 self?.stopLoadingView()
                 if success {
                     self?.appDelegate.presentUserFLow()
@@ -68,6 +69,14 @@ class RegisterationViewController: BaseViewController {
             MessageViewAlert.showError(with: Validation.ValidationError.phoneNo.rawValue)
             return false
         }
+        if !Validation.phone(user.phone) {
+            MessageViewAlert.showError(with: Validation.ValidationError.phoneNo.rawValue)
+            return false
+        }
+        if !Validation.gender(user.gender) {
+            MessageViewAlert.showError(with: Validation.ValidationError.gender.rawValue)
+            return false
+        }
         return true
     }
 }
@@ -87,18 +96,23 @@ extension RegisterationViewController: UITableViewDataSource {
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "registerationTextCell", for: indexPath) as! RegisterationTextTableViewCell
+            cell.textField.isSecureTextEntry = false
+            cell.textField.keyboardType = .default
             var text = ""
             switch indexPath.row - 1 {
             case 0:
                 text = user.username
             case 1:
                 text = user.password
+                cell.textField.isSecureTextEntry = true
             case 2:
                 text = user.email
+                cell.textField.keyboardType = .emailAddress
             case 3:
                 text = user.phone
             case 4:
                 text = user.gender
+                cell.textField.isUserInteractionEnabled = false
             case 5:
                 text = user.dob
             default:
@@ -120,7 +134,24 @@ extension RegisterationViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        switch indexPath.row {
+        case 5:
+            let alertController = UIAlertController(title: "Select Gender", message: "", preferredStyle: .actionSheet)
+            let maleButton = UIAlertAction(title: "Male", style: .default, handler: { (action) -> Void in
+                self.user.gender = "Male"
+                tableView.reloadData()
+            })
+            let  femaleButton = UIAlertAction(title: "Female", style: .default, handler: { (action) -> Void in
+                self.user.gender = "Female"
+                tableView.reloadData()
+            })
+
+            alertController.addAction(maleButton)
+            alertController.addAction(femaleButton)
+            self.navigationController!.present(alertController, animated: true, completion: nil)
+        default:
+            print("error")
+        }
     }
 }
 extension RegisterationViewController: RegistrationDelegate {

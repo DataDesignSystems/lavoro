@@ -64,6 +64,7 @@
 		137938CB2468213C00AB2C46 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137938CA2468213B00AB2C46 /* LocationManager.swift */; };
 		137938CD2468254D00AB2C46 /* AddLocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137938CC2468254D00AB2C46 /* AddLocationTableViewCell.swift */; };
 		137938D224682B2700AB2C46 /* ALChatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137938D024682B2700AB2C46 /* ALChatManager.swift */; };
+		1382B7A1248F9C6B0032BE49 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1382B7A0248F9C6B0032BE49 /* ImageService.swift */; };
 		13B531B1248BF6E300C6C8FF /* NetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B531B0248BF6E300C6C8FF /* NetworkConfig.swift */; };
 		13B531B3248BF8B800C6C8FF /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B531B2248BF8B800C6C8FF /* NetworkService.swift */; };
 		13B531B6248BFD8300C6C8FF /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B531B5248BFD8300C6C8FF /* LoginService.swift */; };
@@ -180,6 +181,7 @@
 		137938CA2468213B00AB2C46 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		137938CC2468254D00AB2C46 /* AddLocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationTableViewCell.swift; sourceTree = "<group>"; };
 		137938D024682B2700AB2C46 /* ALChatManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ALChatManager.swift; sourceTree = "<group>"; };
+		1382B7A0248F9C6B0032BE49 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		13B531B0248BF6E300C6C8FF /* NetworkConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConfig.swift; sourceTree = "<group>"; };
 		13B531B2248BF8B800C6C8FF /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		13B531B5248BFD8300C6C8FF /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
@@ -502,6 +504,7 @@
 				13B531B0248BF6E300C6C8FF /* NetworkConfig.swift */,
 				13B531B2248BF8B800C6C8FF /* NetworkService.swift */,
 				13B531B7248BFDD500C6C8FF /* BaseModuleService.swift */,
+				1382B7A0248F9C6B0032BE49 /* ImageService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -943,6 +946,7 @@
 				13D057A1245C7B4700227E15 /* CheckInFeedTableViewCell.swift in Sources */,
 				13D057E2245C9DF800227E15 /* IGError.swift in Sources */,
 				13D057D6245C9DF800227E15 /* Color+Additions.swift in Sources */,
+				1382B7A1248F9C6B0032BE49 /* ImageService.swift in Sources */,
 				1378AAAB2459F5EE00131BEB /* UIResponder+Exts.swift in Sources */,
 				1327EB7D2466A8A900BA4805 /* RecommendedCollectionViewCell.swift in Sources */,
 				13B531B3248BF8B800C6C8FF /* NetworkService.swift in Sources */,

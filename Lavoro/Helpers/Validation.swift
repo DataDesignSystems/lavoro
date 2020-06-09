@@ -14,6 +14,7 @@ struct Validation {
         case phoneNo = "Enter phone number is not correct!"
         case pin = "Pin should be atleast 4 characters!"
         case username = "username is mandatory!"
+        case gender = "Please select gender!"
     }
     
     enum Error: String {
@@ -52,5 +53,10 @@ struct Validation {
     static func username(_ username: String) -> Bool{
         let usernameValid = (username.count > 0)
         return usernameValid
+    }
+    
+    static func gender(_ gender: String) -> Bool{
+        let genderValid = (gender == "Male" || gender == "Female")
+        return genderValid
     }
 }

@@ -40,4 +40,13 @@ class BaseModuleService: NSObject {
         }
         return nil
     }
+    
+    func updateUser(from json: Any) -> AuthUser? {
+        if let data = json as? [String: Any], let dataObj = data["data"] as? [String: Any], let profileData = dataObj["profile"]  as? [String: Any] {
+            let authUser = AuthUser(json: profileData, token: self.getToken(from: json) ?? "")
+            authUser.saveUser()
+            return authUser
+        }
+        return nil
+    }
 }
