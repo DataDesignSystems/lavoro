@@ -52,18 +52,22 @@ class LoginService: BaseModuleService {
         }
     }
     
-    func validateOTP(with pin: String, phone: String, completionHandler: @escaping ((Bool, String?) -> ())) {
+    func validateOTP(with pin: String, phone: String, completionHandler: @escaping ((Bool, String?, Bool) -> ())) {
         NS.getRequest(with: .pinValidation, parameters: [LoginService.pin: pin, LoginService.phone: phone]) { [weak self] (response) in
             switch response.result {
             case .success(let json):
                 if self?.getCode(from: json) == 201 {
                     self?.updateUser(from: json)
-                    completionHandler(true, self?.getMessage(from: json))
+                    var isNewUser = true
+                    if let data = json as? [String: Any], let dataObj = data["data"] as? [String: Any], let profileData = dataObj["profile"]  as? [String: Any] {
+                        isNewUser = !(profileData["didRegister"] as? Bool ?? true)
+                    }
+                    completionHandler(true, self?.getMessage(from: json), isNewUser)
                 } else {
-                    completionHandler(false, self?.getMessage(from: json))
+                    completionHandler(false, self?.getMessage(from: json), true)
                 }
             case .failure( _):
-                completionHandler(false, "")
+                completionHandler(false, "", true)
             }
         }
     }

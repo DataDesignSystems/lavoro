@@ -141,10 +141,14 @@ extension MobileVerificationViewController {
             return
         }
         self.showLoadingView()
-        loginService.validateOTP(with: otp, phone: phoneNumber ?? "") { [weak self] (success, message) in
+        loginService.validateOTP(with: otp, phone: phoneNumber ?? "") { [weak self] (success, message, isNewUser) in
             self?.stopLoadingView()
             if success {
-                self?.performSegue(withIdentifier: "selectType", sender: self)
+                if isNewUser {
+                    self?.performSegue(withIdentifier: "selectType", sender: self)
+                } else {
+                    self?.appDelegate.presentUserFLow()
+                }
                 MessageViewAlert.showSuccess(with: message ?? Validation.SuccessMessage.pinValidated.rawValue)
             } else if message?.isEmpty ?? true {
                 MessageViewAlert.showError(with: Validation.Error.genericError.rawValue)
