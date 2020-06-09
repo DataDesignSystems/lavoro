@@ -97,18 +97,37 @@ class AuthUser: NSObject, NSCoding {
 
     
     func saveUser() {
-        let userDefaults = UserDefaults.standard
-        let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: self)
-        userDefaults.set(encodedData, forKey: "authuser")
-        userDefaults.synchronize()
-        AuthUser.authUser = nil
+        do {
+            let userDefaults = UserDefaults.standard
+            let encodedData: Data = try NSKeyedArchiver.archivedData(withRootObject: self, requiringSecureCoding: false)
+            userDefaults.set(encodedData, forKey: "authuser")
+            userDefaults.synchronize()
+            AuthUser.authUser = AuthUser.loadAuthUser()
+        }
+        catch {
+            print("ERROR")
+        }
     }
     
+    @discardableResult
     static func loadAuthUser() -> AuthUser? {
         let userDefaults = UserDefaults.standard
         if let decoded  = userDefaults.data(forKey: "authuser") {
-            return NSKeyedUnarchiver.unarchiveObject(with: decoded) as? AuthUser
+            do {
+                let authUser = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(decoded) as? AuthUser
+                return authUser
+            }
+            catch {
+                print("Error")
+            }
         }
         return nil
+    }
+    
+    static func logout() {
+        AuthUser.authUser = nil
+        let userDefaults = UserDefaults.standard
+        userDefaults.removeObject(forKey: "authuser")
+        userDefaults.synchronize()
     }
 }

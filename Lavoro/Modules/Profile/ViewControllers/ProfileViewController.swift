@@ -25,7 +25,8 @@ class ProfileViewController: BaseViewController {
                        ProfileInfo(icon: "WhoIFollow", title: "Who I Follow", type: .whoIFollow),
                        ProfileInfo(icon: "Messages", title: "Messages", type: .messages),
                        ProfileInfo(icon: "Blacklist", title: "Blacklist", type: .blacklist),
-                       ProfileInfo(icon: "Settings", title: "Settings", type: .settings)]]
+                       ProfileInfo(icon: "Settings", title: "Settings", type: .settings),
+                       ProfileInfo(icon: "logout", title: "Logout", type: .logout)]]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,6 +70,9 @@ extension ProfileViewController: UITableViewDelegate {
             self.performSegue(withIdentifier: "findFriends", sender: self)
         case .followers:
             self.performSegue(withIdentifier: "followers", sender: self)
+        case .logout:
+            AuthUser.loadAuthUser()
+            appDelegate.presentLoginFlow()
         default:
             print(object.title)
         }
@@ -91,4 +95,5 @@ enum ProfileType {
     case messages
     case blacklist
     case settings
+    case logout
 }
