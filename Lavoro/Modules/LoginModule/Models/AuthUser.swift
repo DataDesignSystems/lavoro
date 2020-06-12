@@ -19,7 +19,11 @@ class AuthUser: NSObject, NSCoding {
     let status: String
     let userType: String
     let authToken: String
-    static var authUser: AuthUser?
+    let gender: String
+    let birthday: String
+    let username: String
+    let avatar: String
+    private static var authUser: AuthUser?
     
     static func getAuthUser() -> AuthUser? {
         if AuthUser.authUser == nil {
@@ -38,7 +42,11 @@ class AuthUser: NSObject, NSCoding {
          userTypeId: String,
          status: String,
          userType: String,
-         authToken: String) {
+         authToken: String,
+         gender: String,
+         birthday: String,
+         username: String,
+         avatar: String) {
         self.id = id
         self.first = first
         self.middle = middle
@@ -50,6 +58,10 @@ class AuthUser: NSObject, NSCoding {
         self.status = status
         self.userType = userType
         self.authToken = authToken
+        self.gender = gender
+        self.birthday = birthday
+        self.username = username
+        self.avatar = avatar
     }
     
     init(json: [String: Any], token: String) {
@@ -64,6 +76,10 @@ class AuthUser: NSObject, NSCoding {
         self.status = json["status"] as? String ?? ""
         self.userType = json["userType"] as? String ?? ""
         self.authToken = token
+        self.gender = json["gender"] as? String ?? ""
+        self.birthday = json["birthday"] as? String ?? ""
+        self.username =  json["username"] as? String ?? ""
+        self.avatar = json["avatar"] as? String ?? ""
     }
     
     required convenience init(coder aDecoder: NSCoder) {
@@ -78,7 +94,11 @@ class AuthUser: NSObject, NSCoding {
         let status = aDecoder.decodeObject(forKey: "status") as? String ?? ""
         let userType = aDecoder.decodeObject(forKey: "userType") as? String ?? ""
         let authToken = aDecoder.decodeObject(forKey: "authToken") as? String ?? ""
-        self.init(id: id, first: first, middle: middle, last: last, phone: phone, email: email, facebookToken: facebookToken, userTypeId: userTypeId, status: status, userType: userType, authToken: authToken)
+        let gender = aDecoder.decodeObject(forKey: "gender") as? String ?? ""
+        let birthday = aDecoder.decodeObject(forKey: "birthday") as? String ?? ""
+        let username = aDecoder.decodeObject(forKey: "username") as? String ?? ""
+        let avatar = aDecoder.decodeObject(forKey: "avatar") as? String ?? ""
+        self.init(id: id, first: first, middle: middle, last: last, phone: phone, email: email, facebookToken: facebookToken, userTypeId: userTypeId, status: status, userType: userType, authToken: authToken, gender: gender, birthday: birthday, username: username, avatar: avatar)
     }
 
     func encode(with aCoder: NSCoder) {
@@ -93,6 +113,10 @@ class AuthUser: NSObject, NSCoding {
         aCoder.encode(status, forKey: "status")
         aCoder.encode(userType, forKey: "userType")
         aCoder.encode(authToken, forKey: "authToken")
+        aCoder.encode(gender, forKey: "gender")
+        aCoder.encode(birthday, forKey: "birthday")
+        aCoder.encode(username, forKey: "username")
+        aCoder.encode(avatar, forKey: "avatar")
     }
 
     

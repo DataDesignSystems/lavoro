@@ -9,15 +9,30 @@
 import UIKit
 import SkyFloatingLabelTextField
 import IQKeyboardManagerSwift
+import SDWebImage
 
 class RegisterationViewController: BaseViewController {
     @IBOutlet weak var tableView: UITableView!
     var user = User()
     var textFieldPlacehoders = ["Username", "Password", "Email", "Phone", "Gender", "Date of birth"]
     let loginService = LoginService()
+    var isEditingProfile = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadUserData()
+    }
+    
+    func loadUserData() {
+        if let authUser = AuthUser.getAuthUser() {
+            user.username = authUser.username
+            user.password = ""
+            user.email = authUser.email
+            user.phone = authUser.phone
+            user.gender = authUser.gender
+            user.dob = authUser.birthday
+            user.imageURL = authUser.avatar
+        }
     }
     
     @objc func imageSelectionButton(button: UIButton) {
@@ -35,13 +50,18 @@ class RegisterationViewController: BaseViewController {
             let username: String? = user.username.isEmpty ? nil : user.username
             let email: String? = user.email.isEmpty ? nil : user.email
             let password: String? = user.password.isEmpty ? nil : user.password
-            let phone: String? = user.phone.isEmpty ? nil : user.phone
+            let phone: String? = user.phone.isEmpty ? nil : user.phone.removePhoneFormating()
             let gender: String? = user.gender.isEmpty ? nil : user.gender
+            let dob: String? = user.dob.isEmpty ? nil : user.dob
             showLoadingView()
-            loginService.updateUserProfile(with: username, password: password, email: email, phone: phone, gender: gender, dob: nil, imageURL: nil) { [weak self] (success, message) in
+            loginService.updateUserProfile(with: username, password: password, email: email, phone: phone, gender: gender, dob: dob, imageURL: nil) { [weak self] (success, message) in
                 self?.stopLoadingView()
                 if success {
-                    self?.appDelegate.presentUserFLow()
+                    if self?.isEditingProfile ?? false {
+                        self?.backButton()
+                    } else {
+                        self?.appDelegate.presentUserFLow()
+                    }
                     MessageViewAlert.showSuccess(with: message ?? Validation.SuccessMessage.profileUpdatedSuccessfully.rawValue)
                 } else if message?.isEmpty ?? true {
                     MessageViewAlert.showError(with: Validation.Error.genericError.rawValue)
@@ -65,16 +85,16 @@ class RegisterationViewController: BaseViewController {
             MessageViewAlert.showError(with: Validation.ValidationError.email.rawValue)
             return false
         }
-        if !Validation.phone(user.phone) {
-            MessageViewAlert.showError(with: Validation.ValidationError.phoneNo.rawValue)
-            return false
-        }
-        if !Validation.phone(user.phone) {
+        if !Validation.phone(user.phone.removePhoneFormating()) {
             MessageViewAlert.showError(with: Validation.ValidationError.phoneNo.rawValue)
             return false
         }
         if !Validation.gender(user.gender) {
             MessageViewAlert.showError(with: Validation.ValidationError.gender.rawValue)
+            return false
+        }
+        if !Validation.dob(user.dob) {
+            MessageViewAlert.showError(with: Validation.ValidationError.dob.rawValue)
             return false
         }
         return true
@@ -91,6 +111,8 @@ extension RegisterationViewController: UITableViewDataSource {
             if let image = user.image {
                 cell.imageSelectionButton.setBackgroundImage(image, for: .normal)
                 cell.imageSelectionButton.setImage(nil, for: .normal)
+            } else if let url = URL(string: user.imageURL) {
+                cell.imageSelectionButton.sd_setImage(with: url, for: .normal, completed: nil)
             }
             cell.imageSelectionButton.addTarget(self, action: #selector(imageSelectionButton(button:)), for: .touchUpInside)
             return cell
@@ -110,11 +132,15 @@ extension RegisterationViewController: UITableViewDataSource {
                 cell.textField.keyboardType = .emailAddress
             case 3:
                 text = user.phone
+                if let authUser = AuthUser.getAuthUser(), authUser.phone.count > 8 {
+                    cell.textField.isUserInteractionEnabled = false
+                }
             case 4:
                 text = user.gender
                 cell.textField.isUserInteractionEnabled = false
             case 5:
                 text = user.dob
+                cell.textField.isUserInteractionEnabled = false
             default:
                 print("error")
             }
@@ -149,6 +175,12 @@ extension RegisterationViewController: UITableViewDelegate {
             alertController.addAction(maleButton)
             alertController.addAction(femaleButton)
             self.navigationController!.present(alertController, animated: true, completion: nil)
+        case 6: //dob picker
+            let selectedDate = user.dob.toDate(dateFormat: "YYYY-MM-dd") ?? Date()
+            RPicker.selectDate(title: "Select Date", cancelText: "Cancel", selectedDate: selectedDate, maxDate: Date(), didSelectDate: { [weak self] (selectedDate) in
+                self?.user.dob = selectedDate.toString(dateFormat: "YYYY-MM-dd")
+                tableView.reloadData()
+            })
         default:
             print("error")
         }

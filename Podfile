@@ -19,4 +19,5 @@ target 'Lavoro' do
   pod 'SwiftMessages'
   pod 'NVActivityIndicatorView'
   pod 'FBSDKLoginKit'
+  pod 'SDWebImage', '~> 5.0'
 end

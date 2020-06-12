@@ -20,4 +20,8 @@ extension String {
         }
         return pureNumber
     }
+    
+    func removePhoneFormating() -> String {
+        return self.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
+    }
 }

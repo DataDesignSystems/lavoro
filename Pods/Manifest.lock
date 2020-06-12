@@ -63,6 +63,7 @@ DEPENDENCIES:
   - KVKCalendar
   - MaterialComponents/BottomSheet
   - NVActivityIndicatorView
+  - SDWebImage (~> 5.0)
   - SkyFloatingLabelTextField (~> 3.0)
   - SnapKit (~> 5.0.0)
   - SwiftMessages
@@ -96,6 +97,6 @@ SPEC CHECKSUMS:
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftMessages: b577dc7043be8b299857ab35bb663dbff6483bd0
 
-PODFILE CHECKSUM: e48cdf8868cf4c89ae3e86ef40baceade641849b
+PODFILE CHECKSUM: 358993e14c7063113d81269dceb79bab42b33688
 
 COCOAPODS: 1.9.1

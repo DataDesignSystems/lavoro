@@ -20,6 +20,7 @@
 		1327EB7D2466A8A900BA4805 /* RecommendedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1327EB7C2466A8A900BA4805 /* RecommendedCollectionViewCell.swift */; };
 		1353F24F248E84EB00AA59F6 /* FacebookUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1353F24E248E84EB00AA59F6 /* FacebookUser.swift */; };
 		1353F251248E8D6E00AA59F6 /* AuthUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1353F250248E8D6E00AA59F6 /* AuthUser.swift */; };
+		13574E922493D0A600DC1DDF /* RPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13574E912493D0A500DC1DDF /* RPicker.swift */; };
 		136EBD952466D91E00C27589 /* FollowersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136EBD942466D91E00C27589 /* FollowersViewController.swift */; };
 		136EBD9A24670A5F00C27589 /* MessageListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136EBD9924670A5F00C27589 /* MessageListViewController.swift */; };
 		136EBD9C246710D900C27589 /* MessageThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136EBD9B246710D900C27589 /* MessageThread.swift */; };
@@ -135,6 +136,7 @@
 		1327EB7C2466A8A900BA4805 /* RecommendedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedCollectionViewCell.swift; sourceTree = "<group>"; };
 		1353F24E248E84EB00AA59F6 /* FacebookUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookUser.swift; sourceTree = "<group>"; };
 		1353F250248E8D6E00AA59F6 /* AuthUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUser.swift; sourceTree = "<group>"; };
+		13574E912493D0A500DC1DDF /* RPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RPicker.swift; sourceTree = "<group>"; };
 		136EBD942466D91E00C27589 /* FollowersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersViewController.swift; sourceTree = "<group>"; };
 		136EBD9924670A5F00C27589 /* MessageListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageListViewController.swift; sourceTree = "<group>"; };
 		136EBD9B246710D900C27589 /* MessageThread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageThread.swift; sourceTree = "<group>"; };
@@ -250,6 +252,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		13574E902493D09500DC1DDF /* DateTimePicker */ = {
+			isa = PBXGroup;
+			children = (
+				13574E912493D0A500DC1DDF /* RPicker.swift */,
+			);
+			path = DateTimePicker;
+			sourceTree = "<group>";
+		};
 		136EBD9624670A5100C27589 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -549,6 +559,7 @@
 		13D057A2245C9DF700227E15 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				13574E902493D09500DC1DDF /* DateTimePicker */,
 				137938CE24682B2700AB2C46 /* Applozic */,
 				13D057A3245C9DF700227E15 /* Stories */,
 			);
@@ -958,6 +969,7 @@
 				137938C72468125200AB2C46 /* AddScheduleType.swift in Sources */,
 				1317B82E2463142900AD9AC8 /* OtherUser.swift in Sources */,
 				136F3260245B032F006939ED /* RegisterationViewController.swift in Sources */,
+				13574E922493D0A600DC1DDF /* RPicker.swift in Sources */,
 				1317B8262460A16B00AD9AC8 /* WorkCategoriesCollectionViewCell.swift in Sources */,
 				136F325C245B032F006939ED /* User.swift in Sources */,
 				136F325A245B032F006939ED /* RegisterationTextTableViewCell.swift in Sources */,

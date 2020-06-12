@@ -17,4 +17,5 @@ class User {
     var gender: String = ""
     var dob: String = ""
     var image: UIImage?
+    var imageURL: String = ""
 }

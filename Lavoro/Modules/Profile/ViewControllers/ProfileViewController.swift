@@ -38,6 +38,14 @@ class ProfileViewController: BaseViewController {
         userImage.setLayer(cornerRadius: 6.0)
         editButton.setLayer(cornerRadius: 10.0)
     }
+    
+    @IBAction func editProfile() {
+        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+        if let vc = storyboard.instantiateViewController(withIdentifier: "RegisterationViewController") as? RegisterationViewController {
+            vc.isEditingProfile = true
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
 }
 
 extension ProfileViewController: UITableViewDataSource {

@@ -18,7 +18,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.presentLoginFlow()
+        if AuthUser.getAuthUser() != nil {
+            presentUserFLow()
+        } else {
+            self.presentLoginFlow()
+        }
         self.window?.makeKeyAndVisible()
         IQKeyboardManager.shared.enable = true
         LocationManager.shared.startLocation()

@@ -19,7 +19,7 @@ class LoginService: BaseModuleService {
     static let userTypeId: String = "userTypeId"
     static let username: String = "username"
     static let gender: String = "gender"
-    static let dob: String = "dob"
+    static let dob: String = "birthday"
     static let avatar: String = "avatar"
     
     func login(with email: String, password: String, completionHandler: @escaping ((Bool, User?, String?) -> ())) {

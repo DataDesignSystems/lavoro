@@ -15,6 +15,7 @@ struct Validation {
         case pin = "Pin should be atleast 4 characters!"
         case username = "username is mandatory!"
         case gender = "Please select gender!"
+        case dob = "Please select dob!"
     }
     
     enum Error: String {
@@ -58,5 +59,12 @@ struct Validation {
     static func gender(_ gender: String) -> Bool{
         let genderValid = (gender == "Male" || gender == "Female")
         return genderValid
+    }
+    
+    static func dob(_ dob: String) -> Bool {
+        if dob.toDate(dateFormat: "YYYY-MM-dd") != nil {
+            return true
+        }
+        return false
     }
 }

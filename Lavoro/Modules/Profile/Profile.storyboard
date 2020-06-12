@@ -108,6 +108,9 @@
                                         <state key="normal" title="Edit profile">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="editProfile" destination="vBH-4o-q8b" eventType="touchUpInside" id="cM6-O1-1Ju"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="312" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AkU-eC-Ucj">
                                         <rect key="frame" x="193" y="141" width="28.5" height="21"/>
@@ -441,7 +444,6 @@
         <!--Add Location-->
         <scene sceneID="vrn-B6-Kqc">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wyS-gQ-e5X" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController id="DkZ-HA-rDX" customClass="AddLocationViewController" customModule="Lavoro" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7tX-c5-ngS">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -544,6 +546,7 @@
                         <outlet property="tableview" destination="U4y-nK-r7n" id="9og-6F-lfQ"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wyS-gQ-e5X" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="918.84057971014499" y="1573.6607142857142"/>
         </scene>
