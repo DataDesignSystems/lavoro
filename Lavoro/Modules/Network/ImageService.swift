@@ -7,6 +7,22 @@
 //
 
 import Foundation
-class ImageService: NSObject {
-    
+import UIKit
+
+class ImageService: BaseModuleService {
+    func uploadImage(_ image: UIImage, completionHandler: @escaping ((Bool, String?) -> ())) {
+        if let data = image.pngData() {
+            NS.uploadImage(data: data) { (response) in
+                switch response.result {
+                case .success(let json):
+                    print(json)
+                case .failure(let error):
+                    print(error)
+                    completionHandler(false, nil)
+                }
+            }
+        } else {
+            completionHandler(false, nil)
+        }
+    }
 }

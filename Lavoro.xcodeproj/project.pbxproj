@@ -75,6 +75,7 @@
 		13B531BF248C1C7C00C6C8FF /* String+Exts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B531BE248C1C7C00C6C8FF /* String+Exts.swift */; };
 		13B531C1248C260B00C6C8FF /* BaseFacebookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B531C0248C260B00C6C8FF /* BaseFacebookViewController.swift */; };
 		13C3525D94BE24BBD94682BB /* Pods_Lavoro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD31EEAD4AE9165735295736 /* Pods_Lavoro.framework */; };
+		13C54C052493F51600CE1AF6 /* UIImage+Exts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C54C042493F51600CE1AF6 /* UIImage+Exts.swift */; };
 		13D0579B245C7A6600227E15 /* HomeFeedsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D0579A245C7A6600227E15 /* HomeFeedsViewController.swift */; };
 		13D0579F245C7B2D00227E15 /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D0579E245C7B2D00227E15 /* Feed.swift */; };
 		13D057A1245C7B4700227E15 /* CheckInFeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D057A0245C7B4700227E15 /* CheckInFeedTableViewCell.swift */; };
@@ -192,6 +193,7 @@
 		13B531BC248C040000C6C8FF /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		13B531BE248C1C7C00C6C8FF /* String+Exts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Exts.swift"; sourceTree = "<group>"; };
 		13B531C0248C260B00C6C8FF /* BaseFacebookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFacebookViewController.swift; sourceTree = "<group>"; };
+		13C54C042493F51600CE1AF6 /* UIImage+Exts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Exts.swift"; sourceTree = "<group>"; };
 		13D0579A245C7A6600227E15 /* HomeFeedsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedsViewController.swift; sourceTree = "<group>"; };
 		13D0579E245C7B2D00227E15 /* Feed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
 		13D057A0245C7B4700227E15 /* CheckInFeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInFeedTableViewCell.swift; sourceTree = "<group>"; };
@@ -496,6 +498,7 @@
 				13B531B9248BFF0E00C6C8FF /* Validation.swift */,
 				13B531BC248C040000C6C8FF /* MessageView.swift */,
 				13B531BE248C1C7C00C6C8FF /* String+Exts.swift */,
+				13C54C042493F51600CE1AF6 /* UIImage+Exts.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -903,6 +906,7 @@
 				137938CD2468254D00AB2C46 /* AddLocationTableViewCell.swift in Sources */,
 				136F3258245B032F006939ED /* AccountTypeTableViewCell.swift in Sources */,
 				13D0579B245C7A6600227E15 /* HomeFeedsViewController.swift in Sources */,
+				13C54C052493F51600CE1AF6 /* UIImage+Exts.swift in Sources */,
 				13D057F0245C9DF800227E15 /* LayoutAttributesAnimator.swift in Sources */,
 				136F3282245B4195006939ED /* MyScheduleViewController.swift in Sources */,
 				136F325B245B032F006939ED /* RegisterationImageTableViewCell.swift in Sources */,

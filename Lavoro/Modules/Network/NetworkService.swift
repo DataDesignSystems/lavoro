@@ -25,4 +25,40 @@ class NetworkService {
             completionHandler(response)
         }
     }
+    
+    func uploadImage(endpoint: NetworkConfig.Endpoint = .imageUpload, data: Data, imageName: String = "photo", authToken: Bool = true, completionHandler: @escaping ((AFDataResponse<Any>) -> ())) {
+        let token = AuthUser.getAuthUser()?.authToken ?? ""
+        guard let url = URL(string: NetworkConfig.baseURL + endpoint.rawValue + (authToken ? token : "")) else {
+            return
+        }
+        AF.upload(multipartFormData: { multipartFormData in
+            multipartFormData.append(data, withName: imageName, fileName: imageName + ".jpeg", mimeType: "image/jpeg")
+            }, to: url).responseJSON { response in
+                switch response.result {
+                case .success(let json):
+                    print(json)
+                case .failure(let error):
+                    print(error)
+                }
+                completionHandler(response)
+            }
+    }
+    
+    func uploadFile(endpoint: NetworkConfig.Endpoint = .imageUpload, data: Data, imageName: String = "photo", authToken: Bool = true, completionHandler: @escaping ((AFDataResponse<Any>) -> ())) {
+        let token = AuthUser.getAuthUser()?.authToken ?? ""
+        guard let url = URL(string: NetworkConfig.baseURL + endpoint.rawValue + (authToken ? token : "")) else {
+            return
+        }
+        AF.upload(multipartFormData: { multipartFormData in
+            multipartFormData.append(data, withName: imageName)
+            }, to: url).responseJSON { response in
+                switch response.result {
+                case .success(let json):
+                    print(json)
+                case .failure(let error):
+                    print(error)
+                }
+                completionHandler(response)
+            }
+    }
 }

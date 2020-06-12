@@ -16,6 +16,7 @@ class RegisterationViewController: BaseViewController {
     var user = User()
     var textFieldPlacehoders = ["Username", "Password", "Email", "Phone", "Gender", "Date of birth"]
     let loginService = LoginService()
+    let imageService = ImageService()
     var isEditingProfile = false
 
     override func viewDidLoad() {
@@ -54,21 +55,34 @@ class RegisterationViewController: BaseViewController {
             let gender: String? = user.gender.isEmpty ? nil : user.gender
             let dob: String? = user.dob.isEmpty ? nil : user.dob
             showLoadingView()
-            loginService.updateUserProfile(with: username, password: password, email: email, phone: phone, gender: gender, dob: dob, imageURL: nil) { [weak self] (success, message) in
-                self?.stopLoadingView()
-                if success {
-                    if self?.isEditingProfile ?? false {
-                        self?.backButton()
+            uploadImage { [weak self] (url) in
+                let imageURL: String? = (url?.isEmpty ?? true) ? nil : (url ?? nil)
+                self?.loginService.updateUserProfile(with: username, password: password, email: email, phone: phone, gender: gender, dob: dob, imageURL: imageURL) { [weak self] (success, message) in
+                    self?.stopLoadingView()
+                    if success {
+                        if self?.isEditingProfile ?? false {
+                            self?.backButton()
+                        } else {
+                            self?.appDelegate.presentUserFLow()
+                        }
+                        MessageViewAlert.showSuccess(with: message ?? Validation.SuccessMessage.profileUpdatedSuccessfully.rawValue)
+                    } else if message?.isEmpty ?? true {
+                        MessageViewAlert.showError(with: Validation.Error.genericError.rawValue)
                     } else {
-                        self?.appDelegate.presentUserFLow()
+                        MessageViewAlert.showError(with: message ?? "")
                     }
-                    MessageViewAlert.showSuccess(with: message ?? Validation.SuccessMessage.profileUpdatedSuccessfully.rawValue)
-                } else if message?.isEmpty ?? true {
-                    MessageViewAlert.showError(with: Validation.Error.genericError.rawValue)
-                } else {
-                    MessageViewAlert.showError(with: message ?? "")
                 }
             }
+        }
+    }
+    
+    func uploadImage(completionHandler: @escaping ((String?) -> ())) {
+        if let image = user.image {
+            imageService.uploadImage(image) { (success, url) in
+                    completionHandler(url)
+            }
+        } else {
+            completionHandler(nil)
         }
     }
     
