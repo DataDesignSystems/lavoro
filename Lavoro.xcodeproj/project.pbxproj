@@ -76,6 +76,7 @@
 		13B531C1248C260B00C6C8FF /* BaseFacebookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B531C0248C260B00C6C8FF /* BaseFacebookViewController.swift */; };
 		13C3525D94BE24BBD94682BB /* Pods_Lavoro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD31EEAD4AE9165735295736 /* Pods_Lavoro.framework */; };
 		13C54C052493F51600CE1AF6 /* UIImage+Exts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C54C042493F51600CE1AF6 /* UIImage+Exts.swift */; };
+		13C54C0E24953D8C00CE1AF6 /* HomeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C54C0D24953D8C00CE1AF6 /* HomeService.swift */; };
 		13D0579B245C7A6600227E15 /* HomeFeedsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D0579A245C7A6600227E15 /* HomeFeedsViewController.swift */; };
 		13D0579F245C7B2D00227E15 /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D0579E245C7B2D00227E15 /* Feed.swift */; };
 		13D057A1245C7B4700227E15 /* CheckInFeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D057A0245C7B4700227E15 /* CheckInFeedTableViewCell.swift */; };
@@ -194,6 +195,7 @@
 		13B531BE248C1C7C00C6C8FF /* String+Exts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Exts.swift"; sourceTree = "<group>"; };
 		13B531C0248C260B00C6C8FF /* BaseFacebookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFacebookViewController.swift; sourceTree = "<group>"; };
 		13C54C042493F51600CE1AF6 /* UIImage+Exts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Exts.swift"; sourceTree = "<group>"; };
+		13C54C0D24953D8C00CE1AF6 /* HomeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeService.swift; sourceTree = "<group>"; };
 		13D0579A245C7A6600227E15 /* HomeFeedsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedsViewController.swift; sourceTree = "<group>"; };
 		13D0579E245C7B2D00227E15 /* Feed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
 		13D057A0245C7B4700227E15 /* CheckInFeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInFeedTableViewCell.swift; sourceTree = "<group>"; };
@@ -392,6 +394,7 @@
 		136F326C245B045B006939ED /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				13C54C0C24953D6B00CE1AF6 /* Services */,
 				13D05797245C7A4C00227E15 /* Cells */,
 				13D05799245C7A4C00227E15 /* Models */,
 				13D05798245C7A4C00227E15 /* ViewControllers */,
@@ -526,6 +529,14 @@
 			isa = PBXGroup;
 			children = (
 				13B531B5248BFD8300C6C8FF /* LoginService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		13C54C0C24953D6B00CE1AF6 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				13C54C0D24953D8C00CE1AF6 /* HomeService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -961,6 +972,7 @@
 				13D057A1245C7B4700227E15 /* CheckInFeedTableViewCell.swift in Sources */,
 				13D057E2245C9DF800227E15 /* IGError.swift in Sources */,
 				13D057D6245C9DF800227E15 /* Color+Additions.swift in Sources */,
+				13C54C0E24953D8C00CE1AF6 /* HomeService.swift in Sources */,
 				1382B7A1248F9C6B0032BE49 /* ImageService.swift in Sources */,
 				1378AAAB2459F5EE00131BEB /* UIResponder+Exts.swift in Sources */,
 				1327EB7D2466A8A900BA4805 /* RecommendedCollectionViewCell.swift in Sources */,

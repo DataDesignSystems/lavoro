@@ -14,7 +14,7 @@ target 'Lavoro' do
   pod 'KVKCalendar'
   pod 'SnapKit', '~> 5.0.0'
   pod 'MaterialComponents/BottomSheet'
-  pod 'Applozic'
+  pod 'ApplozicSwift'
   pod 'Alamofire', '~> 5.2'
   pod 'SwiftMessages'
   pod 'NVActivityIndicatorView'

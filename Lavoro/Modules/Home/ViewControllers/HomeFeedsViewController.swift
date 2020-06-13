@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeFeedsViewController: UIViewController {
+class HomeFeedsViewController: BaseViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var userImage: UIButton!
     @IBOutlet weak var searchbar: UISearchBar!
@@ -16,11 +16,33 @@ class HomeFeedsViewController: UIViewController {
     @IBOutlet weak var storiesView: UIView!
     private var igStoriesView: IGHomeView!
     private var viewModel: IGHomeViewModel = IGHomeViewModel()
-    var feeds = Feed.mockData()
+    let homeService = HomeService()
+    var feeds = [Feed]()
+    let noFeedLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.text = "No feeds available!\nFollow users to see their feeds"
+        label.textColor = UIColor(white: 0.20, alpha: 1)
+        label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        label.textAlignment = .center
+        return label
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        self.fetchData()
+    }
+    
+    func fetchData() {
+        self.showLoadingView()
+        noFeedLabel.isHidden = true
+        homeService.getDashboardData { [weak self] (success, message, feeds)  in
+            self?.feeds = feeds
+            self?.noFeedLabel.isHidden = !feeds.isEmpty
+            self?.stopLoadingView()
+            self?.tableView.reloadData()
+        }
     }
     
     func setupView() {
@@ -35,6 +57,12 @@ class HomeFeedsViewController: UIViewController {
         igStoriesView.collectionView.delegate = self
         igStoriesView.collectionView.dataSource = self
         igStoriesView.collectionView.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+        tableView.backgroundView = UIView()
+        tableView.backgroundView?.addSubview(noFeedLabel)
+        noFeedLabel.snp.makeConstraints { (make) in
+            make.center.equalToSuperview()
+            make.leading.equalToSuperview().offset(16.0)
+        }
     }
 }
 extension HomeFeedsViewController: UITableViewDataSource {

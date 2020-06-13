@@ -16,6 +16,11 @@ class ImageService: BaseModuleService {
                 switch response.result {
                 case .success(let json):
                     print(json)
+                    if let json = json as? [String: Any], let data = json["data"] as? [String: Any], let url = data["image"] as? String {
+                        completionHandler(true, url)
+                    } else {
+                        completionHandler(false, nil)
+                    }
                 case .failure(let error):
                     print(error)
                     completionHandler(false, nil)

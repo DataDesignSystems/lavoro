@@ -27,6 +27,7 @@ class LoginService: BaseModuleService {
             switch response.result {
             case .success(let json):
                 if self?.getCode(from: json) == 201 {
+                    self?.updateUser(from: json)
                     completionHandler(true, User(), self?.getMessage(from: json))
                 } else {
                     completionHandler(false, nil, self?.getMessage(from: json))

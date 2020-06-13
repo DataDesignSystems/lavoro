@@ -9,26 +9,74 @@
 
 import Foundation
 
-enum FeedType {
-    case checkIn
-    case checkOut
+enum FeedType: String {
+    case checkIn = "check-in"
+    case checkOut = "check-out"
+    case unknown = "unknown"
 }
 
 struct Feed {
-    var username: String
+    let id: String
+    let comments: String
+    let status: String
+    let user: FeedUser
+    let likes: String
+    let displayTime: String
+    let timeEntered: Date
     var feedType: FeedType
-    var date: Date
-    var dateInString: String
-    var locationName: String
-    var message: String
-    var likesCount: Int
-    var commentsCount: Int
-    var userImage: String
+    var location: Location
+
+    init(with json: [String: Any]) {
+        self.id = json["id"] as? String ?? ""
+        self.comments = json["comments"] as? String ?? ""
+        self.status = json["status"] as? String ?? ""
+        self.likes = json["likes"] as? String ?? ""
+        self.displayTime = json["display_time"] as? String ?? ""
+        self.timeEntered = (json["time_entered"] as? String ?? "").toDate(dateFormat: "MM-dd-yyyy hh:mm a") ?? Date()
+        self.feedType = FeedType(rawValue: (json["type"] as? String ?? "")) ?? .unknown
+        self.user = FeedUser(with: (json["user"] as? [String: Any] ?? [:]))
+        self.location = Location(with: (json["location"] as? [String: Any] ?? [:]))
+    }
+}
+
+struct FeedUser {
+    let id: String
+    let username: String
+    let avatar: String
+    let isFavorite: Bool
     
-    static func mockData() -> [Feed] {
-        return [Feed(username: "Alice Jones", feedType: .checkIn, date: Date(), dateInString: "2 hours ago", locationName: "Butterbee's American Grille", message: "Butterbee's American Grille", likesCount: 231, commentsCount: 122, userImage: ""),
-                Feed(username: "Alice Jones", feedType: .checkOut, date: Date(), dateInString: "12 hours ago", locationName: "Butterbee's American Grille", message: "Butterbee's American Grille", likesCount: 675, commentsCount: 353, userImage: ""),
-                Feed(username: "John Doe", feedType: .checkIn, date: Date(), dateInString: "6 hours ago", locationName: "Butterbee's American Grille", message: "Butterbee's American Grille", likesCount: 635, commentsCount: 833, userImage: ""),
-                Feed(username: "John Doe", feedType: .checkOut, date: Date(), dateInString: "22 hours ago", locationName: "Butterbee's American Grille", message: "Butterbee's American Grille", likesCount: 123, commentsCount: 879, userImage: "")]
+    init(with json: [String: Any]) {
+        self.id = json["id"] as? String ?? ""
+        self.username = json["username"] as? String ?? ""
+        self.avatar = json["avatar"] as? String ?? ""
+        self.isFavorite = json["isfavorite"] as? Bool ?? false
+    }
+}
+
+struct Location {
+    let id: String
+    let name: String
+    let address: String
+    let suite: String
+    let city: String
+    let state: String
+    let zip: String
+    let phone: String
+    let email: String
+    let image: String
+    let status: String
+    
+    init(with json: [String: Any]) {
+        self.id = json["id"] as? String ?? ""
+        self.name = json["name"] as? String ?? ""
+        self.address = json["address"] as? String ?? ""
+        self.suite = json["suite"] as? String ?? ""
+        self.city = json["city"] as? String ?? ""
+        self.state = json["state"] as? String ?? ""
+        self.zip = json["zip"] as? String ?? ""
+        self.phone = json["phone"] as? String ?? ""
+        self.email = json["email"] as? String ?? ""
+        self.image = json["image"] as? String ?? ""
+        self.status = json["status"] as? String ?? ""
     }
 }

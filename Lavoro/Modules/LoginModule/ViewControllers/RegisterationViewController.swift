@@ -106,7 +106,7 @@ class RegisterationViewController: BaseViewController {
             MessageViewAlert.showError(with: Validation.ValidationError.username.rawValue)
             return false
         }
-        if !Validation.password(user.password) {
+        if !Validation.password(user.password) && !isEditingProfile {
             MessageViewAlert.showError(with: Validation.ValidationError.password.rawValue)
             return false
         }
@@ -172,7 +172,9 @@ extension RegisterationViewController: UITableViewDataSource {
                 text = user.gender
                 cell.textField.isUserInteractionEnabled = false
             case .dob:
-                text = user.dob
+                if user.dob.count > 0 {
+                    text = user.dob.toDate(dateFormat: "YYYY-MM-dd")?.toString(dateFormat: "MMM-dd-YYYY") ?? ""
+                }
                 cell.textField.isUserInteractionEnabled = false
             default:
                 print("error")
@@ -236,8 +238,6 @@ extension RegisterationViewController: RegistrationDelegate {
             user.phone = text
         case .gender:
             user.gender = text
-        case .dob:
-            user.dob = text
         default:
             print("error")
         }

@@ -19,5 +19,6 @@ struct NetworkConfig {
         case updateUserAccountType = "api/update-user-account-type/"
         case updateUserProfile = "api/update-user-profile/"
         case imageUpload = "api/upload-image/"
+        case dashboard = "api/get-my-dashboard/"
     }
 }

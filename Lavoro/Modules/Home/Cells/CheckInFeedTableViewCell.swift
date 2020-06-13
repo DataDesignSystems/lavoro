@@ -37,11 +37,17 @@ class CheckInFeedTableViewCell: UITableViewCell {
     }
     
     func setupCell(with object: Feed) {
-        username.text = object.username
-        time.text = object.dateInString
-        likesCount.text = "\(object.likesCount)"
-        commentsCount.text = "\(object.commentsCount)"
-        locationName.text = object.locationName
+        if let url = URL(string: object.user.avatar) {
+            userImage.sd_setImage(with: url, completed: nil)
+        }
+        if let url = URL(string: object.location.image) {
+            checkInImage.sd_setImage(with: url, completed: nil)
+        }
+        username.text = object.user.username
+        time.text = object.displayTime
+        likesCount.text = object.likes
+        commentsCount.text = object.comments
+        locationName.text = object.location.name
         var userMessage = ""
         switch object.feedType {
         case .checkIn:
@@ -50,8 +56,11 @@ class CheckInFeedTableViewCell: UITableViewCell {
         case .checkOut:
             userMessage = "Checked Out of\n"
             locationNameBackgroundView.backgroundColor = UIColor(hexString: "FF2D55")
+        case .unknown:
+            userMessage = "Handle the new type \n"
+            locationNameBackgroundView.backgroundColor = UIColor(hexString: "FF2D55")
         }
-        message.text = userMessage + object.message
+        message.text = userMessage + object.location.name
     }
 
     @IBAction func likesButtonTap(button: UIButton) {
