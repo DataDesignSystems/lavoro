@@ -34,6 +34,11 @@ class HomeFeedsViewController: BaseViewController {
         self.fetchData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setProfileData()
+    }
+    
     func fetchData() {
         self.showLoadingView()
         noFeedLabel.isHidden = true
@@ -62,6 +67,22 @@ class HomeFeedsViewController: BaseViewController {
         noFeedLabel.snp.makeConstraints { (make) in
             make.center.equalToSuperview()
             make.leading.equalToSuperview().offset(16.0)
+        }
+    }
+
+    func setProfileData() {
+        if let authUser = AuthUser.getAuthUser() {
+            if let url = URL(string: authUser.avatar) {
+                userImage.sd_setImage(with: url, for: .normal, completed: nil)
+            }
+        }
+    }
+
+    @IBAction func editProfile() {
+        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+        if let vc = storyboard.instantiateViewController(withIdentifier: "RegisterationViewController") as? RegisterationViewController {
+            vc.isEditingProfile = true
+            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
 }
