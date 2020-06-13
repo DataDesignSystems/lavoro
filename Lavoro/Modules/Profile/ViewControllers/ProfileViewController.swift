@@ -33,6 +33,22 @@ class ProfileViewController: BaseViewController {
         setupView()
         // Do any additional setup after loading the view.
     }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        refreshView()
+    }
+    
+    func refreshView() {
+        if let authUser = AuthUser.getAuthUser() {
+            if let url = URL(string: authUser.avatar) {
+                userImage.sd_setImage(with: url, completed: nil)
+            }
+            usernameLabel.text = "@\(authUser.username)"
+            nameLabel.text = "\(authUser.first) \(authUser.last)"
+        }
+    }
         
     func setupView() {
         userImage.setLayer(cornerRadius: 6.0)

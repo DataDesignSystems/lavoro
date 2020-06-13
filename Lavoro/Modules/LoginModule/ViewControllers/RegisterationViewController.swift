@@ -11,10 +11,21 @@ import SkyFloatingLabelTextField
 import IQKeyboardManagerSwift
 import SDWebImage
 
+enum Fields: String {
+    case username = "Username"
+    case firstname = "First Name"
+    case lastname = "Last Name"
+    case password = "Password"
+    case email = "Email"
+    case phone = "Phone"
+    case gender = "Gender"
+    case dob = "Date of birth"
+}
+
 class RegisterationViewController: BaseViewController {
     @IBOutlet weak var tableView: UITableView!
     var user = User()
-    var textFieldPlacehoders = ["Username", "Password", "Email", "Phone", "Gender", "Date of birth"]
+    var textFieldPlacehoders: [Fields] = [.username, .firstname, .lastname, .password, .email, .phone, .gender, .dob] // ["Username", "Password", "Email", "Phone", "Gender", "Date of birth"]
     let loginService = LoginService()
     let imageService = ImageService()
     var isEditingProfile = false
@@ -32,6 +43,8 @@ class RegisterationViewController: BaseViewController {
             user.phone = authUser.phone
             user.gender = authUser.gender
             user.dob = authUser.birthday
+            user.firstname = authUser.first
+            user.lastname = authUser.last
             user.imageURL = authUser.avatar
         }
     }
@@ -49,6 +62,8 @@ class RegisterationViewController: BaseViewController {
         self.view.endEditing(true)
         if isValid() {
             let username: String? = user.username.isEmpty ? nil : user.username
+            let firstname: String? = user.firstname.isEmpty ? nil : user.firstname
+            let lastname: String? = user.lastname.isEmpty ? nil : user.lastname
             let email: String? = user.email.isEmpty ? nil : user.email
             let password: String? = user.password.isEmpty ? nil : user.password
             let phone: String? = user.phone.isEmpty ? nil : user.phone.removePhoneFormating()
@@ -57,7 +72,7 @@ class RegisterationViewController: BaseViewController {
             showLoadingView()
             uploadImage { [weak self] (url) in
                 let imageURL: String? = (url?.isEmpty ?? true) ? nil : (url ?? nil)
-                self?.loginService.updateUserProfile(with: username, password: password, email: email, phone: phone, gender: gender, dob: dob, imageURL: imageURL) { [weak self] (success, message) in
+                self?.loginService.updateUserProfile(with: username, firstname: firstname, lastname: lastname, password: password, email: email, phone: phone, gender: gender, dob: dob, imageURL: imageURL) { [weak self] (success, message) in
                     self?.stopLoadingView()
                     if success {
                         if self?.isEditingProfile ?? false {
@@ -135,30 +150,34 @@ extension RegisterationViewController: UITableViewDataSource {
             cell.textField.isSecureTextEntry = false
             cell.textField.keyboardType = .default
             var text = ""
-            switch indexPath.row - 1 {
-            case 0:
+            switch textFieldPlacehoders[indexPath.row - 1] {
+            case .username:
                 text = user.username
-            case 1:
+            case .firstname:
+                text = user.firstname
+            case .lastname:
+                text = user.lastname
+            case .password:
                 text = user.password
                 cell.textField.isSecureTextEntry = true
-            case 2:
+            case .email:
                 text = user.email
                 cell.textField.keyboardType = .emailAddress
-            case 3:
+            case .phone:
                 text = user.phone
                 if let authUser = AuthUser.getAuthUser(), authUser.phone.count > 8 {
                     cell.textField.isUserInteractionEnabled = false
                 }
-            case 4:
+            case .gender:
                 text = user.gender
                 cell.textField.isUserInteractionEnabled = false
-            case 5:
+            case .dob:
                 text = user.dob
                 cell.textField.isUserInteractionEnabled = false
             default:
                 print("error")
             }
-            cell.textField.placeholder = textFieldPlacehoders[indexPath.row - 1]
+            cell.textField.placeholder = textFieldPlacehoders[indexPath.row - 1].rawValue
             cell.delegate = self
             cell.setupCell(with: text, index: indexPath.row - 1)
             return cell
@@ -174,8 +193,8 @@ extension RegisterationViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.row {
-        case 5:
+        switch textFieldPlacehoders[indexPath.row-1] {
+        case .gender:
             let alertController = UIAlertController(title: "Select Gender", message: "", preferredStyle: .actionSheet)
             let maleButton = UIAlertAction(title: "Male", style: .default, handler: { (action) -> Void in
                 self.user.gender = "Male"
@@ -189,7 +208,7 @@ extension RegisterationViewController: UITableViewDelegate {
             alertController.addAction(maleButton)
             alertController.addAction(femaleButton)
             self.navigationController!.present(alertController, animated: true, completion: nil)
-        case 6: //dob picker
+        case .dob:
             let selectedDate = user.dob.toDate(dateFormat: "YYYY-MM-dd") ?? Date()
             RPicker.selectDate(title: "Select Date", cancelText: "Cancel", selectedDate: selectedDate, maxDate: Date(), didSelectDate: { [weak self] (selectedDate) in
                 self?.user.dob = selectedDate.toString(dateFormat: "YYYY-MM-dd")
@@ -202,18 +221,22 @@ extension RegisterationViewController: UITableViewDelegate {
 }
 extension RegisterationViewController: RegistrationDelegate {
     func textEntered(with text: String, index: Int) {
-        switch index {
-        case 0:
+        switch textFieldPlacehoders[index] {
+        case .username:
             user.username = text
-        case 1:
+        case .firstname:
+            user.firstname = text
+        case .lastname:
+            user.lastname = text
+        case .password:
             user.password = text
-        case 2:
+        case .email:
             user.email = text
-        case 3:
+        case .phone:
             user.phone = text
-        case 4:
+        case .gender:
             user.gender = text
-        case 5:
+        case .dob:
             user.dob = text
         default:
             print("error")

@@ -11,6 +11,8 @@ import UIKit
 
 class User {
     var username: String = ""
+    var firstname: String = ""
+    var lastname: String = ""
     var password: String = ""
     var email: String = ""
     var phone: String = ""

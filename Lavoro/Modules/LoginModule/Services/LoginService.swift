@@ -111,8 +111,8 @@ class LoginService: BaseModuleService {
         }
     }
     
-    func updateUserProfile(with username: String?, password: String?, email: String?, phone: String?, gender: String?, dob: String?, imageURL: String?, completionHandler: @escaping ((Bool, String?) -> ())) {
-        let params = [LoginService.username: username, LoginService.email: email, LoginService.password:password, LoginService.phone: phone, LoginService.gender: gender, LoginService.dob: dob, LoginService.avatar: imageURL].compactMapValues({ $0 })
+    func updateUserProfile(with username: String?, firstname: String?, lastname: String?, password: String?, email: String?, phone: String?, gender: String?, dob: String?, imageURL: String?, completionHandler: @escaping ((Bool, String?) -> ())) {
+        let params = [LoginService.username: username, LoginService.firstName: firstname, LoginService.lastName: lastname, LoginService.email: email, LoginService.password:password, LoginService.phone: phone, LoginService.gender: gender, LoginService.dob: dob, LoginService.avatar: imageURL].compactMapValues({ $0 })
         NS.getRequest(with: .updateUserProfile, parameters: params, authToken: true) { [weak self] (response) in
             switch response.result {
             case .success(let json):
