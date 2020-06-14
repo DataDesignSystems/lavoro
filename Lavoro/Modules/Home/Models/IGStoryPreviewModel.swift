@@ -22,13 +22,13 @@ class IGStoryPreviewModel: NSObject {
     
     //MARK:- Functions
     func numberOfItemsInSection(_ section: Int) -> Int {
-        if let count = stories?.count {
+        if let count = stories?.stories.count {
             return count
         }
         return 0
     }
     func cellForItemAtIndexPath(_ indexPath: IndexPath) -> IGStory? {
-        guard let count = stories?.count else {return nil}
+        guard let count = stories?.stories.count else {return nil}
         if indexPath.item < count {
             return stories?.stories[indexPath.item]
         }else {

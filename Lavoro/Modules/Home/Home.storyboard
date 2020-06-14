@@ -227,25 +227,37 @@ Butterbee's American Grille</string>
                                             <outlet property="delegate" destination="IH3-bm-VaG" id="RxT-NL-Xfh"/>
                                         </connections>
                                     </searchBar>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="haV-Wl-mUL">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="haV-Wl-mUL">
                                         <rect key="frame" x="16" y="65" width="132" height="39"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="132" id="RFA-HW-gkU"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="22"/>
-                                        <state key="normal" title="Following Me">
+                                        <state key="normal" title="Following">
+                                            <color key="titleColor" red="0.67450980392156867" green="0.69411764705882351" blue="0.75294117647058822" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <state key="selected">
                                             <color key="titleColor" red="0.11764705882352941" green="0.14117647058823529" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="followButtonToggleWithButton:" destination="IH3-bm-VaG" eventType="touchUpInside" id="SNu-FJ-Qtn"/>
+                                        </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3yQ-92-AJS">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3yQ-92-AJS">
                                         <rect key="frame" x="160" y="65" width="132" height="39"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="132" id="8Ee-Aa-emq"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="22"/>
-                                        <state key="normal" title="Following">
+                                        <state key="normal" title="Following Me">
                                             <color key="titleColor" red="0.67450980392156867" green="0.69411764705882351" blue="0.75294117647058822" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <state key="selected">
+                                            <color key="titleColor" red="0.11764705882352941" green="0.14117647058823529" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="followButtonToggleWithButton:" destination="IH3-bm-VaG" eventType="touchUpInside" id="Cdy-82-8gm"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l8J-nd-OYq">
                                         <rect key="frame" x="360" y="65.5" width="38" height="38"/>
@@ -301,6 +313,8 @@ Butterbee's American Grille</string>
                     </view>
                     <navigationItem key="navigationItem" id="oDh-Ee-Aia"/>
                     <connections>
+                        <outlet property="followingButton" destination="haV-Wl-mUL" id="1W8-p4-5tu"/>
+                        <outlet property="followingMeButton" destination="3yQ-92-AJS" id="qyy-DC-ww0"/>
                         <outlet property="headerView" destination="Z4q-gE-VfH" id="yad-Pv-e4K"/>
                         <outlet property="searchbar" destination="8kQ-n6-g2H" id="ah4-AZ-Gyc"/>
                         <outlet property="storiesView" destination="IT4-yt-Cj0" id="Uxy-Fu-xYA"/>

@@ -234,7 +234,7 @@ extension IGStoryPreviewController {
 extension IGStoryPreviewController: StoryPreviewProtocol {
     func didCompletePreview() {
         let n = handPickedStoryIndex+nStoryIndex+1
-        if n < stories.count {
+        if n < stories.stories.count {
             //Move to next story
             story_copy = stories.stories[nStoryIndex+handPickedStoryIndex]
             nStoryIndex = nStoryIndex + 1
@@ -251,7 +251,7 @@ extension IGStoryPreviewController: StoryPreviewProtocol {
     func moveToPreviousStory() {
         //let n = handPickedStoryIndex+nStoryIndex+1
         let n = nStoryIndex+1
-        if n <= stories.count && n > 1 {
+        if n <= stories.stories.count && n > 1 {
             story_copy = stories.stories[nStoryIndex+handPickedStoryIndex]
             nStoryIndex = nStoryIndex - 1
             let nIndexPath = IndexPath.init(row: nStoryIndex, section: 0)

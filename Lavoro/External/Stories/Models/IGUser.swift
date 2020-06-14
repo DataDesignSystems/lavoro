@@ -17,4 +17,10 @@ public class IGUser: Codable {
         case name = "name"
         case picture = "picture"
     }
+    
+    init(with json:[String: Any]) {
+        self.name = (json["first"] as? String ?? "") + " " + (json["last"] as? String ?? "")
+        self.internalIdentifier = json["id"] as? String ?? ""
+        self.picture = json["avatar"] as? String ?? ""
+    }
 }

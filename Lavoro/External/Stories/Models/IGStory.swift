@@ -25,6 +25,14 @@ public class IGStory: Codable {
         case lastUpdated = "last_updated"
         case user = "user"
     }
+    
+    init(with json:[String: Any]) {
+        self.snapsCount = 0
+        self.snaps = []
+        self.internalIdentifier = ""
+        self.lastUpdated = 0
+        self.user = IGUser(with: json)
+    }
 }
 
 extension IGStory: Equatable {

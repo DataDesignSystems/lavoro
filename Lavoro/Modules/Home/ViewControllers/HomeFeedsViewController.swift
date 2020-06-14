@@ -15,7 +15,10 @@ class HomeFeedsViewController: BaseViewController {
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var storiesView: UIView!
     private var igStoriesView: IGHomeView!
-    private var viewModel: IGHomeViewModel = IGHomeViewModel()
+    private var followingViewModel: IGHomeViewModel = IGHomeViewModel()
+    private var followingMeViewModel: IGHomeViewModel = IGHomeViewModel()
+    @IBOutlet weak var followingButton: UIButton!
+    @IBOutlet weak var followingMeButton: UIButton!
     let homeService = HomeService()
     var feeds = [Feed]()
     let noFeedLabel: UILabel = {
@@ -42,11 +45,14 @@ class HomeFeedsViewController: BaseViewController {
     func fetchData() {
         self.showLoadingView()
         noFeedLabel.isHidden = true
-        homeService.getDashboardData { [weak self] (success, message, feeds)  in
+        homeService.getDashboardData { [weak self] (success, message, feeds, followingMe, following)   in
             self?.feeds = feeds
             self?.noFeedLabel.isHidden = !feeds.isEmpty
+            self?.followingMeViewModel.setStories(stories: IGStories(with: followingMe))
+            self?.followingViewModel.setStories(stories: IGStories(with: following))
             self?.stopLoadingView()
             self?.tableView.reloadData()
+            self?.igStoriesView.collectionView.reloadData()
         }
     }
     
@@ -68,6 +74,8 @@ class HomeFeedsViewController: BaseViewController {
             make.center.equalToSuperview()
             make.leading.equalToSuperview().offset(16.0)
         }
+        followingButton.isSelected = true
+        followingMeButton.isSelected = false
     }
 
     func setProfileData() {
@@ -84,6 +92,17 @@ class HomeFeedsViewController: BaseViewController {
             vc.isEditingProfile = true
             self.navigationController?.pushViewController(vc, animated: true)
         }
+    }
+    
+    func getSelectedViewModel() -> IGHomeViewModel {
+        return followingMeButton.isSelected ? followingMeViewModel : followingViewModel
+    }
+    
+    @IBAction func followButtonToggle(button: UIButton) {
+        followingMeButton.isSelected = false
+        followingButton.isSelected = false
+        button.isSelected = true
+        igStoriesView.collectionView.reloadData()
     }
 }
 extension HomeFeedsViewController: UITableViewDataSource {
@@ -121,12 +140,12 @@ extension HomeFeedsViewController: UISearchBarDelegate {
 
 extension HomeFeedsViewController: UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.numberOfItemsInSection(section)
+        return getSelectedViewModel().numberOfItemsInSection(section)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IGStoryListCell.reuseIdentifier,for: indexPath) as? IGStoryListCell else { fatalError() }
-        let story = viewModel.cellForItemAt(indexPath: indexPath)
+        let story = getSelectedViewModel().cellForItemAt(indexPath: indexPath)
         cell.story = story
         return cell
     }
