@@ -25,6 +25,7 @@ class IGHomeView: UIView {
         cv.showsVerticalScrollIndicator = false
         cv.showsHorizontalScrollIndicator = false
         cv.register(IGStoryListCell.self, forCellWithReuseIdentifier: IGStoryListCell.reuseIdentifier)
+        cv.register(IGAddStoryCell.self, forCellWithReuseIdentifier: IGAddStoryCell.reuseIdentifier)
         cv.translatesAutoresizingMaskIntoConstraints = false
         return cv
     }()

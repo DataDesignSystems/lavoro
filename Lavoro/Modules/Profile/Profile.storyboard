@@ -569,7 +569,7 @@
         <!--Find Friends-->
         <scene sceneID="7Bg-K1-QA1">
             <objects>
-                <viewController id="HnA-Ma-Fla" customClass="WhoCanIFollowViewController" customModule="Lavoro" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WhoCanIFollowViewController" id="HnA-Ma-Fla" customClass="WhoCanIFollowViewController" customModule="Lavoro" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6BG-FJ-InS">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

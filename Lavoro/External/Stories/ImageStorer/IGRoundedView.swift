@@ -13,7 +13,7 @@ import UIKit
 struct Attributes {
     let borderWidth:CGFloat = 2.0
     let borderColor = UIColor.white
-    let backgroundColor = IGTheme.redOrange
+    let backgroundColor = UIColor(hexString: "#FF2D55")
     let size = CGSize(width:52,height:52)
 }
 

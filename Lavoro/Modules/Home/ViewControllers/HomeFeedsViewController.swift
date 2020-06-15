@@ -99,10 +99,21 @@ class HomeFeedsViewController: BaseViewController {
     }
     
     @IBAction func followButtonToggle(button: UIButton) {
+        if button == followingMeButton && (followingMeViewModel.getStories()?.stories.count ?? 0) == 0 {
+            MessageViewAlert.showWarning(with: Validation.Warning.noFollowers.rawValue)
+            return
+        }
         followingMeButton.isSelected = false
         followingButton.isSelected = false
         button.isSelected = true
         igStoriesView.collectionView.reloadData()
+    }
+    
+    func showWhoIFollow() {
+        let storyboard = UIStoryboard(name: "Profile", bundle: nil)
+        if let vc = storyboard.instantiateViewController(withIdentifier: "WhoCanIFollowViewController") as? WhoCanIFollowViewController {
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
 }
 extension HomeFeedsViewController: UITableViewDataSource {
@@ -144,13 +155,21 @@ extension HomeFeedsViewController: UICollectionViewDelegate,UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let story = getSelectedViewModel().cellForItemAt(indexPath: indexPath) else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IGAddStoryCell.reuseIdentifier, for: indexPath) as? IGAddStoryCell else { fatalError() }
+            cell.userDetails = ("Add","")
+            return cell
+        }
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IGStoryListCell.reuseIdentifier,for: indexPath) as? IGStoryListCell else { fatalError() }
-        let story = getSelectedViewModel().cellForItemAt(indexPath: indexPath)
         cell.story = story
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard getSelectedViewModel().cellForItemAt(indexPath: indexPath) != nil else {
+            showWhoIFollow()
+            return
+        }
         DispatchQueue.main.async {
             /*if let stories = self.viewModel.getStories(), let stories_copy = try? stories.copy() {
                 let storyPreviewScene = IGStoryPreviewController.init(stories: stories_copy, handPickedStoryIndex:  indexPath.row-1)

@@ -38,10 +38,12 @@ class OnboardingViewController: BaseFacebookViewController {
     
     @IBAction func facebookLoginTap() {
         self.facebookLogin { [weak self] (success, authUser, isNewUser) in
-            if isNewUser {
-                self?.performSegue(withIdentifier: "registerFlow", sender: self)
-            } else {
-                self?.appDelegate.presentUserFLow()
+            if success {
+                if isNewUser {
+                    self?.performSegue(withIdentifier: "registerFlow", sender: self)
+                } else {
+                    self?.appDelegate.presentUserFLow()
+                }
             }
         }
     }

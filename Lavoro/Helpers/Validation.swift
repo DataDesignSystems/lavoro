@@ -23,6 +23,10 @@ struct Validation {
         case genericError = "Please try again!"
     }
     
+    enum Warning: String {
+        case noFollowers = "No one is following you!"
+    }
+    
     enum SuccessMessage: String {
         case loginSuccessfull = "Logged in successfully!"
         case profileUpdatedSuccessfully = "Profile updated successfully!"

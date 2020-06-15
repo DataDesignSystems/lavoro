@@ -127,6 +127,7 @@ class AuthUser: NSObject, NSCoding {
             userDefaults.set(encodedData, forKey: "authuser")
             userDefaults.synchronize()
             AuthUser.authUser = AuthUser.loadAuthUser()
+            LoginChatUser.registerUserForChat()
         }
         catch {
             print("ERROR")
@@ -149,6 +150,9 @@ class AuthUser: NSObject, NSCoding {
     }
     
     static func logout() {
+        ALChatManager(applicationKey: ALChatManager.applicationId).logoutUser { (success) in
+            print("###ALChatManager Logout \(success)")
+        }
         AuthUser.authUser = nil
         let userDefaults = UserDefaults.standard
         userDefaults.removeObject(forKey: "authuser")

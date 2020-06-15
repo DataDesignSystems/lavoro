@@ -10,6 +10,7 @@ import Applozic
 import ApplozicSwift
 import Foundation
 import UIKit
+import IQKeyboardManagerSwift
 
 var TYPE_CLIENT: Int16 = 0
 var TYPE_APPLOZIC: Int16 = 1
@@ -19,8 +20,8 @@ var APNS_TYPE_DEVELOPMENT: Int16 = 0
 var APNS_TYPE_DISTRIBUTION: Int16 = 1
 
 class ALChatManager: NSObject {
-    static let applicationId = "applozic-sample-app"
-    static let shared = ALChatManager(applicationKey: ALChatManager.applicationId as NSString)
+    static let applicationId = "228113c2486cb194536b7e155e910ba63"
+    static let shared = ALChatManager(applicationKey: ALChatManager.applicationId)
 
     var pushNotificationTokenData: Data? {
         didSet {
@@ -28,12 +29,12 @@ class ALChatManager: NSObject {
         }
     }
 
-    init(applicationKey: NSString) {
+    init(applicationKey: String) {
         super.init()
-        if applicationKey.length == 0 {
+        if applicationKey.count == 0 {
             fatalError("Please pass your applicationId in the ALChatManager file.")
         }
-        ALUserDefaultsHandler.setApplicationKey(applicationKey as String)
+        ALUserDefaultsHandler.setApplicationKey(applicationKey)
         defaultChatViewSettings()
     }
 
@@ -124,6 +125,18 @@ class ALChatManager: NSObject {
         ALApplozicSettings.setFilterContactsStatus(false)
         ALUserDefaultsHandler.setDebugLogsRequire(true)
         ALApplozicSettings.setSwiftFramework(true)
+        ALKMessageStyle.sentBubble.color = UIColor(hexString: "#FF2D55")
+        ALKMessageStyle.sentBubble.style = .round
+        ALKMessageStyle.receivedBubble.color = UIColor(hexString: "#F1F2F4")
+        ALKMessageStyle.sentMessage = Style(font: UIFont.systemFont(ofSize: 14, weight: .medium), text: UIColor(hexString: "#FFFFFF"))
+        ALKMessageStyle.receivedMessage = Style(font: UIFont.systemFont(ofSize: 14, weight: .medium), text: UIColor(hexString: "#242A37"))
+        ALKMessageStyle.receivedBubble.style = .round
+        ALApplozicSettings.setColorForNavigation(UIColor(hexString: "#F7F8FA"))
+        let navigationBarProxy = UINavigationBar.appearance(whenContainedInInstancesOf: [ALKBaseNavigationViewController.self])
+        navigationBarProxy.isTranslucent = false
+        navigationBarProxy.barTintColor = UIColor(hexString: "#F7F8FA")
+        navigationBarProxy.tintColor = UIColor.black
+
     }
 
     func launchChatList(from viewController: UIViewController, with configuration: ALKConfiguration) {
@@ -139,11 +152,21 @@ class ALChatManager: NSObject {
             vc.present(navVC, animated: false, completion: nil)
             return
         }
+        IQKeyboardManager.shared.enableAutoToolbar = false
+        navVC.navigationBar.barTintColor = UIColor(hexString: "#F7F8FA")
+        navVC.navigationBar.tintColor = UIColor.black
+        navVC.navigationBar.isTranslucent = false
         vc.modalPresentationStyle = .fullScreen
-        vc.navigationController?.pushViewController(viewController, animated: false)
+        vc.hidesBottomBarWhenPushed = true
+        vc.navigationController?.pushViewController(viewController, animated: true)
+        vc.hidesBottomBarWhenPushed = false
     }
 
     func launchChatWith(contactId: String, from viewController: UIViewController, configuration: ALKConfiguration) {
+        var config = ALKConfiguration()
+        config.chatBarAttachmentViewBackgroundColor = UIColor(hexString: "#F3F3F3")
+        config.sendMessageIcon = UIImage(named: "messageSend")
+        
         let alContactDbService = ALContactDBService()
         var title = ""
         if let alContact = alContactDbService.loadContact(byKey: "userId", value: contactId), let name = alContact.getDisplayName() {
@@ -151,7 +174,7 @@ class ALChatManager: NSObject {
         }
         title = title.isEmpty ? "No name" : title
         let convViewModel = ALKConversationViewModel(contactId: contactId, channelKey: nil, localizedStringFileName: configuration.localizedStringFileName)
-        let conversationViewController = ALKConversationViewController(configuration: configuration)
+        let conversationViewController = ALKConversationViewController(configuration: config)
         conversationViewController.viewModel = convViewModel
         launch(viewController: conversationViewController, from: viewController)
     }

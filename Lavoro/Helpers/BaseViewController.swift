@@ -9,6 +9,7 @@
 import UIKit
 import NVActivityIndicatorView
 import SnapKit
+import IQKeyboardManagerSwift
 
 class BaseViewController: UIViewController {
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -30,7 +31,7 @@ class BaseViewController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+        IQKeyboardManager.shared.enableAutoToolbar = true
         view.bringSubviewToFront(activityIndicatorView)
     }
     

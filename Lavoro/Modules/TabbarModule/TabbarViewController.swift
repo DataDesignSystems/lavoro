@@ -48,6 +48,15 @@ class TabbarViewController: UITabBarController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
     }
+    
+    func showWhoIFollow() {
+        if let tabbarItems = self.tabBar.items, tabbarItems.count >= 5 {
+            self.selectedIndex = 4
+            if let profileNC = viewControllers?[4] as? UINavigationController, let profileVC = profileNC.topViewController as? ProfileViewController {
+                profileVC.displayWhoIFollowPage()
+            }
+        }
+    }
 }
 
 struct Tabbar {

@@ -62,6 +62,10 @@ class ProfileViewController: BaseViewController {
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
+    
+    func displayWhoIFollowPage() {
+        self.performSegue(withIdentifier: "findFriends", sender: self)
+    }
 }
 
 extension ProfileViewController: UITableViewDataSource {
@@ -95,7 +99,7 @@ extension ProfileViewController: UITableViewDelegate {
         case .followers:
             self.performSegue(withIdentifier: "followers", sender: self)
         case .logout:
-            AuthUser.loadAuthUser()
+            AuthUser.logout()
             appDelegate.presentLoginFlow()
         default:
             print(object.title)

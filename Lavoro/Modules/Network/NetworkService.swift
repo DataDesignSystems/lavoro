@@ -34,14 +34,14 @@ class NetworkService {
         AF.upload(multipartFormData: { multipartFormData in
             multipartFormData.append(data, withName: imageName, fileName: imageName + ".jpeg", mimeType: "image/jpeg")
         }, to: url, method:.post).responseJSON { response in
-                switch response.result {
-                case .success(let json):
-                    print(json)
-                case .failure(let error):
-                    print(error)
-                }
-                completionHandler(response)
+            switch response.result {
+            case .success(let json):
+                print(json)
+            case .failure(let error):
+                print(error)
             }
+            completionHandler(response)
+        }
     }
     
     func uploadFile(endpoint: NetworkConfig.Endpoint = .imageUpload, data: Data, imageName: String = "photo", authToken: Bool = true, completionHandler: @escaping ((AFDataResponse<Any>) -> ())) {
@@ -51,14 +51,14 @@ class NetworkService {
         }
         AF.upload(multipartFormData: { multipartFormData in
             multipartFormData.append(data, withName: imageName)
-            }, to: url).responseJSON { response in
-                switch response.result {
-                case .success(let json):
-                    print(json)
-                case .failure(let error):
-                    print(error)
-                }
-                completionHandler(response)
+        }, to: url).responseJSON { response in
+            switch response.result {
+            case .success(let json):
+                print(json)
+            case .failure(let error):
+                print(error)
             }
+            completionHandler(response)
+        }
     }
 }

@@ -25,4 +25,12 @@ struct MessageViewAlert {
         error.button?.isHidden = true
         SwiftMessages.show(view: error)
     }
+    
+    static func showWarning(with message: String) {
+        let error = MessageView.viewFromNib(layout: .cardView)
+        error.configureTheme(.warning)
+        error.configureContent(title: "Oops", body: message)
+        error.button?.isHidden = true
+        SwiftMessages.show(view: error)
+    }
 }
