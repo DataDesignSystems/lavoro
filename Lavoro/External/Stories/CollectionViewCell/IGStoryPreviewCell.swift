@@ -121,7 +121,7 @@ final class IGStoryPreviewCell: UICollectionViewCell, UIScrollViewDelegate {
     public var story: IGStory? {
         didSet {
             storyHeaderView.story = story
-            if let picture = story?.user.picture {
+            if let picture = story?.user.avatar {
                 storyHeaderView.snaperImageView.setImage(url: picture)
             }
         }

@@ -25,8 +25,8 @@ class RecommendedCollectionViewCell: UICollectionViewCell {
     
     func setupCell(with object: OtherUser) {
         name.text = object.name
-        profession.text = object.profession
-        userImage.image = UIImage(named: object.imageName)
+        profession.text = "object.profession"
+        userImage.image = nil
     }
     
 }

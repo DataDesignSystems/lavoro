@@ -8,17 +8,9 @@
 
 import Foundation
 
-public class IGStories: Codable {
+public class IGStories {
     public let stories: [IGStory]
     
-    enum CodingKeys: String, CodingKey {
-        case stories = "stories"
-    }
-    func copy() throws -> IGStories {
-        let data = try JSONEncoder().encode(self)
-        let copy = try JSONDecoder().decode(IGStories.self, from: data)
-        return copy
-    }
     init(with stories: [IGStory]) {
         self.stories = stories
     }

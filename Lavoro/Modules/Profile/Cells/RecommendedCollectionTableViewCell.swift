@@ -10,7 +10,7 @@ import UIKit
 
 class RecommendedCollectionTableViewCell: UITableViewCell {
     @IBOutlet weak var collectionView: UICollectionView!
-    var users = OtherUser.mockdata()
+    var users = [OtherUser]()
     
     override func awakeFromNib() {
         super.awakeFromNib()

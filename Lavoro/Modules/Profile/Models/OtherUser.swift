@@ -8,21 +8,19 @@
 
 import Foundation
 
-struct OtherUser {
-    var name: String
-    var profession: String
-    var imageName: String
+public class OtherUser {
+    public let id: String
+    public let name: String
+    public let avatar: String
+    public let username: String
+    public let isFavorite: Bool
     
-    static func mockdata() -> [OtherUser] {
-        return [OtherUser(name: "Josie Johnston", profession: "Server", imageName: "dummyUser"),
-                OtherUser(name: "Eddie Simmons", profession: "Bartender", imageName: "dummyUser"),
-                OtherUser(name: "Noah Guzman", profession: "Server", imageName: "dummyUser"),
-                OtherUser(name: "Bradley West", profession: "Bartender", imageName: "dummyUser"),
-                OtherUser(name: "Allen Day", profession: "Server", imageName: "dummyUser"),
-                OtherUser(name: "Noah Guzman", profession: "Bartender", imageName: "dummyUser"),
-                OtherUser(name: "Bradley West", profession: "Bartender", imageName: "dummyUser"),
-                OtherUser(name: "Jesus Reeves", profession: "Bartender", imageName: "dummyUser"),
-                OtherUser(name: "Allen Day", profession: "Server", imageName: "dummyUser")]
+    init(with json:[String: Any]) {
+        let fullname = ((json["first"] as? String ?? "") + " " + (json["last"] as? String ?? "")).trimmingCharacters(in: .whitespacesAndNewlines)
+        self.name = fullname.isEmpty ? (json["username"] as? String ?? "") : fullname
+        self.id = json["id"] as? String ?? ""
+        self.avatar = json["avatar"] as? String ?? ""
+        self.username = json["username"] as? String ?? ""
+        self.isFavorite = json["isFavorite"] as? Bool ?? false
     }
 }
-

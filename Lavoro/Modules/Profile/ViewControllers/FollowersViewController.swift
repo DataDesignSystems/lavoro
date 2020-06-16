@@ -10,32 +10,63 @@ import UIKit
 
 class FollowersViewController: BaseViewController {
     @IBOutlet weak var tableview: UITableView!
-    var users = OtherUser.mockdata()
+    var users = [OtherUser]()
     var searchController = UISearchController(searchResultsController: nil)
-
+    let noDataLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.text = "You not followed by anyone!\nPlease check later"
+        label.textColor = UIColor(white: 0.20, alpha: 1)
+        label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        label.textAlignment = .center
+        return label
+    }()
+    
     override func viewDidLoad() {
-            super.viewDidLoad()
-            searchController.delegate = self
-            self.navigationItem.searchController = searchController
-        }
-        
-        override func viewWillAppear(_ animated: Bool) {
-            super.viewWillAppear(animated)
-            self.navigationController?.setNavigationBarHidden(false, animated: true)
-            navigationItem.hidesSearchBarWhenScrolling = false
-        }
-        
-        override func viewDidAppear(_ animated: Bool) {
-            super.viewDidAppear(animated)
-            navigationItem.hidesSearchBarWhenScrolling = true
-        }
-
-        
-        override func viewWillDisappear(_ animated: Bool) {
-            super.viewWillDisappear(animated)
-            self.navigationController?.setNavigationBarHidden(true, animated: true)
+        super.viewDidLoad()
+        searchController.delegate = self
+        self.navigationItem.searchController = searchController
+        setupView()
+        self.fetchData()
+    }
+    
+    func setupView() {
+        tableview.backgroundView = UIView()
+        tableview.backgroundView?.addSubview(noDataLabel)
+        noDataLabel.snp.makeConstraints { (make) in
+            make.center.equalToSuperview()
+            make.leading.equalToSuperview().offset(16.0)
         }
     }
+    
+    func fetchData() {
+        noDataLabel.isHidden = true
+        self.showLoadingView()
+        userService.getFollowingMe { [weak self] (success, message, users) in
+            self?.stopLoadingView()
+            self?.noDataLabel.isHidden = !users.isEmpty
+            self?.users = users
+            self?.tableview.reloadData()
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        navigationItem.hidesSearchBarWhenScrolling = false
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        navigationItem.hidesSearchBarWhenScrolling = true
+    }
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+}
 
     extension FollowersViewController: UITableViewDataSource, UITableViewDelegate {
         func numberOfSections(in tableView: UITableView) -> Int {
@@ -77,7 +108,7 @@ class FollowersViewController: BaseViewController {
                 }
             }
             if let label = header?.viewWithTag(11) as? UILabel {
-                label.text = "Following Me".uppercased()
+                label.text = users.count > 0 ? "Following Me".uppercased() : ""
             }
             return header
         }

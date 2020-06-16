@@ -20,5 +20,10 @@ struct NetworkConfig {
         case updateUserProfile = "api/update-user-profile/"
         case imageUpload = "api/upload-image/"
         case dashboard = "api/get-my-dashboard/"
+        case whoIFollow = "api/get-who-i-follow-list/"
+        case followingMe = "api/get-my-following-list/"
+        case addUserToFollow = "api/add-user-to-follow/"
+        case removeUserToFollow = "api/remove-user-to-follow/"
+        
     }
 }

@@ -14,7 +14,7 @@ final class IGStoryListCell: UICollectionViewCell {
     public var story: IGStory? {
         didSet {
             self.profileNameLabel.text = story?.user.name
-            if let picture = story?.user.picture {
+            if let picture = story?.user.avatar {
                 self.profileImageView.imageView.setImage(url: picture)
             }
         }

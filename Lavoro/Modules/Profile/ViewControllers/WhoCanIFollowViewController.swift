@@ -10,13 +10,44 @@ import UIKit
 
 class WhoCanIFollowViewController: BaseViewController {
     @IBOutlet weak var tableview: UITableView!
-    var users = OtherUser.mockdata()
+    var users = [OtherUser]()
     var searchController = UISearchController(searchResultsController: nil)
+    let noDataLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.text = "You not following any user!\nFollow users to see it here"
+        label.textColor = UIColor(white: 0.20, alpha: 1)
+        label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        label.textAlignment = .center
+        return label
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         searchController.delegate = self
         self.navigationItem.searchController = searchController
+        setupView()
+        self.fetchData()
+    }
+    
+    func fetchData() {
+        self.showLoadingView()
+        noDataLabel.isHidden = true
+        userService.getWhoIFollow { [weak self] (success, message, users) in
+            self?.stopLoadingView()
+            self?.noDataLabel.isHidden = !users.isEmpty
+            self?.users = users
+            self?.tableview.reloadData()
+        }
+    }
+    
+    func setupView() {
+        tableview.backgroundView = UIView()
+        tableview.backgroundView?.addSubview(noDataLabel)
+        noDataLabel.snp.makeConstraints { (make) in
+            make.center.equalToSuperview()
+            make.leading.equalToSuperview().offset(16.0)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -101,7 +132,7 @@ extension WhoCanIFollowViewController: UITableViewDataSource, UITableViewDelegat
             if section == 0 {
                 label.text = "Recommended".uppercased()
             } else {
-                label.text = "Service Professionals".uppercased()
+                label.text = users.count > 0 ? "Service Professionals".uppercased() : ""
             }
         }
         if let button = header?.viewWithTag(12) {

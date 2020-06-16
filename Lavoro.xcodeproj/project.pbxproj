@@ -74,6 +74,7 @@
 		13B531BD248C040000C6C8FF /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B531BC248C040000C6C8FF /* MessageView.swift */; };
 		13B531BF248C1C7C00C6C8FF /* String+Exts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B531BE248C1C7C00C6C8FF /* String+Exts.swift */; };
 		13B531C1248C260B00C6C8FF /* BaseFacebookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B531C0248C260B00C6C8FF /* BaseFacebookViewController.swift */; };
+		13BA4E212498E96B002AA103 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BA4E202498E96B002AA103 /* UserService.swift */; };
 		13C3525D94BE24BBD94682BB /* Pods_Lavoro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD31EEAD4AE9165735295736 /* Pods_Lavoro.framework */; };
 		13C54C052493F51600CE1AF6 /* UIImage+Exts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C54C042493F51600CE1AF6 /* UIImage+Exts.swift */; };
 		13C54C0E24953D8C00CE1AF6 /* HomeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C54C0D24953D8C00CE1AF6 /* HomeService.swift */; };
@@ -83,7 +84,6 @@
 		13D0579B245C7A6600227E15 /* HomeFeedsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D0579A245C7A6600227E15 /* HomeFeedsViewController.swift */; };
 		13D0579F245C7B2D00227E15 /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D0579E245C7B2D00227E15 /* Feed.swift */; };
 		13D057A1245C7B4700227E15 /* CheckInFeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D057A0245C7B4700227E15 /* CheckInFeedTableViewCell.swift */; };
-		13D057D2245C9DF800227E15 /* IGMockLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D057A5245C9DF700227E15 /* IGMockLoader.swift */; };
 		13D057D3245C9DF800227E15 /* IGStoryPreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D057A7245C9DF700227E15 /* IGStoryPreviewCell.swift */; };
 		13D057D4245C9DF800227E15 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D057A9245C9DF700227E15 /* UIView+Extension.swift */; };
 		13D057D5245C9DF800227E15 /* IGAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D057AA245C9DF700227E15 /* IGAdditions.swift */; };
@@ -197,6 +197,7 @@
 		13B531BC248C040000C6C8FF /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		13B531BE248C1C7C00C6C8FF /* String+Exts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Exts.swift"; sourceTree = "<group>"; };
 		13B531C0248C260B00C6C8FF /* BaseFacebookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFacebookViewController.swift; sourceTree = "<group>"; };
+		13BA4E202498E96B002AA103 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		13C54C042493F51600CE1AF6 /* UIImage+Exts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Exts.swift"; sourceTree = "<group>"; };
 		13C54C0D24953D8C00CE1AF6 /* HomeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeService.swift; sourceTree = "<group>"; };
 		13C54C0F2496168700CE1AF6 /* LoginChatUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginChatUser.swift; sourceTree = "<group>"; };
@@ -205,7 +206,6 @@
 		13D0579A245C7A6600227E15 /* HomeFeedsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedsViewController.swift; sourceTree = "<group>"; };
 		13D0579E245C7B2D00227E15 /* Feed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
 		13D057A0245C7B4700227E15 /* CheckInFeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInFeedTableViewCell.swift; sourceTree = "<group>"; };
-		13D057A5245C9DF700227E15 /* IGMockLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGMockLoader.swift; sourceTree = "<group>"; };
 		13D057A7245C9DF700227E15 /* IGStoryPreviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGStoryPreviewCell.swift; sourceTree = "<group>"; };
 		13D057A9245C9DF700227E15 /* UIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		13D057AA245C9DF700227E15 /* IGAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGAdditions.swift; sourceTree = "<group>"; };
@@ -529,6 +529,7 @@
 				13B531B2248BF8B800C6C8FF /* NetworkService.swift */,
 				13B531B7248BFDD500C6C8FF /* BaseModuleService.swift */,
 				1382B7A0248F9C6B0032BE49 /* ImageService.swift */,
+				13BA4E202498E96B002AA103 /* UserService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -591,7 +592,6 @@
 		13D057A3245C9DF700227E15 /* Stories */ = {
 			isa = PBXGroup;
 			children = (
-				13D057A4245C9DF700227E15 /* Stubs */,
 				13D057A6245C9DF700227E15 /* CollectionViewCell */,
 				13D057A8245C9DF700227E15 /* Extension */,
 				13D057AD245C9DF700227E15 /* StoryHeaderView & ProgressView */,
@@ -604,14 +604,6 @@
 				13D057C7245C9DF700227E15 /* External */,
 			);
 			path = Stories;
-			sourceTree = "<group>";
-		};
-		13D057A4245C9DF700227E15 /* Stubs */ = {
-			isa = PBXGroup;
-			children = (
-				13D057A5245C9DF700227E15 /* IGMockLoader.swift */,
-			);
-			path = Stubs;
 			sourceTree = "<group>";
 		};
 		13D057A6245C9DF700227E15 /* CollectionViewCell */ = {
@@ -953,6 +945,7 @@
 				136F3259245B032F006939ED /* OnboardingCollectionViewCell.swift in Sources */,
 				13D05809245D755B00227E15 /* BaseNavigationViewController.swift in Sources */,
 				13D057DC245C9DF800227E15 /* IGSnap.swift in Sources */,
+				13BA4E212498E96B002AA103 /* UserService.swift in Sources */,
 				1317B8282460A42400AD9AC8 /* WorkLocationTableViewCell.swift in Sources */,
 				136F3284245B4D42006939ED /* UIDate+Exts.swift in Sources */,
 				13D05802245CA0B000227E15 /* IGHomeViewModel.swift in Sources */,
@@ -971,7 +964,6 @@
 				13D057E5245C9DF800227E15 /* IGVideoCacheManager.swift in Sources */,
 				13D057E7245C9DF800227E15 /* IGCommon.swift in Sources */,
 				13D057EB245C9DF800227E15 /* Reachability.swift in Sources */,
-				13D057D2245C9DF800227E15 /* IGMockLoader.swift in Sources */,
 				136F3263245B032F006939ED /* OnboardingViewController.swift in Sources */,
 				13B531B6248BFD8300C6C8FF /* LoginService.swift in Sources */,
 				136F327E245B13C6006939ED /* ProfileTableViewCell.swift in Sources */,

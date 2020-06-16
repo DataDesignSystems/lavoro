@@ -7,31 +7,23 @@
 
 import Foundation
 
-public class IGStory: Codable {
+public class IGStory {
     // Note: To retain lastPlayedSnapIndex value for each story making this type as class
     public var snapsCount: Int
     public var snaps: [IGSnap]
     public var internalIdentifier: String
     public var lastUpdated: Int
-    public var user: IGUser
+    public var user: OtherUser
     var lastPlayedSnapIndex = 0
     var isCompletelyVisible = false
     var isCancelledAbruptly = false
-    
-    enum CodingKeys: String, CodingKey {
-        case snapsCount = "snaps_count"
-        case snaps = "snaps"
-        case internalIdentifier = "id"
-        case lastUpdated = "last_updated"
-        case user = "user"
-    }
     
     init(with json:[String: Any]) {
         self.snapsCount = 0
         self.snaps = []
         self.internalIdentifier = ""
         self.lastUpdated = 0
-        self.user = IGUser(with: json)
+        self.user = OtherUser(with: json)
     }
 }
 
