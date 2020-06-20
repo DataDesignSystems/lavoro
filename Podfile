@@ -20,4 +20,5 @@ target 'Lavoro' do
   pod 'NVActivityIndicatorView'
   pod 'FBSDKLoginKit'
   pod 'SDWebImage', '~> 5.0'
+  pod 'InputBarAccessoryView'
 end

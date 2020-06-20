@@ -14,6 +14,7 @@ public class OtherUser {
     public let avatar: String
     public let username: String
     public let isFavorite: Bool
+    public let position: String
     
     init(with json:[String: Any]) {
         let fullname = ((json["first"] as? String ?? "") + " " + (json["last"] as? String ?? "")).trimmingCharacters(in: .whitespacesAndNewlines)
@@ -21,6 +22,7 @@ public class OtherUser {
         self.id = json["id"] as? String ?? ""
         self.avatar = json["avatar"] as? String ?? ""
         self.username = json["username"] as? String ?? ""
+        self.position = json["position"] as? String ?? ""
         self.isFavorite = json["isFavorite"] as? Bool ?? false
     }
 }

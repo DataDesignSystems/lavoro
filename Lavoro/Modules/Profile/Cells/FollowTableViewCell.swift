@@ -29,7 +29,7 @@ class FollowTableViewCell: UITableViewCell {
     
     func setupCell(with object: OtherUser) {
         name.text = object.name
-        profession.text = ""
+        profession.text = object.position
         if let url = URL(string: object.avatar) {
             userImage.sd_setImage(with: url, completed:  nil)
         }

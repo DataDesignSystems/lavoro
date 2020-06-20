@@ -20,6 +20,9 @@ PODS:
     - FBSDKLoginKit/Login (= 7.0.0)
   - FBSDKLoginKit/Login (7.0.0):
     - FBSDKCoreKit (~> 7.0.0)
+  - InputBarAccessoryView (4.3.2):
+    - InputBarAccessoryView/Core (= 4.3.2)
+  - InputBarAccessoryView/Core (4.3.2)
   - IQKeyboardManagerSwift (6.3.0)
   - Kingfisher (5.13.4):
     - Kingfisher/Core (= 5.13.4)
@@ -71,6 +74,7 @@ DEPENDENCIES:
   - Alamofire (~> 5.2)
   - ApplozicSwift
   - FBSDKLoginKit
+  - InputBarAccessoryView
   - IQKeyboardManagerSwift (= 6.3.0)
   - KVKCalendar
   - MaterialComponents/BottomSheet
@@ -87,6 +91,7 @@ SPEC REPOS:
     - ApplozicSwift
     - FBSDKCoreKit
     - FBSDKLoginKit
+    - InputBarAccessoryView
     - IQKeyboardManagerSwift
     - Kingfisher
     - KVKCalendar
@@ -104,6 +109,7 @@ SPEC CHECKSUMS:
   ApplozicSwift: 2ed5595373c5c63fc443238c3691ac91d1fe9080
   FBSDKCoreKit: 8ad31cd09f793d1d7e84cf20fd6cebfe80ad318d
   FBSDKLoginKit: 5d1e321dc45ab1fa09198b77fc17c32a06f008c0
+  InputBarAccessoryView: 7985d418040a05fe894bd4b8328dd43ab35517c3
   IQKeyboardManagerSwift: a8228c257614af98743b4cd8584637025f36358f
   Kingfisher: d2279a7abece3c7f25a80cd2b7f363ca5cf3f44c
   KVKCalendar: 0cf91e3db666a044f2c59cf3feb3b3c5114aef05
@@ -115,6 +121,6 @@ SPEC CHECKSUMS:
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftMessages: b577dc7043be8b299857ab35bb663dbff6483bd0
 
-PODFILE CHECKSUM: 895026e7399a965934fcd30364263950c05eec8b
+PODFILE CHECKSUM: 8a0a39a6c3edac26347c374a10d8bcdfbf33c9fb
 
 COCOAPODS: 1.9.1

@@ -85,13 +85,17 @@ class HomeFeedsViewController: BaseViewController {
             }
         }
     }
+    
+    @objc func showUserProfileButtonsTap( button: UIButton) {
+        let profileId = feeds[button.tag].user.id
+        PublicProfileViewController.showProfile(on: self.navigationController, profileId: profileId)
+    }
 
     @IBAction func editProfile() {
-        let storyboard = UIStoryboard(name: "Login", bundle: nil)
-        if let vc = storyboard.instantiateViewController(withIdentifier: "RegisterationViewController") as? RegisterationViewController {
-            vc.isEditingProfile = true
-            self.navigationController?.pushViewController(vc, animated: true)
+        guard let profileId = AuthUser.getAuthUser()?.id else {
+            return
         }
+        PublicProfileViewController.showProfile(on: self.navigationController, profileId: profileId)
     }
     
     func getSelectedViewModel() -> IGHomeViewModel {
@@ -127,6 +131,8 @@ extension HomeFeedsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "checkInFeed", for: indexPath) as! CheckInFeedTableViewCell
         cell.setupCell(with: feeds[indexPath.row])
+        cell.userImageButton.tag = indexPath.row
+        cell.userImageButton.addTarget(self, action: #selector(showUserProfileButtonsTap(button:)), for: .touchUpInside)
         return cell
     }
 }
@@ -166,11 +172,13 @@ extension HomeFeedsViewController: UICollectionViewDelegate,UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard getSelectedViewModel().cellForItemAt(indexPath: indexPath) != nil else {
+        guard let story = getSelectedViewModel().cellForItemAt(indexPath: indexPath) else {
             showWhoIFollow()
             return
         }
         DispatchQueue.main.async {
+            let profileId = story.user.id
+            PublicProfileViewController.showProfile(on: self.navigationController, profileId: profileId)
             /*if let stories = self.viewModel.getStories(), let stories_copy = try? stories.copy() {
                 let storyPreviewScene = IGStoryPreviewController.init(stories: stories_copy, handPickedStoryIndex:  indexPath.row-1)
                 self.present(storyPreviewScene, animated: true, completion: nil)

@@ -11,6 +11,7 @@ import UIKit
 class CheckInFeedTableViewCell: UITableViewCell {
     @IBOutlet weak var parentView: UIView!
     @IBOutlet weak var userImage: UIImageView!
+    @IBOutlet weak var userImageButton: UIButton!
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var time: UILabel!
     @IBOutlet weak var checkInImage: UIImageView!
@@ -24,6 +25,7 @@ class CheckInFeedTableViewCell: UITableViewCell {
         super.awakeFromNib()
         parentView.setLayer(cornerRadius: 8)
         userImage.setLayer(cornerRadius: 25)
+        userImageButton.setLayer(cornerRadius: 25)
         checkInImage.setLayer(cornerRadius: 4)
         locationNameBackgroundView.setLayer(cornerRadius: 4)
         parentView.outerShadow(shadowOpacity: 0.1, shadowColor: .black)
@@ -38,7 +40,7 @@ class CheckInFeedTableViewCell: UITableViewCell {
     
     func setupCell(with object: Feed) {
         if let url = URL(string: object.user.avatar) {
-            userImage.sd_setImage(with: url, completed: nil)
+            userImageButton.sd_setImage(with: url, for: .normal, completed: nil)
         }
         if let url = URL(string: object.location.image) {
             checkInImage.sd_setImage(with: url, completed: nil)

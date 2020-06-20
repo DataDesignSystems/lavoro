@@ -91,6 +91,12 @@ class FollowersViewController: BaseViewController {
             return 40
         }
         
+        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            let profileId = users[indexPath.row].id
+            tableView.deselectRow(at: indexPath, animated: true)
+            PublicProfileViewController.showProfile(on: self.navigationController, profileId: profileId)
+        }
+        
         func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
             var header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header")
             if header == nil {

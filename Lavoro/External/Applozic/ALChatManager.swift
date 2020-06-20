@@ -148,25 +148,28 @@ class ALChatManager: NSObject {
 
     func launch(viewController: UIViewController, from vc: UIViewController) {
         let navVC = ALKBaseNavigationViewController(rootViewController: viewController)
-        guard vc.navigationController != nil else {
-            vc.present(navVC, animated: false, completion: nil)
-            return
-        }
         IQKeyboardManager.shared.enableAutoToolbar = false
         navVC.navigationBar.barTintColor = UIColor(hexString: "#F7F8FA")
         navVC.navigationBar.tintColor = UIColor.black
         navVC.navigationBar.isTranslucent = false
-        vc.modalPresentationStyle = .fullScreen
-        vc.hidesBottomBarWhenPushed = true
-        vc.navigationController?.pushViewController(viewController, animated: true)
-        vc.hidesBottomBarWhenPushed = false
+        navVC.modalPresentationStyle = .fullScreen
+        let backImage = UIImage(named: "ic_back")
+        vc.navigationItem.leftBarButtonItem = UIBarButtonItem(image: backImage, style: .done, target: self, action: #selector(backButton))
+        guard vc.navigationController != nil else {
+            vc.present(navVC, animated: false, completion: nil)
+            return
+        }
+    }
+    
+    @IBAction func backButton () {
     }
 
     func launchChatWith(contactId: String, from viewController: UIViewController, configuration: ALKConfiguration) {
         var config = ALKConfiguration()
         config.chatBarAttachmentViewBackgroundColor = UIColor(hexString: "#F3F3F3")
         config.sendMessageIcon = UIImage(named: "messageSend")
-        
+        config.hideBackButtonInConversationList = false
+
         let alContactDbService = ALContactDBService()
         var title = ""
         if let alContact = alContactDbService.loadContact(byKey: "userId", value: contactId), let name = alContact.getDisplayName() {

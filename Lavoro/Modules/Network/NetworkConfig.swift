@@ -24,6 +24,10 @@ struct NetworkConfig {
         case followingMe = "api/get-my-following-list/"
         case addUserToFollow = "api/add-user-to-follow/"
         case removeUserToFollow = "api/remove-user-to-follow/"
-        
+        case userPublicProfile = "api/get-user-public-profile/"
+        case addCommentsToPublicProfile = "api/add-comment-to-public-profile/"
+        case searchUserByUsername = "api/search-user-by-username/"
+        case followUser = "api/follow-user/"
+        case removeFollowUser = "api/remove-follow-user/"
     }
 }

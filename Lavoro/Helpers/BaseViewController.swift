@@ -39,6 +39,7 @@ class BaseViewController: UIViewController {
     func addkeyboardObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
 
     }
 
@@ -67,6 +68,9 @@ class BaseViewController: UIViewController {
                 self.view.frame.origin.y = 0
             }
         }
+    }
+    
+    @objc func keyboardWillChange(notification: NSNotification) {
     }
     
     @objc func openImagePicker() {
