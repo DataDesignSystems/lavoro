@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol ChangeFollowStatus: class {
+    func apiCallInitiated(userId: Int)
+    func apiCallEnd(userId: Int, success: Bool)
+}
+
 class FollowTableViewCell: UITableViewCell {
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var profession: UILabel!
@@ -15,6 +20,7 @@ class FollowTableViewCell: UITableViewCell {
     @IBOutlet weak var followButton: UIButton!
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView(style: .medium)
     let userService = UserService()
+    weak var delegate: ChangeFollowStatus?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -62,9 +68,11 @@ class FollowTableViewCell: UITableViewCell {
         guard button.tag != -1 else {
             return
         }
+        delegate?.apiCallInitiated(userId: button.tag)
         self.startAnimation()
         userService.changeFollowUser(with: "\(button.tag)", isFollow: !followButton.isSelected) { [weak self] (success, message) in
             self?.stopAnimation()
+            self?.delegate?.apiCallEnd(userId: button.tag, success: success)
         }
     }
 }

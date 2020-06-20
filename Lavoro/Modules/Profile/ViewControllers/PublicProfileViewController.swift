@@ -66,12 +66,9 @@ class PublicProfileViewController: BaseViewController {
         keyboardManager.bind(to: tableview)
         keyboardManager.on(event: .didShow) { [weak self] (notification) in
             self?.bottomConstraint.constant = notification.endFrame.height
-//            self?.tableview.scrollIndicatorInsets.bottom = notification.endFrame.height
         }.on(event: .didHide) { [weak self] _ in
             let barHeight = self?.inputBar.bounds.height ?? 0
             self?.bottomConstraint.constant = barHeight
-//            self?.tableview.contentInset.bottom = barHeight
-//            self?.tableview.scrollIndicatorInsets.bottom = barHeight
         }
     }
 

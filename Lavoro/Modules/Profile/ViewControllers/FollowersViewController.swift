@@ -21,7 +21,8 @@ class FollowersViewController: BaseViewController {
         label.textAlignment = .center
         return label
     }()
-    
+    var loadingUsers = [String]()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         searchController.delegate = self
@@ -83,6 +84,7 @@ extension FollowersViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "followCell", for: indexPath) as! FollowTableViewCell
         cell.setupCell(with: users[indexPath.row])
+        cell.delegate = self
         return cell
     }
     
@@ -135,4 +137,24 @@ extension FollowersViewController: UISearchBarDelegate {
         SearchViewController.pushSearch(on: self.navigationController)
         return false
     }
+}
+extension FollowersViewController: ChangeFollowStatus {
+    func apiCallInitiated(userId: Int) {
+        loadingUsers.append("\(userId)")
+    }
+    
+    func apiCallEnd(userId: Int, success: Bool) {
+        if let index = loadingUsers.firstIndex(of: "\(userId)") {
+            loadingUsers.remove(at: index)
+        }
+        if success {
+            for user in users {
+                if user.id == "\(userId)" {
+                    user.isFollowing.toggle()
+                }
+            }
+            tableview.reloadData()
+        }
+    }
+    
 }
