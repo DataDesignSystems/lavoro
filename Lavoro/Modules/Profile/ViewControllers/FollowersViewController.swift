@@ -27,7 +27,6 @@ class FollowersViewController: BaseViewController {
         searchController.delegate = self
         self.navigationItem.searchController = searchController
         setupView()
-        self.fetchData()
     }
     
     func setupView() {
@@ -42,7 +41,9 @@ class FollowersViewController: BaseViewController {
     
     func fetchData() {
         noDataLabel.isHidden = true
-        self.showLoadingView()
+        if users.count == 0 {
+            self.showLoadingView()
+        }
         userService.getFollowingMe { [weak self] (success, message, users) in
             self?.stopLoadingView()
             self?.noDataLabel.isHidden = !users.isEmpty
@@ -55,6 +56,7 @@ class FollowersViewController: BaseViewController {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         navigationItem.hidesSearchBarWhenScrolling = false
+        self.fetchData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -130,7 +132,7 @@ extension FollowersViewController: UISearchBarDelegate {
     }
     
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        SearchViewController.presentSearch(on: self.tabBarController ?? self)
+        SearchViewController.pushSearch(on: self.navigationController)
         return false
     }
 }

@@ -44,6 +44,10 @@ class SearchViewController: BaseViewController {
     }
     
     func searchUser(with text: String) {
+        let text = text.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard text.count > 0 else {
+            return
+        }
         self.showLoadingView()
         userService.searchUser(with: text) { [weak self] (success, message, users) in
             self?.stopLoadingView()
@@ -65,7 +69,7 @@ class SearchViewController: BaseViewController {
     }
 
     override func backButton() {
-        self.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: false)
     }
     
     
@@ -129,6 +133,8 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension SearchViewController: UISearchControllerDelegate {
     
+    
+    
 }
 extension SearchViewController {
     static func presentSearch(on fromViewController: UIViewController) {
@@ -137,6 +143,15 @@ extension SearchViewController {
         let nc = UINavigationController(rootViewController: viewController)
         nc.modalPresentationStyle = .fullScreen
         fromViewController.present(nc, animated: false, completion: nil)
+    }
+    
+    static func pushSearch(on fromNavigation: UINavigationController?) {
+        guard let fromNavigation = fromNavigation else {
+            return
+        }
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Profile", bundle: nil)
+        let viewController = storyBoard.instantiateViewController(withIdentifier: "SearchViewController") as! SearchViewController
+        fromNavigation.pushViewController(viewController, animated: false)
     }
 }
 extension SearchViewController: UISearchBarDelegate {
@@ -150,5 +165,9 @@ extension SearchViewController: UISearchBarDelegate {
     
     func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
         return true
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.backButton()
     }
 }

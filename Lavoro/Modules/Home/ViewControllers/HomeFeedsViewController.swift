@@ -34,17 +34,19 @@ class HomeFeedsViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        self.fetchData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         setProfileData()
+        self.fetchData()
     }
     
     func fetchData() {
-        self.showLoadingView()
+        if self.feeds.count == 0 {
+            self.showLoadingView()
+        }
         noFeedLabel.isHidden = true
         homeService.getDashboardData { [weak self] (success, message, feeds, followingMe, following)   in
             self?.feeds = feeds
@@ -156,7 +158,7 @@ extension HomeFeedsViewController: UISearchBarDelegate {
     }
     
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        SearchViewController.presentSearch(on: self.tabBarController ?? self)
+        SearchViewController.pushSearch(on: self.navigationController)
         return false
     }
 }

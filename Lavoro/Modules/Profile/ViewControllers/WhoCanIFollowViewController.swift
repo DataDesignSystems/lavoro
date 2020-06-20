@@ -27,11 +27,12 @@ class WhoCanIFollowViewController: BaseViewController {
         searchController.delegate = self
         self.navigationItem.searchController = searchController
         setupView()
-        self.fetchData()
     }
     
     func fetchData() {
-        self.showLoadingView()
+        if users.count == 0 {
+            self.showLoadingView()
+        }
         noDataLabel.isHidden = true
         userService.getWhoIFollow { [weak self] (success, message, users) in
             self?.stopLoadingView()
@@ -55,6 +56,7 @@ class WhoCanIFollowViewController: BaseViewController {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         navigationItem.hidesSearchBarWhenScrolling = false
+        self.fetchData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -126,7 +128,7 @@ extension WhoCanIFollowViewController: UISearchBarDelegate {
     }
     
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        SearchViewController.presentSearch(on: self.tabBarController ?? self)
+        SearchViewController.pushSearch(on: self.navigationController)
         return false
     }
 }
