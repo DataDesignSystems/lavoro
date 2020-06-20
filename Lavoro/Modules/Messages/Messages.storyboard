@@ -26,7 +26,7 @@
         <!--Messages-->
         <scene sceneID="6m8-zX-pxo">
             <objects>
-                <viewController id="8BC-Wx-9Zg" customClass="MessageListViewController" customModule="Lavoro" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MessageListViewController" id="8BC-Wx-9Zg" customClass="MessageListViewController" customModule="Lavoro" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mgb-N0-I1O">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -37,6 +37,7 @@ class ProfileViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
         refreshView()
     }
     
@@ -101,6 +102,11 @@ extension ProfileViewController: UITableViewDelegate {
         case .logout:
             AuthUser.logout()
             appDelegate.presentLoginFlow()
+        case .messages:
+            let storyboard = UIStoryboard(name: "Messages", bundle: nil)
+            if let vc = storyboard.instantiateViewController(withIdentifier: "MessageListViewController") as? MessageListViewController {
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
         default:
             print(object.title)
         }
