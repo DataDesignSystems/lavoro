@@ -21,10 +21,13 @@ class MessageListViewController: BaseViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
-        let backImage = UIImage(named: "ic_back_white")
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: backImage, style: .done, target: self, action: #selector(backButton))
-        self.navigationController?.navigationBar.tintColor = .black
+        
+        if self.navigationController?.viewControllers.count ?? 0 > 1 {
+            self.navigationController?.setNavigationBarHidden(false, animated: false)
+            let backImage = UIImage(named: "ic_back_white")
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: backImage, style: .done, target: self, action: #selector(backButton))
+            self.navigationController?.navigationBar.tintColor = .black
+        }
         refreshChatMessage()
     }
     

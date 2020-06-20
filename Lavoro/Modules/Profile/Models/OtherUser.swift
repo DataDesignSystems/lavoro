@@ -15,6 +15,7 @@ public class OtherUser {
     public let username: String
     public let isFavorite: Bool
     public let position: String
+    public let isFollowing: Bool
     
     init(with json:[String: Any]) {
         let fullname = ((json["first"] as? String ?? "") + " " + (json["last"] as? String ?? "")).trimmingCharacters(in: .whitespacesAndNewlines)
@@ -24,5 +25,6 @@ public class OtherUser {
         self.username = json["username"] as? String ?? ""
         self.position = json["position"] as? String ?? ""
         self.isFavorite = json["isFavorite"] as? Bool ?? false
+        self.isFollowing = json["isFollowing"] as? Bool ?? false
     }
 }

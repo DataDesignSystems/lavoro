@@ -74,6 +74,7 @@
 		1382551D249BE026004BF327 /* PublicProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1382551C249BE026004BF327 /* PublicProfile.swift */; };
 		1382551F249D13C4004BF327 /* UIScreen+Exts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1382551E249D13C4004BF327 /* UIScreen+Exts.swift */; };
 		13825522249D2C96004BF327 /* IMessageInputBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13825521249D2C96004BF327 /* IMessageInputBar.swift */; };
+		13825524249E1B6E004BF327 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13825523249E1B6E004BF327 /* SearchViewController.swift */; };
 		1382B7A1248F9C6B0032BE49 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1382B7A0248F9C6B0032BE49 /* ImageService.swift */; };
 		13B531B1248BF6E300C6C8FF /* NetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B531B0248BF6E300C6C8FF /* NetworkConfig.swift */; };
 		13B531B3248BF8B800C6C8FF /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B531B2248BF8B800C6C8FF /* NetworkService.swift */; };
@@ -206,6 +207,7 @@
 		1382551C249BE026004BF327 /* PublicProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicProfile.swift; sourceTree = "<group>"; };
 		1382551E249D13C4004BF327 /* UIScreen+Exts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Exts.swift"; sourceTree = "<group>"; };
 		13825521249D2C96004BF327 /* IMessageInputBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMessageInputBar.swift; sourceTree = "<group>"; };
+		13825523249E1B6E004BF327 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		1382B7A0248F9C6B0032BE49 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		13B531B0248BF6E300C6C8FF /* NetworkConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConfig.swift; sourceTree = "<group>"; };
 		13B531B2248BF8B800C6C8FF /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
@@ -461,6 +463,7 @@
 				136EBD9F2468034400C27589 /* AddScheduleViewController.swift */,
 				137938C824681FA600AB2C46 /* AddLocationViewController.swift */,
 				137BA476249BBC0E007EFE51 /* PublicProfileViewController.swift */,
+				13825523249E1B6E004BF327 /* SearchViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1002,6 +1005,7 @@
 				136F3259245B032F006939ED /* OnboardingCollectionViewCell.swift in Sources */,
 				13D05809245D755B00227E15 /* BaseNavigationViewController.swift in Sources */,
 				13D057DC245C9DF800227E15 /* IGSnap.swift in Sources */,
+				13825524249E1B6E004BF327 /* SearchViewController.swift in Sources */,
 				13BA4E212498E96B002AA103 /* UserService.swift in Sources */,
 				1317B8282460A42400AD9AC8 /* WorkLocationTableViewCell.swift in Sources */,
 				136F3284245B4D42006939ED /* UIDate+Exts.swift in Sources */,

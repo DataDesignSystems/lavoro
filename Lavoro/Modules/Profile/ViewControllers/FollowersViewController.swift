@@ -37,6 +37,7 @@ class FollowersViewController: BaseViewController {
             make.center.equalToSuperview()
             make.leading.equalToSuperview().offset(16.0)
         }
+        searchController.searchBar.delegate = self
     }
     
     func fetchData() {
@@ -68,58 +69,68 @@ class FollowersViewController: BaseViewController {
     }
 }
 
-    extension FollowersViewController: UITableViewDataSource, UITableViewDelegate {
-        func numberOfSections(in tableView: UITableView) -> Int {
-            return 1
-        }
-        
-        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return users.count
-        }
-        
-        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "followCell", for: indexPath) as! FollowTableViewCell
-            cell.setupCell(with: users[indexPath.row])
-            return cell
-        }
-        
-        func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-            return 76
-        }
-        
-        func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-            return 40
-        }
-        
-        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            let profileId = users[indexPath.row].id
-            tableView.deselectRow(at: indexPath, animated: true)
-            PublicProfileViewController.showProfile(on: self.navigationController, profileId: profileId)
-        }
-        
-        func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-            var header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header")
-            if header == nil {
-                header = UITableViewHeaderFooterView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 40))
-                header?.backgroundColor = .white
-                header?.tintColor = .white
-                let title: UILabel = UILabel()
-                title.textColor = .black
-                title.font = UIFont.systemFont(ofSize: 15, weight: .bold)
-                title.tag = 11
-                header?.addSubview(title)
-                title.snp.makeConstraints { (make) in
-                    make.centerY.equalToSuperview().offset(4)
-                    make.leading.equalTo(16)
-                }
-            }
-            if let label = header?.viewWithTag(11) as? UILabel {
-                label.text = users.count > 0 ? "Following Me".uppercased() : ""
-            }
-            return header
-        }
+extension FollowersViewController: UITableViewDataSource, UITableViewDelegate {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
     }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return users.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "followCell", for: indexPath) as! FollowTableViewCell
+        cell.setupCell(with: users[indexPath.row])
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 76
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let profileId = users[indexPath.row].id
+        tableView.deselectRow(at: indexPath, animated: true)
+        PublicProfileViewController.showProfile(on: self.navigationController, profileId: profileId)
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        var header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header")
+        if header == nil {
+            header = UITableViewHeaderFooterView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 40))
+            header?.backgroundColor = .white
+            header?.tintColor = .white
+            let title: UILabel = UILabel()
+            title.textColor = .black
+            title.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+            title.tag = 11
+            header?.addSubview(title)
+            title.snp.makeConstraints { (make) in
+                make.centerY.equalToSuperview().offset(4)
+                make.leading.equalTo(16)
+            }
+        }
+        if let label = header?.viewWithTag(11) as? UILabel {
+            label.text = users.count > 0 ? "Following Me".uppercased() : ""
+        }
+        return header
+    }
+}
 
-    extension FollowersViewController: UISearchControllerDelegate {
-        
+extension FollowersViewController: UISearchControllerDelegate {
+    
+}
+extension FollowersViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
     }
+    
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        SearchViewController.presentSearch(on: self.tabBarController ?? self)
+        return false
+    }
+}
