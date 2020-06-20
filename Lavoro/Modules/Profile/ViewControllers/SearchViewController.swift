@@ -41,6 +41,8 @@ class SearchViewController: BaseViewController {
             make.center.equalToSuperview()
             make.leading.equalToSuperview().offset(16.0)
         }
+        let appearance = UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self])
+        appearance.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black], for: .normal)
     }
     
     func searchUser(with text: String) {
