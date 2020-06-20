@@ -51,6 +51,23 @@ class PublicProfileViewController: BaseViewController {
         headerParentView.isHidden = true
         IQKeyboardManager.shared.enableAutoToolbar = false
         IQKeyboardManager.shared.enable = false
+        setupViewForSelf()
+    }
+    
+    func setupViewForSelf() {
+        guard let profileId = profileId, profileId == AuthUser.getAuthUser()?.id else {
+            return
+        }
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "editPublicProfile"), style: .done, target: self, action: #selector(editTagline))
+        self.navigationController?.navigationBar.tintColor = .white
+        headerView.heartButton.isHidden = true
+        headerView.commentsButton.isHidden = true
+    }
+    
+    @objc func editTagline() {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Profile", bundle: nil)
+        let viewController = storyBoard.instantiateViewController(withIdentifier: "UpdateTaglineViewController") as! UpdateTaglineViewController
+        self.tabBarController?.present(viewController, animated: true, completion: nil)
     }
     
     func setupNavigation() {
@@ -91,6 +108,7 @@ class PublicProfileViewController: BaseViewController {
             self?.headerView.commentsButton.addTarget(self, action: #selector(self?.chatButtonTap), for: .touchUpInside)
             self?.headerView.heartButton.addTarget(self, action: #selector(self?.followButtonTap(button:)), for: .touchUpInside)
             self?.tableview.contentInset = UIEdgeInsets(top: UIScreen.main.bounds.width, left: 0, bottom: 0, right: 0)
+            self?.view.endEditing(true)
             self?.tableview.reloadData()
         }
     }
@@ -99,7 +117,7 @@ class PublicProfileViewController: BaseViewController {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.tabBarController?.tabBar.isHidden = true
-        
+        self.setNeedsStatusBarAppearanceUpdate()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -157,6 +175,10 @@ class PublicProfileViewController: BaseViewController {
                 MessageViewAlert.showError(with: message ?? "Please try again")
             }
         }
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
     }
 }
 

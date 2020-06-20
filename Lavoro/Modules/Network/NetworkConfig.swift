@@ -29,5 +29,6 @@ struct NetworkConfig {
         case searchUserByUsername = "api/search-user-by-username/"
         case followUser = "api/follow-user/"
         case removeFollowUser = "api/remove-follow-user/"
+        case tagline = "api/tagline/"
     }
 }

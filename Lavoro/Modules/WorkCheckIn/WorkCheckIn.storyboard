@@ -60,7 +60,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="384" height="165"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </imageView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dummyUser" translatesAutoresizingMaskIntoConstraints="NO" id="0NT-AI-9y4">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0NT-AI-9y4">
                                         <rect key="frame" x="16" y="16" width="60" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="TCY-q5-RtH"/>
@@ -181,7 +181,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="dummyUser" width="105" height="105"/>
         <image name="ic_close_bg" width="30" height="30"/>
         <image name="onboarding_1" width="375" height="812"/>
     </resources>

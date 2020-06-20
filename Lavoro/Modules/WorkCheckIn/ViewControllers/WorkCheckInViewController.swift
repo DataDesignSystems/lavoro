@@ -29,6 +29,9 @@ class WorkCheckInViewController: UIViewController {
         parentView.setLayer(cornerRadius: 8)
         userImage.setLayer(cornerRadius: 4)
         checkInButton.setLayer(cornerRadius: 4)
+        if let url = URL(string: AuthUser.getAuthUser()?.avatar ?? "") {
+            userImage.sd_setImage(with: url, completed: nil)
+        }
     }
     
     @IBAction func closeButtonAction() {
