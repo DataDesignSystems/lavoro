@@ -71,7 +71,7 @@
                     <rect key="frame" x="397" y="411" width="20" height="20"/>
                 </activityIndicatorView>
             </subviews>
-            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="Azk-FF-FBJ" firstAttribute="top" secondItem="6n4-Wc-xQM" secondAttribute="bottom" constant="8" id="0Bq-oZ-OfW"/>
                 <constraint firstItem="7nh-90-xDB" firstAttribute="centerY" secondItem="la2-xq-su3" secondAttribute="centerY" id="6Fg-ES-uLg"/>

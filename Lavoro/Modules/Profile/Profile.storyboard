@@ -558,17 +558,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cre-Cj-Qvx">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="cre-Cj-Qvx" secondAttribute="height" multiplier="1:1" id="evC-Pt-VZd"/>
-                                </constraints>
-                            </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.56000000000000005" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jri-BX-cyW">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="w50-iF-qV4">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -644,25 +633,48 @@
                                     <outlet property="delegate" destination="kXN-pR-eFA" id="2F3-H3-u4x"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P1O-d4-w9v">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cre-Cj-Qvx">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.56000000000000005" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jri-BX-cyW">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="cre-Cj-Qvx" firstAttribute="leading" secondItem="P1O-d4-w9v" secondAttribute="leading" id="4s8-0O-uql"/>
+                                    <constraint firstAttribute="bottom" secondItem="Jri-BX-cyW" secondAttribute="bottom" id="7pY-sb-WGS"/>
+                                    <constraint firstItem="Jri-BX-cyW" firstAttribute="top" secondItem="P1O-d4-w9v" secondAttribute="top" id="G83-E1-EJy"/>
+                                    <constraint firstAttribute="bottom" secondItem="cre-Cj-Qvx" secondAttribute="bottom" id="G8E-t8-6Qy"/>
+                                    <constraint firstAttribute="trailing" secondItem="Jri-BX-cyW" secondAttribute="trailing" id="GNU-9r-PNs"/>
+                                    <constraint firstItem="cre-Cj-Qvx" firstAttribute="top" secondItem="P1O-d4-w9v" secondAttribute="top" id="HNo-54-CTS"/>
+                                    <constraint firstAttribute="height" constant="414" id="OBx-Ta-IJb"/>
+                                    <constraint firstItem="Jri-BX-cyW" firstAttribute="leading" secondItem="P1O-d4-w9v" secondAttribute="leading" id="q4e-gA-cXS"/>
+                                    <constraint firstAttribute="trailing" secondItem="cre-Cj-Qvx" secondAttribute="trailing" id="r9P-XV-vpJ"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="cre-Cj-Qvx" firstAttribute="top" secondItem="V1o-H0-oPi" secondAttribute="top" id="19s-vF-0iB"/>
-                            <constraint firstItem="w50-iF-qV4" firstAttribute="top" secondItem="V1o-H0-oPi" secondAttribute="top" id="2KC-jg-oPP"/>
-                            <constraint firstItem="Jri-BX-cyW" firstAttribute="trailing" secondItem="cre-Cj-Qvx" secondAttribute="trailing" id="2QY-9U-mwa"/>
-                            <constraint firstItem="cre-Cj-Qvx" firstAttribute="leading" secondItem="JpU-m6-5qa" secondAttribute="leading" id="9tL-be-eTx"/>
-                            <constraint firstItem="Jri-BX-cyW" firstAttribute="top" secondItem="cre-Cj-Qvx" secondAttribute="top" id="UzY-I2-zVJ"/>
-                            <constraint firstItem="Jri-BX-cyW" firstAttribute="leading" secondItem="cre-Cj-Qvx" secondAttribute="leading" id="eOt-1j-AyW"/>
+                            <constraint firstItem="w50-iF-qV4" firstAttribute="top" secondItem="V1o-H0-oPi" secondAttribute="top" id="2bF-L6-p6l"/>
+                            <constraint firstItem="JpU-m6-5qa" firstAttribute="trailing" secondItem="P1O-d4-w9v" secondAttribute="trailing" id="TAF-Mb-Ymz"/>
+                            <constraint firstItem="P1O-d4-w9v" firstAttribute="top" secondItem="V1o-H0-oPi" secondAttribute="top" id="VqX-qX-v5G"/>
+                            <constraint firstItem="P1O-d4-w9v" firstAttribute="leading" secondItem="JpU-m6-5qa" secondAttribute="leading" id="fYx-YS-q1e"/>
                             <constraint firstAttribute="bottom" secondItem="w50-iF-qV4" secondAttribute="bottom" constant="34" id="hps-gj-N3b"/>
                             <constraint firstItem="w50-iF-qV4" firstAttribute="leading" secondItem="JpU-m6-5qa" secondAttribute="leading" id="icb-4l-TvC"/>
                             <constraint firstItem="JpU-m6-5qa" firstAttribute="trailing" secondItem="w50-iF-qV4" secondAttribute="trailing" id="o1y-q4-qAn"/>
-                            <constraint firstItem="Jri-BX-cyW" firstAttribute="bottom" secondItem="cre-Cj-Qvx" secondAttribute="bottom" id="tyS-Z6-QwN"/>
-                            <constraint firstItem="cre-Cj-Qvx" firstAttribute="width" secondItem="V1o-H0-oPi" secondAttribute="width" id="xGI-Kg-Gcx"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="JpU-m6-5qa"/>
                     </view>
                     <connections>
                         <outlet property="bottomConstraint" destination="hps-gj-N3b" id="Odk-J4-m2l"/>
+                        <outlet property="headerHeightConstraint" destination="OBx-Ta-IJb" id="QQK-qF-0rg"/>
+                        <outlet property="headerParentView" destination="P1O-d4-w9v" id="Rha-8k-wxO"/>
                         <outlet property="tableview" destination="w50-iF-qV4" id="t2y-Zi-TAa"/>
                         <outlet property="userImage" destination="cre-Cj-Qvx" id="T1Z-tY-f6O"/>
                     </connections>

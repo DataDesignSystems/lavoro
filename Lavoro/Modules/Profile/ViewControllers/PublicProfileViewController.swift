@@ -9,6 +9,7 @@
 import UIKit
 import ApplozicSwift
 import InputBarAccessoryView
+import IQKeyboardManagerSwift
 
 class PublicProfileViewController: BaseViewController {
     @IBOutlet weak var tableview: UITableView!
@@ -20,7 +21,9 @@ class PublicProfileViewController: BaseViewController {
     let inputBar: InputBarAccessoryView = IMessageInputBar()
     private var keyboardManager = KeyboardManager()
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
-    var headerView: PublicProfileHeaderView?
+    @IBOutlet weak var headerHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var headerParentView: UIView!
+    var headerView = PublicProfileHeaderView.fromNib(named: "PublicProfileHeaderView")
     
     var stateView: UIView = {
         let view = UIView()
@@ -40,6 +43,14 @@ class PublicProfileViewController: BaseViewController {
     func setupView() {
         inputBar.delegate = self
         inputBar.inputTextView.keyboardType = .default
+        headerHeightConstraint.constant = UIScreen.main.bounds.width
+        headerParentView.addSubview(headerView)
+        headerView.snp.makeConstraints { (make) in
+            make.leading.trailing.bottom.equalToSuperview()
+        }
+        headerParentView.isHidden = true
+        IQKeyboardManager.shared.enableAutoToolbar = false
+        IQKeyboardManager.shared.enable = false
     }
     
     func setupNavigation() {
@@ -78,6 +89,11 @@ class PublicProfileViewController: BaseViewController {
                 self?.userImage.sd_setImage(with: url, completed: nil)
                 self?.isDataLoaded = true
             }
+            self?.headerParentView.isHidden = false
+            self?.headerView.setupView(with: publicProfile)
+            self?.headerView.commentsButton.addTarget(self, action: #selector(self?.chatButtonTap), for: .touchUpInside)
+            self?.headerView.heartButton.addTarget(self, action: #selector(self?.followButtonTap(button:)), for: .touchUpInside)
+            self?.tableview.contentInset = UIEdgeInsets(top: UIScreen.main.bounds.width, left: 0, bottom: 0, right: 0)
             self?.tableview.reloadData()
         }
     }
@@ -124,10 +140,10 @@ class PublicProfileViewController: BaseViewController {
         guard let profileId = profileId else {
             return
         }
-        headerView?.stopFollowChangeAnimation()
+        headerView.startFollowChangeAnimation()
         userService.changeFollowUser(with: profileId, isFollow: !button.isSelected) { [weak self] (success, message) in
             self?.refreshView()
-            self?.headerView?.startFollowChangeAnimation()
+            self?.headerView.stopFollowChangeAnimation()
         }
     }
     
@@ -150,14 +166,11 @@ class PublicProfileViewController: BaseViewController {
 
 extension PublicProfileViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 1 {
-            return publicProfile?.comments.count ?? 0
-        }
-        return 0
+        return publicProfile?.comments.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -170,28 +183,12 @@ extension PublicProfileViewController: UITableViewDataSource, UITableViewDelegat
         return UITableView.automaticDimension
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 0 {
-            return UIScreen.main.bounds.width  - (120  + UIScreen.main.safeAreaTop() + (self.navigationController?.navigationBar.frame.size.height ?? 0))
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let constantMinHeight = -(UIScreen.main.safeAreaTop() + 124 + (self.navigationController?.navigationBar.frame.size.height ?? 0))
+        if tableview.contentOffset.y < constantMinHeight && tableview.contentOffset.y > -(UIScreen.main.bounds.width) {
+            headerHeightConstraint.constant = abs(tableview.contentOffset.y)
+            tableview.contentInset = UIEdgeInsets(top: abs(tableview.contentOffset.y), left: 0, bottom: 0, right: 0)
         }
-        return ((isDataLoaded == true) ? (120 + UIScreen.main.safeAreaTop() + (self.navigationController?.navigationBar.frame.size.height ?? 0)) : 0)
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section == 0 {
-            let view = UIView()
-            view.backgroundColor = .clear
-            return view
-        }
-        headerView = PublicProfileHeaderView.fromNib(named: "PublicProfileHeaderView")
-        headerView?.setupView(with: publicProfile)
-        headerView?.commentsButton.addTarget(self, action: #selector(chatButtonTap), for: .touchUpInside)
-        headerView?.heartButton.addTarget(self, action: #selector(followButtonTap(button:)), for: .touchUpInside)
-        return headerView
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
     }
 }
 
@@ -214,7 +211,7 @@ extension PublicProfileViewController: InputBarAccessoryViewDelegate {
         sendComment(text: text)
     }
     func inputBar(_ inputBar: InputBarAccessoryView, didChangeIntrinsicContentTo size: CGSize) {
-//        bottomConstraint.constant = size.height + 300 // keyboard size estimate
+        bottomConstraint.constant = size.height + 300 // keyboard size estimate
     }
     func inputBar(_ inputBar: InputBarAccessoryView, textViewTextDidChangeTo text: String) {}
 }

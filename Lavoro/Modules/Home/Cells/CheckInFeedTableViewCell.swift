@@ -20,6 +20,7 @@ class CheckInFeedTableViewCell: UITableViewCell {
     @IBOutlet weak var locationNameBackgroundView: UIView!
     @IBOutlet weak var locationName: UILabel!
     @IBOutlet weak var message: UILabel!
+    @IBOutlet weak var headerHeightConstraints: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()
