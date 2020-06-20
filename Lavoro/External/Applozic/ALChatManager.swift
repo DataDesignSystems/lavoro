@@ -149,26 +149,43 @@ class ALChatManager: NSObject {
     func launch(viewController: UIViewController, from vc: UIViewController) {
         let navVC = ALKBaseNavigationViewController(rootViewController: viewController)
         IQKeyboardManager.shared.enableAutoToolbar = false
-        navVC.navigationBar.barTintColor = UIColor(hexString: "#F7F8FA")
+        navVC.navigationBar.barTintColor = UIColor(white: 0.95, alpha: 1)
         navVC.navigationBar.tintColor = UIColor.black
         navVC.navigationBar.isTranslucent = false
         navVC.modalPresentationStyle = .fullScreen
         let backImage = UIImage(named: "ic_back")
-        vc.navigationItem.leftBarButtonItem = UIBarButtonItem(image: backImage, style: .done, target: self, action: #selector(backButton))
+        viewController.navigationItem.leftBarButtonItem = UIBarButtonItem(image: backImage, style: .done, target: self, action: #selector(backButton))
         guard vc.navigationController != nil else {
+            let transition = CATransition()
+            transition.duration = 0.5
+            transition.type = CATransitionType.push
+            transition.subtype = CATransitionSubtype.fromRight
+            transition.timingFunction = CAMediaTimingFunction(name:CAMediaTimingFunctionName.easeInEaseOut)
+            vc.view.window!.layer.add(transition, forKey: kCATransition)
             vc.present(navVC, animated: false, completion: nil)
             return
         }
     }
     
     @IBAction func backButton () {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if let viewPresented = appDelegate.window?.rootViewController?.presentedViewController {
+            let transition = CATransition()
+            transition.duration = 0.5
+            transition.type = CATransitionType.push
+            transition.subtype = CATransitionSubtype.fromLeft
+            transition.timingFunction = CAMediaTimingFunction(name:CAMediaTimingFunctionName.easeInEaseOut)
+            viewPresented.view.window!.layer.add(transition, forKey: kCATransition)
+            viewPresented.dismiss(animated: false, completion: nil)
+        }
     }
 
     func launchChatWith(contactId: String, from viewController: UIViewController, configuration: ALKConfiguration) {
         var config = ALKConfiguration()
         config.chatBarAttachmentViewBackgroundColor = UIColor(hexString: "#F3F3F3")
         config.sendMessageIcon = UIImage(named: "messageSend")
-        config.hideBackButtonInConversationList = false
+        config.statusBarStyle = UIStatusBarStyle.default
+        config.hideNavigationBarBottomLine = false
 
         let alContactDbService = ALContactDBService()
         var title = ""

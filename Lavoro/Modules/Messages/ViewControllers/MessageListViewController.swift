@@ -63,7 +63,6 @@ extension MessageListViewController: UITableViewDelegate, UITableViewDataSource 
         tableView.deselectRow(at: indexPath, animated: true)
         
         let message = messageThreads[indexPath.row] as! ALMessage
-        let chatManager = ALChatManager(applicationKey: ALChatManager.applicationId)
         chatManager.launchChatWith(contactId: message.to, from: self.tabBarController ?? self, configuration: ALKConfiguration())
     }
 }

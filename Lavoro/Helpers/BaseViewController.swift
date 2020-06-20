@@ -15,6 +15,7 @@ class BaseViewController: UIViewController {
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let userService = UserService()
     var activityIndicatorView: NVActivityIndicatorView = NVActivityIndicatorView(frame: CGRect.zero, type: .circleStrokeSpin, color: UIColor(hexString: "#FF2D55"), padding: 12.0)
+    let chatManager = ALChatManager(applicationKey: ALChatManager.applicationId)
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -132,7 +132,6 @@ class PublicProfileViewController: BaseViewController {
         guard let profileId = profileId else {
             return
         }
-        let chatManager = ALChatManager(applicationKey: ALChatManager.applicationId)
         chatManager.launchChatWith(contactId: profileId, from: self.tabBarController ?? self, configuration: ALKConfiguration())
     }
     
