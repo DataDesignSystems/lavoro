@@ -13,7 +13,7 @@ class TabbarViewController: UITabBarController {
                    Tabbar(storyboardName: "WorkCheckIn", initialViewControllerIdentifier: "WorkCheckInModule", iconName: "ic_workCheckIn", title: "Work Check In"),
                    Tabbar(storyboardName: "Messages", initialViewControllerIdentifier: "MessagesModule", iconName: "ic_messages", title: "Messages"),
                    Tabbar(storyboardName: "Notification", initialViewControllerIdentifier: "NotificationModule", iconName: "ic_notification", title: "Notifications"),
-                   Tabbar(storyboardName: "Profile", initialViewControllerIdentifier: "ProfileModule", iconName: "ic_profile", title: "Profile")]
+                   Tabbar(storyboardName: "Profile", initialViewControllerIdentifier: "ProfileModule", iconName: "ic_profile", title: "Public")]
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTabbar()

@@ -87,7 +87,7 @@ open class RPicker {
                           type: RPickerType = .date) -> RPickerController? {
         
         
-        if let cc = UIWindow.currentController?.tabBarController {
+        if let cc = UIWindow.currentController?.tabBarController ?? UIWindow.currentController {
             if RPicker.sharedInstance.isPresented == false {
                 RPicker.sharedInstance.isPresented = true
                 

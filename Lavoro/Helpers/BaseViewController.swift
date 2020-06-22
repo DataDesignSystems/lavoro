@@ -100,7 +100,7 @@ class BaseViewController: UIViewController {
     {
         if (UIImagePickerController .isSourceTypeAvailable(UIImagePickerController.SourceType.camera)) {
             let imagePicker = UIImagePickerController()
-            imagePicker.allowsEditing = false
+            imagePicker.allowsEditing = true
             imagePicker.delegate = self
             imagePicker.sourceType = .camera
             

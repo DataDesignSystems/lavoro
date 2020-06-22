@@ -15,7 +15,7 @@ struct Validation {
         case pin = "Pin should be atleast 4 characters!"
         case username = "username is mandatory!"
         case gender = "Please select gender!"
-        case dob = "Please select dob!"
+        case dob = "Please select date of birth!"
     }
     
     enum Error: String {
