@@ -95,10 +95,9 @@ class HomeFeedsViewController: BaseViewController {
     }
 
     @IBAction func editProfile() {
-        guard let profileId = AuthUser.getAuthUser()?.id else {
-            return
+        if let tabbar = self.tabBarController as? TabbarViewController {
+            tabbar.showProfileTab()
         }
-        PublicProfileViewController.showProfile(on: self.navigationController, profileId: profileId)
     }
     
     func getSelectedViewModel() -> IGHomeViewModel {

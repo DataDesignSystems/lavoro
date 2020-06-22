@@ -54,6 +54,9 @@ class ProfileViewController: BaseViewController {
     func setupView() {
         userImage.setLayer(cornerRadius: 6.0)
         editButton.setLayer(cornerRadius: 10.0)
+        if let authUser = AuthUser.getAuthUser(), authUser.userTypeId == "3" {
+            profileInfo[0].insert(ProfileInfo(icon: "My Public Profile", title: "My Public Profile", type: .publicProfile), at: 0)
+        }
     }
     
     @IBAction func editProfile() {
@@ -107,6 +110,11 @@ extension ProfileViewController: UITableViewDelegate {
             if let vc = storyboard.instantiateViewController(withIdentifier: "MessageListViewController") as? MessageListViewController {
                 self.navigationController?.pushViewController(vc, animated: true)
             }
+        case .publicProfile:
+            guard let profileId = AuthUser.getAuthUser()?.id else {
+                return
+            }
+            PublicProfileViewController.showProfile(on: self.navigationController, profileId: profileId)
         default:
             print(object.title)
         }
@@ -130,4 +138,5 @@ enum ProfileType {
     case blacklist
     case settings
     case logout
+    case publicProfile
 }

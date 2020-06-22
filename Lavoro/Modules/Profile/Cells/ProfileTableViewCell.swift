@@ -14,6 +14,7 @@ class ProfileTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        iconImageView.setLayer(cornerRadius: 15)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -23,7 +24,13 @@ class ProfileTableViewCell: UITableViewCell {
     }
     
     func setupCell(with object: ProfileInfo) {
-        iconImageView.image = UIImage(named: object.icon)
+        if object.type == .publicProfile {
+            if let authUser = AuthUser.getAuthUser(), let url = URL(string: authUser.avatar) {
+                iconImageView.sd_setImage(with: url, completed: nil)
+            }
+        } else {
+            iconImageView.image = UIImage(named: object.icon)
+        }
         titleLabel.text = object.title
     }
 }
