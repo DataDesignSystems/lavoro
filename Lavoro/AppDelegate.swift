@@ -12,7 +12,7 @@ import FBSDKCoreKit
 import Applozic
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     var window: UIWindow?
     var orientationLock = UIInterfaceOrientationMask.all
 
@@ -31,14 +31,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         let refreshMessage = Notification.Name(NotificationKey.refreshMessageList.rawValue)
         NotificationCenter.default.addObserver(self, selector: #selector(updateBadgeCountForUnreadMessage), name: refreshMessage, object: nil)
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) {
-            (granted, error) in
-            
-        }
+        registerForNotification()
         UIApplication.shared.registerForRemoteNotifications()
         updateBadgeCountForUnreadMessage()
         return true
     }
+    
+    func registerForNotification() {
+         if #available(iOS 10.0, *) {
+             UNUserNotificationCenter.current().delegate = self
+             UNUserNotificationCenter.current().requestAuthorization(options:[.badge, .alert, .sound]) { (granted, error) in
+                 if granted {
+                     DispatchQueue.main.async {
+                         UIApplication.shared.registerForRemoteNotifications()
+                     }
+                 }
+             }
+         } else {
+             let settings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+             UIApplication.shared.registerUserNotificationSettings(settings)
+             UIApplication.shared.registerForRemoteNotifications()
+         }
+     }
+
     
     func presentLoginFlow() {
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
@@ -56,8 +71,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        let alPushNotificationService: ALPushNotificationService = ALPushNotificationService()
+        alPushNotificationService.notificationArrived(to: application, with: userInfo)
         let notificationName = Notification.Name(NotificationKey.refreshMessageList.rawValue)
         NotificationCenter.default.post(name: notificationName, object: nil)
+        completionHandler(UIBackgroundFetchResult.newData)
     }
 
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
@@ -70,6 +88,52 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             NotificationCenter.default.post(name: notificationName, object: nil)
         }
     }
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        NSLog("Device token data :: \(deviceToken.description)")
+        var deviceTokenString: String = ""
+        for i in 0..<deviceToken.count
+        {
+            deviceTokenString += String(format: "%02.2hhx", deviceToken[i] as CVarArg)
+        }
+        NSLog("Device token :: \(deviceTokenString)")
+        if (ALUserDefaultsHandler.getApnDeviceToken() != deviceTokenString)
+        {
+            let alRegisterUserClientService: ALRegisterUserClientService = ALRegisterUserClientService()
+            alRegisterUserClientService.updateApnDeviceToken(withCompletion: deviceTokenString, withCompletion: { (response, error) in
+               if error != nil {
+                   print("Error in Registration: \(error)")
+               }
+               NSLog("Registration Response :: \(response)")
+            })
+        }
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+
+            let pushNotificationService = ALPushNotificationService()
+            let userInfo = notification.request.content.userInfo
+
+            if pushNotificationService.isApplozicNotification(userInfo) {
+                pushNotificationService.notificationArrived(to: UIApplication.shared, with: userInfo)
+                completionHandler([])
+                return
+            }
+            completionHandler([.alert, .badge, .sound])
+    }
+
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+
+            let pushNotificationService = ALPushNotificationService()
+            let userInfo = response.notification.request.content.userInfo
+            if pushNotificationService.isApplozicNotification(userInfo) {
+                pushNotificationService.notificationArrived(to: UIApplication.shared, with: userInfo)
+                completionHandler()
+                return
+            }
+            completionHandler()
+     }
+
     
     @objc
     func updateBadgeCountForUnreadMessage() {

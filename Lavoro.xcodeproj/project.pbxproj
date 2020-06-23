@@ -210,6 +210,7 @@
 		13825521249D2C96004BF327 /* IMessageInputBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMessageInputBar.swift; sourceTree = "<group>"; };
 		13825523249E1B6E004BF327 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		13825525249E708B004BF327 /* UpdateTaglineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTaglineViewController.swift; sourceTree = "<group>"; };
+		1382553224A22D1C004BF327 /* Lavoro.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Lavoro.entitlements; sourceTree = "<group>"; };
 		1382B7A0248F9C6B0032BE49 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		13B531B0248BF6E300C6C8FF /* NetworkConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConfig.swift; sourceTree = "<group>"; };
 		13B531B2248BF8B800C6C8FF /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
@@ -509,6 +510,7 @@
 		1378AA872459E75700131BEB /* Lavoro */ = {
 			isa = PBXGroup;
 			children = (
+				1382553224A22D1C004BF327 /* Lavoro.entitlements */,
 				13D057F2245C9F6100227E15 /* MockData */,
 				13D057A2245C9DF700227E15 /* External */,
 				136F3245245B032E006939ED /* Modules */,
@@ -1206,6 +1208,7 @@
 			baseConfigurationReference = 628B0437F4A76385A5B384A6 /* Pods-Lavoro.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Lavoro/Lavoro.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = D6B8D9KYF4;
@@ -1228,6 +1231,7 @@
 			baseConfigurationReference = 0E14D8A558B0D4E9EFCF519F /* Pods-Lavoro.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Lavoro/Lavoro.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = D6B8D9KYF4;
