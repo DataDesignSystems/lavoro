@@ -15,7 +15,7 @@ class TabbarViewController: UITabBarController {
                    Tabbar(storyboardName: "Notification", initialViewControllerIdentifier: "NotificationModule", iconName: "ic_notification", title: "Notifications")]
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let authUser = AuthUser.getAuthUser(), authUser.userTypeId == "3" {
+        if let authUser = AuthUser.getAuthUser(), authUser.type == .serviceProvider {
             tabInfo.append(Tabbar(storyboardName: "Profile", initialViewControllerIdentifier: "ProfileModule", iconName: "ic_profile", title: "Public"))
         }
         setupTabbar()

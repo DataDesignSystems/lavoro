@@ -7,6 +7,13 @@
 //
 
 import Foundation
+
+enum UserType: String{
+    case admin = "1"
+    case customer = "2"
+    case serviceProvider = "3"
+}
+
 class AuthUser: NSObject, NSCoding {
     let id: String
     let first: String
@@ -23,6 +30,8 @@ class AuthUser: NSObject, NSCoding {
     let birthday: String
     let username: String
     let avatar: String
+    let type: UserType
+
     private static var authUser: AuthUser?
     
     static func getAuthUser() -> AuthUser? {
@@ -62,6 +71,7 @@ class AuthUser: NSObject, NSCoding {
         self.birthday = birthday
         self.username = username
         self.avatar = avatar
+        self.type = UserType(rawValue: userTypeId) ?? .customer
     }
     
     init(json: [String: Any], token: String) {
@@ -80,6 +90,7 @@ class AuthUser: NSObject, NSCoding {
         self.birthday = json["birthday"] as? String ?? ""
         self.username =  json["username"] as? String ?? ""
         self.avatar = json["avatar"] as? String ?? ""
+        self.type = UserType(rawValue: json["userTypeId"] as? String ?? "") ?? .customer
     }
     
     required convenience init(coder aDecoder: NSCoder) {

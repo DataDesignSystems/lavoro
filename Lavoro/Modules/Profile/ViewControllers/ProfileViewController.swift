@@ -21,8 +21,7 @@ class ProfileViewController: BaseViewController {
     var profileInfo = [[ProfileInfo(icon: "MyWorkGroupLocations", title: "My Work Locations", type: .myWorkLocations),
                        ProfileInfo(icon: "MySchedule", title: "My Schedule", type: .mySchedule),
                        ProfileInfo(icon: "Group", title: "Send Group Message", type: .sendGroupMessage)],
-                       [ProfileInfo(icon: "Followers", title: "Followers", type: .followers),
-                       ProfileInfo(icon: "WhoIFollow", title: "Who I Follow", type: .whoIFollow),
+                       [ProfileInfo(icon: "WhoIFollow", title: "Who I Follow", type: .whoIFollow),
                        ProfileInfo(icon: "Messages", title: "Messages", type: .messages),
                        ProfileInfo(icon: "Blacklist", title: "Blacklist", type: .blacklist),
                        ProfileInfo(icon: "Settings", title: "Settings", type: .settings),
@@ -60,8 +59,9 @@ class ProfileViewController: BaseViewController {
     func setupView() {
         userImage.setLayer(cornerRadius: 6.0)
         editButton.setLayer(cornerRadius: 10.0)
-        if let authUser = AuthUser.getAuthUser(), authUser.userTypeId == "3" {
+        if let authUser = AuthUser.getAuthUser(), authUser.type == .serviceProvider {
             profileInfo[0].insert(ProfileInfo(icon: "My Public Profile", title: "My Public Profile", type: .publicProfile), at: 0)
+            profileInfo[1].insert(ProfileInfo(icon: "Followers", title: "Followers", type: .followers), at: 0)
         }
     }
     

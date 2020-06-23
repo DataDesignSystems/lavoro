@@ -699,7 +699,7 @@
             </objects>
             <point key="canvasLocation" x="123" y="1574"/>
         </scene>
-        <!--My Followers-->
+        <!--Who I Follow-->
         <scene sceneID="7Bg-K1-QA1">
             <objects>
                 <viewController storyboardIdentifier="WhoCanIFollowViewController" id="HnA-Ma-Fla" customClass="WhoCanIFollowViewController" customModule="Lavoro" customModuleProvider="target" sceneMemberID="viewController">
@@ -890,7 +890,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="2OE-fS-EUK"/>
                     </view>
-                    <navigationItem key="navigationItem" title="My Followers" id="ZdH-cK-Ku9">
+                    <navigationItem key="navigationItem" title="Who I Follow" id="ZdH-cK-Ku9">
                         <barButtonItem key="leftBarButtonItem" image="ic_back" id="i8H-Nv-LKi">
                             <color key="tintColor" red="0.042379505929999998" green="0.12709069249999999" blue="0.23087176679999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>

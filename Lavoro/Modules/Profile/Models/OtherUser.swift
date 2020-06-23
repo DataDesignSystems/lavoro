@@ -18,8 +18,8 @@ public class OtherUser {
     public var isFollowing: Bool
     
     init(with json:[String: Any]) {
-        let fullname = ((json["first"] as? String ?? "") + " " + (json["last"] as? String ?? "")).trimmingCharacters(in: .whitespacesAndNewlines)
-        self.name = fullname.isEmpty ? (json["username"] as? String ?? "") : fullname
+//        let fullname = ((json["first"] as? String ?? "") + " " + (json["last"] as? String ?? "")).trimmingCharacters(in: .whitespacesAndNewlines)
+        self.name = json["username"] as? String ?? ""
         self.id = json["id"] as? String ?? ""
         self.avatar = json["avatar"] as? String ?? ""
         self.username = json["username"] as? String ?? ""

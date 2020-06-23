@@ -88,6 +88,9 @@ class HomeFeedsViewController: BaseViewController {
             if let url = URL(string: authUser.avatar) {
                 userImage.sd_setImage(with: url, for: .normal, completed: nil)
             }
+            if authUser.type != .serviceProvider {
+                self.followingMeButton.isHidden = true
+            }
         }
     }
     
