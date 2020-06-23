@@ -58,7 +58,7 @@ class CheckInFeedTableViewCell: UITableViewCell {
             userMessage = "Checked In\n"
             locationNameBackgroundView.backgroundColor = UIColor(hexString: "4CD964")
         case .checkOut:
-            userMessage = "Checked Out of\n"
+            userMessage = "Checked Out\n"
             locationNameBackgroundView.backgroundColor = UIColor(hexString: "FF2D55")
         case .unknown:
             userMessage = "Handle the new type \n"
