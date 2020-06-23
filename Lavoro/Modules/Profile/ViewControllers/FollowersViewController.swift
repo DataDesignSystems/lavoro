@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ApplozicSwift
 
 class FollowersViewController: BaseViewController {
     @IBOutlet weak var tableview: UITableView!
@@ -100,7 +101,9 @@ extension FollowersViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let profileId = users[indexPath.row].id
         tableView.deselectRow(at: indexPath, animated: true)
-        PublicProfileViewController.showProfile(on: self.navigationController, profileId: profileId)
+        if let tabbar = self.tabBarController {
+            self.chatManager.launchChatWith(contactId: profileId, from: tabbar, configuration: ALKConfiguration())
+        }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
