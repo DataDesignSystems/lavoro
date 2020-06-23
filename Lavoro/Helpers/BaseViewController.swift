@@ -121,6 +121,16 @@ class BaseViewController: UIViewController {
     func imageSelectedFromPicker(image: UIImage) {
         
     }
+    
+    func enableKeyboardManager() {
+        IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.enableAutoToolbar = true
+    }
+    
+    func disableKeyboardManager() {
+        IQKeyboardManager.shared.enable = false
+        IQKeyboardManager.shared.enableAutoToolbar = false
+    }
 }
 extension BaseViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import IQKeyboardManagerSwift
 
 class LoginViewController: BaseViewController {
     @IBOutlet weak var signUpButton: UIButton!
@@ -20,7 +21,19 @@ class LoginViewController: BaseViewController {
         super.viewDidLoad()
         setupView()
         // Do any additional setup after loading the view.
+        #if targetEnvironment(simulator)
         testUser()
+        #endif
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        enableKeyboardManager()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        disableKeyboardManager()
     }
     
     func setupView() {

@@ -25,6 +25,7 @@ struct Feed {
     let timeEntered: Date
     var feedType: FeedType
     var location: Location
+    let postedComment: String
 
     init(with json: [String: Any]) {
         self.id = json["id"] as? String ?? ""
@@ -36,6 +37,7 @@ struct Feed {
         self.feedType = FeedType(rawValue: (json["type"] as? String ?? "")) ?? .unknown
         self.user = FeedUser(with: (json["user"] as? [String: Any] ?? [:]))
         self.location = Location(with: (json["location"] as? [String: Any] ?? [:]))
+        self.postedComment = json["posted_comment"] as? String ?? ""
     }
 }
 

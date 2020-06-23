@@ -69,10 +69,10 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Amg-Cz-XOi">
-                                                            <rect key="frame" x="16" y="90" width="350" height="89"/>
+                                                            <rect key="frame" x="16" y="90" width="350" height="64"/>
                                                             <string key="text">Checked in at 
 Butterbee's American Grille</string>
-                                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -143,11 +143,21 @@ Butterbee's American Grille</string>
                                                             </constraints>
                                                             <state key="normal" image="ic_overflow"/>
                                                         </button>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ujP-4j-tyU">
+                                                            <rect key="frame" x="16" y="170" width="350" height="21"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="21" id="DyH-Jc-RmF"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                     <constraints>
                                                         <constraint firstItem="ThI-Q5-yIL" firstAttribute="leading" secondItem="dMj-VY-7Qt" secondAttribute="leading" id="1G7-LE-p8a"/>
                                                         <constraint firstItem="Amg-Cz-XOi" firstAttribute="top" secondItem="dMj-VY-7Qt" secondAttribute="bottom" constant="24" id="5hR-JT-b3z"/>
+                                                        <constraint firstItem="ujP-4j-tyU" firstAttribute="leading" secondItem="Amg-Cz-XOi" secondAttribute="leading" id="7HW-ni-V74"/>
                                                         <constraint firstItem="Rr6-a3-nmC" firstAttribute="leading" secondItem="c8H-Sd-LwA" secondAttribute="trailing" constant="4" id="A3b-im-XHL"/>
                                                         <constraint firstItem="wCQ-za-enV" firstAttribute="centerY" secondItem="yEh-bq-3nf" secondAttribute="centerY" id="Bgm-2P-c8G"/>
                                                         <constraint firstItem="c8H-Sd-LwA" firstAttribute="centerY" secondItem="qab-gv-Pnl" secondAttribute="centerY" id="E4W-gU-sPd"/>
@@ -155,17 +165,18 @@ Butterbee's American Grille</string>
                                                         <constraint firstItem="yEh-bq-3nf" firstAttribute="leading" secondItem="dMj-VY-7Qt" secondAttribute="trailing" constant="16" id="JhG-cm-duo"/>
                                                         <constraint firstItem="ThI-Q5-yIL" firstAttribute="top" secondItem="dMj-VY-7Qt" secondAttribute="top" id="Jnn-Sv-fux"/>
                                                         <constraint firstAttribute="trailing" secondItem="Duw-aM-bII" secondAttribute="trailing" constant="16" id="KUg-hc-G6Z"/>
+                                                        <constraint firstItem="ujP-4j-tyU" firstAttribute="trailing" secondItem="Amg-Cz-XOi" secondAttribute="trailing" id="LFM-x1-Vt1"/>
                                                         <constraint firstItem="qab-gv-Pnl" firstAttribute="top" secondItem="Duw-aM-bII" secondAttribute="bottom" constant="16" id="MF8-AB-6l1"/>
                                                         <constraint firstItem="qab-gv-Pnl" firstAttribute="leading" secondItem="tcN-lb-Prd" secondAttribute="leading" constant="16" id="MeR-rC-48j"/>
                                                         <constraint firstAttribute="bottom" secondItem="qab-gv-Pnl" secondAttribute="bottom" constant="16" id="R18-lx-3QG"/>
                                                         <constraint firstItem="qOT-r2-ijk" firstAttribute="leading" secondItem="Duw-aM-bII" secondAttribute="leading" constant="8" id="S4b-Il-nBO"/>
                                                         <constraint firstItem="ThI-Q5-yIL" firstAttribute="trailing" secondItem="dMj-VY-7Qt" secondAttribute="trailing" id="S7X-So-VsV"/>
                                                         <constraint firstItem="yEh-bq-3nf" firstAttribute="centerY" secondItem="dMj-VY-7Qt" secondAttribute="centerY" constant="-8" id="SiW-DK-CUQ"/>
-                                                        <constraint firstItem="Duw-aM-bII" firstAttribute="top" secondItem="Amg-Cz-XOi" secondAttribute="bottom" constant="24" id="V3i-Z0-sbA"/>
                                                         <constraint firstItem="Amg-Cz-XOi" firstAttribute="leading" secondItem="tcN-lb-Prd" secondAttribute="leading" constant="16" id="VgG-T4-rHm"/>
                                                         <constraint firstItem="8cS-BA-dkU" firstAttribute="centerY" secondItem="Rr6-a3-nmC" secondAttribute="centerY" id="WRt-P7-wu7"/>
                                                         <constraint firstAttribute="trailing" secondItem="wCQ-za-enV" secondAttribute="trailing" constant="16" id="bzC-Re-bnO"/>
                                                         <constraint firstAttribute="trailing" secondItem="yEh-bq-3nf" secondAttribute="trailing" constant="32" id="gso-R6-P05"/>
+                                                        <constraint firstItem="ujP-4j-tyU" firstAttribute="top" secondItem="Amg-Cz-XOi" secondAttribute="bottom" constant="16" id="ma9-rq-0uJ"/>
                                                         <constraint firstAttribute="trailing" secondItem="Amg-Cz-XOi" secondAttribute="trailing" constant="16" id="nES-Qr-KBZ"/>
                                                         <constraint firstItem="c8H-Sd-LwA" firstAttribute="leading" secondItem="qab-gv-Pnl" secondAttribute="trailing" constant="-4" id="o1k-JO-Mxi"/>
                                                         <constraint firstItem="Rr6-a3-nmC" firstAttribute="centerY" secondItem="c8H-Sd-LwA" secondAttribute="centerY" id="oKa-Rf-IyL"/>
@@ -173,6 +184,7 @@ Butterbee's American Grille</string>
                                                         <constraint firstItem="qOT-r2-ijk" firstAttribute="top" secondItem="Duw-aM-bII" secondAttribute="top" constant="8" id="qdh-Wy-3kh"/>
                                                         <constraint firstItem="ThI-Q5-yIL" firstAttribute="bottom" secondItem="dMj-VY-7Qt" secondAttribute="bottom" id="s5s-5U-OaM"/>
                                                         <constraint firstItem="dMj-VY-7Qt" firstAttribute="top" secondItem="tcN-lb-Prd" secondAttribute="top" constant="16" id="t9J-au-H8M"/>
+                                                        <constraint firstItem="Duw-aM-bII" firstAttribute="top" secondItem="ujP-4j-tyU" secondAttribute="bottom" constant="12" id="tYx-ed-BuM"/>
                                                         <constraint firstItem="dMj-VY-7Qt" firstAttribute="leading" secondItem="tcN-lb-Prd" secondAttribute="leading" constant="16" id="wYs-YK-hvP"/>
                                                         <constraint firstItem="3B6-Sy-25i" firstAttribute="leading" secondItem="yEh-bq-3nf" secondAttribute="leading" id="z86-0q-hXc"/>
                                                         <constraint firstItem="8cS-BA-dkU" firstAttribute="leading" secondItem="Rr6-a3-nmC" secondAttribute="trailing" constant="-4" id="zzh-aZ-Fkz"/>
@@ -194,8 +206,9 @@ Butterbee's American Grille</string>
                                             <outlet property="likesCount" destination="c8H-Sd-LwA" id="m0i-8R-nva"/>
                                             <outlet property="locationName" destination="9VG-m3-8kZ" id="rxl-jy-qfJ"/>
                                             <outlet property="locationNameBackgroundView" destination="qOT-r2-ijk" id="ldX-5y-gID"/>
-                                            <outlet property="message" destination="Amg-Cz-XOi" id="8CY-Sd-Efp"/>
+                                            <outlet property="message" destination="ujP-4j-tyU" id="dzl-zq-HX6"/>
                                             <outlet property="parentView" destination="tcN-lb-Prd" id="zGA-Vf-lrq"/>
+                                            <outlet property="postedComment" destination="Amg-Cz-XOi" id="c7n-8C-5RC"/>
                                             <outlet property="time" destination="3B6-Sy-25i" id="TFg-Lf-8WQ"/>
                                             <outlet property="userImage" destination="dMj-VY-7Qt" id="OJ0-ov-Gee"/>
                                             <outlet property="userImageButton" destination="ThI-Q5-yIL" id="T1N-tg-mww"/>

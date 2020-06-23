@@ -27,7 +27,7 @@
         <!--Profile View Controller-->
         <scene sceneID="JPr-iQ-0HC">
             <objects>
-                <viewController id="vBH-4o-q8b" customClass="ProfileViewController" customModule="Lavoro" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProfileViewController" id="vBH-4o-q8b" customClass="ProfileViewController" customModule="Lavoro" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Dvh-QR-s35">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

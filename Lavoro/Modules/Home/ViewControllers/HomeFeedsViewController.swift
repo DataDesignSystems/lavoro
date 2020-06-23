@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ApplozicSwift
 
 class HomeFeedsViewController: BaseViewController {
     @IBOutlet weak var tableView: UITableView!
@@ -39,6 +40,7 @@ class HomeFeedsViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        appDelegate.updateBadgeCountForUnreadMessage()
         setProfileData()
         self.fetchData()
     }
@@ -95,8 +97,9 @@ class HomeFeedsViewController: BaseViewController {
     }
 
     @IBAction func editProfile() {
-        if let tabbar = self.tabBarController as? TabbarViewController {
-            tabbar.showProfileTab()
+        let storyboard = UIStoryboard(name: "Profile", bundle: nil)
+        if let vc = storyboard.instantiateViewController(withIdentifier: "ProfileViewController") as? ProfileViewController {
+            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
     
@@ -183,9 +186,16 @@ extension HomeFeedsViewController: UICollectionViewDelegate,UICollectionViewData
             showWhoIFollow()
             return
         }
-        DispatchQueue.main.async {
-            let profileId = story.user.id
-            PublicProfileViewController.showProfile(on: self.navigationController, profileId: profileId)
+        DispatchQueue.main.async { [weak self] in
+            if self?.followingMeButton.isSelected ?? false {
+                let profileId = story.user.id
+                if let tabbar = self?.tabBarController {
+                    self?.chatManager.launchChatWith(contactId: profileId, from: tabbar, configuration: ALKConfiguration())
+                }
+            } else {
+                let profileId = story.user.id
+                PublicProfileViewController.showProfile(on: self?.navigationController, profileId: profileId)
+            }
             /*if let stories = self.viewModel.getStories(), let stories_copy = try? stories.copy() {
                 let storyPreviewScene = IGStoryPreviewController.init(stories: stories_copy, handPickedStoryIndex:  indexPath.row-1)
                 self.present(storyPreviewScene, animated: true, completion: nil)

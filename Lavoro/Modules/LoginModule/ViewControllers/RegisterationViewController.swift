@@ -35,6 +35,17 @@ class RegisterationViewController: BaseViewController {
         loadUserData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        enableKeyboardManager()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        disableKeyboardManager()
+    }
+    
     func loadUserData() {
         if let authUser = AuthUser.getAuthUser() {
             user.username = authUser.username
@@ -173,7 +184,7 @@ extension RegisterationViewController: UITableViewDataSource {
                 cell.textField.isUserInteractionEnabled = false
             case .dob:
                 if user.dob.count > 0 {
-                    text = user.dob.toDate(dateFormat: "YYYY-MM-dd")?.toString(dateFormat: "MMM-dd-YYYY") ?? ""
+                    text = user.dob.toDate(dateFormat: "YYYY-MM-dd")?.toString(dateFormat: "MM-dd-YYYY") ?? ""
                 }
                 cell.textField.isUserInteractionEnabled = false
             default:

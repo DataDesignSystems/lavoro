@@ -57,6 +57,7 @@ class FollowersViewController: BaseViewController {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         navigationItem.hidesSearchBarWhenScrolling = false
+        self.extendedLayoutIncludesOpaqueBars = true
         self.fetchData()
     }
     

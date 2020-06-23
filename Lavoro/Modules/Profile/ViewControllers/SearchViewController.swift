@@ -64,6 +64,7 @@ class SearchViewController: BaseViewController {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         navigationItem.hidesSearchBarWhenScrolling = false
+        self.extendedLayoutIncludesOpaqueBars = true
     }
     
     override func viewDidAppear(_ animated: Bool) {

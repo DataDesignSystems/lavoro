@@ -10,13 +10,19 @@ import UIKit
 
 class BaseModuleService: NSObject {
     let NS = NetworkService()
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     func getCode(from data: Any) -> Int? {
         guard let json = data as? [String: Any], let data = json["data"] as? [String: Any] else {
             return nil
         }
         if let code = data["code"] as? Int {
-            return code
+            if code == 301 {
+                MessageViewAlert.showError(with: Validation.Error.tokenExpire.rawValue)
+                appDelegate.presentLoginFlow()
+            } else {
+                return code
+            }
         }
         return nil
     }

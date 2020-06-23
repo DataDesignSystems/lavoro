@@ -19,6 +19,7 @@ class CheckInFeedTableViewCell: UITableViewCell {
     @IBOutlet weak var commentsCount: UILabel!
     @IBOutlet weak var locationNameBackgroundView: UIView!
     @IBOutlet weak var locationName: UILabel!
+    @IBOutlet weak var postedComment: UILabel!
     @IBOutlet weak var message: UILabel!
     @IBOutlet weak var headerHeightConstraints: NSLayoutConstraint!
     
@@ -54,7 +55,7 @@ class CheckInFeedTableViewCell: UITableViewCell {
         var userMessage = ""
         switch object.feedType {
         case .checkIn:
-            userMessage = "Checked in at\n"
+            userMessage = "Checked In\n"
             locationNameBackgroundView.backgroundColor = UIColor(hexString: "4CD964")
         case .checkOut:
             userMessage = "Checked Out of\n"
@@ -64,6 +65,7 @@ class CheckInFeedTableViewCell: UITableViewCell {
             locationNameBackgroundView.backgroundColor = UIColor(hexString: "FF2D55")
         }
         message.text = userMessage + object.location.name
+        postedComment.text = object.postedComment
     }
 
     @IBAction func likesButtonTap(button: UIButton) {

@@ -203,6 +203,9 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next" textContentType="tel"/>
+                                <connections>
+                                    <outlet property="delegate" destination="kwB-gf-hZB" id="aku-jT-o6e"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YvF-4I-Xgh">
                                 <rect key="frame" x="0.0" y="851" width="414" height="45"/>
@@ -446,7 +449,7 @@
                                     <constraint firstAttribute="height" constant="34" id="rFx-Yd-g8H"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad" textContentType="one-time-code"/>
                                 <connections>
                                     <outlet property="delegate" destination="GQF-Pz-W5t" id="wfi-MP-Smc"/>
                                 </connections>
@@ -851,7 +854,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="vLo-Ph-5U7"/>
+        <segue reference="nTS-D1-Pfh"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="fbIcon" width="20" height="20"/>

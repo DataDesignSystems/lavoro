@@ -55,8 +55,9 @@ class WhoCanIFollowViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
         navigationItem.hidesSearchBarWhenScrolling = false
+        self.extendedLayoutIncludesOpaqueBars = true
         self.fetchData()
     }
     

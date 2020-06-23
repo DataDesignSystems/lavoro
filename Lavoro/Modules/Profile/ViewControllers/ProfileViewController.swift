@@ -37,7 +37,13 @@ class ProfileViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        let backImage = UIImage(named: "ic_back_white")
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: backImage, style: .done, target: self, action: #selector(backButton))
+        self.navigationController?.navigationBar.tintColor = .black
+        self.navigationController?.navigationBar.barTintColor = UIColor(hexString: "#F7F8FA")
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationItem.title = "Profile"
         refreshView()
     }
     
@@ -50,7 +56,7 @@ class ProfileViewController: BaseViewController {
             nameLabel.text = "\(authUser.first) \(authUser.last)"
         }
     }
-        
+    
     func setupView() {
         userImage.setLayer(cornerRadius: 6.0)
         editButton.setLayer(cornerRadius: 10.0)

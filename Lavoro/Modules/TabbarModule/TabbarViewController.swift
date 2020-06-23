@@ -12,10 +12,12 @@ class TabbarViewController: UITabBarController {
     var tabInfo = [Tabbar(storyboardName: "Home", initialViewControllerIdentifier: "HomeModule", iconName: "ic_home", title: "Home"),
                    Tabbar(storyboardName: "WorkCheckIn", initialViewControllerIdentifier: "WorkCheckInModule", iconName: "ic_workCheckIn", title: "Work Check In"),
                    Tabbar(storyboardName: "Messages", initialViewControllerIdentifier: "MessagesModule", iconName: "ic_messages", title: "Messages"),
-                   Tabbar(storyboardName: "Notification", initialViewControllerIdentifier: "NotificationModule", iconName: "ic_notification", title: "Notifications"),
-                   Tabbar(storyboardName: "Profile", initialViewControllerIdentifier: "ProfileModule", iconName: "ic_profile", title: "Profile")]
+                   Tabbar(storyboardName: "Notification", initialViewControllerIdentifier: "NotificationModule", iconName: "ic_notification", title: "Notifications")]
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let authUser = AuthUser.getAuthUser(), authUser.userTypeId == "3" {
+            tabInfo.append(Tabbar(storyboardName: "Profile", initialViewControllerIdentifier: "ProfileModule", iconName: "ic_profile", title: "Public"))
+        }
         setupTabbar()
         self.delegate = self
         // Do any additional setup after loading the view.
@@ -76,6 +78,16 @@ extension TabbarViewController: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         if let nc = viewController as? UINavigationController, let _ = nc.viewControllers.first as? WorkCheckInViewController {
             presentWebCheckIn()
+            return false
+        }
+        if let nc = viewController as? UINavigationController, let _ = nc.viewControllers.first as? ProfileViewController {
+            guard let profileId = AuthUser.getAuthUser()?.id else {
+                return false
+            }
+            guard let nav = self.selectedViewController as? UINavigationController else {
+                return false
+            }
+            PublicProfileViewController.showProfile(on: nav, profileId: profileId)
             return false
         }
         return true

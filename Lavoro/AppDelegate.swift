@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         if AuthUser.getAuthUser() != nil {
             presentUserFLow()
+            LoginChatUser.registerUserForChat()
         } else {
             self.presentLoginFlow()
         }

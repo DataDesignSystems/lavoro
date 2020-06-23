@@ -18,7 +18,7 @@ class LoginChatUser {
             alUser.userId = authUser.id
             alUser.email = authUser.email
             alUser.imageLink = authUser.avatar
-            alUser.displayName = "\(authUser.first) \(authUser.last)"
+            alUser.displayName = authUser.username // "\(authUser.first) \(authUser.last)"
             alUser.password = "Atustr29!"
 
 

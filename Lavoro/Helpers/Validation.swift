@@ -21,6 +21,7 @@ struct Validation {
     enum Error: String {
         case loginError = "Your email and password does not match!"
         case genericError = "Please try again!"
+        case tokenExpire = "Session expired!\nPlease login again."
     }
     
     enum Warning: String {
