@@ -129,6 +129,7 @@ class PublicProfileViewController: BaseViewController {
         if self.isMovingFromParent {
             self.tabBarController?.tabBar.isHidden = false
         }
+        navigationController?.navigationBar.shadowImage = nil
     }
     
     func refreshView() {
