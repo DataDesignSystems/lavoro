@@ -56,6 +56,11 @@ class MyScheduleViewController: BaseViewController {
         monthLabel.text = selectDate.toString(dateFormat: "MMMM")
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
     @IBAction func todayButtonTap() {
         calendarView.scrollTo(Date())
     }

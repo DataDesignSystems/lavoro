@@ -36,6 +36,10 @@ class MyWorkLocationsViewController: BaseViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
     func setupView() {
         collectionview.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
         collectionviewBackgroundView.gradientLayer(with: UIColor(white: 0, alpha: 0.0), endColor: UIColor(white: 0, alpha: 0.1))

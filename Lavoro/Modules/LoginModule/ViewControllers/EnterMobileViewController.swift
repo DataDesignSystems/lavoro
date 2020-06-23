@@ -80,7 +80,7 @@ class EnterMobileViewController: BaseFacebookViewController {
     }
     
     @IBAction func requestOTPTap() {
-        if Validation.phone(phoneNumberTextField.text ?? "") {
+        if Validation.phone(phoneNumberTextField.text?.removePhoneFormating() ?? "") {
             showLoadingView()
             loginService.requestOTP(with: phoneNumberTextField.text ?? "") { [weak self] (success, message) in
                 self?.stopLoadingView()
