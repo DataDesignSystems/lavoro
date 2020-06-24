@@ -24,6 +24,7 @@ class MobileVerificationViewController: BaseViewController {
         super.viewDidLoad()
         setupView()
         addkeyboardObserver()
+        disableKeyboardManager()
         // Do any additional setup after loading the view.
     }
     

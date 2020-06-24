@@ -73,7 +73,10 @@ class MessageListViewController: BaseViewController {
                 self.tabBarController?.tabBar.items![2].badgeValue = nil
             }
         }
-        
+    }
+    
+    func redirectToChat(with userId: String) {
+        chatManager.launchChatWith(contactId: userId, from: self.tabBarController ?? self, configuration: ALKConfiguration())
     }
 }
 

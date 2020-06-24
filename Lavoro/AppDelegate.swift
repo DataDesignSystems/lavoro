@@ -75,6 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         alPushNotificationService.notificationArrived(to: application, with: userInfo)
         let notificationName = Notification.Name(NotificationKey.refreshMessageList.rawValue)
         NotificationCenter.default.post(name: notificationName, object: nil)
+        updatebadgeCountFromPushInfo(userInfo: userInfo)
         completionHandler(UIBackgroundFetchResult.newData)
     }
 
@@ -82,6 +83,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         print(userInfo)
         let alPushNotificationService: ALPushNotificationService = ALPushNotificationService()
         alPushNotificationService.notificationArrived(to: application, with: userInfo)
+        updatebadgeCountFromPushInfo(userInfo: userInfo)
         let dispatchTime = DispatchTime.now() + .seconds(1)
         DispatchQueue.main.asyncAfter(deadline: dispatchTime) {
             let notificationName = Notification.Name(NotificationKey.refreshMessageList.rawValue)
@@ -128,6 +130,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             let userInfo = response.notification.request.content.userInfo
             if pushNotificationService.isApplozicNotification(userInfo) {
                 pushNotificationService.notificationArrived(to: UIApplication.shared, with: userInfo)
+                redirectToMessage(userInfo: userInfo)
                 completionHandler()
                 return
             }
@@ -149,6 +152,69 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 }else{
                     UIApplication.shared.applicationIconBadgeNumber = 0
                     tabbarController.tabBar.items![2].badgeValue = nil
+                }
+            }
+        }
+    }
+    
+    func updatebadgeCountFromPushInfo(userInfo: [AnyHashable: Any]) {
+        guard let tabbarController = window?.rootViewController as? UITabBarController else {
+            return
+        }
+        if let userInfo = userInfo as? [String: Any] {
+            print(userInfo)
+            if let object = userInfo["AL_VALUE"] as? String {
+                print(object)
+                let data = object.data(using: .utf8)!
+                do {
+                    if let jsonObj = try JSONSerialization.jsonObject(with: data, options : .allowFragments) as? [String: Any]
+                    {
+                        print(jsonObj)
+                        if let unreadCount = jsonObj["totalUnreadCount"] as? Int {
+                            print(unreadCount)
+                            UIApplication.shared.applicationIconBadgeNumber = unreadCount
+                            if((tabbarController.tabBar.items?.count ?? 0) > 2){
+                                tabbarController.tabBar.items![2].badgeValue = "\(unreadCount)"
+                            }
+                        }
+                        
+                    } else {
+                        print("bad json")
+                    }
+                } catch let error as NSError {
+                    print(error)
+                }
+            }
+        }
+    }
+    
+    func redirectToMessage(userInfo: [AnyHashable: Any]) {
+        guard let tabbarController = window?.rootViewController as? UITabBarController else {
+            return
+        }
+        if let userInfo = userInfo as? [String: Any] {
+            print(userInfo)
+            if let object = userInfo["AL_VALUE"] as? String {
+                print(object)
+                let data = object.data(using: .utf8)!
+                do {
+                    if let jsonObj = try JSONSerialization.jsonObject(with: data, options : .allowFragments) as? [String: Any]
+                    {
+                        print(jsonObj)
+                        if let userId = jsonObj["message"] as? String {
+                            if((tabbarController.tabBar.items?.count ?? 0) > 2){
+                                tabbarController.selectedIndex = 2
+                                if let nav = tabbarController.selectedViewController as? UINavigationController, let messageVC = nav.topViewController as? MessageListViewController {
+                                    messageVC.redirectToChat(with: userId)
+                                }
+                            }
+                        }
+                        
+                    } else {
+                        print("bad json")
+                    }
+                } catch let error as NSError {
+                    print(error)
                 }
             }
         }
