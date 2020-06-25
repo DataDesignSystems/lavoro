@@ -10,6 +10,7 @@ import UIKit
 import IQKeyboardManagerSwift
 import FBSDKCoreKit
 import Applozic
+import GooglePlaces
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
@@ -34,6 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         registerForNotification()
         UIApplication.shared.registerForRemoteNotifications()
         updateBadgeCountForUnreadMessage()
+        GMSPlacesClient.provideAPIKey(GPManager.key)
         return true
     }
     

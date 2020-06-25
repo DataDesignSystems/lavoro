@@ -21,4 +21,5 @@ target 'Lavoro' do
   pod 'FBSDKLoginKit'
   pod 'SDWebImage', '~> 5.0'
   pod 'InputBarAccessoryView'
+  pod 'GooglePlaces'
 end

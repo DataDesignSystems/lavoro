@@ -9,14 +9,20 @@
 import UIKit
 import MapKit
 
-class AddLocationViewController: UIViewController {
+class AddLocationViewController: BaseViewController {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var tableview: UITableView!
-    var locations: [WorkLocation] = WorkLocation.mockData()
+    var locations: [WorkLocation] = [WorkLocation]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setLocation()
+        showLoadingView()
+        GPManager.findNearbyPlaces { [weak self] (success, locations) in
+            self?.locations = locations
+            self?.stopLoadingView()
+            self?.tableview.reloadData()
+        }
         // Do any additional setup after loading the view.
     }
     
@@ -65,5 +71,9 @@ extension AddLocationViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GooglePlaces
 
 class AddLocationTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
@@ -30,6 +31,12 @@ class AddLocationTableViewCell: UITableViewCell {
         nameLabel.text = object.name
         addressLabel.text = object.address
         locationImage.image = UIImage(named: "locationPlaceholder")
+        if let photoData = object.photoData {
+            GMSPlacesClient.shared().loadPlacePhoto(photoData) { [weak self] (image, error) in
+                if let image = image {
+                    self?.locationImage.image = image
+                }
+            }
+        }
     }
-
 }

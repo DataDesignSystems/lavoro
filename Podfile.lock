@@ -20,6 +20,9 @@ PODS:
     - FBSDKLoginKit/Login (= 7.0.0)
   - FBSDKLoginKit/Login (7.0.0):
     - FBSDKCoreKit (~> 7.0.0)
+  - GoogleMaps/Base (3.9.0)
+  - GooglePlaces (3.9.0):
+    - GoogleMaps/Base (= 3.9.0)
   - InputBarAccessoryView (4.3.2):
     - InputBarAccessoryView/Core (= 4.3.2)
   - InputBarAccessoryView/Core (4.3.2)
@@ -74,6 +77,7 @@ DEPENDENCIES:
   - Alamofire (~> 5.2)
   - ApplozicSwift
   - FBSDKLoginKit
+  - GooglePlaces
   - InputBarAccessoryView
   - IQKeyboardManagerSwift (= 6.3.0)
   - KVKCalendar
@@ -91,6 +95,8 @@ SPEC REPOS:
     - ApplozicSwift
     - FBSDKCoreKit
     - FBSDKLoginKit
+    - GoogleMaps
+    - GooglePlaces
     - InputBarAccessoryView
     - IQKeyboardManagerSwift
     - Kingfisher
@@ -109,6 +115,8 @@ SPEC CHECKSUMS:
   ApplozicSwift: 2ed5595373c5c63fc443238c3691ac91d1fe9080
   FBSDKCoreKit: 8ad31cd09f793d1d7e84cf20fd6cebfe80ad318d
   FBSDKLoginKit: 5d1e321dc45ab1fa09198b77fc17c32a06f008c0
+  GoogleMaps: 4b5346bddfe6911bb89155d43c903020170523ac
+  GooglePlaces: 1634d019549b969d40fe0ccb0b9513055adebe01
   InputBarAccessoryView: 7985d418040a05fe894bd4b8328dd43ab35517c3
   IQKeyboardManagerSwift: a8228c257614af98743b4cd8584637025f36358f
   Kingfisher: d2279a7abece3c7f25a80cd2b7f363ca5cf3f44c
@@ -121,6 +129,6 @@ SPEC CHECKSUMS:
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftMessages: b577dc7043be8b299857ab35bb663dbff6483bd0
 
-PODFILE CHECKSUM: 8a0a39a6c3edac26347c374a10d8bcdfbf33c9fb
+PODFILE CHECKSUM: 0e2bc8131e72cc536af80368df386f6928b5e1c8
 
 COCOAPODS: 1.9.1

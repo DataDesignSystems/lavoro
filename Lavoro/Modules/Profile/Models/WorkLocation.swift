@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreLocation
+import GooglePlaces
 
 struct WorkLocation {
     var name: String
@@ -17,6 +18,7 @@ struct WorkLocation {
     var location: CLLocationCoordinate2D
     var distance: Double
     var imageName: String
+    var photoData: GMSPlacePhotoMetadata?
     
     static func mockData() -> [WorkLocation] {
         return [WorkLocation(name: "Anderson Pub & Grill", category: .restaurants, address: "8060 Beechmont Ave, Cincinnati, OH 45255", workingType: .working, location: CLLocationCoordinate2D(), distance: 5, imageName: "locationDummyImage"),
@@ -30,6 +32,30 @@ struct WorkLocation {
                 WorkLocation(name: "Latitudes Bar & Bistro", category: .bars, address: "7454 Beechmont Ave, Cincinnati, OH 45255", workingType: .notWorking, location: CLLocationCoordinate2D(), distance: 8, imageName: "locationDummyImage"),
                 WorkLocation(name: "Latitudes Bar & Bistro", category: .bars, address: "7454 Beechmont Ave, Cincinnati, OH 45255", workingType: .notWorking, location: CLLocationCoordinate2D(), distance: 8, imageName: "locationDummyImage"),
                 WorkLocation(name: "Latitudes Bar & Bistro", category: .other, address: "7454 Beechmont Ave, Cincinnati, OH 45255", workingType: .notWorking, location: CLLocationCoordinate2D(), distance: 8, imageName: "locationDummyImage")]
+    }
+    
+    init(with place: GMSPlace) {
+        self.name = place.name ?? ""
+        self.category = .restaurants
+        self.address = place.formattedAddress ?? ""
+        self.workingType = .working
+        self.location = place.coordinate
+        self.distance = 10
+        self.imageName = ""
+        if let photo = place.photos?.first {
+            self.photoData = photo
+            
+        }
+    }
+    
+    init(name: String, category: CategoryType, address: String, workingType: WorkingType, location: CLLocationCoordinate2D, distance: Double, imageName: String) {
+        self.name = name
+        self.category = category
+        self.address = address
+        self.workingType = workingType
+        self.location = location
+        self.distance = distance
+        self.imageName = imageName
     }
 }
 

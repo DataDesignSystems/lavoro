@@ -77,6 +77,7 @@
 		13825524249E1B6E004BF327 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13825523249E1B6E004BF327 /* SearchViewController.swift */; };
 		13825526249E708B004BF327 /* UpdateTaglineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13825525249E708B004BF327 /* UpdateTaglineViewController.swift */; };
 		1382B7A1248F9C6B0032BE49 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1382B7A0248F9C6B0032BE49 /* ImageService.swift */; };
+		1388A93324A4EB4E007F505E /* GPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1388A93224A4EB4E007F505E /* GPManager.swift */; };
 		13B531B1248BF6E300C6C8FF /* NetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B531B0248BF6E300C6C8FF /* NetworkConfig.swift */; };
 		13B531B3248BF8B800C6C8FF /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B531B2248BF8B800C6C8FF /* NetworkService.swift */; };
 		13B531B6248BFD8300C6C8FF /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B531B5248BFD8300C6C8FF /* LoginService.swift */; };
@@ -212,6 +213,7 @@
 		13825525249E708B004BF327 /* UpdateTaglineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTaglineViewController.swift; sourceTree = "<group>"; };
 		1382553224A22D1C004BF327 /* Lavoro.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Lavoro.entitlements; sourceTree = "<group>"; };
 		1382B7A0248F9C6B0032BE49 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
+		1388A93224A4EB4E007F505E /* GPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPManager.swift; sourceTree = "<group>"; };
 		13B531B0248BF6E300C6C8FF /* NetworkConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConfig.swift; sourceTree = "<group>"; };
 		13B531B2248BF8B800C6C8FF /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		13B531B5248BFD8300C6C8FF /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
@@ -582,6 +584,15 @@
 			path = Helper;
 			sourceTree = "<group>";
 		};
+		1388A93124A4EB37007F505E /* GooglePlaces */ = {
+			isa = PBXGroup;
+			children = (
+				1388A93224A4EB4E007F505E /* GPManager.swift */,
+			);
+			name = GooglePlaces;
+			path = Lavoro/Helpers/GooglePlaces;
+			sourceTree = SOURCE_ROOT;
+		};
 		13B531AF248BF6B400C6C8FF /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -642,6 +653,7 @@
 		13D057A2245C9DF700227E15 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				1388A93124A4EB37007F505E /* GooglePlaces */,
 				13574E902493D09500DC1DDF /* DateTimePicker */,
 				137938CE24682B2700AB2C46 /* Applozic */,
 				13D057A3245C9DF700227E15 /* Stories */,
@@ -837,6 +849,7 @@
 				1378AA822459E75700131BEB /* Frameworks */,
 				1378AA832459E75700131BEB /* Resources */,
 				E896162DB923F802285BF269 /* [CP] Embed Pods Frameworks */,
+				551643F8E41DF66AF1F58BD0 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -904,6 +917,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		551643F8E41DF66AF1F58BD0 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Lavoro/Pods-Lavoro-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Lavoro/Pods-Lavoro-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Lavoro/Pods-Lavoro-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		CEFC1091B1D65B752C668883 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1033,6 +1063,7 @@
 				13D057FE245CA09B00227E15 /* IGStoryListCell.swift in Sources */,
 				13D057E5245C9DF800227E15 /* IGVideoCacheManager.swift in Sources */,
 				13D057E7245C9DF800227E15 /* IGCommon.swift in Sources */,
+				1388A93324A4EB4E007F505E /* GPManager.swift in Sources */,
 				13D057EB245C9DF800227E15 /* Reachability.swift in Sources */,
 				136F3263245B032F006939ED /* OnboardingViewController.swift in Sources */,
 				13B531B6248BFD8300C6C8FF /* LoginService.swift in Sources */,
