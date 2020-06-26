@@ -32,6 +32,8 @@ class AuthUser: NSObject, NSCoding {
     let avatar: String
     let type: UserType
     var checkStatus: String
+    var placeId: String
+    var placeName: String
 
     private static var authUser: AuthUser?
     
@@ -57,7 +59,9 @@ class AuthUser: NSObject, NSCoding {
          birthday: String,
          username: String,
          avatar: String,
-         checkStatus: String) {
+         checkStatus: String,
+         placeId: String,
+         placeName: String) {
         self.id = id
         self.first = first
         self.middle = middle
@@ -75,6 +79,8 @@ class AuthUser: NSObject, NSCoding {
         self.avatar = avatar
         self.type = UserType(rawValue: userTypeId) ?? .customer
         self.checkStatus = checkStatus
+        self.placeId = placeId
+        self.placeName = placeName
     }
     
     init(json: [String: Any], token: String) {
@@ -94,7 +100,15 @@ class AuthUser: NSObject, NSCoding {
         self.username =  json["username"] as? String ?? ""
         self.avatar = json["avatar"] as? String ?? ""
         self.type = UserType(rawValue: json["userTypeId"] as? String ?? "") ?? .customer
-        self.checkStatus = json["check_status"] as? String ?? "check-out"
+        if let checkStatus = json["check_status"] as? [String: Any] {
+            self.checkStatus = checkStatus["type"] as? String ?? "check-out"
+            self.placeId = checkStatus["google_id"] as? String ?? ""
+            self.placeName = checkStatus["name"] as? String ?? ""
+        } else {
+            self.checkStatus = "check-out"
+            self.placeId = ""
+            self.placeName = ""
+        }
     }
     
     required convenience init(coder aDecoder: NSCoder) {
@@ -114,7 +128,9 @@ class AuthUser: NSObject, NSCoding {
         let username = aDecoder.decodeObject(forKey: "username") as? String ?? ""
         let avatar = aDecoder.decodeObject(forKey: "avatar") as? String ?? ""
         let checkStatus = aDecoder.decodeObject(forKey: "checkStatus") as? String ?? ""
-        self.init(id: id, first: first, middle: middle, last: last, phone: phone, email: email, facebookToken: facebookToken, userTypeId: userTypeId, status: status, userType: userType, authToken: authToken, gender: gender, birthday: birthday, username: username, avatar: avatar, checkStatus: checkStatus)
+        let placeId = aDecoder.decodeObject(forKey: "placeId") as? String ?? ""
+        let placeName = aDecoder.decodeObject(forKey: "placeName") as? String ?? ""
+        self.init(id: id, first: first, middle: middle, last: last, phone: phone, email: email, facebookToken: facebookToken, userTypeId: userTypeId, status: status, userType: userType, authToken: authToken, gender: gender, birthday: birthday, username: username, avatar: avatar, checkStatus: checkStatus, placeId: placeId, placeName: placeName)
     }
 
     func encode(with aCoder: NSCoder) {
@@ -134,6 +150,8 @@ class AuthUser: NSObject, NSCoding {
         aCoder.encode(username, forKey: "username")
         aCoder.encode(avatar, forKey: "avatar")
         aCoder.encode(checkStatus, forKey: "checkStatus")
+        aCoder.encode(placeId, forKey: "placeId")
+        aCoder.encode(placeName, forKey: "placeName")
     }
 
     
@@ -176,12 +194,14 @@ class AuthUser: NSObject, NSCoding {
         userDefaults.synchronize()
     }
     
-    func toggleCheckInStatus() {
+    func toggleCheckInStatus(with placeName: String, placeId: String) {
         if self.checkStatus == "check-out"{
             self.checkStatus = "check-in"
         } else {
             self.checkStatus = "check-out"
         }
+        self.placeName = placeName
+        self.placeId = placeId
         saveUser()
     }
     

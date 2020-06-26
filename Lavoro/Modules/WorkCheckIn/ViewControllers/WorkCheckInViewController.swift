@@ -38,8 +38,16 @@ class WorkCheckInViewController: BaseViewController {
         if let url = URL(string: AuthUser.getAuthUser()?.avatar ?? "") {
             userImage.sd_setImage(with: url, completed: nil)
         }
-        let title = (AuthUser.getAuthUser()?.isAlreadyCheckIn() ?? false) ? "Check Out And Notify" : "Check In And Notify"
-        checkInButton.setTitle(title, for: .normal)
+        if AuthUser.getAuthUser()?.isAlreadyCheckIn() ?? false {
+            checkInButton.setTitle("Check Out And Notify", for: .normal)
+            checkInButton.backgroundColor = UIColor(hexString: "#FF2D55")
+            selectLocationButton.setTitle(AuthUser.getAuthUser()?.placeName, for: .normal)
+            selectLocationButton.isUserInteractionEnabled = false
+        } else {
+            checkInButton.setTitle("Check In And Notify", for: .normal)
+            checkInButton.backgroundColor = UIColor(hexString: "#4CD964")
+            selectLocationButton.isUserInteractionEnabled = true
+        }
     }
     
     @IBAction func closeButtonAction() {
@@ -51,19 +59,26 @@ class WorkCheckInViewController: BaseViewController {
         guard tagline.count > 0 else {
             return
         }
-        guard let place = selectedPlace, let placeId = place.placeID else {
-            MessageViewAlert.showError(with: Validation.ValidationError.selectPlace.rawValue)
-            return
+        let isCheckIn = !(AuthUser.getAuthUser()?.isAlreadyCheckIn() ?? false)
+        var googleId = ""
+        if isCheckIn {
+            guard let place = selectedPlace, let placeId = place.placeID else {
+                MessageViewAlert.showError(with: Validation.ValidationError.selectPlace.rawValue)
+                return
+            }
+            googleId = placeId
+        } else {
+            googleId = AuthUser.getAuthUser()?.placeId ?? ""
         }
         self.showLoadingView()
-        let isCheckIn = !(AuthUser.getAuthUser()?.isAlreadyCheckIn() ?? false)
-        profileService.updateCheckInStatus(with: tagline, place_id: placeId, isCheckIn: isCheckIn) { [weak self] (success, message) in
+        
+        profileService.updateCheckInStatus(with: tagline, place_id: googleId, isCheckIn: isCheckIn) { [weak self] (success, message) in
             self?.stopLoadingView()
             if success {
                 if let message = message {
                     MessageViewAlert.showSuccess(with: message)
                 }
-                AuthUser.getAuthUser()?.toggleCheckInStatus()
+                AuthUser.getAuthUser()?.toggleCheckInStatus(with: self?.selectedPlace?.name ?? "", placeId: self?.selectedPlace?.placeID ?? "")
                 if let tabbar = self?.appDelegate.window?.rootViewController as? TabbarViewController {
                     tabbar.setupCheckInStatusText()
                 }

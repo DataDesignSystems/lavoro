@@ -33,7 +33,6 @@ class BaseViewController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        IQKeyboardManager.shared.enableAutoToolbar = true
         view.bringSubviewToFront(activityIndicatorView)
     }
     

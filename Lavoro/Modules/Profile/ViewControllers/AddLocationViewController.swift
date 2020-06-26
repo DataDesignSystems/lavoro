@@ -21,11 +21,11 @@ class AddLocationViewController: BaseViewController {
         GPManager.findNearbyPlaces { [weak self] (success, locations) in
             if success {
                 self?.locations = locations
-                self?.stopLoadingView()
                 self?.tableview.reloadData()
             } else {
                 MessageViewAlert.showError(with: "Location not available. Please try again")
             }
+            self?.stopLoadingView()
         }
         // Do any additional setup after loading the view.
     }
