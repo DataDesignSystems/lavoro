@@ -31,6 +31,16 @@ class HomeFeedsViewController: BaseViewController {
         label.textAlignment = .center
         return label
     }()
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action:
+                     #selector(fetchData),
+                                 for: UIControl.Event.valueChanged)
+        refreshControl.tintColor = UIColor.red
+        
+        return refreshControl
+    }()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,7 +55,7 @@ class HomeFeedsViewController: BaseViewController {
         self.fetchData()
     }
     
-    func fetchData() {
+    @objc func fetchData() {
         if self.feeds.count == 0 {
             self.showLoadingView()
         }
@@ -58,6 +68,7 @@ class HomeFeedsViewController: BaseViewController {
             self?.stopLoadingView()
             self?.tableView.reloadData()
             self?.igStoriesView.collectionView.reloadData()
+            self?.refreshControl.endRefreshing()
         }
     }
     
@@ -81,6 +92,7 @@ class HomeFeedsViewController: BaseViewController {
         }
         followingButton.isSelected = true
         followingMeButton.isSelected = false
+        self.tableView.addSubview(self.refreshControl)
     }
 
     func setProfileData() {

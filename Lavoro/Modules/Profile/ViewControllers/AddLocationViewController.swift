@@ -19,9 +19,13 @@ class AddLocationViewController: BaseViewController {
         setLocation()
         showLoadingView()
         GPManager.findNearbyPlaces { [weak self] (success, locations) in
-            self?.locations = locations
-            self?.stopLoadingView()
-            self?.tableview.reloadData()
+            if success {
+                self?.locations = locations
+                self?.stopLoadingView()
+                self?.tableview.reloadData()
+            } else {
+                MessageViewAlert.showError(with: "Location not available. Please try again")
+            }
         }
         // Do any additional setup after loading the view.
     }
@@ -60,12 +64,13 @@ extension AddLocationViewController: UITableViewDelegate, UITableViewDataSource 
             cell.addressLabel.isHidden = true
             cell.nameLabel.text = "Use my current location"
             cell.locationImage.image = UIImage(named: "currentLocation")
+            cell.indexPath = indexPath
             return cell
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: "addLocationCell", for: indexPath) as! AddLocationTableViewCell
         cell.nameCenterYConstraint.constant = -16
         cell.addressLabel.isHidden = false
-        cell.setupCell(with: locations[indexPath.row])
+        cell.setupCell(with: locations[indexPath.row], indexPath: indexPath)
         return cell
     }
     

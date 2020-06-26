@@ -8,6 +8,7 @@
 
 import Foundation
 import GooglePlaces
+import UIKit
 
 class GPManager {
     static var key = "AIzaSyDx7C5HSITI1Hg1Y2JvCr421qE1Y3nICoU"
@@ -36,6 +37,11 @@ class GPManager {
             }
             completionHandler(true, workLocations)
         })
-        
+    }
+    
+    static func loadPlacePhoto(photoData: GMSPlacePhotoMetadata, indexpath: IndexPath, completionHandler: @escaping ((UIImage?, Error?, IndexPath) -> ())) {
+        GMSPlacesClient.shared().loadPlacePhoto(photoData) { (image, error) in
+            completionHandler(image, error, indexpath)
+        }
     }
 }

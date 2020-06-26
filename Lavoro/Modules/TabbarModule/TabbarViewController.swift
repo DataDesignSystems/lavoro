@@ -20,7 +20,20 @@ class TabbarViewController: UITabBarController {
         }
         setupTabbar()
         self.delegate = self
+        setupCheckInStatusText()
         // Do any additional setup after loading the view.
+    }
+    
+    func setupCheckInStatusText() {
+        guard let items = self.tabBar.items, items.count > 1 else {
+            return
+        }
+        let checkinTabbar = items[1]
+        if AuthUser.getAuthUser()?.isAlreadyCheckIn() ?? false {
+            checkinTabbar.title = "Work Check Out"
+        } else {
+            checkinTabbar.title = "Work Check In"
+        }
     }
     
     func setupTabbar() {

@@ -30,5 +30,6 @@ struct NetworkConfig {
         case followUser = "api/follow-user/"
         case removeFollowUser = "api/remove-follow-user/"
         case tagline = "api/tagline/"
+        case addCheckinCheckout = "api/add-checkin-checkout/"
     }
 }

@@ -14,7 +14,7 @@ class UpdateTaglineViewController: BaseViewController {
     @IBOutlet weak var message: UITextView!
     @IBOutlet weak var checkInButton: UIButton!
     @IBOutlet weak var charLimitLabel: UILabel!
-    let placeholderText = "Say something..."
+    let placeholderText = "Say something..." 
     let profileService = ProfileService()
 
     override func viewDidLoad() {

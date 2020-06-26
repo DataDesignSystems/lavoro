@@ -16,6 +16,7 @@ struct Validation {
         case username = "username is mandatory!"
         case gender = "Please select gender!"
         case dob = "Please select date of birth!"
+        case selectPlace = "Please choose your work location"
     }
     
     enum Error: String {

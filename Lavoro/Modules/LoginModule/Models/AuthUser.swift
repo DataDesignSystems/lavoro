@@ -31,6 +31,7 @@ class AuthUser: NSObject, NSCoding {
     let username: String
     let avatar: String
     let type: UserType
+    var checkStatus: String
 
     private static var authUser: AuthUser?
     
@@ -55,7 +56,8 @@ class AuthUser: NSObject, NSCoding {
          gender: String,
          birthday: String,
          username: String,
-         avatar: String) {
+         avatar: String,
+         checkStatus: String) {
         self.id = id
         self.first = first
         self.middle = middle
@@ -72,6 +74,7 @@ class AuthUser: NSObject, NSCoding {
         self.username = username
         self.avatar = avatar
         self.type = UserType(rawValue: userTypeId) ?? .customer
+        self.checkStatus = checkStatus
     }
     
     init(json: [String: Any], token: String) {
@@ -91,6 +94,7 @@ class AuthUser: NSObject, NSCoding {
         self.username =  json["username"] as? String ?? ""
         self.avatar = json["avatar"] as? String ?? ""
         self.type = UserType(rawValue: json["userTypeId"] as? String ?? "") ?? .customer
+        self.checkStatus = json["check_status"] as? String ?? "check-out"
     }
     
     required convenience init(coder aDecoder: NSCoder) {
@@ -109,7 +113,8 @@ class AuthUser: NSObject, NSCoding {
         let birthday = aDecoder.decodeObject(forKey: "birthday") as? String ?? ""
         let username = aDecoder.decodeObject(forKey: "username") as? String ?? ""
         let avatar = aDecoder.decodeObject(forKey: "avatar") as? String ?? ""
-        self.init(id: id, first: first, middle: middle, last: last, phone: phone, email: email, facebookToken: facebookToken, userTypeId: userTypeId, status: status, userType: userType, authToken: authToken, gender: gender, birthday: birthday, username: username, avatar: avatar)
+        let checkStatus = aDecoder.decodeObject(forKey: "checkStatus") as? String ?? ""
+        self.init(id: id, first: first, middle: middle, last: last, phone: phone, email: email, facebookToken: facebookToken, userTypeId: userTypeId, status: status, userType: userType, authToken: authToken, gender: gender, birthday: birthday, username: username, avatar: avatar, checkStatus: checkStatus)
     }
 
     func encode(with aCoder: NSCoder) {
@@ -128,6 +133,7 @@ class AuthUser: NSObject, NSCoding {
         aCoder.encode(birthday, forKey: "birthday")
         aCoder.encode(username, forKey: "username")
         aCoder.encode(avatar, forKey: "avatar")
+        aCoder.encode(checkStatus, forKey: "checkStatus")
     }
 
     
@@ -168,5 +174,21 @@ class AuthUser: NSObject, NSCoding {
         let userDefaults = UserDefaults.standard
         userDefaults.removeObject(forKey: "authuser")
         userDefaults.synchronize()
+    }
+    
+    func toggleCheckInStatus() {
+        if self.checkStatus == "check-out"{
+            self.checkStatus = "check-in"
+        } else {
+            self.checkStatus = "check-out"
+        }
+        saveUser()
+    }
+    
+    func isAlreadyCheckIn() -> Bool {
+        if self.checkStatus == "check-in" {
+            return true
+        }
+        return false
     }
 }
