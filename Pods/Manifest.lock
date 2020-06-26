@@ -64,6 +64,7 @@ PODS:
   - NVActivityIndicatorView (4.8.0):
     - NVActivityIndicatorView/Presenter (= 4.8.0)
   - NVActivityIndicatorView/Presenter (4.8.0)
+  - QRCodeReader.swift (10.1.0)
   - SDWebImage (5.7.4):
     - SDWebImage/Core (= 5.7.4)
   - SDWebImage/Core (5.7.4)
@@ -83,6 +84,7 @@ DEPENDENCIES:
   - KVKCalendar
   - MaterialComponents/BottomSheet
   - NVActivityIndicatorView
+  - QRCodeReader.swift (~> 10.1.0)
   - SDWebImage (~> 5.0)
   - SkyFloatingLabelTextField (~> 3.0)
   - SnapKit (~> 5.0.0)
@@ -104,6 +106,7 @@ SPEC REPOS:
     - MaterialComponents
     - MGSwipeTableCell
     - NVActivityIndicatorView
+    - QRCodeReader.swift
     - SDWebImage
     - SkyFloatingLabelTextField
     - SnapKit
@@ -124,11 +127,12 @@ SPEC CHECKSUMS:
   MaterialComponents: 59bfbfe08fc1ac204b21ba69100beabb932e3699
   MGSwipeTableCell: b804e4e450dee439c42250be90bd50458bf67fce
   NVActivityIndicatorView: d24b7ebcf80af5dcd994adb650e2b6c93379270f
+  QRCodeReader.swift: 373a389fe9a22d513c879a32a6f647c58f4ef572
   SDWebImage: 48b88379b798fd1e4298f95bb25d2cdabbf4deb3
   SkyFloatingLabelTextField: 5a338412114808e961fe2d14ea2c5452c8b6e4aa
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftMessages: b577dc7043be8b299857ab35bb663dbff6483bd0
 
-PODFILE CHECKSUM: 0e2bc8131e72cc536af80368df386f6928b5e1c8
+PODFILE CHECKSUM: 44889e9a02415bb8db632d0d852b93120a9e7d1c
 
 COCOAPODS: 1.9.1

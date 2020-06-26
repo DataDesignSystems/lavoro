@@ -22,4 +22,5 @@ target 'Lavoro' do
   pod 'SDWebImage', '~> 5.0'
   pod 'InputBarAccessoryView'
   pod 'GooglePlaces'
+  pod 'QRCodeReader.swift', '~> 10.1.0'
 end
