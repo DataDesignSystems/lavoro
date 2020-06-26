@@ -63,14 +63,17 @@ class MessageListViewController: BaseViewController {
             self?.tableview.reloadData()
             self?.noFeedLabel.isHidden = (self?.messageThreads.count != 0)
         })
+        guard let tabBarController = self.tabBarController as? TabbarViewController else {
+            return
+        }
         let userService = ALUserService()
         if let totalUnreadCount = userService.getTotalUnreadCount() {
             if(totalUnreadCount.intValue > 0){
                 UIApplication.shared.applicationIconBadgeNumber = totalUnreadCount.intValue
-                self.tabBarController?.tabBar.items![2].badgeValue = "\(totalUnreadCount)"
+                tabBarController.messageTabbarItem()?.badgeValue = "\(totalUnreadCount)"
             }else{
                 UIApplication.shared.applicationIconBadgeNumber = 0
-                self.tabBarController?.tabBar.items![2].badgeValue = nil
+                tabBarController.messageTabbarItem()?.badgeValue = nil
             }
         }
     }

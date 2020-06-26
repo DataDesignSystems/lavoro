@@ -10,12 +10,13 @@ import UIKit
 
 class TabbarViewController: UITabBarController {
     var tabInfo = [Tabbar(storyboardName: "Home", initialViewControllerIdentifier: "HomeModule", iconName: "ic_home", title: "Home"),
-                   Tabbar(storyboardName: "WorkCheckIn", initialViewControllerIdentifier: "WorkCheckInModule", iconName: "ic_workCheckIn", title: "Work Check In"),
                    Tabbar(storyboardName: "Messages", initialViewControllerIdentifier: "MessagesModule", iconName: "ic_messages", title: "Messages"),
                    Tabbar(storyboardName: "Notification", initialViewControllerIdentifier: "NotificationModule", iconName: "ic_notification", title: "Notifications")]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if let authUser = AuthUser.getAuthUser(), authUser.type == .serviceProvider {
+            tabInfo.insert((Tabbar(storyboardName: "WorkCheckIn", initialViewControllerIdentifier: "WorkCheckInModule", iconName: "ic_workCheckIn", title: "Work Check In")), at: 1)
             tabInfo.append(Tabbar(storyboardName: "Profile", initialViewControllerIdentifier: "ProfileModule", iconName: "ic_profile", title: "Public"))
         }
         setupTabbar()
@@ -28,8 +29,11 @@ class TabbarViewController: UITabBarController {
         guard let items = self.tabBar.items, items.count > 1 else {
             return
         }
+        guard let authUser = AuthUser.getAuthUser(), authUser.type == .serviceProvider else {
+            return
+        }
         let checkinTabbar = items[1]
-        if AuthUser.getAuthUser()?.isAlreadyCheckIn() ?? false {
+        if authUser.isAlreadyCheckIn() {
             checkinTabbar.title = "Work Check Out"
         } else {
             checkinTabbar.title = "Work Check In"
@@ -76,6 +80,22 @@ class TabbarViewController: UITabBarController {
             if let profileNC = viewControllers?[4] as? UINavigationController, let profileVC = profileNC.topViewController as? ProfileViewController {
                 profileVC.displayWhoIFollowPage()
             }
+        }
+    }
+    
+    func messageTabbarItem() -> UITabBarItem? {
+        guard let authUser = AuthUser.getAuthUser() else {
+            return nil
+        }
+        guard let items = tabBar.items else {
+            return nil
+        }
+        if authUser.type == .serviceProvider, items.count >= 2 {
+            return items[2]
+        } else if items.count >= 1 {
+            return items[1]
+        } else {
+            return nil
         }
     }
 }

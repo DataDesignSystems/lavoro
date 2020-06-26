@@ -106,9 +106,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             let alRegisterUserClientService: ALRegisterUserClientService = ALRegisterUserClientService()
             alRegisterUserClientService.updateApnDeviceToken(withCompletion: deviceTokenString, withCompletion: { (response, error) in
                if error != nil {
-                   print("Error in Registration: \(error)")
+                print("Error in Registration: \(String(describing: error))")
                }
-               NSLog("Registration Response :: \(response)")
+                NSLog("Registration Response :: \(String(describing: response))")
             })
         }
     }
@@ -142,7 +142,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     @objc
     func updateBadgeCountForUnreadMessage() {
-        guard let tabbarController = window?.rootViewController as? UITabBarController else {
+        guard let tabbarController = window?.rootViewController as? TabbarViewController else {
             return
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
@@ -150,10 +150,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             if let totalUnreadCount = userService.getTotalUnreadCount(), (tabbarController.tabBar.items?.count ?? 0) > 2 {
                 if(totalUnreadCount.intValue > 0){
                     UIApplication.shared.applicationIconBadgeNumber = totalUnreadCount.intValue
-                    tabbarController.tabBar.items![2].badgeValue = "\(totalUnreadCount)"
+                    tabbarController.messageTabbarItem()?.badgeValue = "\(totalUnreadCount)"
                 }else{
                     UIApplication.shared.applicationIconBadgeNumber = 0
-                    tabbarController.tabBar.items![2].badgeValue = nil
+                    tabbarController.messageTabbarItem()?.badgeValue = nil
                 }
             }
         }
