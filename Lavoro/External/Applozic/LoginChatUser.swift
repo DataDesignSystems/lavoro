@@ -13,6 +13,9 @@ import Applozic
 class LoginChatUser {
     static func registerUserForChat() {
         if let authUser = AuthUser.getAuthUser() {
+            guard authUser.didRegister else {
+                return
+            }
             let alUser : ALUser =  ALUser()
             alUser.applicationId = ALChatManager.applicationId
             alUser.userId = authUser.id
@@ -20,7 +23,6 @@ class LoginChatUser {
             alUser.imageLink = authUser.avatar
             alUser.displayName = authUser.username // "\(authUser.first) \(authUser.last)"
             alUser.password = "Atustr29!"
-
 
             //Saving these details
             ALUserDefaultsHandler.setUserId(alUser.userId)
@@ -36,6 +38,9 @@ class LoginChatUser {
                                 appDelegate.updateBadgeCountForUnreadMessage()
                             }
                             print("###ALChatManager Successfull login")
+                            let userService = ALUserService()
+                            userService.updateDisplayName(with: authUser.id, withDisplayName: authUser.username) { (response, error) in}
+                            userService.updateUserDisplayName(authUser.username, andUserImage: authUser.avatar, userStatus: "") { (user, error)in}
                         } else {
                             print("Cannot create a new account on Applozic with userID: \(authUser.id), email: \(authUser.email)")
                         }

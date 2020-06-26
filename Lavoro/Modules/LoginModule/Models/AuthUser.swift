@@ -34,6 +34,7 @@ class AuthUser: NSObject, NSCoding {
     var checkStatus: String
     var placeId: String
     var placeName: String
+    let didRegister: Bool
 
     private static var authUser: AuthUser?
     
@@ -61,7 +62,8 @@ class AuthUser: NSObject, NSCoding {
          avatar: String,
          checkStatus: String,
          placeId: String,
-         placeName: String) {
+         placeName: String,
+         didRegister: Bool) {
         self.id = id
         self.first = first
         self.middle = middle
@@ -81,6 +83,7 @@ class AuthUser: NSObject, NSCoding {
         self.checkStatus = checkStatus
         self.placeId = placeId
         self.placeName = placeName
+        self.didRegister = didRegister
     }
     
     init(json: [String: Any], token: String) {
@@ -109,6 +112,7 @@ class AuthUser: NSObject, NSCoding {
             self.placeId = ""
             self.placeName = ""
         }
+        self.didRegister = json["didRegister"] as? Bool ?? false
     }
     
     required convenience init(coder aDecoder: NSCoder) {
@@ -130,7 +134,8 @@ class AuthUser: NSObject, NSCoding {
         let checkStatus = aDecoder.decodeObject(forKey: "checkStatus") as? String ?? ""
         let placeId = aDecoder.decodeObject(forKey: "placeId") as? String ?? ""
         let placeName = aDecoder.decodeObject(forKey: "placeName") as? String ?? ""
-        self.init(id: id, first: first, middle: middle, last: last, phone: phone, email: email, facebookToken: facebookToken, userTypeId: userTypeId, status: status, userType: userType, authToken: authToken, gender: gender, birthday: birthday, username: username, avatar: avatar, checkStatus: checkStatus, placeId: placeId, placeName: placeName)
+        let didRegister = aDecoder.decodeBool(forKey: "didRegister") as? Bool ?? false
+        self.init(id: id, first: first, middle: middle, last: last, phone: phone, email: email, facebookToken: facebookToken, userTypeId: userTypeId, status: status, userType: userType, authToken: authToken, gender: gender, birthday: birthday, username: username, avatar: avatar, checkStatus: checkStatus, placeId: placeId, placeName: placeName, didRegister: didRegister)
     }
 
     func encode(with aCoder: NSCoder) {
@@ -152,6 +157,7 @@ class AuthUser: NSObject, NSCoding {
         aCoder.encode(checkStatus, forKey: "checkStatus")
         aCoder.encode(placeId, forKey: "placeId")
         aCoder.encode(placeName, forKey: "placeName")
+        aCoder.encode(didRegister, forKey: "didRegister")
     }
 
     
