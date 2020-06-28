@@ -70,7 +70,7 @@ class HomeService: BaseModuleService {
     }
     
     func followUserByQR(qrCode: String, completionHandler: @escaping ((Bool, String?) -> ())) {
-        NS.getRequest(with: .followUserByQR, parameters: [HomeService.code: qrCode], authToken: true) { [weak self] (response) in
+        NS.getRequest(with: .followUserByQR, parameters: [HomeService.code: qrCode.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? qrCode], authToken: true) { [weak self] (response) in
             switch response.result {
             case .success(let json):
                 if self?.getCode(from: json) == 201 {
