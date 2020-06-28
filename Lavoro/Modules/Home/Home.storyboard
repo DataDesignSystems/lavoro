@@ -351,11 +351,82 @@ Butterbee's American Grille</string>
             </objects>
             <point key="canvasLocation" x="8.6956521739130448" y="0.6696428571428571"/>
         </scene>
+        <!--Display View Controller-->
+        <scene sceneID="lWu-Ve-Ksx">
+            <objects>
+                <viewController storyboardIdentifier="QRDisplayViewController" id="fYK-g0-Mea" customClass="QRDisplayViewController" customModule="Lavoro" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="h6b-Xj-97d">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yt6-qb-XVO">
+                                <rect key="frame" x="16" y="54" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="Jng-gb-Gfm"/>
+                                    <constraint firstAttribute="height" constant="40" id="KQA-ik-9DX"/>
+                                </constraints>
+                                <state key="normal" image="ic_close_bg"/>
+                                <connections>
+                                    <action selector="closeButtonAction" destination="fYK-g0-Mea" eventType="touchUpInside" id="rjV-hm-Oyg"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan to follow me!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uzB-46-hAX">
+                                <rect key="frame" x="102.5" y="124" width="209" height="33"/>
+                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="24"/>
+                                <color key="textColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dge-S9-sN5">
+                                <rect key="frame" x="32" y="173" width="350" height="350"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="dge-S9-sN5" secondAttribute="height" id="VrM-cA-47T"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ONN-5r-3t5">
+                                <rect key="frame" x="16" y="547" width="382" height="48"/>
+                                <color key="backgroundColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="ecM-Z0-4uQ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                <state key="normal" title="Open QR Scanner">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="scanStartButton" destination="fYK-g0-Mea" eventType="touchUpInside" id="KD1-lb-Mp5"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.92000000000000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="dge-S9-sN5" firstAttribute="centerX" secondItem="h6b-Xj-97d" secondAttribute="centerX" id="ADI-9T-EEt"/>
+                            <constraint firstItem="Yt6-qb-XVO" firstAttribute="top" secondItem="0Uq-iy-FAa" secondAttribute="top" constant="10" id="RHI-Kq-qwn"/>
+                            <constraint firstItem="dge-S9-sN5" firstAttribute="leading" secondItem="0Uq-iy-FAa" secondAttribute="leading" constant="32" id="irk-Ng-CGu"/>
+                            <constraint firstItem="uzB-46-hAX" firstAttribute="top" secondItem="0Uq-iy-FAa" secondAttribute="top" constant="80" id="mZX-Fe-Ubn"/>
+                            <constraint firstItem="ONN-5r-3t5" firstAttribute="centerX" secondItem="h6b-Xj-97d" secondAttribute="centerX" id="o3C-aA-BhT"/>
+                            <constraint firstItem="ONN-5r-3t5" firstAttribute="top" secondItem="dge-S9-sN5" secondAttribute="bottom" constant="24" id="opf-jc-VUc"/>
+                            <constraint firstItem="Yt6-qb-XVO" firstAttribute="leading" secondItem="0Uq-iy-FAa" secondAttribute="leading" constant="16" id="x49-Tb-e9t"/>
+                            <constraint firstItem="dge-S9-sN5" firstAttribute="top" secondItem="uzB-46-hAX" secondAttribute="bottom" constant="16" id="ynF-A3-Kkb"/>
+                            <constraint firstItem="ONN-5r-3t5" firstAttribute="leading" secondItem="0Uq-iy-FAa" secondAttribute="leading" constant="16" id="zek-pu-oEZ"/>
+                            <constraint firstItem="uzB-46-hAX" firstAttribute="centerX" secondItem="h6b-Xj-97d" secondAttribute="centerX" id="zvM-U6-Rqx"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="0Uq-iy-FAa"/>
+                    </view>
+                    <connections>
+                        <outlet property="qrCodeImage" destination="dge-S9-sN5" id="xrU-tB-13g"/>
+                        <outlet property="scanButton" destination="ONN-5r-3t5" id="VwG-bV-oGT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iW9-K1-Dt9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="749" y="2"/>
+        </scene>
     </scenes>
     <resources>
         <image name="QR_Code" width="30" height="30"/>
         <image name="checkInDummyImage" width="315" height="152"/>
         <image name="dummyUser" width="105" height="105"/>
+        <image name="ic_close_bg" width="30" height="30"/>
         <image name="ic_comments" width="18" height="18"/>
         <image name="ic_like" width="20" height="18"/>
         <image name="ic_like_selected" width="20" height="18"/>

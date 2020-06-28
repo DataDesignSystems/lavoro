@@ -31,5 +31,8 @@ struct NetworkConfig {
         case removeFollowUser = "api/remove-follow-user/"
         case tagline = "api/tagline/"
         case addCheckinCheckout = "api/add-checkin-checkout/"
+        case getMyQRcode = "api/get-my-qrcode/"
+        case followUserByQR = "api/follow-user-by-qr/"
+        
     }
 }

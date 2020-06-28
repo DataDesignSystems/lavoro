@@ -45,11 +45,13 @@ class HomeFeedsViewController: BaseViewController {
     lazy var readerVC: QRCodeReaderViewController = {
         let builder = QRCodeReaderViewControllerBuilder {
             $0.reader = QRCodeReader(metadataObjectTypes: [.qr], captureDevicePosition: .back)
-            $0.showTorchButton        = false
+            $0.showTorchButton = false
             $0.showSwitchCameraButton = false
-            $0.showCancelButton       = false
-            $0.showOverlayView        = true
-            $0.rectOfInterest         = CGRect(x: 0.2, y: 0.2, width: 0.6, height: 0.6)
+            $0.showCancelButton = true
+            $0.showOverlayView = true
+            $0.cancelButtonTitle = ""
+            let readerView = QRCodeReaderContainer(displayable: ScannerOverlay())
+            $0.readerView = readerView
         }
         return QRCodeReaderViewController(builder: builder)
     }()
@@ -105,6 +107,7 @@ class HomeFeedsViewController: BaseViewController {
         followingButton.isSelected = true
         followingMeButton.isSelected = false
         self.tableView.addSubview(self.refreshControl)
+        
     }
 
     func setProfileData() {
@@ -152,12 +155,38 @@ class HomeFeedsViewController: BaseViewController {
         }
     }
     
+    func startScan() {
+        readerVC.completionBlock = { [weak self] (result: QRCodeReaderResult?) in
+           self?.readerVC.dismiss(animated: true) { [weak self] in
+            guard let value = result?.value else {
+                return
+            }
+            self?.showLoadingView()
+            self?.homeService.followUserByQR(qrCode: value, completionHandler: { (success, message) in
+                self?.stopLoadingView()
+                if success {
+                    if let message = message, message.count > 0 {
+                        MessageViewAlert.showSuccess(with: message)
+                    }
+                } else {
+                    MessageViewAlert.showSuccess(with: message ?? Validation.Error.genericError.rawValue)
+                }
+            })
+           }
+        }
+        readerVC.modalPresentationStyle = .formSheet
+        present(readerVC, animated: true, completion: nil)
+    }
+    
     @IBAction func scanAction() {
-         readerVC.completionBlock = { (result: QRCodeReaderResult?) in
-           print(result)
-         }
-         readerVC.modalPresentationStyle = .formSheet
-         present(readerVC, animated: true, completion: nil)
+        guard let authUser = AuthUser.getAuthUser() else {
+            return
+        }
+        if authUser.type == .serviceProvider {
+            QRDisplayViewController.displayQR(on: self)
+        } else {
+            startScan()
+        }
     }
 }
 extension HomeFeedsViewController: UITableViewDataSource {

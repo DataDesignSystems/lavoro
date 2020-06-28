@@ -9,7 +9,7 @@
 import UIKit
 
 class HomeService: BaseModuleService {
-    
+    static let code = "code"
     
     func getDashboardData(with completionHandler: @escaping ((Bool, String?, [Feed], [IGStory], [IGStory]) -> ())) {
         NS.getRequest(with: .dashboard, parameters: [:], authToken: true) { [weak self] (response) in
@@ -42,6 +42,52 @@ class HomeService: BaseModuleService {
                 }
             case .failure( _):
                 completionHandler(false, "", [], [], [])
+            }
+        }
+    }
+    
+    func getQRCode(completionHandler: @escaping ((Bool, String?, String?) -> ())) {
+        NS.getRequest(with: .getMyQRcode, parameters: [:], authToken: true) { [weak self] (response) in
+            switch response.result {
+            case .success(let json):
+                if self?.getCode(from: json) == 201 {
+                    if let json = json as? [String: Any], let data = json["data"] as? [String: Any] {
+                        if let qrCode = data["qr_code"] as? String {
+                            completionHandler(true, self?.getMessage(from: json), qrCode)
+                        } else {
+                            completionHandler(false, self?.getMessage(from: json), nil)
+                        }
+                    } else {
+                        completionHandler(false, self?.getMessage(from: json), nil)
+                    }
+                } else {
+                    completionHandler(false, self?.getMessage(from: json), nil)
+                }
+            case .failure( _):
+                completionHandler(false, "", nil)
+            }
+        }
+    }
+    
+    func followUserByQR(qrCode: String, completionHandler: @escaping ((Bool, String?) -> ())) {
+        NS.getRequest(with: .followUserByQR, parameters: [HomeService.code: qrCode], authToken: true) { [weak self] (response) in
+            switch response.result {
+            case .success(let json):
+                if self?.getCode(from: json) == 201 {
+                    if let json = json as? [String: Any], let data = json["data"] as? [String: Any] {
+                        if let result = data["result"] as? String, result == "done" {
+                            completionHandler(true, self?.getMessage(from: json))
+                        } else {
+                            completionHandler(false, self?.getMessage(from: json))
+                        }
+                    } else {
+                        completionHandler(false, self?.getMessage(from: json))
+                    }
+                } else {
+                    completionHandler(false, self?.getMessage(from: json))
+                }
+            case .failure( _):
+                completionHandler(false, "")
             }
         }
     }

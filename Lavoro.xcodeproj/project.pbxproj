@@ -93,6 +93,8 @@
 		13C54C102496168700CE1AF6 /* LoginChatUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C54C0F2496168700CE1AF6 /* LoginChatUser.swift */; };
 		13C54C1A2496331500CE1AF6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C54C192496331500CE1AF6 /* Constants.swift */; };
 		13C54C1C2496423A00CE1AF6 /* IGAddStoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C54C1B2496423A00CE1AF6 /* IGAddStoryCell.swift */; };
+		13CEEBE924A87B3300C963CD /* QRDisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CEEBE824A87B3300C963CD /* QRDisplayViewController.swift */; };
+		13CEEBEC24A8885B00C963CD /* ScannerOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CEEBEB24A8885B00C963CD /* ScannerOverlay.swift */; };
 		13D0579B245C7A6600227E15 /* HomeFeedsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D0579A245C7A6600227E15 /* HomeFeedsViewController.swift */; };
 		13D0579F245C7B2D00227E15 /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D0579E245C7B2D00227E15 /* Feed.swift */; };
 		13D057A1245C7B4700227E15 /* CheckInFeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D057A0245C7B4700227E15 /* CheckInFeedTableViewCell.swift */; };
@@ -228,6 +230,8 @@
 		13C54C0F2496168700CE1AF6 /* LoginChatUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginChatUser.swift; sourceTree = "<group>"; };
 		13C54C192496331500CE1AF6 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		13C54C1B2496423A00CE1AF6 /* IGAddStoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGAddStoryCell.swift; sourceTree = "<group>"; };
+		13CEEBE824A87B3300C963CD /* QRDisplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRDisplayViewController.swift; sourceTree = "<group>"; };
+		13CEEBEB24A8885B00C963CD /* ScannerOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerOverlay.swift; sourceTree = "<group>"; };
 		13D0579A245C7A6600227E15 /* HomeFeedsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedsViewController.swift; sourceTree = "<group>"; };
 		13D0579E245C7B2D00227E15 /* Feed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
 		13D057A0245C7B4700227E15 /* CheckInFeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInFeedTableViewCell.swift; sourceTree = "<group>"; };
@@ -530,6 +534,7 @@
 		1378AAA92459F5EE00131BEB /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				13CEEBEA24A8884D00C963CD /* QRScannerOverlay */,
 				137938CA2468213B00AB2C46 /* LocationManager.swift */,
 				13D057F9245CA03200227E15 /* IGAppUtility.swift */,
 				1378AAAA2459F5EE00131BEB /* UIResponder+Exts.swift */,
@@ -621,6 +626,14 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		13CEEBEA24A8884D00C963CD /* QRScannerOverlay */ = {
+			isa = PBXGroup;
+			children = (
+				13CEEBEB24A8885B00C963CD /* ScannerOverlay.swift */,
+			);
+			path = QRScannerOverlay;
+			sourceTree = "<group>";
+		};
 		13D05797245C7A4C00227E15 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -636,6 +649,7 @@
 			children = (
 				13D057F5245C9FDB00227E15 /* IGStoryPreviewController.swift */,
 				13D0579A245C7A6600227E15 /* HomeFeedsViewController.swift */,
+				13CEEBE824A87B3300C963CD /* QRDisplayViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1040,6 +1054,7 @@
 				136F3259245B032F006939ED /* OnboardingCollectionViewCell.swift in Sources */,
 				13D05809245D755B00227E15 /* BaseNavigationViewController.swift in Sources */,
 				13D057DC245C9DF800227E15 /* IGSnap.swift in Sources */,
+				13CEEBE924A87B3300C963CD /* QRDisplayViewController.swift in Sources */,
 				13825524249E1B6E004BF327 /* SearchViewController.swift in Sources */,
 				13BA4E212498E96B002AA103 /* UserService.swift in Sources */,
 				1317B8282460A42400AD9AC8 /* WorkLocationTableViewCell.swift in Sources */,
@@ -1061,6 +1076,7 @@
 				1382551F249D13C4004BF327 /* UIScreen+Exts.swift in Sources */,
 				1317B82424609D6300AD9AC8 /* WorkLocation.swift in Sources */,
 				13D057FE245CA09B00227E15 /* IGStoryListCell.swift in Sources */,
+				13CEEBEC24A8885B00C963CD /* ScannerOverlay.swift in Sources */,
 				13D057E5245C9DF800227E15 /* IGVideoCacheManager.swift in Sources */,
 				13D057E7245C9DF800227E15 /* IGCommon.swift in Sources */,
 				1388A93324A4EB4E007F505E /* GPManager.swift in Sources */,

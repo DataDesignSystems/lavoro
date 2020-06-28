@@ -58,6 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     
     func presentLoginFlow() {
+        AuthUser.logout()
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "loginFLow")
         self.window?.rootViewController = vc
