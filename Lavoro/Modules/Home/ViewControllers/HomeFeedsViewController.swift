@@ -107,7 +107,6 @@ class HomeFeedsViewController: BaseViewController {
         followingButton.isSelected = true
         followingMeButton.isSelected = false
         self.tableView.addSubview(self.refreshControl)
-        
     }
 
     func setProfileData() {

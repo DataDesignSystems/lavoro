@@ -193,6 +193,7 @@
                     <connections>
                         <outlet property="editButton" destination="v4d-UB-VqL" id="kGR-Lv-Oh0"/>
                         <outlet property="followerLabel" destination="AkU-eC-Ucj" id="n0B-f7-gh7"/>
+                        <outlet property="followerTextLabel" destination="Pv5-iI-4zO" id="vwL-A6-Wzs"/>
                         <outlet property="followingLabel" destination="UCL-QA-xdA" id="cvh-Kq-oqV"/>
                         <outlet property="likesLabel" destination="RbZ-CL-XHJ" id="nb9-ps-Am2"/>
                         <outlet property="nameLabel" destination="hjH-th-bUV" id="0ms-4g-qT4"/>

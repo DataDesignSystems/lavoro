@@ -15,17 +15,27 @@ class ProfileViewController: BaseViewController {
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var followerLabel: UILabel!
+    @IBOutlet weak var followerTextLabel: UILabel!
     @IBOutlet weak var followingLabel: UILabel!
     @IBOutlet weak var likesLabel: UILabel!
 
-    var profileInfo = [[ProfileInfo(icon: "MyWorkGroupLocations", title: "My Work Locations", type: .myWorkLocations),
-                       ProfileInfo(icon: "MySchedule", title: "My Schedule", type: .mySchedule),
-                       ProfileInfo(icon: "Group", title: "Send Group Message", type: .sendGroupMessage)],
-                       [ProfileInfo(icon: "WhoIFollow", title: "Who I Follow", type: .whoIFollow),
-                       ProfileInfo(icon: "Messages", title: "Messages", type: .messages),
-                       ProfileInfo(icon: "Blacklist", title: "Blacklist", type: .blacklist),
-                       ProfileInfo(icon: "Settings", title: "Settings", type: .settings),
-                       ProfileInfo(icon: "logout", title: "Logout", type: .logout)]]
+    var serviceProfileInfo = [[ProfileInfo(icon: "My Public Profile", title: "My Public Profile", type: .publicProfile),
+                               ProfileInfo(icon: "MyWorkGroupLocations", title: "My Work Locations", type: .myWorkLocations),
+                               ProfileInfo(icon: "MySchedule", title: "My Schedule", type: .mySchedule),
+                               ProfileInfo(icon: "Group", title: "Send Group Message", type: .sendGroupMessage)],
+                              [ProfileInfo(icon: "Followers", title: "Followers", type: .followers),
+                               ProfileInfo(icon: "WhoIFollow", title: "Who I Follow", type: .whoIFollow),
+                               ProfileInfo(icon: "Messages", title: "Messages", type: .messages),
+                               ProfileInfo(icon: "Blacklist", title: "Blacklist", type: .blacklist),
+                               ProfileInfo(icon: "Settings", title: "Settings", type: .settings),
+                               ProfileInfo(icon: "logout", title: "Logout", type: .logout)]]
+    
+    var customerProfileInfo = [[ProfileInfo(icon: "WhoIFollow", title: "Who I Follow", type: .whoIFollow),
+                                ProfileInfo(icon: "Messages", title: "Messages", type: .messages),
+                                ProfileInfo(icon: "Settings", title: "Settings", type: .settings),
+                                ProfileInfo(icon: "logout", title: "Logout", type: .logout)]]
+    
+    var profileInfo = [[ProfileInfo]]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,8 +70,13 @@ class ProfileViewController: BaseViewController {
         userImage.setLayer(cornerRadius: 6.0)
         editButton.setLayer(cornerRadius: 10.0)
         if let authUser = AuthUser.getAuthUser(), authUser.type == .serviceProvider {
-            profileInfo[0].insert(ProfileInfo(icon: "My Public Profile", title: "My Public Profile", type: .publicProfile), at: 0)
-            profileInfo[1].insert(ProfileInfo(icon: "Followers", title: "Followers", type: .followers), at: 0)
+            profileInfo = serviceProfileInfo
+            followerLabel.isHidden = false
+            followerTextLabel.isHidden = false
+        } else {
+            profileInfo = customerProfileInfo
+            followerLabel.isHidden = true
+            followerTextLabel.isHidden = true
         }
     }
     

@@ -59,7 +59,6 @@ class QRDisplayViewController: BaseViewController {
         readerVC.completionBlock = { [weak self] (result: QRCodeReaderResult?) in
            self?.readerVC.dismiss(animated: true) { [weak self] in
             guard let value = result?.value else {
-                MessageViewAlert.showError(with: Validation.Error.genericError.rawValue)
                 return
             }
             self?.showLoadingView()

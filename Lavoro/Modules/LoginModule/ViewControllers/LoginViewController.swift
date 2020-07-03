@@ -51,7 +51,7 @@ class LoginViewController: BaseViewController {
     }
     
     func testUser() {
-        emailTextField.text = "test@test.com"
+        emailTextField.text = "vulputate.eu@quis.ca"
         passwordtextField.text = "GoJackets2018!"
     }
     
