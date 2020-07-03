@@ -13,12 +13,12 @@ class WorkCategoriesCollectionViewCell: UICollectionViewCell {
     let selectedColor = UIColor(hexString: "1E2432")
     let unselectedColor = UIColor(hexString: "ACB1C0")
     
-    func setupCell(with object: WorkCategories, selectedCategory: WorkCategories) {
-        if object.category == selectedCategory.category {
+    func setupCell(with object: String, selectedCategory: String) {
+        if object == selectedCategory {
             categoryName.textColor = selectedColor
         } else {
             categoryName.textColor = unselectedColor
         }
-        categoryName.text = object.category.rawValue
+        categoryName.text = object
     }
 }

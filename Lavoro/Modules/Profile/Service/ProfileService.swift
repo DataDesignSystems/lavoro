@@ -14,6 +14,7 @@ class ProfileService: BaseModuleService {
     static let comments: String = "comments"
     static let googleId: String = "google_id"
     static let checkInStatus: String = "check"
+    static let all: String = "All"
 
     func getPublicProfile(with userId: String, completionHandler: @escaping ((Bool, String?, PublicProfile?) -> ())) {
         NS.getRequest(with: .userPublicProfile, parameters: [ProfileService.userId: userId], authToken: true) { [weak self] (response) in
@@ -121,4 +122,33 @@ class ProfileService: BaseModuleService {
             }
         }
     }
+    
+    func getMyWorkLocations(with completionHandler: @escaping ((Bool, String?, [WorkLocation], [String]) -> ())) {
+        NS.getRequest(with: .getMyWorkLocations, parameters: [:], authToken: true) { [weak self] (response) in
+            switch response.result {
+            case .success(let json):
+                if self?.getCode(from: json) == 201 {
+                    var workLocations = [WorkLocation]()
+                    var categories = [ProfileService.all]
+                    if let json = json as? [String: Any], let data = json["data"] as? [String: Any] {
+                        if let locations =  data["locations"] as? [[String: Any]] {
+                            for location in locations {
+                                workLocations.append(WorkLocation(with: location))
+                            }
+                        }
+                        if let ctgrs = data["categories"] as? [String] {
+                            categories = categories + ctgrs
+                        }
+                    }
+                    
+                    completionHandler(true, self?.getMessage(from: json), workLocations, categories)
+                } else {
+                    completionHandler(false, self?.getMessage(from: json), [], [])
+                }
+            case .failure( _):
+                completionHandler(false, "", [], [])
+            }
+        }
+    }
+
 }

@@ -29,14 +29,13 @@ class WorkLocationTableViewCell: UITableViewCell {
     func setupCell(with object: WorkLocation) {
         nameLabel.text = object.name
         addressLabel.text = object.address
-        workingStatusLabel.text = object.workingType.rawValue
+        workingStatusLabel.text = object.workingText
         locationLabel.text = "\(object.distance) mi"
-        locationImage.image = UIImage(named: object.imageName)
-        switch object.workingType {
-        case .working:
-            workingStatusLabel.textColor = UIColor(hexString: "4CD964")
-        case .notWorking:
-            workingStatusLabel.textColor = UIColor(hexString: "FF2D55")
+        if let url = URL(string: object.imageName) {
+            locationImage.sd_setImage(with: url, completed: nil)
+        } else {
+            locationImage.image = nil
         }
+        workingStatusLabel.textColor = object.color ?? UIColor(hexString: "FF2D55")
     }
 }

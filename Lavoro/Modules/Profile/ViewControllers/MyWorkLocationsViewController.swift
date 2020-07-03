@@ -16,6 +16,7 @@ class MyWorkLocationsViewController: BaseViewController {
     @IBOutlet weak var topHeaderView: UIView!
     @IBOutlet weak var topTableHeaderConstraint: NSLayoutConstraint!
     var isOpenedAsBottomSheet = false
+    let profileService = ProfileService()
 
     var widthConstraint: Constraint?
     var leadingConstraint: Constraint?
@@ -25,15 +26,44 @@ class MyWorkLocationsViewController: BaseViewController {
         return view
     }()
 
-    var workLocations: [WorkLocation] = WorkLocation.mockData()
-    var workCategories: [WorkCategories] = [WorkCategories(category: .all), WorkCategories(category: .restaurants), WorkCategories(category: .bars), WorkCategories(category: .hotels), WorkCategories(category: .other)]
-    var selectedCategory: WorkCategories = WorkCategories(category: .all)
+    var workLocations: [WorkLocation] = [WorkLocation]()
+    var workCategories: [String] = []
+    var selectedCategory: String = ProfileService.all
     var filteredWorkLocations = [WorkLocation]()
+    let noFeedLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.text = "No work locations available. Check in at your work location to add place here!"
+        label.textColor = UIColor(white: 0.20, alpha: 1)
+        label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        label.textAlignment = .center
+        return label
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        filteredItems()
+        fetchData()
         // Do any additional setup after loading the view.
+    }
+    
+    func fetchData() {
+        selectedCategoryBottomView.isHidden = true
+        noFeedLabel.isHidden = true
+        self.showLoadingView()
+        profileService.getMyWorkLocations { [weak self] (success, message, workLocations, categories) in
+            self?.stopLoadingView()
+            self?.workLocations = workLocations
+            self?.workCategories = categories
+            self?.filteredItems()
+            if workLocations.count == 0 {
+                self?.noFeedLabel.isHidden = false
+            } else {
+                self?.selectedCategoryBottomView.isHidden = false
+            }
+            self?.collectionview.reloadData()
+            self?.tableview.reloadData()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,6 +83,12 @@ class MyWorkLocationsViewController: BaseViewController {
         if isOpenedAsBottomSheet {
             setupViewForBottomSheet()
         }
+        tableview.backgroundView = UIView()
+        tableview.backgroundView?.addSubview(noFeedLabel)
+        noFeedLabel.snp.makeConstraints { (make) in
+            make.center.equalToSuperview()
+            make.leading.equalToSuperview().offset(16.0)
+        }
     }
     
     func setupViewForBottomSheet() {
@@ -61,12 +97,12 @@ class MyWorkLocationsViewController: BaseViewController {
     }
     
     func filteredItems(){
-        guard selectedCategory.category != .all else {
+        guard selectedCategory != ProfileService.all else {
             filteredWorkLocations = workLocations
             return
         }
         let filteredItems = workLocations.filter { workLocation in
-            workLocation.category == selectedCategory.category
+            workLocation.category.contains(selectedCategory)
         }
         filteredWorkLocations = filteredItems
     }

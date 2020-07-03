@@ -12,31 +12,23 @@ import GooglePlaces
 
 struct WorkLocation {
     var name: String
-    var category: CategoryType
+    var category: [String]
     var address: String
-    var workingType: WorkingType
+    var workingType: WorkingType = .working
     var location: CLLocationCoordinate2D
     var distance: Double
     var imageName: String
     var photoData: GMSPlacePhotoMetadata?
-    
+    var color: UIColor?
+    var workingText: String?
+
     static func mockData() -> [WorkLocation] {
-        return [WorkLocation(name: "Anderson Pub & Grill", category: .restaurants, address: "8060 Beechmont Ave, Cincinnati, OH 45255", workingType: .working, location: CLLocationCoordinate2D(), distance: 5, imageName: "locationDummyImage"),
-                WorkLocation(name: "Latitudes Bar & Bistro", category: .restaurants, address: "7454 Beechmont Ave, Cincinnati, OH 45255", workingType: .notWorking, location: CLLocationCoordinate2D(), distance: 8, imageName: "locationDummyImage"),
-                WorkLocation(name: "Butterbee's American Grille", category: .restaurants, address: "5980 Meijer Dr, Milford, OH 45150", workingType: .notWorking, location: CLLocationCoordinate2D(), distance: 12, imageName: "locationDummyImage"),
-                WorkLocation(name: "Butterbee's American Grille", category: .hotels, address: "5980 Meijer Dr, Milford, OH 45150", workingType: .notWorking, location: CLLocationCoordinate2D(), distance: 12, imageName: "locationDummyImage"),
-                WorkLocation(name: "Anderson Pub & Grill", category: .hotels, address: "8060 Beechmont Ave, Cincinnati, OH 45255", workingType: .working, location: CLLocationCoordinate2D(), distance: 5, imageName: "locationDummyImage"),
-                WorkLocation(name: "Latitudes Bar & Bistro", category: .other, address: "7454 Beechmont Ave, Cincinnati, OH 45255", workingType: .notWorking, location: CLLocationCoordinate2D(), distance: 8, imageName: "locationDummyImage"),
-                WorkLocation(name: "Butterbee's American Grille", category: .other, address: "5980 Meijer Dr, Milford, OH 45150", workingType: .notWorking, location: CLLocationCoordinate2D(), distance: 12, imageName: "locationDummyImage"),
-                WorkLocation(name: "Anderson Pub & Grill", category: .bars, address: "8060 Beechmont Ave, Cincinnati, OH 45255", workingType: .working, location: CLLocationCoordinate2D(), distance: 5, imageName: "locationDummyImage"),
-                WorkLocation(name: "Latitudes Bar & Bistro", category: .bars, address: "7454 Beechmont Ave, Cincinnati, OH 45255", workingType: .notWorking, location: CLLocationCoordinate2D(), distance: 8, imageName: "locationDummyImage"),
-                WorkLocation(name: "Latitudes Bar & Bistro", category: .bars, address: "7454 Beechmont Ave, Cincinnati, OH 45255", workingType: .notWorking, location: CLLocationCoordinate2D(), distance: 8, imageName: "locationDummyImage"),
-                WorkLocation(name: "Latitudes Bar & Bistro", category: .other, address: "7454 Beechmont Ave, Cincinnati, OH 45255", workingType: .notWorking, location: CLLocationCoordinate2D(), distance: 8, imageName: "locationDummyImage")]
+        return []
     }
     
     init(with place: GMSPlace) {
         self.name = place.name ?? ""
-        self.category = .restaurants
+        self.category = []
         self.address = place.formattedAddress ?? ""
         self.workingType = .working
         self.location = place.coordinate
@@ -48,7 +40,7 @@ struct WorkLocation {
         }
     }
     
-    init(name: String, category: CategoryType, address: String, workingType: WorkingType, location: CLLocationCoordinate2D, distance: Double, imageName: String) {
+    init(name: String, category: [String], address: String, workingType: WorkingType, location: CLLocationCoordinate2D, distance: Double, imageName: String) {
         self.name = name
         self.category = category
         self.address = address
@@ -56,6 +48,29 @@ struct WorkLocation {
         self.location = location
         self.distance = distance
         self.imageName = imageName
+    }
+    
+    init(with json:[String: Any]) {
+        self.name = json["name"] as? String ?? ""
+        self.category = json["categories"] as? [String] ?? []
+        
+        let address = json["address"] as? String ?? ""
+        let suite = json["suite"] as? String ?? ""
+        let city = json["city"] as? String ?? ""
+        let state = json["state"] as? String ?? ""
+        let zip = json["zip"] as? String ?? ""
+        
+        self.address = address + " " + suite + " " + city + " " + state + " " + zip
+        self.location = CLLocationCoordinate2D(latitude: json["latitude"] as? Double ?? 0.0, longitude: json["longitude"] as? Double ?? 0.0)
+        self.distance = 0.0
+        self.imageName = json["image"] as? String ?? ""
+        if let working = json["working"] as? [String: Any] {
+            self.workingText = working["name"] as? String ?? ""
+            self.color = UIColor(hexString: working["color"] as? String) 
+        } else {
+            self.workingText = "Not Working"
+            self.color = UIColor(hexString: "FF2D55")
+        }
     }
 }
 

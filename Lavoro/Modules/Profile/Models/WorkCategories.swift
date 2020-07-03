@@ -8,8 +8,8 @@
 
 import Foundation
 
-struct WorkCategories {
-    var category: CategoryType
+struct WorkCategory {
+    var category: String
 }
 
 enum CategoryType: String {
