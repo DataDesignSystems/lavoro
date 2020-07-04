@@ -35,6 +35,9 @@ class AuthUser: NSObject, NSCoding {
     var placeId: String
     var placeName: String
     let didRegister: Bool
+    let following: String
+    let follower: String
+    let likes: String
 
     private static var authUser: AuthUser?
     
@@ -63,7 +66,10 @@ class AuthUser: NSObject, NSCoding {
          checkStatus: String,
          placeId: String,
          placeName: String,
-         didRegister: Bool) {
+         didRegister: Bool,
+         following: String,
+         follower: String,
+         likes: String) {
         self.id = id
         self.first = first
         self.middle = middle
@@ -84,6 +90,9 @@ class AuthUser: NSObject, NSCoding {
         self.placeId = placeId
         self.placeName = placeName
         self.didRegister = didRegister
+        self.following = following
+        self.follower = follower
+        self.likes = likes
     }
     
     init(json: [String: Any], token: String) {
@@ -113,6 +122,9 @@ class AuthUser: NSObject, NSCoding {
             self.placeName = ""
         }
         self.didRegister = json["didRegister"] as? Bool ?? false
+        self.following = json["following"] as? String ?? "0"
+        self.follower = json["follower"] as? String ?? "0"
+        self.likes = json["likes"] as? String ?? "0"
     }
     
     required convenience init(coder aDecoder: NSCoder) {
@@ -134,8 +146,11 @@ class AuthUser: NSObject, NSCoding {
         let checkStatus = aDecoder.decodeObject(forKey: "checkStatus") as? String ?? ""
         let placeId = aDecoder.decodeObject(forKey: "placeId") as? String ?? ""
         let placeName = aDecoder.decodeObject(forKey: "placeName") as? String ?? ""
-        let didRegister = aDecoder.decodeBool(forKey: "didRegister") as? Bool ?? false
-        self.init(id: id, first: first, middle: middle, last: last, phone: phone, email: email, facebookToken: facebookToken, userTypeId: userTypeId, status: status, userType: userType, authToken: authToken, gender: gender, birthday: birthday, username: username, avatar: avatar, checkStatus: checkStatus, placeId: placeId, placeName: placeName, didRegister: didRegister)
+        let didRegister = aDecoder.decodeBool(forKey: "didRegister")
+        let following = aDecoder.decodeObject(forKey: "following") as? String ?? "0"
+        let follower = aDecoder.decodeObject(forKey: "follower") as? String ?? "0"
+        let likes = aDecoder.decodeObject(forKey: "likes") as? String ?? "0"
+        self.init(id: id, first: first, middle: middle, last: last, phone: phone, email: email, facebookToken: facebookToken, userTypeId: userTypeId, status: status, userType: userType, authToken: authToken, gender: gender, birthday: birthday, username: username, avatar: avatar, checkStatus: checkStatus, placeId: placeId, placeName: placeName, didRegister: didRegister, following: following, follower: follower, likes: likes)
     }
 
     func encode(with aCoder: NSCoder) {
@@ -158,6 +173,9 @@ class AuthUser: NSObject, NSCoding {
         aCoder.encode(placeId, forKey: "placeId")
         aCoder.encode(placeName, forKey: "placeName")
         aCoder.encode(didRegister, forKey: "didRegister")
+        aCoder.encode(following, forKey: "following")
+        aCoder.encode(follower, forKey: "follower")
+        aCoder.encode(likes, forKey: "likes")
     }
 
     

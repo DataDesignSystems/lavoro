@@ -54,6 +54,13 @@ class ProfileViewController: BaseViewController {
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationItem.title = "Profile"
         refreshView()
+        updateUserProfileData()
+    }
+    
+    func updateUserProfileData() {
+        userService.getMyUserProfile { [weak self] (success, message) in
+            self?.refreshView()
+        }
     }
     
     func refreshView() {
@@ -63,6 +70,9 @@ class ProfileViewController: BaseViewController {
             }
             usernameLabel.text = "@\(authUser.username)"
             nameLabel.text = "\(authUser.first) \(authUser.last)"
+            followerLabel.text = authUser.follower
+            followingLabel.text = authUser.following
+            likesLabel.text = authUser.likes
         }
     }
     

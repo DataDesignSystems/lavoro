@@ -101,4 +101,30 @@ class UserService: BaseModuleService {
             }
         }
     }
+    
+    func getMyUserProfile(with completionHandler: @escaping ((Bool, String?) -> ())) {
+        NS.getRequest(with: .getMyUserProfile, parameters: [:], authToken: true) { [weak self] (response) in
+            switch response.result {
+            case .success(let json):
+                if self?.getCode(from: json) == 201 {
+                    if let json = json as? [String: Any], let data = json["data"] as? [String: Any] {
+                        if let profileData = data["profile"] as? [String: Any] {
+                            let authUser = AuthUser(json: profileData, token: AuthUser.getAuthUser()?.authToken ?? "")
+                            authUser.saveUser()
+                            completionHandler(true, self?.getMessage(from: json))
+                        } else {
+                            completionHandler(false, self?.getMessage(from: json))
+                        }
+                    } else {
+                        completionHandler(false, self?.getMessage(from: json))
+                    }
+                } else {
+                    completionHandler(false, self?.getMessage(from: json))
+                }
+            case .failure( _):
+                completionHandler(false, "")
+            }
+        }
+    }
+
 }
