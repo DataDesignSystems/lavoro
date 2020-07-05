@@ -12,6 +12,7 @@ class CheckInFeedTableViewCell: UITableViewCell {
     @IBOutlet weak var parentView: UIView!
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var userImageButton: UIButton!
+    @IBOutlet weak var commentButton: UIButton!
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var time: UILabel!
     @IBOutlet weak var checkInImage: UIImageView!
@@ -43,9 +44,13 @@ class CheckInFeedTableViewCell: UITableViewCell {
     func setupCell(with object: Feed) {
         if let url = URL(string: object.user.avatar) {
             userImageButton.sd_setImage(with: url, for: .normal, completed: nil)
+        } else {
+            userImageButton.setImage(nil, for: .normal)
         }
         if let url = URL(string: object.location.image) {
             checkInImage.sd_setImage(with: url, completed: nil)
+        } else {
+            checkInImage.image = nil
         }
         username.text = object.user.username
         time.text = object.displayTime
@@ -70,9 +75,5 @@ class CheckInFeedTableViewCell: UITableViewCell {
 
     @IBAction func likesButtonTap(button: UIButton) {
         button.isSelected = !button.isSelected
-    }
-    
-    @IBAction func commentsButtonTap(button: UIButton) {
-        
     }
 }

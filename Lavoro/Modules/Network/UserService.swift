@@ -10,6 +10,7 @@ import Foundation
 class UserService: BaseModuleService {
     static let term = "term"
     static let userId = "user_id"
+    static let comments = "comments"
     func getWhoIFollow(with completionHandler: @escaping ((Bool, String?, [OtherUser]) -> ())) {
         NS.getRequest(with: .whoIFollow, parameters: [:], authToken: true) { [weak self] (response) in
             switch response.result {
@@ -111,6 +112,33 @@ class UserService: BaseModuleService {
                         if let profileData = data["profile"] as? [String: Any] {
                             let authUser = AuthUser(json: profileData, token: AuthUser.getAuthUser()?.authToken ?? "")
                             authUser.saveUser()
+                            completionHandler(true, self?.getMessage(from: json))
+                        } else {
+                            completionHandler(false, self?.getMessage(from: json))
+                        }
+                    } else {
+                        completionHandler(false, self?.getMessage(from: json))
+                    }
+                } else {
+                    completionHandler(false, self?.getMessage(from: json))
+                }
+            case .failure( _):
+                completionHandler(false, "")
+            }
+        }
+    }
+    func sendGroupMessage(with message: String, completionHandler: @escaping ((Bool, String?) -> ())) {
+        let message = message.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard message.count > 0 else {
+            completionHandler(false, "")
+            return
+        }
+        NS.getRequest(with: .sendGroupMessage, parameters: [UserService.comments: message],  authToken: true) { [weak self] (response) in
+            switch response.result {
+            case .success(let json):
+                if self?.getCode(from: json) == 201 {
+                    if let json = json as? [String: Any], let data = json["data"] as? [String: Any] {
+                        if let response = data["response"] as? [String: Any], let status = response["status"] as? String, status == "success" {
                             completionHandler(true, self?.getMessage(from: json))
                         } else {
                             completionHandler(false, self?.getMessage(from: json))

@@ -48,6 +48,7 @@ class WorkCheckInViewController: BaseViewController {
             checkInButton.backgroundColor = UIColor(hexString: "#4CD964")
             selectLocationButton.isUserInteractionEnabled = true
         }
+        charLimitLabel.text = "0/\(AppPrefrences.messageCharLimit)"
     }
     
     @IBAction func closeButtonAction() {
@@ -146,12 +147,12 @@ extension WorkCheckInViewController: UITextViewDelegate {
         
         if let textViewString = textView.text, let swtRange = Range(range, in: textViewString) {
             let fullString = textViewString.replacingCharacters(in: swtRange, with: text)
-            if fullString.count <= 160 {
-                charLimitLabel.text = "\(fullString.count)/160"
+            if fullString.count <= AppPrefrences.messageCharLimit {
+                charLimitLabel.text = "\(fullString.count)/\(AppPrefrences.messageCharLimit)"
                 return true
             } else {
-                textView.text = fullString[0..<160]
-                charLimitLabel.text = "160/160"
+                textView.text = fullString[0..<AppPrefrences.messageCharLimit]
+                charLimitLabel.text = "\(AppPrefrences.messageCharLimit)/\(AppPrefrences.messageCharLimit)"
                 return false
             }
             

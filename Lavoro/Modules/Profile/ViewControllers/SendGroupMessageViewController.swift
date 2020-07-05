@@ -1,22 +1,24 @@
 //
-//  UpdateTaglineViewController.swift
+//  SendGroupMessageViewController.swift
 //  Lavoro
 //
-//  Created by Manish on 20/06/20.
+//  Created by Manish on 04/07/20.
 //  Copyright © 2020 Manish. All rights reserved.
 //
 
 import UIKit
 
-class UpdateTaglineViewController: BaseViewController {
+class SendGroupMessageViewController: BaseViewController {
+    @IBOutlet weak var gradientTopView: UIView!
+    @IBOutlet weak var gradientBottomView: UIView!
     @IBOutlet weak var parentView: UIView!
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var message: UITextView!
     @IBOutlet weak var checkInButton: UIButton!
     @IBOutlet weak var charLimitLabel: UILabel!
-    let placeholderText = "Say something..." 
     let profileService = ProfileService()
-
+    let placeholderText = "Say something..."
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -24,13 +26,15 @@ class UpdateTaglineViewController: BaseViewController {
     }
 
     func setupView() {
+        gradientTopView.gradientLayer(with: UIColor(white: 0, alpha: 0.75), endColor: UIColor(white: 0, alpha: 0))
+        gradientBottomView.gradientLayer(with: UIColor(white: 0, alpha: 0), endColor: UIColor(white: 0, alpha: 1))
         parentView.setLayer(cornerRadius: 8)
         userImage.setLayer(cornerRadius: 4)
         checkInButton.setLayer(cornerRadius: 4)
         if let url = URL(string: AuthUser.getAuthUser()?.avatar ?? "") {
             userImage.sd_setImage(with: url, completed: nil)
         }
-        message.text = placeholderText
+        checkInButton.backgroundColor = UIColor(hexString: "#FF2D55")
         charLimitLabel.text = "0/\(AppPrefrences.messageCharLimit)"
     }
     
@@ -39,22 +43,17 @@ class UpdateTaglineViewController: BaseViewController {
     }
     
     @IBAction func checkInNotify() {
-        self.updateTagline()
-    }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
-    
-    func updateTagline() {
-        let tagline = message.text.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard tagline.count > 0 else {
+        let messageToSend = message.text.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard messageToSend.count > 0 else {
             return
         }
         self.showLoadingView()
-        profileService.updateTagline(with: tagline) { [weak self] (success, message) in
+        userService.sendGroupMessage(with: messageToSend) { [weak self] (success, message) in
             self?.stopLoadingView()
             if success {
+                if let message = message {
+                    MessageViewAlert.showSuccess(with: message)
+                }
                 self?.closeButtonAction()
             } else {
                 MessageViewAlert.showError(with: message ?? "There is some error./nPlease try again")
@@ -63,7 +62,7 @@ class UpdateTaglineViewController: BaseViewController {
     }
 }
 
-extension UpdateTaglineViewController: UITextViewDelegate {
+extension SendGroupMessageViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.text == placeholderText {
             textView.text = nil

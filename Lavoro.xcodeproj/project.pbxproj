@@ -78,6 +78,11 @@
 		13825526249E708B004BF327 /* UpdateTaglineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13825525249E708B004BF327 /* UpdateTaglineViewController.swift */; };
 		1382B7A1248F9C6B0032BE49 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1382B7A0248F9C6B0032BE49 /* ImageService.swift */; };
 		1388A93324A4EB4E007F505E /* GPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1388A93224A4EB4E007F505E /* GPManager.swift */; };
+		1395003524B079B500DFBD26 /* FeedDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1395003424B079B500DFBD26 /* FeedDetailViewController.swift */; };
+		1395003D24B07E5800DFBD26 /* FeedDetailHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1395003B24B07E5800DFBD26 /* FeedDetailHeaderView.xib */; };
+		1395003E24B07E5800DFBD26 /* FeedDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1395003C24B07E5800DFBD26 /* FeedDetailHeaderView.swift */; };
+		1395004024B0E2E900DFBD26 /* SendGroupMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1395003F24B0E2E900DFBD26 /* SendGroupMessageViewController.swift */; };
+		1395004224B0F2AC00DFBD26 /* AppPrefrences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1395004124B0F2AC00DFBD26 /* AppPrefrences.swift */; };
 		13B531B1248BF6E300C6C8FF /* NetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B531B0248BF6E300C6C8FF /* NetworkConfig.swift */; };
 		13B531B3248BF8B800C6C8FF /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B531B2248BF8B800C6C8FF /* NetworkService.swift */; };
 		13B531B6248BFD8300C6C8FF /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B531B5248BFD8300C6C8FF /* LoginService.swift */; };
@@ -216,6 +221,11 @@
 		1382553224A22D1C004BF327 /* Lavoro.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Lavoro.entitlements; sourceTree = "<group>"; };
 		1382B7A0248F9C6B0032BE49 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		1388A93224A4EB4E007F505E /* GPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPManager.swift; sourceTree = "<group>"; };
+		1395003424B079B500DFBD26 /* FeedDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedDetailViewController.swift; sourceTree = "<group>"; };
+		1395003B24B07E5800DFBD26 /* FeedDetailHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedDetailHeaderView.xib; sourceTree = "<group>"; };
+		1395003C24B07E5800DFBD26 /* FeedDetailHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedDetailHeaderView.swift; sourceTree = "<group>"; };
+		1395003F24B0E2E900DFBD26 /* SendGroupMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendGroupMessageViewController.swift; sourceTree = "<group>"; };
+		1395004124B0F2AC00DFBD26 /* AppPrefrences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPrefrences.swift; sourceTree = "<group>"; };
 		13B531B0248BF6E300C6C8FF /* NetworkConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConfig.swift; sourceTree = "<group>"; };
 		13B531B2248BF8B800C6C8FF /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		13B531B5248BFD8300C6C8FF /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
@@ -474,6 +484,7 @@
 				137BA476249BBC0E007EFE51 /* PublicProfileViewController.swift */,
 				13825523249E1B6E004BF327 /* SearchViewController.swift */,
 				13825525249E708B004BF327 /* UpdateTaglineViewController.swift */,
+				1395003F24B0E2E900DFBD26 /* SendGroupMessageViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -550,6 +561,7 @@
 				13C54C192496331500CE1AF6 /* Constants.swift */,
 				13825515249BD921004BF327 /* UIView+Exts.swift */,
 				1382551E249D13C4004BF327 /* UIScreen+Exts.swift */,
+				1395004124B0F2AC00DFBD26 /* AppPrefrences.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -597,6 +609,15 @@
 			name = GooglePlaces;
 			path = Lavoro/Helpers/GooglePlaces;
 			sourceTree = SOURCE_ROOT;
+		};
+		1395003624B07E2300DFBD26 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				1395003C24B07E5800DFBD26 /* FeedDetailHeaderView.swift */,
+				1395003B24B07E5800DFBD26 /* FeedDetailHeaderView.xib */,
+			);
+			path = Header;
+			sourceTree = "<group>";
 		};
 		13B531AF248BF6B400C6C8FF /* Network */ = {
 			isa = PBXGroup;
@@ -647,9 +668,11 @@
 		13D05798245C7A4C00227E15 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				1395003624B07E2300DFBD26 /* Header */,
 				13D057F5245C9FDB00227E15 /* IGStoryPreviewController.swift */,
 				13D0579A245C7A6600227E15 /* HomeFeedsViewController.swift */,
 				13CEEBE824A87B3300C963CD /* QRDisplayViewController.swift */,
+				1395003424B079B500DFBD26 /* FeedDetailViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -918,6 +941,7 @@
 				136F326F245B0464006939ED /* Home.storyboard in Resources */,
 				13D057EC245C9DF800227E15 /* LICENSE in Resources */,
 				13825514249BD726004BF327 /* PublicProfileHeaderView.xib in Resources */,
+				1395003D24B07E5800DFBD26 /* FeedDetailHeaderView.xib in Resources */,
 				1378AA952459E75A00131BEB /* LaunchScreen.storyboard in Resources */,
 				136F3277245B0490006939ED /* WorkCheckIn.storyboard in Resources */,
 				1378AA922459E75A00131BEB /* Assets.xcassets in Resources */,
@@ -1004,6 +1028,7 @@
 				136EBD9E2467123000C27589 /* MessageTableViewCell.swift in Sources */,
 				13D057ED245C9DF800227E15 /* CubeAttributesAnimator.swift in Sources */,
 				13D057D4245C9DF800227E15 /* UIView+Extension.swift in Sources */,
+				1395004224B0F2AC00DFBD26 /* AppPrefrences.swift in Sources */,
 				13B531C1248C260B00C6C8FF /* BaseFacebookViewController.swift in Sources */,
 				13D05800245CA09B00227E15 /* IGHomeView.swift in Sources */,
 				136F3261245B032F006939ED /* AccountTypeViewController.swift in Sources */,
@@ -1037,6 +1062,7 @@
 				13D057E3245C9DF800227E15 /* IGURLSession.swift in Sources */,
 				137938C924681FA600AB2C46 /* AddLocationViewController.swift in Sources */,
 				13D057DE245C9DF800227E15 /* UIImageView+Extension.swift in Sources */,
+				1395003E24B07E5800DFBD26 /* FeedDetailHeaderView.swift in Sources */,
 				137938C52468114000AB2C46 /* AddScheduleDataTableViewCell.swift in Sources */,
 				13825516249BD921004BF327 /* UIView+Exts.swift in Sources */,
 				13D057E8245C9DF800227E15 /* IGConstants.swift in Sources */,
@@ -1055,6 +1081,7 @@
 				13D05809245D755B00227E15 /* BaseNavigationViewController.swift in Sources */,
 				13D057DC245C9DF800227E15 /* IGSnap.swift in Sources */,
 				13CEEBE924A87B3300C963CD /* QRDisplayViewController.swift in Sources */,
+				1395003524B079B500DFBD26 /* FeedDetailViewController.swift in Sources */,
 				13825524249E1B6E004BF327 /* SearchViewController.swift in Sources */,
 				13BA4E212498E96B002AA103 /* UserService.swift in Sources */,
 				1317B8282460A42400AD9AC8 /* WorkLocationTableViewCell.swift in Sources */,
@@ -1090,6 +1117,7 @@
 				13B531B8248BFDD500C6C8FF /* BaseModuleService.swift in Sources */,
 				1327EB792466A61900BA4805 /* UIButton+Exts.swift in Sources */,
 				13D057A1245C7B4700227E15 /* CheckInFeedTableViewCell.swift in Sources */,
+				1395004024B0E2E900DFBD26 /* SendGroupMessageViewController.swift in Sources */,
 				13D057E2245C9DF800227E15 /* IGError.swift in Sources */,
 				13D057D6245C9DF800227E15 /* Color+Additions.swift in Sources */,
 				13C54C0E24953D8C00CE1AF6 /* HomeService.swift in Sources */,

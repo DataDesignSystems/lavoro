@@ -124,6 +124,10 @@ class HomeFeedsViewController: BaseViewController {
         let profileId = feeds[button.tag].user.id
         PublicProfileViewController.showProfile(on: self.navigationController, profileId: profileId)
     }
+    
+    @objc func showFeedDetailButtonTap( button: UIButton) {
+        FeedDetailViewController.showFeedDetail(on: self.navigationController, feed: feeds[button.tag])
+    }
 
     @IBAction func editProfile() {
         let storyboard = UIStoryboard(name: "Profile", bundle: nil)
@@ -201,6 +205,8 @@ extension HomeFeedsViewController: UITableViewDataSource {
         cell.setupCell(with: feeds[indexPath.row])
         cell.userImageButton.tag = indexPath.row
         cell.userImageButton.addTarget(self, action: #selector(showUserProfileButtonsTap(button:)), for: .touchUpInside)
+        cell.commentButton.tag = indexPath.row
+        cell.commentButton.addTarget(self, action: #selector(showFeedDetailButtonTap), for: .touchUpInside)
         return cell
     }
 }
@@ -210,6 +216,7 @@ extension HomeFeedsViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        FeedDetailViewController.showFeedDetail(on: self.navigationController, feed: feeds[indexPath.row])
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

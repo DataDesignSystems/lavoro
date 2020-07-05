@@ -146,6 +146,10 @@ extension ProfileViewController: UITableViewDelegate {
                 return
             }
             PublicProfileViewController.showProfile(on: self.navigationController, profileId: profileId)
+        case .sendGroupMessage:
+            let storyBoard: UIStoryboard = UIStoryboard(name: "Profile", bundle: nil)
+            let viewController = storyBoard.instantiateViewController(withIdentifier: "SendGroupMessageViewController") as! SendGroupMessageViewController
+            self.tabBarController?.present(viewController, animated: true, completion: nil)
         default:
             print(object.title)
         }

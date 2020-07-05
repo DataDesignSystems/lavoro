@@ -140,7 +140,7 @@ extension MyWorkLocationsViewController: UITableViewDataSource, UITableViewDeleg
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "workLocationCell", for: indexPath) as! WorkLocationTableViewCell
-        cell.setupCell(with: workLocations[indexPath.row])
+        cell.setupCell(with: filteredWorkLocations[indexPath.row])
         return cell
     }
     

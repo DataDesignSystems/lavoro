@@ -35,5 +35,6 @@ struct NetworkConfig {
         case followUserByQR = "api/follow-user-by-qr/"
         case getMyWorkLocations = "api/get-my-work-locations/"
         case getMyUserProfile = "api/get-my-user-profile/"
+        case sendGroupMessage = "api/send-group-message/"
     }
 }

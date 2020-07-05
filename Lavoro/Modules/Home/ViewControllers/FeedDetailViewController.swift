@@ -1,43 +1,57 @@
 //
-//  PublicProfileViewController.swift
+//  FeedDetailViewController.swift
 //  Lavoro
 //
-//  Created by Manish on 18/06/20.
+//  Created by Manish on 04/07/20.
 //  Copyright © 2020 Manish. All rights reserved.
 //
 
 import UIKit
-import ApplozicSwift
 import InputBarAccessoryView
 import IQKeyboardManagerSwift
 
-class PublicProfileViewController: BaseViewController {
+class FeedDetailViewController: BaseViewController {
     @IBOutlet weak var tableview: UITableView!
-    let profileService = ProfileService()
-    var profileId: String?
-    var publicProfile: PublicProfile?
-    var isDataLoaded = false
-    @IBOutlet weak var userImage: UIImageView!
+    var feed: Feed?
+    @IBOutlet weak var locationImage: UIImageView!
     let inputBar: InputBarAccessoryView = IMessageInputBar()
     private var keyboardManager = KeyboardManager()
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var headerHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var headerParentView: UIView!
-    var headerView = PublicProfileHeaderView.fromNib(named: "PublicProfileHeaderView")
-    
+    var headerView = FeedDetailHeaderView.fromNib(named: "FeedDetailHeaderView")
+    let homeService = HomeService()
     var stateView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(white: 250/255, alpha: 1)
         return view
     }()
     
+    var locationNameLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        return label
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupNavigation()
         setupView()
         fetchData()
         inputBar.topStackView.addArrangedSubview(stateView)
         manageKeyboard()
+        bindData()
+    }
+    
+    func bindData() {
+        guard let feed = feed else {
+            return
+        }
+        if let url = URL(string: feed.location.image) {
+            locationImage.sd_setImage(with: url, completed: nil)
+        }
+        headerView.setupView(with: feed)
     }
     
     func setupView() {
@@ -48,32 +62,20 @@ class PublicProfileViewController: BaseViewController {
         headerView.snp.makeConstraints { (make) in
             make.leading.trailing.bottom.equalToSuperview()
         }
-        headerParentView.isHidden = true
         IQKeyboardManager.shared.enableAutoToolbar = false
         IQKeyboardManager.shared.enable = false
-        setupViewForSelf()
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleTap))
         self.view.addGestureRecognizer(tapGesture)
-    }
-    
-    func setupViewForSelf() {
-        guard let profileId = profileId, profileId == AuthUser.getAuthUser()?.id else {
-            return
+        switch feed?.feedType {
+        case .checkIn:
+            locationNameLabel.text = "Checked In"
+        case .checkOut:
+            locationNameLabel.text = "Checked Out"
+        case .unknown:
+            locationNameLabel.text = "Unknown"
+        default:
+            print("error")
         }
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "editPublicProfile"), style: .done, target: self, action: #selector(editTagline))
-        self.navigationController?.navigationBar.tintColor = .white
-        headerView.heartButton.isHidden = true
-        headerView.commentsButton.isHidden = true
-    }
-    
-    @objc func handleTap() {
-        self.inputBar.inputTextView.resignFirstResponder()
-    }
-    
-    @objc func editTagline() {
-        let storyBoard: UIStoryboard = UIStoryboard(name: "Profile", bundle: nil)
-        let viewController = storyBoard.instantiateViewController(withIdentifier: "UpdateTaglineViewController") as! UpdateTaglineViewController
-        self.tabBarController?.present(viewController, animated: true, completion: nil)
     }
     
     func setupNavigation() {
@@ -83,44 +85,31 @@ class PublicProfileViewController: BaseViewController {
         let backImage = UIImage(named: "ic_back_white")
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: backImage, style: .done, target: self, action: #selector(backButton))
         self.navigationController?.navigationBar.tintColor = .white
+        self.navigationItem.titleView = locationNameLabel
+
+    }
+    
+    @objc func handleTap() {
+        self.inputBar.inputTextView.resignFirstResponder()
     }
     
     func manageKeyboard() {
         keyboardManager.bind(to: tableview)
         keyboardManager.on(event: .didShow) { [weak self] (notification) in
             self?.bottomConstraint.constant = notification.endFrame.height
-        }.on(event: .willShow) { [weak self] (notification) in
-            self?.bottomConstraint.constant = notification.endFrame.height
         }.on(event: .didHide) { [weak self] _ in
             let barHeight = self?.inputBar.bounds.height ?? 0
             self?.bottomConstraint.constant = barHeight
-        }.on(event: .willHide) { [weak self] _ in
-            let barHeight = self?.inputBar.bounds.height ?? 0
-            self?.bottomConstraint.constant = barHeight
-        }.on(event: .willChangeFrame) { [weak self] (notification) in
-            print(notification.endFrame.height)
-            self?.bottomConstraint.constant = notification.endFrame.height
         }
     }
 
     func fetchData() {
-        guard let profileId = profileId else {
+        guard let feedId = feed?.id else {
             return
         }
-        if publicProfile == nil {
-            self.showLoadingView()
-        }
-        profileService.getPublicProfile(with: profileId) { [weak self] (success, message, publicProfile)  in
+        self.showLoadingView()
+        homeService.getFeedData(with: feedId) { [weak self] (success, message, publicProfile)  in
             self?.stopLoadingView()
-            self?.publicProfile = publicProfile
-            if let avatar = publicProfile?.avatar, let url = URL(string: avatar) {
-                self?.userImage.sd_setImage(with: url, completed: nil)
-                self?.isDataLoaded = true
-            }
-            self?.headerParentView.isHidden = false
-            self?.headerView.setupView(with: publicProfile)
-            self?.headerView.commentsButton.addTarget(self, action: #selector(self?.chatButtonTap), for: .touchUpInside)
-            self?.headerView.heartButton.addTarget(self, action: #selector(self?.followButtonTap(button:)), for: .touchUpInside)
             self?.tableview.contentInset = UIEdgeInsets(top: UIScreen.main.bounds.width, left: 0, bottom: 0, right: 0)
             self?.view.endEditing(true)
             self?.tableview.reloadData()
@@ -158,37 +147,15 @@ class PublicProfileViewController: BaseViewController {
         return true
     }
     
-    @IBAction func chatButtonTap() {
-        guard let profileId = profileId else {
-            return
-        }
-        chatManager.launchChatWith(contactId: profileId, from: self.tabBarController ?? self, configuration: ALKConfiguration())
-    }
-    
-    @IBAction func followButtonTap(button: UIButton) {
-        guard let profileId = profileId else {
-            return
-        }
-        headerView.startFollowChangeAnimation()
-        userService.changeFollowUser(with: profileId, isFollow: !button.isSelected) { [weak self] (success, message) in
-            self?.refreshView()
-            self?.headerView.stopFollowChangeAnimation()
-        }
-    }
-    
     func sendComment(text: String) {
-        guard let profileId = profileId else {
+        guard let feedId = feed?.id else {
             return
         }
         self.inputBar.sendButton.startAnimating()
-        profileService.postComment(with: profileId, comment: text) { [weak self] (success, message) in
+        homeService.postComment(with: feedId, comment: text) { [weak self] (success, message) in
             self?.inputBar.sendButton.stopAnimating()
             if success {
                 self?.inputBar.inputTextView.text = ""
-                self?.inputBar.inputTextView.resignFirstResponder()
-                if let profile = self?.publicProfile, profile.comments.count > 0 {
-                    self?.tableview.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
-                }
                 self?.refreshView()
             } else {
                 MessageViewAlert.showError(with: message ?? "Please try again")
@@ -201,18 +168,30 @@ class PublicProfileViewController: BaseViewController {
     }
 }
 
-extension PublicProfileViewController: UITableViewDataSource, UITableViewDelegate {
+extension FeedDetailViewController {
+    static func showFeedDetail(on navigation:UINavigationController?, feed: Feed) {
+        guard let navigation = navigation else {
+            return
+        }
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Home", bundle: nil)
+        let viewController = storyBoard.instantiateViewController(withIdentifier: "FeedDetailViewController") as! FeedDetailViewController
+        viewController.feed = feed
+        viewController.hidesBottomBarWhenPushed = true
+        navigation.pushViewController(viewController, animated: true)
+        viewController.hidesBottomBarWhenPushed = false
+    }
+}
+extension FeedDetailViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return publicProfile?.comments.count ?? 0
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath) as! PublicProfileTableViewCell
-        cell.setupCell(with: publicProfile?.comments[indexPath.row])
         return cell
     }
     
@@ -228,23 +207,7 @@ extension PublicProfileViewController: UITableViewDataSource, UITableViewDelegat
         }
     }
 }
-
-
-extension PublicProfileViewController {
-    static func showProfile(on navigation:UINavigationController?, profileId: String) {
-        guard let navigation = navigation else {
-            return
-        }
-        let storyBoard: UIStoryboard = UIStoryboard(name: "Profile", bundle: nil)
-        let viewController = storyBoard.instantiateViewController(withIdentifier: "PublicProfileViewController") as! PublicProfileViewController
-        viewController.profileId = profileId
-        viewController.hidesBottomBarWhenPushed = true
-        navigation.pushViewController(viewController, animated: true)
-        viewController.hidesBottomBarWhenPushed = false
-    }
-}
-
-extension PublicProfileViewController: InputBarAccessoryViewDelegate {
+extension FeedDetailViewController: InputBarAccessoryViewDelegate {
     func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
         sendComment(text: text)
     }

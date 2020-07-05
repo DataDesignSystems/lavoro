@@ -37,6 +37,10 @@ class FollowTableViewCell: UITableViewCell {
             make.center.equalTo(followButton)
         }
         followButton.addTarget(self, action: #selector(followButtonTap(button:)), for: .touchUpInside)
+        guard let authUser = AuthUser.getAuthUser() else {
+            return
+        }
+        followButton.isHidden = (authUser.type != .serviceProvider)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
