@@ -15,29 +15,37 @@ enum FeedType: String {
     case unknown = "unknown"
 }
 
-struct Feed {
+enum LikeStatus {
+    case loading
+    case loaded
+}
+
+class Feed {
     let id: String
     let comments: String
     let status: String
     let user: FeedUser
-    let likes: String
+    var likes: String
     let displayTime: String
     let timeEntered: Date
     var feedType: FeedType
     var location: Location
     let postedComment: String
+    var isLiked: Bool
+    var likeStatus: LikeStatus = .loaded
 
     init(with json: [String: Any]) {
         self.id = json["id"] as? String ?? ""
-        self.comments = json["comments"] as? String ?? ""
+        self.comments = json["total_comments"] as? String ?? ""
         self.status = json["status"] as? String ?? ""
-        self.likes = json["likes"] as? String ?? ""
+        self.likes = json["total_likes"] as? String ?? ""
         self.displayTime = json["display_time"] as? String ?? ""
         self.timeEntered = (json["time_entered"] as? String ?? "").toDate(dateFormat: "MM-dd-yyyy hh:mm a") ?? Date()
         self.feedType = FeedType(rawValue: (json["type"] as? String ?? "")) ?? .unknown
         self.user = FeedUser(with: (json["user"] as? [String: Any] ?? [:]))
         self.location = Location(with: (json["location"] as? [String: Any] ?? [:]))
         self.postedComment = json["posted_comment"] as? String ?? ""
+        self.isLiked = json["liked"] as? Bool ?? false
     }
 }
 

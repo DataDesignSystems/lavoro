@@ -36,5 +36,8 @@ struct NetworkConfig {
         case getMyWorkLocations = "api/get-my-work-locations/"
         case getMyUserProfile = "api/get-my-user-profile/"
         case sendGroupMessage = "api/send-group-message/"
+        case getTheCheckinProfile = "api/get-the-checkin-profile/"
+        case addCommentToCheckin = "api/add-comment-to-checkin/"
+        case updateCheckinLike = "api/update-checkin-like/"
     }
 }

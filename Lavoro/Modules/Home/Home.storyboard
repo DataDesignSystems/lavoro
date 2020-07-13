@@ -90,9 +90,6 @@ Butterbee's American Grille</string>
                                                             </constraints>
                                                             <state key="normal" image="ic_like"/>
                                                             <state key="selected" image="ic_like_selected"/>
-                                                            <connections>
-                                                                <action selector="likesButtonTapWithButton:" destination="MzQ-3J-Kn4" eventType="touchUpInside" id="3oU-8P-MvQ"/>
-                                                            </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1125" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c8H-Sd-LwA">
                                                             <rect key="frame" x="52" y="378.5" width="36" height="21"/>
@@ -149,6 +146,9 @@ Butterbee's American Grille</string>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Qhd-tv-oVD">
+                                                            <rect key="frame" x="26" y="379" width="20" height="20"/>
+                                                        </activityIndicatorView>
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                     <constraints>
@@ -168,6 +168,7 @@ Butterbee's American Grille</string>
                                                         <constraint firstAttribute="bottom" secondItem="qab-gv-Pnl" secondAttribute="bottom" constant="16" id="R18-lx-3QG"/>
                                                         <constraint firstItem="qOT-r2-ijk" firstAttribute="leading" secondItem="Duw-aM-bII" secondAttribute="leading" constant="8" id="S4b-Il-nBO"/>
                                                         <constraint firstItem="ThI-Q5-yIL" firstAttribute="trailing" secondItem="dMj-VY-7Qt" secondAttribute="trailing" id="S7X-So-VsV"/>
+                                                        <constraint firstItem="Qhd-tv-oVD" firstAttribute="centerY" secondItem="qab-gv-Pnl" secondAttribute="centerY" id="SWI-Im-0FO"/>
                                                         <constraint firstItem="yEh-bq-3nf" firstAttribute="centerY" secondItem="dMj-VY-7Qt" secondAttribute="centerY" constant="-8" id="SiW-DK-CUQ"/>
                                                         <constraint firstItem="Amg-Cz-XOi" firstAttribute="leading" secondItem="tcN-lb-Prd" secondAttribute="leading" constant="16" id="VgG-T4-rHm"/>
                                                         <constraint firstItem="8cS-BA-dkU" firstAttribute="centerY" secondItem="Rr6-a3-nmC" secondAttribute="centerY" id="WRt-P7-wu7"/>
@@ -180,6 +181,7 @@ Butterbee's American Grille</string>
                                                         <constraint firstItem="Duw-aM-bII" firstAttribute="leading" secondItem="tcN-lb-Prd" secondAttribute="leading" constant="16" id="oS2-iE-riK"/>
                                                         <constraint firstItem="qOT-r2-ijk" firstAttribute="top" secondItem="Duw-aM-bII" secondAttribute="top" constant="8" id="qdh-Wy-3kh"/>
                                                         <constraint firstItem="ThI-Q5-yIL" firstAttribute="bottom" secondItem="dMj-VY-7Qt" secondAttribute="bottom" id="s5s-5U-OaM"/>
+                                                        <constraint firstItem="Qhd-tv-oVD" firstAttribute="centerX" secondItem="qab-gv-Pnl" secondAttribute="centerX" id="sNo-2v-Y8S"/>
                                                         <constraint firstItem="dMj-VY-7Qt" firstAttribute="top" secondItem="tcN-lb-Prd" secondAttribute="top" constant="16" id="t9J-au-H8M"/>
                                                         <constraint firstItem="Duw-aM-bII" firstAttribute="top" secondItem="ujP-4j-tyU" secondAttribute="bottom" constant="12" id="tYx-ed-BuM"/>
                                                         <constraint firstItem="dMj-VY-7Qt" firstAttribute="leading" secondItem="tcN-lb-Prd" secondAttribute="leading" constant="16" id="wYs-YK-hvP"/>
@@ -198,9 +200,11 @@ Butterbee's American Grille</string>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
+                                            <outlet property="activityIndicator" destination="Qhd-tv-oVD" id="wG0-dF-DmA"/>
                                             <outlet property="checkInImage" destination="Duw-aM-bII" id="J4d-hX-XcI"/>
                                             <outlet property="commentButton" destination="Rr6-a3-nmC" id="Thj-jf-7QV"/>
                                             <outlet property="commentsCount" destination="8cS-BA-dkU" id="Utp-6h-kUk"/>
+                                            <outlet property="likeButton" destination="qab-gv-Pnl" id="YOv-NK-zXL"/>
                                             <outlet property="likesCount" destination="c8H-Sd-LwA" id="m0i-8R-nva"/>
                                             <outlet property="locationName" destination="9VG-m3-8kZ" id="rxl-jy-qfJ"/>
                                             <outlet property="locationNameBackgroundView" destination="qOT-r2-ijk" id="ldX-5y-gID"/>
@@ -431,7 +435,7 @@ Butterbee's American Grille</string>
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="commentCell" rowHeight="174" id="y7Q-oE-oSW" customClass="PublicProfileTableViewCell" customModule="Lavoro" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="commentCell" rowHeight="174" id="y7Q-oE-oSW" customClass="FeedCommentTableViewCell" customModule="Lavoro" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="174"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="y7Q-oE-oSW" id="CAE-r4-egr">

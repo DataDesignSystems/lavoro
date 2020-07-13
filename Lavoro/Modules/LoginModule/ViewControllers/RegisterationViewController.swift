@@ -187,8 +187,6 @@ extension RegisterationViewController: UITableViewDataSource {
                     text = user.dob.toDate(dateFormat: "YYYY-MM-dd")?.toString(dateFormat: "MM-dd-YYYY") ?? ""
                 }
                 cell.textField.isUserInteractionEnabled = false
-            default:
-                print("error")
             }
             cell.textField.placeholder = textFieldPlacehoders[indexPath.row - 1].rawValue
             cell.delegate = self

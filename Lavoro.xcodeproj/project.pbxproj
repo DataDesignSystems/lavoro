@@ -18,6 +18,8 @@
 		1327EB792466A61900BA4805 /* UIButton+Exts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1327EB782466A61900BA4805 /* UIButton+Exts.swift */; };
 		1327EB7B2466A80300BA4805 /* RecommendedCollectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1327EB7A2466A80300BA4805 /* RecommendedCollectionTableViewCell.swift */; };
 		1327EB7D2466A8A900BA4805 /* RecommendedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1327EB7C2466A8A900BA4805 /* RecommendedCollectionViewCell.swift */; };
+		1346C7AD24BC81BE00188FC0 /* CheckInProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1346C7AC24BC81BE00188FC0 /* CheckInProfile.swift */; };
+		1346C7AF24BC860700188FC0 /* FeedCommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1346C7AE24BC860700188FC0 /* FeedCommentTableViewCell.swift */; };
 		1353F24F248E84EB00AA59F6 /* FacebookUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1353F24E248E84EB00AA59F6 /* FacebookUser.swift */; };
 		1353F251248E8D6E00AA59F6 /* AuthUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1353F250248E8D6E00AA59F6 /* AuthUser.swift */; };
 		13574E922493D0A600DC1DDF /* RPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13574E912493D0A500DC1DDF /* RPicker.swift */; };
@@ -158,6 +160,8 @@
 		1327EB782466A61900BA4805 /* UIButton+Exts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Exts.swift"; sourceTree = "<group>"; };
 		1327EB7A2466A80300BA4805 /* RecommendedCollectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedCollectionTableViewCell.swift; sourceTree = "<group>"; };
 		1327EB7C2466A8A900BA4805 /* RecommendedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedCollectionViewCell.swift; sourceTree = "<group>"; };
+		1346C7AC24BC81BE00188FC0 /* CheckInProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInProfile.swift; sourceTree = "<group>"; };
+		1346C7AE24BC860700188FC0 /* FeedCommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCommentTableViewCell.swift; sourceTree = "<group>"; };
 		1353F24E248E84EB00AA59F6 /* FacebookUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookUser.swift; sourceTree = "<group>"; };
 		1353F250248E8D6E00AA59F6 /* AuthUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUser.swift; sourceTree = "<group>"; };
 		13574E912493D0A500DC1DDF /* RPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RPicker.swift; sourceTree = "<group>"; };
@@ -661,6 +665,7 @@
 				13D057FD245CA09B00227E15 /* IGHomeView.swift */,
 				13D057FB245CA09B00227E15 /* IGStoryListCell.swift */,
 				13D057A0245C7B4700227E15 /* CheckInFeedTableViewCell.swift */,
+				1346C7AE24BC860700188FC0 /* FeedCommentTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -683,6 +688,7 @@
 				13D05801245CA0B000227E15 /* IGHomeViewModel.swift */,
 				13D057F7245C9FFC00227E15 /* IGStoryPreviewModel.swift */,
 				13D0579E245C7B2D00227E15 /* Feed.swift */,
+				1346C7AC24BC81BE00188FC0 /* CheckInProfile.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1057,6 +1063,7 @@
 				136EBD952466D91E00C27589 /* FollowersViewController.swift in Sources */,
 				13825522249D2C96004BF327 /* IMessageInputBar.swift in Sources */,
 				136F325D245B032F006939ED /* Onboarding.swift in Sources */,
+				1346C7AF24BC860700188FC0 /* FeedCommentTableViewCell.swift in Sources */,
 				137938D224682B2700AB2C46 /* ALChatManager.swift in Sources */,
 				136F3231245AC0BA006939ED /* BaseViewController.swift in Sources */,
 				13D057E3245C9DF800227E15 /* IGURLSession.swift in Sources */,
@@ -1069,6 +1076,7 @@
 				13D057D8245C9DF800227E15 /* IGSnapProgressView.swift in Sources */,
 				1317B82C2463132D00AD9AC8 /* FollowTableViewCell.swift in Sources */,
 				136F3268245B036B006939ED /* TabbarViewController.swift in Sources */,
+				1346C7AD24BC81BE00188FC0 /* CheckInProfile.swift in Sources */,
 				13D05807245CB14A00227E15 /* WorkCheckInViewController.swift in Sources */,
 				13D057FA245CA03200227E15 /* IGAppUtility.swift in Sources */,
 				13D057D5245C9DF800227E15 /* IGAdditions.swift in Sources */,

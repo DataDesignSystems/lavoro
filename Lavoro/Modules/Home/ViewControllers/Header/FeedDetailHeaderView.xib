@@ -13,13 +13,6 @@
             <rect key="frame" x="0.0" y="0.0" width="501" height="455"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart" translatesAutoresizingMaskIntoConstraints="NO" id="ruQ-rD-oOu">
-                    <rect key="frame" x="340" y="63.5" width="24" height="24"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="24" id="F61-Av-xJn"/>
-                        <constraint firstAttribute="height" constant="24" id="V8K-8o-ygK"/>
-                    </constraints>
-                </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6n4-Wc-xQM">
                     <rect key="frame" x="80" y="52" width="56" height="31"/>
                     <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="22"/>
@@ -64,26 +57,40 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1gv-br-GuU">
+                    <rect key="frame" x="332" y="55.5" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="aEU-Ku-WSH"/>
+                        <constraint firstAttribute="width" constant="40" id="c9A-o9-nCE"/>
+                    </constraints>
+                    <state key="normal" image="ic_like"/>
+                    <state key="selected" image="heart"/>
+                </button>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="dTx-Eu-NTP">
+                    <rect key="frame" x="342" y="65.5" width="20" height="20"/>
+                </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="Azk-FF-FBJ" firstAttribute="top" secondItem="wpC-ix-pOn" secondAttribute="bottom" constant="8" id="0Bq-oZ-OfW"/>
+                <constraint firstItem="dTx-Eu-NTP" firstAttribute="centerX" secondItem="1gv-br-GuU" secondAttribute="centerX" id="2zn-YD-Wty"/>
                 <constraint firstItem="6n4-Wc-xQM" firstAttribute="centerY" secondItem="wpC-ix-pOn" secondAttribute="centerY" constant="-8" id="3Rb-xe-cDz"/>
                 <constraint firstItem="Qu4-sl-k16" firstAttribute="trailing" secondItem="9xP-ja-gQY" secondAttribute="trailing" constant="16" id="44A-u0-tWL"/>
                 <constraint firstItem="o7W-4U-Keh" firstAttribute="leading" secondItem="6n4-Wc-xQM" secondAttribute="leading" id="7Bk-Fy-sGk"/>
                 <constraint firstItem="wpC-ix-pOn" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="50.5" id="9mo-AF-8nS"/>
-                <constraint firstItem="Gbx-Mz-5fN" firstAttribute="centerY" secondItem="ruQ-rD-oOu" secondAttribute="centerY" id="CeB-bb-Wnd"/>
+                <constraint firstItem="Gbx-Mz-5fN" firstAttribute="centerY" secondItem="1gv-br-GuU" secondAttribute="centerY" id="CTZ-BT-fMj"/>
                 <constraint firstItem="6n4-Wc-xQM" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="80" id="D5p-bG-x4P"/>
                 <constraint firstItem="Ay4-VM-GPM" firstAttribute="centerY" secondItem="Gbx-Mz-5fN" secondAttribute="centerY" id="GGB-Xe-AfP"/>
+                <constraint firstItem="1gv-br-GuU" firstAttribute="centerY" secondItem="wpC-ix-pOn" secondAttribute="centerY" id="Iwy-3x-TpD"/>
                 <constraint firstItem="wpC-ix-pOn" firstAttribute="leading" secondItem="Qu4-sl-k16" secondAttribute="leading" constant="16" id="KMM-7G-xho"/>
                 <constraint firstItem="9xP-ja-gQY" firstAttribute="leading" secondItem="Ay4-VM-GPM" secondAttribute="trailing" constant="6" id="NON-hA-xdx"/>
                 <constraint firstItem="Azk-FF-FBJ" firstAttribute="leading" secondItem="Qu4-sl-k16" secondAttribute="leading" constant="16" id="OTf-Zc-ZJC"/>
                 <constraint firstItem="o7W-4U-Keh" firstAttribute="top" secondItem="6n4-Wc-xQM" secondAttribute="bottom" constant="2" id="Rtb-mM-9yi"/>
                 <constraint firstItem="9xP-ja-gQY" firstAttribute="centerY" secondItem="Ay4-VM-GPM" secondAttribute="centerY" id="ZIr-Gj-P4Q"/>
-                <constraint firstItem="Gbx-Mz-5fN" firstAttribute="leading" secondItem="ruQ-rD-oOu" secondAttribute="trailing" constant="6" id="cir-na-JMb"/>
+                <constraint firstItem="Gbx-Mz-5fN" firstAttribute="leading" secondItem="1gv-br-GuU" secondAttribute="trailing" constant="-2" id="a5s-u7-Gha"/>
                 <constraint firstItem="Qu4-sl-k16" firstAttribute="trailing" secondItem="Azk-FF-FBJ" secondAttribute="trailing" constant="16" id="gDi-Ow-eiu"/>
                 <constraint firstItem="Ay4-VM-GPM" firstAttribute="leading" secondItem="Gbx-Mz-5fN" secondAttribute="trailing" constant="12" id="kgA-kj-G7a"/>
-                <constraint firstItem="ruQ-rD-oOu" firstAttribute="centerY" secondItem="wpC-ix-pOn" secondAttribute="centerY" id="p0h-Mf-tkE"/>
+                <constraint firstItem="dTx-Eu-NTP" firstAttribute="centerY" secondItem="1gv-br-GuU" secondAttribute="centerY" id="rnP-Ai-6TU"/>
                 <constraint firstItem="Qu4-sl-k16" firstAttribute="bottom" secondItem="Azk-FF-FBJ" secondAttribute="bottom" constant="16" id="vAw-RX-UHI"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
@@ -91,10 +98,12 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="Qu4-sl-k16"/>
             <connections>
+                <outlet property="activityIndicator" destination="dTx-Eu-NTP" id="kuT-g7-0eM"/>
                 <outlet property="checkedInLabel" destination="o7W-4U-Keh" id="khD-pX-iNL"/>
                 <outlet property="commentsCount" destination="9xP-ja-gQY" id="EoV-n2-luv"/>
                 <outlet property="feedDescription" destination="Azk-FF-FBJ" id="stS-dP-SFx"/>
                 <outlet property="heartCount" destination="Gbx-Mz-5fN" id="0lz-IE-jXp"/>
+                <outlet property="likeButton" destination="1gv-br-GuU" id="c9b-2Z-MlM"/>
                 <outlet property="nameLabel" destination="6n4-Wc-xQM" id="wiC-Zp-Ruk"/>
                 <outlet property="userImageview" destination="wpC-ix-pOn" id="3VT-Qk-zbB"/>
             </connections>
@@ -104,5 +113,6 @@
     <resources>
         <image name="comment" width="18" height="18"/>
         <image name="heart" width="18" height="16"/>
+        <image name="ic_like" width="20" height="18"/>
     </resources>
 </document>

@@ -129,6 +129,24 @@ class HomeFeedsViewController: BaseViewController {
         FeedDetailViewController.showFeedDetail(on: self.navigationController, feed: feeds[button.tag])
     }
 
+    @objc func likeButtonTap( button: UIButton) {
+        let feed = feeds[button.tag]
+        feed.likeStatus = .loading
+        tableView.reloadRows(at: [IndexPath(row: button.tag, section: 0)], with: .automatic)
+        homeService.updateCheckinLike(with: feed.id, isLiked: !feed.isLiked) { [weak self] (success, message, isLiked, totalCount) in
+            feed.likeStatus = .loaded
+            if success {
+                feed.isLiked = isLiked ?? !feed.isLiked
+                feed.likes = totalCount ?? feed.likes
+                self?.tableView.reloadRows(at: [IndexPath(row: button.tag, section: 0)], with: .automatic)
+            } else {
+                if let message = message, message.count > 0 {
+                    MessageViewAlert.showError(with: message)
+                }
+            }
+        }
+    }
+
     @IBAction func editProfile() {
         let storyboard = UIStoryboard(name: "Profile", bundle: nil)
         if let vc = storyboard.instantiateViewController(withIdentifier: "ProfileViewController") as? ProfileViewController {
@@ -207,6 +225,8 @@ extension HomeFeedsViewController: UITableViewDataSource {
         cell.userImageButton.addTarget(self, action: #selector(showUserProfileButtonsTap(button:)), for: .touchUpInside)
         cell.commentButton.tag = indexPath.row
         cell.commentButton.addTarget(self, action: #selector(showFeedDetailButtonTap), for: .touchUpInside)
+        cell.likeButton.tag = indexPath.row
+        cell.likeButton.addTarget(self, action: #selector(likeButtonTap), for: .touchUpInside)
         return cell
     }
 }

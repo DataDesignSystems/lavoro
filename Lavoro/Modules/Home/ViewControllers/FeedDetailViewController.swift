@@ -13,6 +13,7 @@ import IQKeyboardManagerSwift
 class FeedDetailViewController: BaseViewController {
     @IBOutlet weak var tableview: UITableView!
     var feed: Feed?
+    var checkInProfile: CheckInProfile?
     @IBOutlet weak var locationImage: UIImageView!
     let inputBar: InputBarAccessoryView = IMessageInputBar()
     private var keyboardManager = KeyboardManager()
@@ -62,6 +63,7 @@ class FeedDetailViewController: BaseViewController {
         headerView.snp.makeConstraints { (make) in
             make.leading.trailing.bottom.equalToSuperview()
         }
+        headerView.likeButton.addTarget(self, action: #selector(likeButtonTap), for: .touchUpInside)
         IQKeyboardManager.shared.enableAutoToolbar = false
         IQKeyboardManager.shared.enable = false
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleTap))
@@ -77,6 +79,26 @@ class FeedDetailViewController: BaseViewController {
             print("error")
         }
     }
+    
+    @objc func likeButtonTap( button: UIButton) {
+        guard let checkInProfile = checkInProfile else {
+            return
+        }
+        headerView.startLoader()
+        homeService.updateCheckinLike(with: checkInProfile.id, isLiked: !checkInProfile.isLiked) { [weak self] (success, message, isLiked, totalCount) in
+            self?.headerView.stopLoader()
+            if success {
+                checkInProfile.isLiked = isLiked ?? !checkInProfile.isLiked
+                checkInProfile.likes_count = totalCount ?? checkInProfile.likes_count
+                self?.headerView.setupView(with: checkInProfile)
+            } else {
+                if let message = message, message.count > 0 {
+                    MessageViewAlert.showError(with: message)
+                }
+            }
+        }
+    }
+
     
     func setupNavigation() {
         navigationController?.navigationBar.isTranslucent = true
@@ -108,7 +130,9 @@ class FeedDetailViewController: BaseViewController {
             return
         }
         self.showLoadingView()
-        homeService.getFeedData(with: feedId) { [weak self] (success, message, publicProfile)  in
+        homeService.getFeedData(with: feedId) { [weak self] (success, message, checkInProfile)  in
+            self?.checkInProfile = checkInProfile
+            self?.headerView.setupView(with: checkInProfile)
             self?.stopLoadingView()
             self?.tableview.contentInset = UIEdgeInsets(top: UIScreen.main.bounds.width, left: 0, bottom: 0, right: 0)
             self?.view.endEditing(true)
@@ -156,6 +180,7 @@ class FeedDetailViewController: BaseViewController {
             self?.inputBar.sendButton.stopAnimating()
             if success {
                 self?.inputBar.inputTextView.text = ""
+                self?.inputBar.inputTextView.resignFirstResponder()
                 self?.refreshView()
             } else {
                 MessageViewAlert.showError(with: message ?? "Please try again")
@@ -187,11 +212,12 @@ extension FeedDetailViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return checkInProfile?.comments.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath) as! PublicProfileTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath) as! FeedCommentTableViewCell
+        cell.setupCell(with: checkInProfile?.comments[indexPath.row])
         return cell
     }
     

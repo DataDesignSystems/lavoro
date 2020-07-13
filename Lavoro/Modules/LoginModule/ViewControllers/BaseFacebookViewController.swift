@@ -55,7 +55,7 @@ class BaseFacebookViewController: BaseViewController {
                     }
                     else {
                         self?.handleError(message: Validation.Error.genericError.rawValue, completionHandler: completionHandler)
-                        print("error \(error?.localizedDescription)")
+                        print("error \(String(describing: error?.localizedDescription))")
                     }
                 }
             } else {

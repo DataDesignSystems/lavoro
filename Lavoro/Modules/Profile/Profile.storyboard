@@ -538,7 +538,7 @@
                                 <action selector="cancelTap" destination="DkZ-HA-rDX" id="jpr-2d-Uy5"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="search" id="OAl-3c-hNe">
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="OAl-3c-hNe">
                             <color key="tintColor" red="0.1176470588" green="0.14117647059999999" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                         </barButtonItem>
                     </navigationItem>

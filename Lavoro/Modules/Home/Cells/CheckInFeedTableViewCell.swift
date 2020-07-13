@@ -13,6 +13,7 @@ class CheckInFeedTableViewCell: UITableViewCell {
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var userImageButton: UIButton!
     @IBOutlet weak var commentButton: UIButton!
+    @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var time: UILabel!
     @IBOutlet weak var checkInImage: UIImageView!
@@ -23,6 +24,7 @@ class CheckInFeedTableViewCell: UITableViewCell {
     @IBOutlet weak var postedComment: UILabel!
     @IBOutlet weak var message: UILabel!
     @IBOutlet weak var headerHeightConstraints: NSLayoutConstraint!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -71,9 +73,13 @@ class CheckInFeedTableViewCell: UITableViewCell {
         }
         message.text = userMessage + object.location.name
         postedComment.text = object.postedComment
-    }
-
-    @IBAction func likesButtonTap(button: UIButton) {
-        button.isSelected = !button.isSelected
+        if object.likeStatus == .loaded {
+            likeButton.isHidden = false
+            activityIndicator.stopAnimating()
+        } else {
+            likeButton.isHidden = true
+            activityIndicator.startAnimating()
+        }
+        likeButton.isSelected = object.isLiked
     }
 }

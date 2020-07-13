@@ -11,7 +11,8 @@ import UIKit
 class HomeService: BaseModuleService {
     static let code = "code"
     static let comment = "comment"
-    static let feed = "feed"
+    static let feed = "checkin_id"
+    static let value = "value"
     
     func getDashboardData(with completionHandler: @escaping ((Bool, String?, [Feed], [IGStory], [IGStory]) -> ())) {
         NS.getRequest(with: .dashboard, parameters: [:], authToken: true) { [weak self] (response) in
@@ -100,7 +101,7 @@ class HomeService: BaseModuleService {
             completionHandler(false, "")
             return
         }
-        NS.getRequest(with: .addCommentsToPublicProfile, parameters: [HomeService.feed: feedId, HomeService.comment: comment], authToken: true) { [weak self] (response) in
+        NS.getRequest(with: .addCommentToCheckin, parameters: [HomeService.feed: feedId, HomeService.comment: comment], authToken: true) { [weak self] (response) in
             switch response.result {
             case .success(let json):
                 if self?.getCode(from: json) == 201 {
@@ -122,14 +123,14 @@ class HomeService: BaseModuleService {
         }
     }
     
-    func getFeedData(with feedId: String, completionHandler: @escaping ((Bool, String?, PublicProfile?) -> ())) {
-        NS.getRequest(with: .userPublicProfile, parameters: [HomeService.feed: feedId], authToken: true) { [weak self] (response) in
+    func getFeedData(with feedId: String, completionHandler: @escaping ((Bool, String?, CheckInProfile?) -> ())) {
+        NS.getRequest(with: .getTheCheckinProfile, parameters: [HomeService.feed: feedId], authToken: true) { [weak self] (response) in
             switch response.result {
             case .success(let json):
                 if self?.getCode(from: json) == 201 {
                     if let json = json as? [String: Any], let data = json["data"] as? [String: Any] {
-                        if let profile = data["profile"] as? [[String: Any]], let profileData = profile.first {
-                            completionHandler(true, self?.getMessage(from: json), PublicProfile(with: profileData))
+                        if let profile = data["profile"] as? [String: Any] {
+                            completionHandler(true, self?.getMessage(from: json), CheckInProfile(with: profile))
                         } else {
                             completionHandler(false, self?.getMessage(from: json), nil)
                         }
@@ -144,5 +145,32 @@ class HomeService: BaseModuleService {
             }
         }
     }
-
+    func updateCheckinLike(with feedId: String, isLiked: Bool, completionHandler: @escaping ((Bool, String?, Bool?, String?) -> ())) {
+        NS.getRequest(with: .updateCheckinLike, parameters: [HomeService.feed: feedId, HomeService.value: isLiked ? "yes" : "no"], authToken: true) { [weak self] (response) in
+            switch response.result {
+            case .success(let json):
+                if self?.getCode(from: json) == 201 {
+                    if let json = json as? [String: Any], let data = json["data"] as? [String: Any] {
+                        if let response = data["response"] as? String, response == "success" {
+                            var isLiked: Bool?
+                            var totalLike: String?
+                            if let result = data["result"] as? [String: Any] {
+                                isLiked = result["liked"] as? Bool
+                                totalLike = result["total_likes"] as? String
+                            }
+                            completionHandler(true, self?.getMessage(from: json), isLiked, totalLike)
+                        } else {
+                            completionHandler(false, self?.getMessage(from: json), false, "")
+                        }
+                    } else {
+                        completionHandler(false, self?.getMessage(from: json), false, "")
+                    }
+                } else {
+                    completionHandler(false, self?.getMessage(from: json), false, "")
+                }
+            case .failure( _):
+                completionHandler(false, "", false, "")
+            }
+        }
+    }
 }
