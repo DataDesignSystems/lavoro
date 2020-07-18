@@ -133,6 +133,8 @@ extension ProfileViewController: UITableViewDelegate {
             self.performSegue(withIdentifier: "findFriends", sender: self)
         case .followers:
             self.performSegue(withIdentifier: "followers", sender: self)
+        case .blacklist:
+            self.performSegue(withIdentifier: "blacklist", sender: self)
         case .logout:
             AuthUser.logout()
             appDelegate.presentLoginFlow()

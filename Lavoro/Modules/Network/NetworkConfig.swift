@@ -39,5 +39,7 @@ struct NetworkConfig {
         case getTheCheckinProfile = "api/get-the-checkin-profile/"
         case addCommentToCheckin = "api/add-comment-to-checkin/"
         case updateCheckinLike = "api/update-checkin-like/"
+        case getMyBlacklist = "api/get-my-blacklist/"
+        case updateMyBlacklist = "api/update-my-blacklist/"
     }
 }

@@ -7,13 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1312C13924C2DD9000837FED /* BlacklistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1312C13824C2DD9000837FED /* BlacklistViewController.swift */; };
+		1312C13B24C2DF5500837FED /* FollowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1312C13A24C2DF5500837FED /* FollowTableViewCell.swift */; };
 		1317B81E2460963600AD9AC8 /* MyWorkLocationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1317B81D2460963600AD9AC8 /* MyWorkLocationsViewController.swift */; };
 		1317B82224609D4700AD9AC8 /* WorkCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1317B82124609D4700AD9AC8 /* WorkCategories.swift */; };
 		1317B82424609D6300AD9AC8 /* WorkLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1317B82324609D6300AD9AC8 /* WorkLocation.swift */; };
 		1317B8262460A16B00AD9AC8 /* WorkCategoriesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1317B8252460A16B00AD9AC8 /* WorkCategoriesCollectionViewCell.swift */; };
 		1317B8282460A42400AD9AC8 /* WorkLocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1317B8272460A42400AD9AC8 /* WorkLocationTableViewCell.swift */; };
 		1317B82A24630EFA00AD9AC8 /* WhoCanIFollowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1317B82924630EFA00AD9AC8 /* WhoCanIFollowViewController.swift */; };
-		1317B82C2463132D00AD9AC8 /* FollowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1317B82B2463132D00AD9AC8 /* FollowTableViewCell.swift */; };
+		1317B82C2463132D00AD9AC8 /* BlacklistTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1317B82B2463132D00AD9AC8 /* BlacklistTableViewCell.swift */; };
 		1317B82E2463142900AD9AC8 /* OtherUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1317B82D2463142900AD9AC8 /* OtherUser.swift */; };
 		1327EB792466A61900BA4805 /* UIButton+Exts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1327EB782466A61900BA4805 /* UIButton+Exts.swift */; };
 		1327EB7B2466A80300BA4805 /* RecommendedCollectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1327EB7A2466A80300BA4805 /* RecommendedCollectionTableViewCell.swift */; };
@@ -149,13 +151,15 @@
 
 /* Begin PBXFileReference section */
 		0E14D8A558B0D4E9EFCF519F /* Pods-Lavoro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lavoro.release.xcconfig"; path = "Target Support Files/Pods-Lavoro/Pods-Lavoro.release.xcconfig"; sourceTree = "<group>"; };
+		1312C13824C2DD9000837FED /* BlacklistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlacklistViewController.swift; sourceTree = "<group>"; };
+		1312C13A24C2DF5500837FED /* FollowTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowTableViewCell.swift; sourceTree = "<group>"; };
 		1317B81D2460963600AD9AC8 /* MyWorkLocationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyWorkLocationsViewController.swift; sourceTree = "<group>"; };
 		1317B82124609D4700AD9AC8 /* WorkCategories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkCategories.swift; sourceTree = "<group>"; };
 		1317B82324609D6300AD9AC8 /* WorkLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkLocation.swift; sourceTree = "<group>"; };
 		1317B8252460A16B00AD9AC8 /* WorkCategoriesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkCategoriesCollectionViewCell.swift; sourceTree = "<group>"; };
 		1317B8272460A42400AD9AC8 /* WorkLocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkLocationTableViewCell.swift; sourceTree = "<group>"; };
 		1317B82924630EFA00AD9AC8 /* WhoCanIFollowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoCanIFollowViewController.swift; sourceTree = "<group>"; };
-		1317B82B2463132D00AD9AC8 /* FollowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowTableViewCell.swift; sourceTree = "<group>"; };
+		1317B82B2463132D00AD9AC8 /* BlacklistTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlacklistTableViewCell.swift; sourceTree = "<group>"; };
 		1317B82D2463142900AD9AC8 /* OtherUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherUser.swift; sourceTree = "<group>"; };
 		1327EB782466A61900BA4805 /* UIButton+Exts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Exts.swift"; sourceTree = "<group>"; };
 		1327EB7A2466A80300BA4805 /* RecommendedCollectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedCollectionTableViewCell.swift; sourceTree = "<group>"; };
@@ -489,6 +493,7 @@
 				13825523249E1B6E004BF327 /* SearchViewController.swift */,
 				13825525249E708B004BF327 /* UpdateTaglineViewController.swift */,
 				1395003F24B0E2E900DFBD26 /* SendGroupMessageViewController.swift */,
+				1312C13824C2DD9000837FED /* BlacklistViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -496,10 +501,11 @@
 		136F327A245B0AC7006939ED /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				1312C13A24C2DF5500837FED /* FollowTableViewCell.swift */,
 				136F327D245B13C6006939ED /* ProfileTableViewCell.swift */,
 				1317B8252460A16B00AD9AC8 /* WorkCategoriesCollectionViewCell.swift */,
 				1317B8272460A42400AD9AC8 /* WorkLocationTableViewCell.swift */,
-				1317B82B2463132D00AD9AC8 /* FollowTableViewCell.swift */,
+				1317B82B2463132D00AD9AC8 /* BlacklistTableViewCell.swift */,
 				1327EB7A2466A80300BA4805 /* RecommendedCollectionTableViewCell.swift */,
 				1327EB7C2466A8A900BA4805 /* RecommendedCollectionViewCell.swift */,
 				137938C22468083800AB2C46 /* AddScheduleImageTableViewCell.swift */,
@@ -1040,6 +1046,8 @@
 				136F3261245B032F006939ED /* AccountTypeViewController.swift in Sources */,
 				13D057F8245C9FFC00227E15 /* IGStoryPreviewModel.swift in Sources */,
 				13B531BF248C1C7C00C6C8FF /* String+Exts.swift in Sources */,
+				1312C13924C2DD9000837FED /* BlacklistViewController.swift in Sources */,
+				1312C13B24C2DF5500837FED /* FollowTableViewCell.swift in Sources */,
 				1317B82224609D4700AD9AC8 /* WorkCategories.swift in Sources */,
 				136F327C245B1012006939ED /* ProfileViewController.swift in Sources */,
 				13C54C1C2496423A00CE1AF6 /* IGAddStoryCell.swift in Sources */,
@@ -1074,7 +1082,7 @@
 				13825516249BD921004BF327 /* UIView+Exts.swift in Sources */,
 				13D057E8245C9DF800227E15 /* IGConstants.swift in Sources */,
 				13D057D8245C9DF800227E15 /* IGSnapProgressView.swift in Sources */,
-				1317B82C2463132D00AD9AC8 /* FollowTableViewCell.swift in Sources */,
+				1317B82C2463132D00AD9AC8 /* BlacklistTableViewCell.swift in Sources */,
 				136F3268245B036B006939ED /* TabbarViewController.swift in Sources */,
 				1346C7AD24BC81BE00188FC0 /* CheckInProfile.swift in Sources */,
 				13D05807245CB14A00227E15 /* WorkCheckInViewController.swift in Sources */,
