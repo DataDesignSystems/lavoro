@@ -97,6 +97,8 @@
 		13B531C1248C260B00C6C8FF /* BaseFacebookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B531C0248C260B00C6C8FF /* BaseFacebookViewController.swift */; };
 		13BA4E212498E96B002AA103 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BA4E202498E96B002AA103 /* UserService.swift */; };
 		13C3525D94BE24BBD94682BB /* Pods_Lavoro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD31EEAD4AE9165735295736 /* Pods_Lavoro.framework */; };
+		13C5082224D0788C00ABA776 /* ScheduleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C5082124D0788C00ABA776 /* ScheduleService.swift */; };
+		13C5082424D0943B00ABA776 /* ScheduleEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C5082324D0943B00ABA776 /* ScheduleEvents.swift */; };
 		13C54C052493F51600CE1AF6 /* UIImage+Exts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C54C042493F51600CE1AF6 /* UIImage+Exts.swift */; };
 		13C54C0E24953D8C00CE1AF6 /* HomeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C54C0D24953D8C00CE1AF6 /* HomeService.swift */; };
 		13C54C102496168700CE1AF6 /* LoginChatUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C54C0F2496168700CE1AF6 /* LoginChatUser.swift */; };
@@ -243,6 +245,8 @@
 		13B531BE248C1C7C00C6C8FF /* String+Exts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Exts.swift"; sourceTree = "<group>"; };
 		13B531C0248C260B00C6C8FF /* BaseFacebookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFacebookViewController.swift; sourceTree = "<group>"; };
 		13BA4E202498E96B002AA103 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		13C5082124D0788C00ABA776 /* ScheduleService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleService.swift; sourceTree = "<group>"; };
+		13C5082324D0943B00ABA776 /* ScheduleEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleEvents.swift; sourceTree = "<group>"; };
 		13C54C042493F51600CE1AF6 /* UIImage+Exts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Exts.swift"; sourceTree = "<group>"; };
 		13C54C0D24953D8C00CE1AF6 /* HomeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeService.swift; sourceTree = "<group>"; };
 		13C54C0F2496168700CE1AF6 /* LoginChatUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginChatUser.swift; sourceTree = "<group>"; };
@@ -474,6 +478,7 @@
 				1317B82D2463142900AD9AC8 /* OtherUser.swift */,
 				137938C62468125200AB2C46 /* AddScheduleType.swift */,
 				1382551C249BE026004BF327 /* PublicProfile.swift */,
+				13C5082324D0943B00ABA776 /* ScheduleEvents.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -599,6 +604,7 @@
 			isa = PBXGroup;
 			children = (
 				1382551A249BDE27004BF327 /* ProfileService.swift */,
+				13C5082124D0788C00ABA776 /* ScheduleService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -1088,6 +1094,7 @@
 				13D05807245CB14A00227E15 /* WorkCheckInViewController.swift in Sources */,
 				13D057FA245CA03200227E15 /* IGAppUtility.swift in Sources */,
 				13D057D5245C9DF800227E15 /* IGAdditions.swift in Sources */,
+				13C5082424D0943B00ABA776 /* ScheduleEvents.swift in Sources */,
 				136F325E245B032F006939ED /* AccountType.swift in Sources */,
 				1382551D249BE026004BF327 /* PublicProfile.swift in Sources */,
 				136F3262245B032F006939ED /* EnterMobileViewController.swift in Sources */,
@@ -1132,6 +1139,7 @@
 				136F3264245B032F006939ED /* MobileVerificationViewController.swift in Sources */,
 				13B531B8248BFDD500C6C8FF /* BaseModuleService.swift in Sources */,
 				1327EB792466A61900BA4805 /* UIButton+Exts.swift in Sources */,
+				13C5082224D0788C00ABA776 /* ScheduleService.swift in Sources */,
 				13D057A1245C7B4700227E15 /* CheckInFeedTableViewCell.swift in Sources */,
 				1395004024B0E2E900DFBD26 /* SendGroupMessageViewController.swift in Sources */,
 				13D057E2245C9DF800227E15 /* IGError.swift in Sources */,

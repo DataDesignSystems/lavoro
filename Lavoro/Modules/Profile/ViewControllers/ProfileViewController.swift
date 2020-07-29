@@ -27,12 +27,10 @@ class ProfileViewController: BaseViewController {
                                ProfileInfo(icon: "WhoIFollow", title: "Who I Follow", type: .whoIFollow),
                                ProfileInfo(icon: "Messages", title: "Messages", type: .messages),
                                ProfileInfo(icon: "Blacklist", title: "Blacklist", type: .blacklist),
-                               ProfileInfo(icon: "Settings", title: "Settings", type: .settings),
                                ProfileInfo(icon: "logout", title: "Logout", type: .logout)]]
     
     var customerProfileInfo = [[ProfileInfo(icon: "WhoIFollow", title: "Who I Follow", type: .whoIFollow),
                                 ProfileInfo(icon: "Messages", title: "Messages", type: .messages),
-                                ProfileInfo(icon: "Settings", title: "Settings", type: .settings),
                                 ProfileInfo(icon: "logout", title: "Logout", type: .logout)]]
     
     var profileInfo = [[ProfileInfo]]()

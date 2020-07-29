@@ -18,6 +18,8 @@ class MyScheduleViewController: BaseViewController {
     }()
     
     private var events = [Event]()
+    private var scheduleEvents = [ScheduleEvent]()
+    let scheduleService = ScheduleService()
     
     private lazy var style: Style = {
         var style = Style()
@@ -59,6 +61,28 @@ class MyScheduleViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        self.fetchData()
+    }
+    
+    func fetchData() {
+        if events.isEmpty {
+            self.showLoadingView()
+        }
+        scheduleService.getMyCalendar { [weak self] (success, message, scheduleEvents) in
+            self?.scheduleEvents = scheduleEvents
+            self?.events = scheduleEvents.map({ scheduleEvent in
+                var event = Event()
+                event.id = scheduleEvent.calendarId
+                event.start = scheduleEvent.startTime
+                event.end = scheduleEvent.endTime
+                event.text = scheduleEvent.message + "\n" + scheduleEvent.locationText + "\n" + scheduleEvent.startTime.toString(dateFormat: "h:mm a") + " - " + scheduleEvent.endTime.toString(dateFormat: "h:mm a")
+                event.backgroundColor = UIColor(hexString: "#FF2D55")
+                event.colorText = .white
+                return event
+            })
+            self?.calendarView.reloadData()
+            self?.stopLoadingView()
+        }
     }
     
     @IBAction func todayButtonTap() {

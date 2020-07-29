@@ -23,6 +23,7 @@ struct Validation {
         case loginError = "Your email and password does not match!"
         case genericError = "Please try again!"
         case tokenExpire = "Session expired!\nPlease login again."
+        case startEndTime = "End time should be after start time."
     }
     
     enum Warning: String {

@@ -41,5 +41,7 @@ struct NetworkConfig {
         case updateCheckinLike = "api/update-checkin-like/"
         case getMyBlacklist = "api/get-my-blacklist/"
         case updateMyBlacklist = "api/update-my-blacklist/"
+        case addToMyCalendar = "api/add-to-my-calendar/"
+        case getMyCalendar = "api/get-my-calendar/"
     }
 }

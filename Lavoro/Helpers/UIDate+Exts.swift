@@ -15,6 +15,14 @@ extension Date
         dateFormatter.dateFormat = format
         return dateFormatter.string(from: self)
     }
+    
+    func toUTCString(dateFormat format  : String ) -> String
+    {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+        dateFormatter.dateFormat = format
+        return dateFormatter.string(from: self)
+    }
 }
 
 extension String {
@@ -22,6 +30,12 @@ extension String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
         return dateFormatter.date(from:self)
-
+    }
+    
+    func toDateFromUTC(dateFormat format: String) -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+        dateFormatter.dateFormat = format
+        return dateFormatter.date(from:self)
     }
 }

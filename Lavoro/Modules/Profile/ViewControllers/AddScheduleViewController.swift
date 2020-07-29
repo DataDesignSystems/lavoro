@@ -8,68 +8,144 @@
 
 import UIKit
 import MaterialComponents.MaterialBottomSheet
+import GooglePlaces
 
 class AddScheduleViewController: BaseViewController {
-    @IBOutlet weak var tableview: UITableView!
-    @IBOutlet weak var createEventButton: UIButton!
+    @IBOutlet weak var gradientTopView: UIView!
+    @IBOutlet weak var gradientBottomView: UIView!
+    @IBOutlet weak var parentView: UIView!
+    @IBOutlet weak var userImage: UIImageView!
+    @IBOutlet weak var message: UITextView!
+    @IBOutlet weak var checkInButton: UIButton!
+    @IBOutlet weak var charLimitLabel: UILabel!
+    @IBOutlet weak var selectLocationButton: UIButton!
+    @IBOutlet weak var startTimeButton: UIButton!
+    @IBOutlet weak var endTimeButton: UIButton!
+    let scheduleService = ScheduleService()
+    let placeholderText = "Say something..."
+    var selectedPlace: GMSPlace?
+    var selectedStartDate: Date = Date()
+    var selectedEndDate: Date = Date()
     
-    var addScheduleTypes = [AddScheduleType(type: .location, value: "Please Select"),
-                            AddScheduleType(type: .date, value: "Please Select"),
-                            AddScheduleType(type: .startEndTime, value: "Please Select")]
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         // Do any additional setup after loading the view.
     }
-    
+
     func setupView() {
-        createEventButton.setLayer(cornerRadius: 4)
-        createEventButton.isEnabled = false
+        gradientTopView.gradientLayer(with: UIColor(white: 0, alpha: 0.75), endColor: UIColor(white: 0, alpha: 0))
+        gradientBottomView.gradientLayer(with: UIColor(white: 0, alpha: 0), endColor: UIColor(white: 0, alpha: 1))
+        parentView.setLayer(cornerRadius: 8)
+        userImage.setLayer(cornerRadius: 4)
+        checkInButton.setLayer(cornerRadius: 4)
+        if let url = URL(string: AuthUser.getAuthUser()?.avatar ?? "") {
+            userImage.sd_setImage(with: url, completed: nil)
+        }
+        charLimitLabel.text = "0/\(AppPrefrences.messageCharLimit)"
+    }
+    
+    @IBAction func selectLocation() {
+        let acController = GMSAutocompleteViewController()
+        acController.delegate = self
+        present(acController, animated: true, completion: nil)
+    }
+    
+    @IBAction func selectStartTime() {
+        RPicker.selectDate(title: "Select Start Date", cancelText: "Cancel", datePickerMode: .dateAndTime, selectedDate: selectedStartDate, didSelectDate: { [weak self] (selectedDate) in
+            self?.selectedStartDate = selectedDate
+            self?.startTimeButton.setTitle(selectedDate.toString(dateFormat: "MM-dd-yyyy hh:mm a"), for: .normal)
+        })
+    }
+    
+    @IBAction func selectEndTime() {
+        RPicker.selectDate(title: "Select End Date", cancelText: "Cancel", datePickerMode: .dateAndTime, selectedDate: selectedEndDate, didSelectDate: { [weak self] (selectedDate) in
+            self?.selectedEndDate = selectedDate
+            self?.endTimeButton.setTitle(selectedDate.toString(dateFormat: "MM-dd-yyyy hh:mm a"), for: .normal)
+        })
+    }
+    
+    @IBAction func closeButtonAction() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func checkInNotify() {
+        let messageToSend = message.text.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard messageToSend.count > 0 else {
+            return
+        }
+        guard selectedStartDate < selectedEndDate else {
+            MessageViewAlert.showError(with: Validation.Error.startEndTime.rawValue)
+            return
+        }
+        guard let place = selectedPlace, let placeId = place.placeID else {
+            MessageViewAlert.showError(with: Validation.ValidationError.selectPlace.rawValue)
+            return
+        }
+        self.showLoadingView()
+        scheduleService.addToMyCalendar(with: messageToSend, startTime: selectedStartDate, endTime: selectedEndDate, placeId: placeId) { [weak self] (success, message) in
+            self?.stopLoadingView()
+            if success {
+                if let message = message {
+                    MessageViewAlert.showSuccess(with: message)
+                }
+                self?.closeButtonAction()
+            } else {
+                MessageViewAlert.showError(with: message ?? "There is some error./nPlease try again")
+            }
+        }
     }
 }
 
-extension AddScheduleViewController: UITableViewDataSource, UITableViewDelegate {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        2
-    }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return 1
+extension AddScheduleViewController: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.text == placeholderText {
+            textView.text = nil
         }
-        return addScheduleTypes.count
     }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "addScheduleImage", for: indexPath) as! AddScheduleImageTableViewCell
-            return cell
-        } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "addScheduleData", for: indexPath) as! AddScheduleDataTableViewCell
-            cell.setupCell(with: addScheduleTypes[indexPath.row])
-            return cell
+
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = placeholderText
         }
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 0 {
-            return 236
-        } else {
-            return 100
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if(text == "\n") {
+            textView.resignFirstResponder()
+            return false
         }
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 1 {
-            switch indexPath.row {
-            case 0:
-                let storyBoard: UIStoryboard = UIStoryboard(name: "Profile", bundle: nil)
-                let viewController = storyBoard.instantiateViewController(withIdentifier: "MyWorkLocationsViewController") as! MyWorkLocationsViewController
-                viewController.isOpenedAsBottomSheet = true
-                let bottomSheet: MDCBottomSheetController = MDCBottomSheetController(contentViewController: viewController)
-                present(bottomSheet, animated: true, completion: nil)
-            default:
-                print("not handled")
+        
+        if let textViewString = textView.text, let swtRange = Range(range, in: textViewString) {
+            let fullString = textViewString.replacingCharacters(in: swtRange, with: text)
+            if fullString.count <= AppPrefrences.messageCharLimit {
+                charLimitLabel.text = "\(fullString.count)/\(AppPrefrences.messageCharLimit)"
+                return true
+            } else {
+                textView.text = fullString[0..<AppPrefrences.messageCharLimit]
+                charLimitLabel.text = "\(AppPrefrences.messageCharLimit)/\(AppPrefrences.messageCharLimit)"
+                return false
             }
+            
         }
+
+        return true
+    }
+}
+extension AddScheduleViewController: GMSAutocompleteViewControllerDelegate {
+    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
+        selectedPlace = place
+        selectLocationButton.setTitle(place.name, for: .normal)
+        viewController.dismiss(animated: true, completion: nil)
+        print(viewController)
+    }
+    
+    func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
+        print(viewController)
+    }
+    
+    func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+        viewController.dismiss(animated: true, completion: nil)
+        print(viewController)
     }
 }
