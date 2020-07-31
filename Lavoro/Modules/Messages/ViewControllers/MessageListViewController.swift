@@ -56,7 +56,7 @@ class MessageListViewController: BaseViewController {
     @objc
     fileprivate func refreshChatMessage() {
         appDelegate.updateBadgeCountForUnreadMessage()
-        applozicClient.getLatestMessages(false, withCompletionHandler: { [weak self] messageList, error in
+        applozicClient.getLatestMessages(false, withOnlyGroups: false, withCompletionHandler: { [weak self] messageList, error in
             if let messageList = messageList as? [ALMessage] {
                 self?.messageThreads = messageList
             }
