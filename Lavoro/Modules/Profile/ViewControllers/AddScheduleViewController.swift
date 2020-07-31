@@ -128,7 +128,21 @@ class AddScheduleViewController: BaseViewController {
     }
     
     @IBAction func deleteEntryButtonTap() {
-        
+        guard let calendarId = event?.calendarId else {
+            return
+        }
+        self.showLoadingView()
+        scheduleService.removeFromMyCalendar(with: calendarId) { [weak self] (success, message) in
+            if success {
+                if let message = message {
+                    self?.delegate?.schedulaeAdded()
+                    MessageViewAlert.showSuccess(with: message)
+                }
+                self?.closeButtonAction()
+            } else {
+                MessageViewAlert.showError(with: message ?? "There is some error./nPlease try again")
+            }
+        }
     }
 }
 

@@ -43,5 +43,6 @@ struct NetworkConfig {
         case updateMyBlacklist = "api/update-my-blacklist/"
         case addToMyCalendar = "api/add-to-my-calendar/"
         case getMyCalendar = "api/get-my-calendar/"
+        case removeFromMyCalendar = "api/remove-from-my-calendar/"
     }
 }
