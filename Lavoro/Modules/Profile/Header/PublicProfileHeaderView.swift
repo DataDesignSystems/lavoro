@@ -33,7 +33,7 @@ class PublicProfileHeaderView: UIView {
         nameLabel.text = profile.name
         heartCount.text = profile.follower_count
         commentsCount.text = profile.comment_count
-        profileDescription.text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley"//profile.tagline
+        profileDescription.text = profile.tagline
         heartButton.isSelected = profile.isFollowing
     }
     

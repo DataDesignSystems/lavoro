@@ -16,7 +16,7 @@ public struct PublicProfile {
     public let comment_count: String
     public let isFollowing: Bool
     public let position: String
-    public let tagline: String
+    public var tagline: String
     public let comments: [Comment]
     
     init(with json:[String: Any]) {

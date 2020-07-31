@@ -73,6 +73,8 @@ class PublicProfileViewController: BaseViewController {
     @objc func editTagline() {
         let storyBoard: UIStoryboard = UIStoryboard(name: "Profile", bundle: nil)
         let viewController = storyBoard.instantiateViewController(withIdentifier: "UpdateTaglineViewController") as! UpdateTaglineViewController
+        viewController.delegate = self
+        viewController.lastTagline = publicProfile?.tagline ?? ""
         self.tabBarController?.present(viewController, animated: true, completion: nil)
     }
     
@@ -252,4 +254,11 @@ extension PublicProfileViewController: InputBarAccessoryViewDelegate {
         bottomConstraint.constant = size.height + 300 // keyboard size estimate
     }
     func inputBar(_ inputBar: InputBarAccessoryView, textViewTextDidChangeTo text: String) {}
+}
+
+extension PublicProfileViewController: TaglineUpdatedDelegate {
+    func taglineUpdated(_ tagline: String) {
+        publicProfile?.tagline = tagline
+        self.headerView.setupView(with: publicProfile)
+    }
 }

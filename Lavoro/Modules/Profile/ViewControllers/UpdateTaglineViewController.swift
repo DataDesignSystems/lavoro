@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol TaglineUpdatedDelegate {
+    func taglineUpdated(_ tagline: String)
+}
+
 class UpdateTaglineViewController: BaseViewController {
     @IBOutlet weak var parentView: UIView!
     @IBOutlet weak var userImage: UIImageView!
@@ -16,6 +20,8 @@ class UpdateTaglineViewController: BaseViewController {
     @IBOutlet weak var charLimitLabel: UILabel!
     let placeholderText = "Say something..." 
     let profileService = ProfileService()
+    var lastTagline = ""
+    var delegate: TaglineUpdatedDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,8 +36,13 @@ class UpdateTaglineViewController: BaseViewController {
         if let url = URL(string: AuthUser.getAuthUser()?.avatar ?? "") {
             userImage.sd_setImage(with: url, completed: nil)
         }
-        message.text = placeholderText
-        charLimitLabel.text = "0/\(AppPrefrences.messageCharLimit)"
+        if !lastTagline.isEmpty {
+            message.text = lastTagline
+            charLimitLabel.text = "\(lastTagline.count)/\(AppPrefrences.messageCharLimit)"
+        } else {
+            message.text = placeholderText
+            charLimitLabel.text = "0/\(AppPrefrences.messageCharLimit)"
+        }
     }
     
     @IBAction func closeButtonAction() {
@@ -55,6 +66,7 @@ class UpdateTaglineViewController: BaseViewController {
         profileService.updateTagline(with: tagline) { [weak self] (success, message) in
             self?.stopLoadingView()
             if success {
+                self?.delegate?.taglineUpdated(tagline)
                 self?.closeButtonAction()
             } else {
                 MessageViewAlert.showError(with: message ?? "There is some error./nPlease try again")
