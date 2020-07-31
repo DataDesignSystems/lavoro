@@ -188,6 +188,7 @@ class HomeFeedsViewController: BaseViewController {
                 if success {
                     if let message = message, message.count > 0 {
                         MessageViewAlert.showSuccess(with: message)
+                        self?.fetchData()
                     }
                 } else {
                     MessageViewAlert.showSuccess(with: message ?? Validation.Error.genericError.rawValue)
