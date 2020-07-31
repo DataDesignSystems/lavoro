@@ -205,7 +205,7 @@ class HomeFeedsViewController: BaseViewController {
             return
         }
         if authUser.type == .serviceProvider {
-            QRDisplayViewController.displayQR(on: self)
+            QRDisplayViewController.displayQR(on: self, delegate: self)
         } else {
             startScan()
         }
@@ -302,5 +302,11 @@ extension HomeFeedsViewController: UICollectionViewDelegate,UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 16
+    }
+}
+
+extension HomeFeedsViewController: QRDisplayDelegate {
+    func userAdded() {
+        fetchData()
     }
 }

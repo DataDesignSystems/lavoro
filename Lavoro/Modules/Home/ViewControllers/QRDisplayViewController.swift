@@ -9,6 +9,10 @@
 import UIKit
 import QRCodeReader
 
+protocol QRDisplayDelegate {
+    func userAdded()
+}
+
 class QRDisplayViewController: BaseViewController {
     @IBOutlet weak var scanButton: UIButton!
     @IBOutlet weak var qrCodeImage: UIImageView!
@@ -26,6 +30,7 @@ class QRDisplayViewController: BaseViewController {
         return QRCodeReaderViewController(builder: builder)
     }()
     let homeService: HomeService = HomeService()
+    var delegate: QRDisplayDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,10 +67,11 @@ class QRDisplayViewController: BaseViewController {
                 return
             }
             self?.showLoadingView()
-            self?.homeService.followUserByQR(qrCode: value, completionHandler: { (success, message) in
+            self?.homeService.followUserByQR(qrCode: value, completionHandler: { [weak self] (success, message) in
                 self?.stopLoadingView()
                 if success {
                     if let message = message, message.count > 0 {
+                        self?.delegate?.userAdded()
                         MessageViewAlert.showSuccess(with: message)
                     }
                 } else {
@@ -79,12 +85,13 @@ class QRDisplayViewController: BaseViewController {
     }
 }
 extension QRDisplayViewController {
-    static func displayQR(on viewController:UIViewController?) {
+    static func displayQR(on viewController: UIViewController?, delegate: QRDisplayDelegate) {
         guard let presentOnViewController = viewController else {
             return
         }
         let storyBoard: UIStoryboard = UIStoryboard(name: "Home", bundle: nil)
         let viewController = storyBoard.instantiateViewController(withIdentifier: "QRDisplayViewController") as! QRDisplayViewController
+        viewController.delegate = delegate
         presentOnViewController.present(viewController, animated: true) {
         }
     }
