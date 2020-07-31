@@ -146,20 +146,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         guard let tabbarController = window?.rootViewController as? TabbarViewController else {
             return
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            let userService = ALUserService()
-            if let totalUnreadCount = userService.getTotalUnreadCount(), (tabbarController.tabBar.items?.count ?? 0) > 2 {
-                if(totalUnreadCount.intValue > 0){
-                    UIApplication.shared.applicationIconBadgeNumber = totalUnreadCount.intValue
-                    tabbarController.messageTabbarItem()?.badgeValue = "\(totalUnreadCount)"
-                }else{
-                    UIApplication.shared.applicationIconBadgeNumber = 0
-                    tabbarController.messageTabbarItem()?.badgeValue = nil
+        
+        ApplozicClient().getLatestMessages(false, withOnlyGroups: false, withCompletionHandler: { messageList, error in
+            if let messageList = messageList as? [ALMessage] {
+                var groupMessageThreads = [NSNumber]()
+                for message in messageList {
+                    if let groupId = message.groupId {
+                        groupMessageThreads.append(groupId)
+                    }
+                }
+                
+                for (index, groupId) in groupMessageThreads.enumerated() {
+                    ApplozicClient().markConversationRead(forGroup: groupId) { (response, error) in
+                        if index == groupMessageThreads.count {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                let userService = ALUserService()
+                                if let totalUnreadCount = userService.getTotalUnreadCount(), (tabbarController.tabBar.items?.count ?? 0) > 2 {
+                                    if(totalUnreadCount.intValue > 0){
+                                        UIApplication.shared.applicationIconBadgeNumber = totalUnreadCount.intValue
+                                        tabbarController.messageTabbarItem()?.badgeValue = "\(totalUnreadCount)"
+                                    }else{
+                                        UIApplication.shared.applicationIconBadgeNumber = 0
+                                        tabbarController.messageTabbarItem()?.badgeValue = nil
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
-        }
+        })
     }
-    
+        
     func updatebadgeCountFromPushInfo(userInfo: [AnyHashable: Any]) {
         guard let tabbarController = window?.rootViewController as? UITabBarController else {
             return

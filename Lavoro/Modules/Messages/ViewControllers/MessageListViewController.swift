@@ -63,9 +63,15 @@ class MessageListViewController: BaseViewController {
             self?.tableview.reloadData()
             self?.noFeedLabel.isHidden = (self?.messageThreads.count != 0)
         })
+        setUnreadCount()
+        resetGroupMessageCount()
+    }
+    
+    func setUnreadCount() {
         guard let tabBarController = self.tabBarController as? TabbarViewController else {
             return
         }
+
         let userService = ALUserService()
         if let totalUnreadCount = userService.getTotalUnreadCount() {
             if(totalUnreadCount.intValue > 0){
@@ -76,6 +82,27 @@ class MessageListViewController: BaseViewController {
                 tabBarController.messageTabbarItem()?.badgeValue = nil
             }
         }
+    }
+    
+    func resetGroupMessageCount() {
+        applozicClient.getLatestMessages(false, withOnlyGroups: false, withCompletionHandler: { [weak self] messageList, error in
+            if let messageList = messageList as? [ALMessage] {
+                var groupMessageThreads = [NSNumber]()
+                for message in messageList {
+                    if let groupId = message.groupId {
+                        groupMessageThreads.append(groupId)
+                    }
+                }
+                
+                for (index, groupId) in groupMessageThreads.enumerated() {
+                    self?.applozicClient.markConversationRead(forGroup: groupId) { (response, error) in
+                        if index == groupMessageThreads.count {
+                            self?.setUnreadCount()
+                        }
+                    }
+                }
+            }
+        })
     }
     
     func redirectToChat(with userId: String) {
