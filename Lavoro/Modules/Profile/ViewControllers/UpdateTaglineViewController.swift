@@ -43,6 +43,12 @@ class UpdateTaglineViewController: BaseViewController {
             message.text = placeholderText
             charLimitLabel.text = "0/\(AppPrefrences.messageCharLimit)"
         }
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleTap))
+        self.view.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc func handleTap() {
+        self.view.endEditing(true)
     }
     
     @IBAction func closeButtonAction() {
