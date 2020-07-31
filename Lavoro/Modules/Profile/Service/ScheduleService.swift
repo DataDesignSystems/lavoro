@@ -13,14 +13,19 @@ class ScheduleService: BaseModuleService {
     static let startTime: String = "start"
     static let endTime: String = "end"
     static let message: String = "message"
+    static let calendarId: String = "calendar_id"
     
-    func addToMyCalendar(with message: String, startTime: Date, endTime: Date, placeId: String, completionHandler: @escaping ((Bool, String?) -> ())) {
+    func addToMyCalendar(with message: String, startTime: Date, endTime: Date, placeId: String, calendarId: String?, completionHandler: @escaping ((Bool, String?) -> ())) {
         let message = message.trimmingCharacters(in: .whitespacesAndNewlines)
         guard message.count > 0 else {
             completionHandler(false, "")
             return
         }
-        NS.getRequest(with: .addToMyCalendar, parameters: [ScheduleService.message: message, ScheduleService.googleId: placeId, ScheduleService.startTime: startTime.toUTCString(dateFormat: "yyyy-MM-dd hh:mm:ss"), ScheduleService.endTime: endTime.toUTCString(dateFormat: "yyyy-MM-dd hh:mm:ss")],  authToken: true) { [weak self] (response) in
+        var params = [ScheduleService.message: message, ScheduleService.googleId: placeId, ScheduleService.startTime: startTime.toUTCString(dateFormat: "yyyy-MM-dd hh:mm:ss"), ScheduleService.endTime: endTime.toUTCString(dateFormat: "yyyy-MM-dd hh:mm:ss")]
+        if let calendarId = calendarId {
+            params[ScheduleService.calendarId] = calendarId
+        }
+        NS.getRequest(with: .addToMyCalendar, parameters: params,  authToken: true) { [weak self] (response) in
             switch response.result {
             case .success(let json):
                 if self?.getCode(from: json) == 201 {

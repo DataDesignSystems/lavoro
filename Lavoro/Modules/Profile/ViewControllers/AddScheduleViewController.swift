@@ -10,6 +10,10 @@ import UIKit
 import MaterialComponents.MaterialBottomSheet
 import GooglePlaces
 
+protocol AddScheduleDelegate: class {
+    func schedulaeAdded()
+}
+
 class AddScheduleViewController: BaseViewController {
     @IBOutlet weak var gradientTopView: UIView!
     @IBOutlet weak var gradientBottomView: UIView!
@@ -17,6 +21,7 @@ class AddScheduleViewController: BaseViewController {
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var message: UITextView!
     @IBOutlet weak var checkInButton: UIButton!
+    @IBOutlet weak var deleteEntryButton: UIButton!
     @IBOutlet weak var charLimitLabel: UILabel!
     @IBOutlet weak var selectLocationButton: UIButton!
     @IBOutlet weak var startTimeButton: UIButton!
@@ -26,6 +31,8 @@ class AddScheduleViewController: BaseViewController {
     var selectedPlace: GMSPlace?
     var selectedStartDate: Date = Date()
     var selectedEndDate: Date = Date()
+    var delegate: AddScheduleDelegate?
+    var event: ScheduleEvent?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +50,21 @@ class AddScheduleViewController: BaseViewController {
             userImage.sd_setImage(with: url, completed: nil)
         }
         charLimitLabel.text = "0/\(AppPrefrences.messageCharLimit)"
+        setupExistingData()
+    }
+    
+    func setupExistingData() {
+        guard let event = event else {
+            return
+        }
+        self.selectedEndDate = event.endTime
+        self.selectedStartDate = event.startTime
+        self.endTimeButton.setTitle(event.endTime.toString(dateFormat: "MM-dd-yyyy hh:mm a"), for: .normal)
+        self.startTimeButton.setTitle(event.startTime.toString(dateFormat: "MM-dd-yyyy hh:mm a"), for: .normal)
+        self.selectLocationButton.setTitle(event.locationText, for: .normal)
+        self.message.text = event.message
+        self.charLimitLabel.text = "\(event.message.count)/\(AppPrefrences.messageCharLimit)"
+        self.deleteEntryButton.isHidden = false
     }
     
     @IBAction func selectLocation() {
@@ -78,15 +100,24 @@ class AddScheduleViewController: BaseViewController {
             MessageViewAlert.showError(with: Validation.Error.startEndTime.rawValue)
             return
         }
-        guard let place = selectedPlace, let placeId = place.placeID else {
+        var googleId = event?.googleId
+        if googleId == nil {
+            guard let place = selectedPlace, let placeId = place.placeID else {
+                MessageViewAlert.showError(with: Validation.ValidationError.selectPlace.rawValue)
+                return
+            }
+            googleId = placeId
+        }
+        guard let placeId = googleId else {
             MessageViewAlert.showError(with: Validation.ValidationError.selectPlace.rawValue)
             return
         }
         self.showLoadingView()
-        scheduleService.addToMyCalendar(with: messageToSend, startTime: selectedStartDate, endTime: selectedEndDate, placeId: placeId) { [weak self] (success, message) in
+        scheduleService.addToMyCalendar(with: messageToSend, startTime: selectedStartDate, endTime: selectedEndDate, placeId: placeId, calendarId: event?.calendarId) { [weak self] (success, message) in
             self?.stopLoadingView()
             if success {
                 if let message = message {
+                    self?.delegate?.schedulaeAdded()
                     MessageViewAlert.showSuccess(with: message)
                 }
                 self?.closeButtonAction()
@@ -94,6 +125,10 @@ class AddScheduleViewController: BaseViewController {
                 MessageViewAlert.showError(with: message ?? "There is some error./nPlease try again")
             }
         }
+    }
+    
+    @IBAction func deleteEntryButtonTap() {
+        
     }
 }
 
@@ -147,5 +182,14 @@ extension AddScheduleViewController: GMSAutocompleteViewControllerDelegate {
     func wasCancelled(_ viewController: GMSAutocompleteViewController) {
         viewController.dismiss(animated: true, completion: nil)
         print(viewController)
+    }
+}
+extension AddScheduleViewController {
+    static func showEditSchedule(presentingView: UIViewController ,event: ScheduleEvent, delegate: AddScheduleDelegate) {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Profile", bundle: nil)
+        let viewController = storyBoard.instantiateViewController(withIdentifier: "AddScheduleViewController") as! AddScheduleViewController
+        viewController.event = event
+        viewController.delegate = delegate
+        presentingView.present(viewController, animated: true, completion: nil)
     }
 }

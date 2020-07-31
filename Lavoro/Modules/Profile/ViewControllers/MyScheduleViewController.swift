@@ -78,6 +78,7 @@ class MyScheduleViewController: BaseViewController {
                 event.text = scheduleEvent.message + "\n" + scheduleEvent.locationText + "\n" + scheduleEvent.startTime.toString(dateFormat: "h:mm a") + " - " + scheduleEvent.endTime.toString(dateFormat: "h:mm a")
                 event.backgroundColor = UIColor(hexString: "#FF2D55")
                 event.colorText = .white
+                event.eventData = scheduleEvent
                 return event
             })
             self?.calendarView.reloadData()
@@ -91,6 +92,12 @@ class MyScheduleViewController: BaseViewController {
     
     @IBAction func addSchedule() {
         self.performSegue(withIdentifier: "addSchedule", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? AddScheduleViewController {
+            vc.delegate = self
+        }
     }
 }
 extension MyScheduleViewController: CalendarDelegate {
@@ -109,9 +116,8 @@ extension MyScheduleViewController: CalendarDelegate {
     
     func didSelectEvent(_ event: Event, type: CalendarType, frame: CGRect?) {
         print(type, event)
-        switch type {
-        default:
-            break
+        if let event = event.eventData as? ScheduleEvent {
+            AddScheduleViewController.showEditSchedule(presentingView: self.tabBarController ?? self, event: event, delegate: self)
         }
     }
     
@@ -137,5 +143,10 @@ extension MyScheduleViewController: CalendarDataSource {
         
         let dateStyle = DateStyle(date: selectDate, backgroundColor: EventColor(.systemOrange))
         return dateStyle
+    }
+}
+extension MyScheduleViewController: AddScheduleDelegate {
+    func schedulaeAdded() {
+        fetchData()
     }
 }
