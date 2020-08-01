@@ -7,11 +7,11 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
+        <!--Base Navigation View Controller-->
         <scene sceneID="wyh-N7-lTu">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XpS-wV-v2A" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <navigationController storyboardIdentifier="WhoIsWorkingModule" id="Wry-Za-L3N" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="WhoIsWorkingModule" id="Wry-Za-L3N" customClass="BaseNavigationViewController" customModule="Lavoro" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Whu-JU-NhJ">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

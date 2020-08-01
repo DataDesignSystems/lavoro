@@ -126,6 +126,10 @@ extension WhoIsWorkingViewController: UITableViewDataSource, UITableViewDelegate
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let navigationController = self.navigationController else {
+            return
+        }
+        PublicProfileViewController.showProfile(on: navigationController, profileId: workArray[indexPath.row].userId)
     }
 }
 
