@@ -99,6 +99,11 @@
 		13C3525D94BE24BBD94682BB /* Pods_Lavoro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD31EEAD4AE9165735295736 /* Pods_Lavoro.framework */; };
 		13C5082224D0788C00ABA776 /* ScheduleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C5082124D0788C00ABA776 /* ScheduleService.swift */; };
 		13C5082424D0943B00ABA776 /* ScheduleEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C5082324D0943B00ABA776 /* ScheduleEvents.swift */; };
+		13C5082A24D5D8E300ABA776 /* WhoIsWorking.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13C5082924D5D8E300ABA776 /* WhoIsWorking.storyboard */; };
+		13C5082C24D5D8FA00ABA776 /* WhoIsWorkingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C5082B24D5D8FA00ABA776 /* WhoIsWorkingViewController.swift */; };
+		13C5082E24D5D9B200ABA776 /* WhoIsWorkingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C5082D24D5D9B200ABA776 /* WhoIsWorkingTableViewCell.swift */; };
+		13C5083124D5DB2400ABA776 /* WhoIsWorkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C5083024D5DB2400ABA776 /* WhoIsWorkingService.swift */; };
+		13C5083324D5DCEF00ABA776 /* WhoIsWorking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C5083224D5DCEF00ABA776 /* WhoIsWorking.swift */; };
 		13C54C052493F51600CE1AF6 /* UIImage+Exts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C54C042493F51600CE1AF6 /* UIImage+Exts.swift */; };
 		13C54C0E24953D8C00CE1AF6 /* HomeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C54C0D24953D8C00CE1AF6 /* HomeService.swift */; };
 		13C54C102496168700CE1AF6 /* LoginChatUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C54C0F2496168700CE1AF6 /* LoginChatUser.swift */; };
@@ -247,6 +252,11 @@
 		13BA4E202498E96B002AA103 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		13C5082124D0788C00ABA776 /* ScheduleService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleService.swift; sourceTree = "<group>"; };
 		13C5082324D0943B00ABA776 /* ScheduleEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleEvents.swift; sourceTree = "<group>"; };
+		13C5082924D5D8E300ABA776 /* WhoIsWorking.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WhoIsWorking.storyboard; sourceTree = "<group>"; };
+		13C5082B24D5D8FA00ABA776 /* WhoIsWorkingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoIsWorkingViewController.swift; sourceTree = "<group>"; };
+		13C5082D24D5D9B200ABA776 /* WhoIsWorkingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoIsWorkingTableViewCell.swift; sourceTree = "<group>"; };
+		13C5083024D5DB2400ABA776 /* WhoIsWorkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoIsWorkingService.swift; sourceTree = "<group>"; };
+		13C5083224D5DCEF00ABA776 /* WhoIsWorking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoIsWorking.swift; sourceTree = "<group>"; };
 		13C54C042493F51600CE1AF6 /* UIImage+Exts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Exts.swift"; sourceTree = "<group>"; };
 		13C54C0D24953D8C00CE1AF6 /* HomeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeService.swift; sourceTree = "<group>"; };
 		13C54C0F2496168700CE1AF6 /* LoginChatUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginChatUser.swift; sourceTree = "<group>"; };
@@ -348,6 +358,7 @@
 		136F3245245B032E006939ED /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				13C5082524D5D8D600ABA776 /* WhoIsWorking */,
 				13B531AF248BF6B400C6C8FF /* Network */,
 				136F326C245B045B006939ED /* Home */,
 				136F326B245B045B006939ED /* Messages */,
@@ -653,6 +664,50 @@
 				13B531B5248BFD8300C6C8FF /* LoginService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		13C5082524D5D8D600ABA776 /* WhoIsWorking */ = {
+			isa = PBXGroup;
+			children = (
+				13C5082F24D5DB1000ABA776 /* Service */,
+				13C5082624D5D8D600ABA776 /* Cells */,
+				13C5082724D5D8D600ABA776 /* ViewControllers */,
+				13C5082824D5D8D600ABA776 /* Model */,
+				13C5082924D5D8E300ABA776 /* WhoIsWorking.storyboard */,
+			);
+			path = WhoIsWorking;
+			sourceTree = "<group>";
+		};
+		13C5082624D5D8D600ABA776 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				13C5082D24D5D9B200ABA776 /* WhoIsWorkingTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		13C5082724D5D8D600ABA776 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				13C5082B24D5D8FA00ABA776 /* WhoIsWorkingViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		13C5082824D5D8D600ABA776 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				13C5083224D5DCEF00ABA776 /* WhoIsWorking.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		13C5082F24D5DB1000ABA776 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				13C5083024D5DB2400ABA776 /* WhoIsWorkingService.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		13C54C0C24953D6B00CE1AF6 /* Services */ = {
@@ -963,6 +1018,7 @@
 				1378AA952459E75A00131BEB /* LaunchScreen.storyboard in Resources */,
 				136F3277245B0490006939ED /* WorkCheckIn.storyboard in Resources */,
 				1378AA922459E75A00131BEB /* Assets.xcassets in Resources */,
+				13C5082A24D5D8E300ABA776 /* WhoIsWorking.storyboard in Resources */,
 				1378AA902459E75700131BEB /* Main.storyboard in Resources */,
 				13D057F4245C9F6200227E15 /* stories.json in Resources */,
 				13D057F1245C9DF800227E15 /* README.md in Resources */,
@@ -1046,6 +1102,7 @@
 				136EBD9E2467123000C27589 /* MessageTableViewCell.swift in Sources */,
 				13D057ED245C9DF800227E15 /* CubeAttributesAnimator.swift in Sources */,
 				13D057D4245C9DF800227E15 /* UIView+Extension.swift in Sources */,
+				13C5082C24D5D8FA00ABA776 /* WhoIsWorkingViewController.swift in Sources */,
 				1395004224B0F2AC00DFBD26 /* AppPrefrences.swift in Sources */,
 				13B531C1248C260B00C6C8FF /* BaseFacebookViewController.swift in Sources */,
 				13D05800245CA09B00227E15 /* IGHomeView.swift in Sources */,
@@ -1101,6 +1158,7 @@
 				13825512249BD71B004BF327 /* PublicProfileHeaderView.swift in Sources */,
 				1327EB7B2466A80300BA4805 /* RecommendedCollectionTableViewCell.swift in Sources */,
 				136F3259245B032F006939ED /* OnboardingCollectionViewCell.swift in Sources */,
+				13C5083324D5DCEF00ABA776 /* WhoIsWorking.swift in Sources */,
 				13D05809245D755B00227E15 /* BaseNavigationViewController.swift in Sources */,
 				13D057DC245C9DF800227E15 /* IGSnap.swift in Sources */,
 				13CEEBE924A87B3300C963CD /* QRDisplayViewController.swift in Sources */,
@@ -1127,6 +1185,7 @@
 				1317B82424609D6300AD9AC8 /* WorkLocation.swift in Sources */,
 				13D057FE245CA09B00227E15 /* IGStoryListCell.swift in Sources */,
 				13CEEBEC24A8885B00C963CD /* ScannerOverlay.swift in Sources */,
+				13C5083124D5DB2400ABA776 /* WhoIsWorkingService.swift in Sources */,
 				13D057E5245C9DF800227E15 /* IGVideoCacheManager.swift in Sources */,
 				13D057E7245C9DF800227E15 /* IGCommon.swift in Sources */,
 				1388A93324A4EB4E007F505E /* GPManager.swift in Sources */,
@@ -1148,6 +1207,7 @@
 				1382B7A1248F9C6B0032BE49 /* ImageService.swift in Sources */,
 				1378AAAB2459F5EE00131BEB /* UIResponder+Exts.swift in Sources */,
 				1327EB7D2466A8A900BA4805 /* RecommendedCollectionViewCell.swift in Sources */,
+				13C5082E24D5D9B200ABA776 /* WhoIsWorkingTableViewCell.swift in Sources */,
 				13B531B3248BF8B800C6C8FF /* NetworkService.swift in Sources */,
 				1382551B249BDE27004BF327 /* ProfileService.swift in Sources */,
 				13D057D7245C9DF800227E15 /* ImageView+Additions.swift in Sources */,

@@ -11,12 +11,13 @@ import UIKit
 class TabbarViewController: UITabBarController {
     var tabInfo = [Tabbar(storyboardName: "Home", initialViewControllerIdentifier: "HomeModule", iconName: "ic_home", title: "Home"),
                    Tabbar(storyboardName: "Messages", initialViewControllerIdentifier: "MessagesModule", iconName: "ic_messages", title: "Messages"),
-                   Tabbar(storyboardName: "Notification", initialViewControllerIdentifier: "NotificationModule", iconName: "ic_notification", title: "Notifications")]
+                   /*Tabbar(storyboardName: "Notification", initialViewControllerIdentifier: "NotificationModule", iconName: "ic_notification", title: "Notifications")*/]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         if let authUser = AuthUser.getAuthUser(), authUser.type == .serviceProvider {
             tabInfo.insert((Tabbar(storyboardName: "WorkCheckIn", initialViewControllerIdentifier: "WorkCheckInModule", iconName: "ic_workCheckIn", title: "Work Check In")), at: 1)
+            tabInfo.append(Tabbar(storyboardName: "WhoIsWorking", initialViewControllerIdentifier: "WhoIsWorkingModule", iconName: "ic_notification", title: "Who Is Working"))
             tabInfo.append(Tabbar(storyboardName: "Profile", initialViewControllerIdentifier: "ProfileModule", iconName: "ic_profile", title: "Public"))
         }
         setupTabbar()
