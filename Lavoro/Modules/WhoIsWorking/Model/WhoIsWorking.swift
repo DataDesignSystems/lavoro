@@ -28,7 +28,7 @@ struct WhoIsWorking {
         self.avatar = json["avatar"] as? String ?? ""
         self.startUTC = json["start_utc"] as? String ?? ""
         self.endUTC = json["end_utc"] as? String ?? ""
-        self.name = json["first"] as? String ?? ""
+        self.name = json["username"] as? String ?? ""
         self.locationName = json["name"] as? String ?? ""
         self.position = json["position"] as? String ?? ""
         self.startTimeReadableLocal = json["start_time_readable_local"] as? String ?? ""
