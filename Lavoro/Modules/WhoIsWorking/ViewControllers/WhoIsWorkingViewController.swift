@@ -116,7 +116,7 @@ extension WhoIsWorkingViewController: UITableViewDataSource, UITableViewDelegate
             title.font = UIFont.systemFont(ofSize: 15, weight: .bold)
             title.tag = 11
             header?.addSubview(title)
-            title.text = selectedDate.toString(dateFormat: "MMMM dd'\(selectedDate.daySuffix())' yyyy")
+            title.text = selectedDate.toString(dateFormat: "EEEE MMMM d'\(selectedDate.daySuffix())' yyyy")
             title.snp.makeConstraints { (make) in
                 make.centerY.equalToSuperview().offset(4)
                 make.leading.equalTo(16)
@@ -153,13 +153,13 @@ extension Date {
         let dayOfMonth = components.day
         switch dayOfMonth {
         case 1, 21, 31:
-            return "ST"
+            return "st"
         case 2, 22:
-            return "ND"
+            return "nd"
         case 3, 23:
-            return "RD"
+            return "rd"
         default:
-            return "TH"
+            return "th"
         }
     }
 }
