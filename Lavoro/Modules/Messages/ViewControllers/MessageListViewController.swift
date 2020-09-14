@@ -85,7 +85,7 @@ class MessageListViewController: BaseViewController {
     }
     
     func resetGroupMessageCount() {
-        applozicClient.getLatestMessages(false, withOnlyGroups: false, withCompletionHandler: { [weak self] messageList, error in
+        applozicClient.getLatestMessages(false, withOnlyGroups: true, withCompletionHandler: { [weak self] messageList, error in
             if let messageList = messageList as? [ALMessage] {
                 var groupMessageThreads = [NSNumber]()
                 for message in messageList {

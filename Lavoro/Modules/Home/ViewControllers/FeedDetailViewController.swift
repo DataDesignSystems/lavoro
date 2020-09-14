@@ -124,6 +124,22 @@ class FeedDetailViewController: BaseViewController {
             self?.bottomConstraint.constant = barHeight
         }
     }
+    
+    func setupWithCheckInProfileObject() {
+        switch checkInProfile?.feedType {
+        case .checkIn:
+            locationNameLabel.text = "Checked In"
+        case .checkOut:
+            locationNameLabel.text = "Checked Out"
+        case .unknown:
+            locationNameLabel.text = "Unknown"
+        default:
+            print("error")
+        }
+        if let imageURL = checkInProfile?.location.image, let url = URL(string: imageURL) {
+            locationImage.sd_setImage(with: url, completed: nil)
+        }
+    }
 
     func fetchData() {
         guard let feedId = feed?.id else {
@@ -133,6 +149,7 @@ class FeedDetailViewController: BaseViewController {
         homeService.getFeedData(with: feedId) { [weak self] (success, message, checkInProfile)  in
             self?.checkInProfile = checkInProfile
             self?.headerView.setupView(with: checkInProfile)
+            self?.setupWithCheckInProfileObject()
             self?.stopLoadingView()
             self?.tableview.contentInset = UIEdgeInsets(top: UIScreen.main.bounds.width, left: 0, bottom: 0, right: 0)
             self?.view.endEditing(true)

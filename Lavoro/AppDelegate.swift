@@ -36,6 +36,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         UIApplication.shared.registerForRemoteNotifications()
         updateBadgeCountForUnreadMessage()
         GMSPlacesClient.provideAPIKey(GPManager.key)
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+//            self.redirectToCheckInOut(with: "31")
+//        }
         return true
     }
     
@@ -147,7 +150,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             return
         }
         
-        ApplozicClient().getLatestMessages(false, withOnlyGroups: false, withCompletionHandler: { messageList, error in
+        ApplozicClient().getLatestMessages(false, withOnlyGroups: true, withCompletionHandler: { messageList, error in
             if let messageList = messageList as? [ALMessage] {
                 var groupMessageThreads = [NSNumber]()
                 for message in messageList {
@@ -209,6 +212,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
     }
     
+    func redirectToPublicProfile(with userId: String) {
+        guard let tabbarController = window?.rootViewController as? UITabBarController else {
+            return
+        }
+        if((tabbarController.tabBar.items?.count ?? 0) > 0){
+            tabbarController.selectedIndex = 0
+            if let nav = tabbarController.selectedViewController as? UINavigationController {
+                PublicProfileViewController.showProfile(on: nav, profileId: userId)
+            }
+        }
+    }
+    
+    func redirectToCheckInOut(with id: String) {
+        guard let tabbarController = window?.rootViewController as? UITabBarController else {
+            return
+        }
+        if((tabbarController.tabBar.items?.count ?? 0) > 0){
+            tabbarController.selectedIndex = 0
+            if let nav = tabbarController.selectedViewController as? UINavigationController {
+                FeedDetailViewController.showFeedDetail(on: nav, feed: Feed(with: ["id": id]))
+            }
+        }
+        
+    }
+    
     func redirectToMessage(userInfo: [AnyHashable: Any]) {
         guard let tabbarController = window?.rootViewController as? UITabBarController else {
             return
@@ -222,6 +250,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                     if let jsonObj = try JSONSerialization.jsonObject(with: data, options : .allowFragments) as? [String: Any]
                     {
                         print(jsonObj)
+                        if let messageMetadata = jsonObj["messageMetaData"] as? [String: Any] {
+                            if let type = messageMetadata["type"] as? String {
+                                if type == "public-profile", let userId = messageMetadata["user_id"] as? String  {
+                                    self.redirectToPublicProfile(with: userId)
+                                    return
+                                } else if (type == "check-in" || type == "check-out"), let id = messageMetadata["id"] as? String {
+                                    self.redirectToCheckInOut(with: id)
+                                    return
+                                }
+                            }
+                        }
                         if let userId = jsonObj["message"] as? String {
                             if((tabbarController.tabBar.items?.count ?? 0) > 2){
                                 tabbarController.selectedIndex = 2
