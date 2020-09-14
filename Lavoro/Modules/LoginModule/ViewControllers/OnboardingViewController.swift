@@ -47,6 +47,10 @@ class OnboardingViewController: BaseFacebookViewController {
             }
         }
     }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
 }
 
 extension OnboardingViewController: UICollectionViewDataSource {

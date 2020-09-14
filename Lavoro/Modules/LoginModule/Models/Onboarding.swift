@@ -14,9 +14,8 @@ struct OnboardingInfo {
     var title: String
     
     static func getOnboardingInfo() -> [OnboardingInfo]{
-        return [OnboardingInfo(imagename: "onboarding_1", title: "Keeping the service industry connected"),
-                OnboardingInfo(imagename: "onboarding_1", title: "Keeping the service industry connected"),
-                OnboardingInfo(imagename: "onboarding_1", title: "Keeping the service industry connected"),
-                OnboardingInfo(imagename: "onboarding_1", title: "Keeping the service industry connected")]
+        return [OnboardingInfo(imagename: "onboarding_2", title: "Keeping the service industry connected"),
+                OnboardingInfo(imagename: "onboarding_3", title: "Keeping the service industry connected"),
+                OnboardingInfo(imagename: "onboarding_4", title: "Keeping the service industry connected")]
     }
 }
