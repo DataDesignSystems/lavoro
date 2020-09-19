@@ -15,10 +15,45 @@ class OnboardingViewController: BaseFacebookViewController {
     @IBOutlet weak var signInButton: UIButton!
     let onboardingInfo = OnboardingInfo.getOnboardingInfo()
     @IBOutlet weak var pageControl: UIPageControl!
+    var work: DispatchWorkItem?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        collectionView.setContentOffset(CGPoint.zero, animated: false)
+        startAutoScroll()
+        super.viewWillAppear(animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        stopAutoScroll()
+    }
+    
+    func startAutoScroll() {
+        work = DispatchWorkItem(block: {
+            self.scrollToNextPage()
+        })
+        guard let work = work else {
+            return
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: work)
+    }
+    
+    func scrollToNextPage() {
+        var currentPage: Int = Int(floor((self.collectionView.contentOffset.x + self.collectionView.frame.size.width / 2) / self.collectionView.frame.size.width))
+        currentPage = (currentPage + 1) % onboardingInfo.count
+        let xOffset  = UIScreen.main.bounds.width * CGFloat(currentPage)
+        collectionView.setContentOffset(CGPoint(x: xOffset, y: 0), animated: true)
+        self.work?.cancel()
+        startAutoScroll()
+    }
+    
+    func stopAutoScroll() {
+        self.work?.cancel()
     }
     
     func setupView() {
@@ -62,6 +97,14 @@ extension OnboardingViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "onboardingCell", for: indexPath) as! OnboardingCollectionViewCell
         cell.setupCell(with: onboardingInfo[indexPath.row])
         return cell
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        stopAutoScroll()
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        startAutoScroll()
     }
 }
 
