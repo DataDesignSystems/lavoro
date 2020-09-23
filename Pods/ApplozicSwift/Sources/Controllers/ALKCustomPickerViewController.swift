@@ -22,6 +22,13 @@ class ALKCustomPickerViewController: ALKBaseViewController, Localizable {
     let option = PHImageRequestOptions()
     var selectedRows = [Int]()
     var selectedFiles = [IndexPath]()
+    lazy var imageRequestOptions: PHImageRequestOptions = {
+        let options = PHImageRequestOptions()
+        options.deliveryMode = .opportunistic
+        options.version = .current
+        options.isNetworkAccessAllowed = true
+        return options
+    }()
 
     @IBOutlet var doneButton: UIBarButtonItem!
     weak var delegate: ALKCustomPickerDelegate?
@@ -78,7 +85,7 @@ class ALKCustomPickerViewController: ALKBaseViewController, Localizable {
     private func checkPhotoLibraryPermission() {
         let status = PHPhotoLibrary.authorizationStatus()
         switch status {
-        case .authorized:
+        case .authorized, .limited:
             getAllImage(completion: { [weak self] isGrant in
                 guard let weakSelf = self else { return }
                 weakSelf.createScrollGallery(isGrant: isGrant)
@@ -103,6 +110,8 @@ class ALKCustomPickerViewController: ALKBaseViewController, Localizable {
                     // whatever
                 }
             }
+        @unknown default:
+            print("Unknown Permission for photo Library")
         }
     }
 
@@ -234,7 +243,10 @@ class ALKCustomPickerViewController: ALKBaseViewController, Localizable {
                         group.leave()
                     }
                 } else {
-                    PHCachingImageManager.default().requestImageData(for: asset, options: nil) { imageData, _, _, _ in
+                    PHCachingImageManager.default().requestImageData(
+                        for: asset,
+                        options: self.imageRequestOptions
+                    ) { imageData, _, _, _ in
                         guard let imageData = imageData, let image = UIImage(data: imageData) else {
                             error = true
                             group.leave()

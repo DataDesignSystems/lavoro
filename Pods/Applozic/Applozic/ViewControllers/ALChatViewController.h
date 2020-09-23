@@ -46,6 +46,7 @@ extern NSString * const ThirdPartyDetailVCNotificationChannelKey;
 @property (nonatomic, strong) NSNumber * conversationId;
 @property (strong, nonatomic) ALMessage * alMessage;
 @property (nonatomic, strong) NSString * contactsGroupId;
+@property (nonatomic) BOOL isSearch;
 
 @property (nonatomic) BOOL isVisible;
 
@@ -70,7 +71,7 @@ extern NSString * const ThirdPartyDetailVCNotificationChannelKey;
 -(void)individualNotificationhandler:(NSNotification *) notification;
 
 -(void)updateDeliveryStatus:(NSNotification *) notification;
--(void) setTitle;
+-(void) updateConversationProfileDetails;
 
 //-(void) syncCall:(NSString *) contactId updateUI:(NSNumber *) updateUI alertValue: (NSString *) alertValue;
 -(void) syncCall:(ALMessage *) alMessage andMessageList:(NSMutableArray*)messageArray;
@@ -90,7 +91,7 @@ extern NSString * const ThirdPartyDetailVCNotificationChannelKey;
 
 -(void) syncCall:(ALMessage*)AlMessage  updateUI:(NSNumber *)updateUI alertValue: (NSString *)alertValue;
 -(void)serverCallForLastSeen;
--(void)processLoadEarlierMessages:(BOOL)isScrollToBottom;
+-(void)loadMessagesWithStarting:(BOOL)loadFromStart WithScrollToBottom:(BOOL)flag withNextPage:(BOOL)isNextPage;
 -(NSString*)formatDateTime:(ALUserDetail*)alUserDetail  andValue:(double)value;
 -(void)checkUserBlockStatus;
 -(void)updateChannelSubscribing:(NSNumber *)oldChannelKey andNewChannel:(NSNumber *)newChannelKey;

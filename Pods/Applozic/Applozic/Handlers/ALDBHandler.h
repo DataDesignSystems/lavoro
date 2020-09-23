@@ -21,32 +21,29 @@ static NSString *const AL_SQLITE_FILE_NAME = @"AppLozic.sqlite";
 
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
-@property (strong, nonatomic) NSPersistentContainer *persistentContainer;
-
 - (NSManagedObjectContext *)privateContext;
 
-- (void)saveContext;
+- (NSError *)saveContext;
 
 +(ALDBHandler *) sharedInstance;
 
--(BOOL)purgeListOfContacts:(NSArray *)contacts;
-
--(BOOL)purgeContact:(ALContact *)contact;
-
--(BOOL)purgeAllContact;
-
--(BOOL)updateListOfContacts:(NSArray *)contacts;
-
--(BOOL)updateContact:(ALContact *)contact;
-
--(BOOL)addListOfContacts:(NSArray *)contacts;
-
--(BOOL)addContact:(ALContact *)userContact;
-
-- (DB_CONTACT *)getContactByKey:(NSString *) key value:(NSString*) value;
-
-- (ALContact *)loadContactByKey:(NSString *) key value:(NSString*) value;
-
 - (void)savePrivateAndMainContext:(NSManagedObjectContext*)context
-                        completion:(void (^)(NSError*error))completion;
+                       completion:(void (^)(NSError*error))completion;
+
+-(NSArray *)executeFetchRequest:(NSFetchRequest *)fetchrequest withError:(NSError **)fetchError;
+
+-(NSEntityDescription *)entityDescriptionWithEntityForName:(NSString *)name;
+
+-(NSUInteger)countForFetchRequest:(NSFetchRequest *)fetchrequest;
+
+-(NSManagedObject*)existingObjectWithID:(NSManagedObjectID *)objectID;
+
+-(NSManagedObject *)insertNewObjectForEntityForName:(NSString *) entityName;
+
+-(NSManagedObject *)insertNewObjectForEntityForName:(NSString *) entityName withManagedObjectContext:(NSManagedObjectContext *) context;
+
+-(void) deleteObject:(NSManagedObject *) managedObject;
+
+-(NSBatchUpdateResult *)executeRequestForNSBatchUpdateResult:(NSBatchUpdateRequest *)updateRequest withError: (NSError **)fetchError;
+
 @end

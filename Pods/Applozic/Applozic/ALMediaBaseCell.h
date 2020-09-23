@@ -28,7 +28,7 @@
 @protocol ALMediaBaseCellDelegate <NSObject>
 
 -(void) downloadRetryButtonActionDelegate:(int) index andMessage:(ALMessage *) message;
--(void) thumbnailDownload:(NSString *) key;
+-(void) thumbnailDownloadWithMessageObject:(ALMessage *) message;
 -(void) stopDownloadForIndex:(int)index andMessage:(ALMessage *)message;
 -(void) showImagePreviewWithFilePath:(NSString *) filePath;
 -(void) deleteMessageFromView:(ALMessage *)message;
@@ -74,13 +74,11 @@
 -(void)hidePlayButtonOnUploading;
 -(void)openUserChatVC;
 -(void)processReplyOfChat:(ALMessage*)almessage andViewSize:(CGSize)viewSize;
-
+-(NSString *)getMessageStatusIconName:(ALMessage *)alMessage;
 
 @property (nonatomic, strong) UILabel *sizeLabel;
 @property (nonatomic, strong) UIView *downloadRetryView;
 -(BOOL)isMessageReplyMenuEnabled:(SEL) action;
 
 @property (nonatomic, strong) ALChannel * channel;
-@property (nonatomic, strong) ALContact * contact;
-
 @end

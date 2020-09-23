@@ -27,7 +27,7 @@ public class SentMessageView: UIView {
 
     // MARK: Fileprivate Properties
 
-    fileprivate lazy var messageView = MessageView(
+    fileprivate lazy var messageView = ALMessageView(
         bubbleStyle: MessageTheme.sentMessage.bubble,
         messageStyle: MessageTheme.sentMessage.message,
         maxWidth: maxWidth

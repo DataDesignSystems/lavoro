@@ -32,22 +32,9 @@ dispatch_queue_t dispatchGlobalQueue;
 }
 
 - (id)init {
-    
     if (self = [super init]) {
 
 
-    }
-
-    if (@available(iOS 10.0, *)) {
-        NSPersistentContainer * container = [[NSPersistentContainer alloc] initWithName:@"AppLozic" managedObjectModel:self.managedObjectModel];
-
-        [container loadPersistentStoresWithCompletionHandler:^(NSPersistentStoreDescription* store, NSError * error) {
-            ALSLog(ALLoggerSeverityInfo, @"pers url: %@",container.persistentStoreCoordinator.persistentStores.firstObject.URL);
-            if(error != nil) {
-                ALSLog(ALLoggerSeverityError, @"%@", error);
-            }
-        }];
-        self.persistentContainer = container;
     }
     return self;
 }
@@ -98,12 +85,12 @@ dispatch_queue_t dispatchGlobalQueue;
         NSPersistentStore  *destinationStore  = nil;
         NSDictionary *options = @{
             NSInferMappingModelAutomaticallyOption: [NSNumber numberWithBool:YES],
-            NSMigratePersistentStoresAutomaticallyOption: [NSNumber numberWithBool:YES],
-            NSPersistentStoreFileProtectionKey: NSFileProtectionComplete
+            NSMigratePersistentStoresAutomaticallyOption: [NSNumber numberWithBool:YES]
         };
 
         if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error]){
             ALSLog(ALLoggerSeverityError, @"Failed to setup the persistentStoreCoordinator %@, %@", error, [error userInfo]);
+            return nil;
         } else {
             sourceStore = [_persistentStoreCoordinator persistentStoreForURL:storeURL];
             if (sourceStore != nil && groupURL){
@@ -112,18 +99,19 @@ dispatch_queue_t dispatchGlobalQueue;
                 destinationStore = [_persistentStoreCoordinator migratePersistentStore:sourceStore toURL:groupURL options:options withType:NSSQLiteStoreType error:&error];
                 if (destinationStore == nil){
                     ALSLog(ALLoggerSeverityError, @"Failed to migratePersistentStore");
+                    return nil;
                 } else {
 
                     NSFileCoordinator *coord = [[NSFileCoordinator alloc]initWithFilePresenter:nil];
                     [coord coordinateWritingItemAtURL:storeURL options:0 error:nil byAccessor:^(NSURL *url)
                      {
-                         NSError *error;
-                         [[NSFileManager defaultManager] removeItemAtURL:url error:&error];
-                         if(error){
-                             ALSLog(ALLoggerSeverityError, @"Failed to Delete the data base file %@, %@", error, [error userInfo]);
-                         }
+                        NSError *error;
+                        [[NSFileManager defaultManager] removeItemAtURL:url error:&error];
+                        if(error){
+                            ALSLog(ALLoggerSeverityError, @"Failed to Delete the data base file %@, %@", error, [error userInfo]);
+                        }
 
-                     }];
+                    }];
 
                 }
             }
@@ -162,321 +150,155 @@ dispatch_queue_t dispatchGlobalQueue;
 
 #pragma mark - Core Data Saving support
 
-- (void)saveContext {
-    
-    NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
-    
-    if (managedObjectContext != nil) {
-        
-        NSError *error = nil;
-        
-        if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
-            
-            ALSLog(ALLoggerSeverityError, @"Unresolved error %@, %@", error, [error userInfo]);
-        }
-    }
-}
-
-#pragma mark - Delete Contacts API -
-
-- (BOOL)purgeListOfContacts:(NSArray *)contacts {
-    BOOL result = NO;
-    
-    for (ALContact *contact in contacts) {
-        
-        result = [self purgeContact:contact];
-        
-        if (!result) {
-            
-            ALSLog(ALLoggerSeverityError, @"Failure to delete the contacts");
-            break;
-        }
-    }
-    
-    return result;
-}
-
-- (BOOL)purgeContact:(ALContact *)contact {
-    
-    BOOL success = NO;
-    
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"DB_CONTACT" inManagedObjectContext:self.managedObjectContext];
-    
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"userId = %@",contact.userId];
-    
-    [fetchRequest setEntity:entity];
-    
-    [fetchRequest setPredicate:predicate];
-    
-    NSError *fetchError = nil;
-    
-    NSArray *result = [self.managedObjectContext executeFetchRequest:fetchRequest error:&fetchError];
-    
-    for (DB_CONTACT *userContact in result) {
-        
-        [self.managedObjectContext deleteObject:userContact];
-    }
-    
-    NSError *deleteError = nil;
-    
-    success = [self.managedObjectContext save:&deleteError];
-    
-    if (!success) {
-        
-        ALSLog(ALLoggerSeverityError, @"Unable to save managed object context.");
-        ALSLog(ALLoggerSeverityError, @"%@, %@", deleteError, deleteError.localizedDescription);
-    }
-    
-    return success;
-}
-
-- (BOOL)purgeAllContact {
-    BOOL success = NO;
-    
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"DB_CONTACT" inManagedObjectContext:self.managedObjectContext];
-    
-    [fetchRequest setEntity:entity];
-    
-    NSError *fetchError = nil;
-    
-    NSArray *result = [self.managedObjectContext executeFetchRequest:fetchRequest error:&fetchError];
-    
-    for (DB_CONTACT *userContact in result) {
-        
-        [self.managedObjectContext deleteObject:userContact];
-    }
-    
-    NSError *deleteError = nil;
-    
-    success = [self.managedObjectContext save:&deleteError];
-    
-    if (!success) {
-        
-        ALSLog(ALLoggerSeverityError, @"Unable to save managed object context.");
-        ALSLog(ALLoggerSeverityError, @"%@, %@", deleteError, deleteError.localizedDescription);
-    }
-    
-    return success;
-}
-
-#pragma mark - Update Contacts API -
-
-- (BOOL)updateListOfContacts:(NSArray *)contacts {
-    
-    BOOL result = NO;
-    
-    for (ALContact *contact in contacts) {
-        
-        result = [self updateContact:contact];
-        
-        if (!result) {
-            
-            ALSLog(ALLoggerSeverityError, @"Failure to update the contacts");
-            break;
-        }
-    }
-    
-    return result;
-}
-
-- (BOOL)updateContact:(ALContact *)contact {
-    
-    BOOL success = NO;
-    
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"DB_CONTACT" inManagedObjectContext:self.managedObjectContext];
-    
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"userId = %@",contact.userId];
-    
-    [fetchRequest setEntity:entity];
-    
-    [fetchRequest setPredicate:predicate];
-    
-    NSError *fetchError = nil;
-    
-    NSArray *result = [self.managedObjectContext executeFetchRequest:fetchRequest error:&fetchError];
-    
-    for (DB_CONTACT *userContact in result) {
-        
-        userContact.userId = contact.userId;
-        userContact.email = contact.email;
-        userContact.fullName = contact.fullName;
-        userContact.contactNumber = contact.contactNumber;
-        userContact.contactImageUrl = contact.contactImageUrl;
-        userContact.displayName = contact.displayName;
-        userContact.localImageResourceName = contact.localImageResourceName;
-        if(contact.contactType){
-            userContact.contactType = contact.contactType;
-        }
-        userContact.roleType = contact.roleType;
-        userContact.metadata =contact.metadata.description;
-    }
-    
+- (NSError *)saveContext {
     NSError *error = nil;
-    
-    success = [self.managedObjectContext save:&error];
-    
-    if (!success) {
-        
-        ALSLog(ALLoggerSeverityError, @"DB ERROR :%@",error);
-    }
-    
-    return success;
-}
+    @try {
+        if (self.managedObjectContext) {
+            if ([self.managedObjectContext hasChanges] && ![self.managedObjectContext save:&error]) {
+                ALSLog(ALLoggerSeverityError, @"Unresolved error %@, %@", error, [error userInfo]);
+                return error;
+            }
+        } else {
+            NSError * managedObjectContexterror = [NSError errorWithDomain:@"Applozic"
+                                                                      code:1
+                                                                  userInfo:@{NSLocalizedDescriptionKey : @"Managed Object Context is nil"}];
 
-#pragma mark - Add Contacts API -
-
-- (BOOL)addListOfContacts:(NSArray *)contacts {
-    
-    BOOL result = NO;
-    
-    for (ALContact *contact in contacts) {
-        
-        result = [self addContact:contact];
-        
-        if (!result) {
-            break;
+            return managedObjectContexterror;
         }
-    }
-    
-    return result;
-}
-
-- (ALContact *) loadContactByKey:(NSString *) key value:(NSString*) value {
-
-    if(!value){
-        return nil;
-    }
-
-    DB_CONTACT *dbContact = [self getContactByKey:key value:value];
-    ALContact *contact = [[ALContact alloc]init];
-
-    if (!dbContact) {
-         contact.userId = value;
-         contact.displayName = value;
-         return contact;
-    }
-     contact.userId = dbContact.userId;
-     contact.fullName = dbContact.fullName;
-     contact.contactNumber = dbContact.contactNumber;
-     contact.displayName = dbContact.displayName;
-     contact.contactImageUrl = dbContact.contactImageUrl;
-     contact.email = dbContact.email;
-     contact.localImageResourceName = dbContact.localImageResourceName;
-     contact.connected = dbContact.connected;
-     contact.lastSeenAt = dbContact.lastSeenAt;
-     contact.contactType = dbContact.contactType;
-     contact.roleType = dbContact.roleType;
-     contact.metadata = [contact getMetaDataDictionary:dbContact.metadata];
-
-     return contact;
-}
-
-
-- (DB_CONTACT *)getContactByKey:(NSString *) key value:(NSString*) value {
-    ALDBHandler * dbHandler = [ALDBHandler sharedInstance];
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"DB_CONTACT" inManagedObjectContext:dbHandler.managedObjectContext];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K=%@",key,value];
-    [fetchRequest setEntity:entity];
-    [fetchRequest setPredicate:predicate];
-    NSError *fetchError = nil;
-    NSArray *result = [dbHandler.managedObjectContext executeFetchRequest:fetchRequest error:&fetchError];
-    
-    if (result.count > 0) {
-        DB_CONTACT* dbContact = [result objectAtIndex:0];
-       /* ALContact *contact = [[ALContact alloc]init];
-        contact.userId = dbContact.userId;
-        contact.fullName = dbContact.fullName;
-        contact.contactNumber = dbContact.contactNumber];
-        contact.displayName = dbContact.displayName;
-        contact.contactImageUrl = dbContact.contactImageUrl;
-        contact.email = dbContact.email;
-        contact.localImageResourceName = dbContact.localImageResourceName;
-        return contact;*/
-        
-        return dbContact;
-    } else {
-        return nil;
+    } @catch (NSException *exception) {
+        error = [NSError errorWithDomain:@"Applozic"
+                                    code:1
+                                userInfo:@{NSLocalizedDescriptionKey : exception.reason}];
+        ALSLog(ALLoggerSeverityError, @"Unresolved NSException in db save %@, %@", exception.reason, [exception userInfo]);
+    } @finally {
+        return error;
     }
 }
 
--(BOOL)addContact:(ALContact *)userContact {
-    
-    DB_CONTACT* existingContact = [self getContactByKey:@"userId" value:[userContact userId]];
-    if (existingContact) {
-        return false;
+-(BOOL) isProtectedDataAvailable {
+    __block BOOL protectedDataAvailable = NO;
+    if ([NSThread isMainThread])
+    {
+        protectedDataAvailable = [[UIApplication sharedApplication] isProtectedDataAvailable];
     }
-    
-    BOOL result = NO;
-    
-    DB_CONTACT * contact = [NSEntityDescription insertNewObjectForEntityForName:@"DB_CONTACT" inManagedObjectContext:self.managedObjectContext];
-    
-    contact.userId = userContact.userId;
-    
-    contact.fullName = userContact.fullName;
-    
-    contact.contactNumber = userContact.contactNumber;
-    
-    contact.displayName = userContact.displayName;
-    
-    contact.email = userContact.email;
-    
-    contact.contactImageUrl = userContact.contactImageUrl;
-    
-    contact.localImageResourceName = userContact.localImageResourceName;
-    contact.contactType = userContact.contactType;
-    contact.roleType = userContact.roleType;
-    contact.metadata = userContact.metadata.description;
-    
-    NSError *error = nil;
-    
-    result = [self.managedObjectContext save:&error];
-    
-    if (!result) {
-        ALSLog(ALLoggerSeverityError, @"DB ERROR :%@",error);
+    else
+    {
+        dispatch_sync(dispatch_get_main_queue(), ^{
+
+            protectedDataAvailable = [[UIApplication sharedApplication] isProtectedDataAvailable];
+        });
     }
-    
-    return result;
+    return protectedDataAvailable;
 }
 
 - (void) savePrivateAndMainContext:(NSManagedObjectContext*)context
                         completion:(void (^)(NSError*error))completion {
-    
-    NSError* error;
-    if (context.hasChanges && [context save:&error]) {
-        NSManagedObjectContext* parentContext = [context parentContext];
-        [parentContext performBlock:^ {
-            NSError* parentContextError;
-            if (parentContext.hasChanges && [parentContext save:&parentContextError]) {
-                completion(nil);
-            } else {
-                if (parentContextError) {
-                    ALSLog(ALLoggerSeverityError, @"DB ERROR in MainContext :%@",parentContextError);
-                }
-                completion(parentContextError);
-            }
-        }];
-    } else {
-        if (error) {
-            ALSLog(ALLoggerSeverityError, @"DB ERROR in savePrivateAndMainContext :%@",error);
-            [context rollback];
+    @try {
+        NSError* error;
+        if (!context) {
+            error = [NSError errorWithDomain:@"Applozic" code:1 userInfo:@{NSLocalizedDescriptionKey : @"Private context is nil"}];
+            completion(error);
+            return;
         }
-        completion(error);
+        if (context.hasChanges && [context save:&error]) {
+            if (!self.managedObjectContext) {
+                error = [NSError errorWithDomain:@"Applozic" code:1 userInfo:@{NSLocalizedDescriptionKey : @"Managed object context is nil"}];
+                completion(error);
+                return;
+            }
+            [self.managedObjectContext performBlock:^ {
+                NSError *parentContextError = [self saveContext];
+                completion(parentContextError);
+            }];
+        } else {
+            if (error) {
+                ALSLog(ALLoggerSeverityError, @"DB ERROR in savePrivateAndMainContext :%@",error);
+                [context rollback];
+            }
+            completion(error);
+        }
+    } @catch (NSException *exception) {
+        ALSLog(ALLoggerSeverityError, @"Unresolved NSException in db savePrivateAndMainContext %@, %@", exception.reason, [exception userInfo]);
     }
 }
 
 - (NSManagedObjectContext *)privateContext {
+    NSManagedObjectContext *privateManagedObjectContext = nil;
+    if (self.managedObjectContext) {
+        privateManagedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        [privateManagedObjectContext setParentContext:self.managedObjectContext];
+    }
+    return privateManagedObjectContext;
+}
 
-    NSManagedObjectContext *managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-    [managedObjectContext setParentContext:self.managedObjectContext];
+-(NSArray *)executeFetchRequest:(NSFetchRequest *)fetchrequest withError: (NSError **)fetchError {
+    NSArray * fetchResultArray = nil;
+    if (self.managedObjectContext) {
+        fetchResultArray = [self.managedObjectContext executeFetchRequest:fetchrequest
+                                                                    error:fetchError];
+    }
+    return fetchResultArray;
+}
 
-    return managedObjectContext;
+-(NSEntityDescription *)entityDescriptionWithEntityForName:(NSString *)name {
+    if (self.managedObjectContext) {
+        return [NSEntityDescription entityForName:name inManagedObjectContext:self.managedObjectContext];
+    }
+    return nil;
+}
+
+-(NSUInteger)countForFetchRequest:(NSFetchRequest *)fetchrequest {
+
+    if (self.managedObjectContext) {
+        NSError *fetchError = nil;
+        NSUInteger fetchCount = [self.managedObjectContext countForFetchRequest:fetchrequest error:&fetchError];
+        if (fetchError) {
+            return 0;
+        }
+        return fetchCount;
+    }
+    return 0;
+}
+
+-(NSManagedObject*)existingObjectWithID:(NSManagedObjectID *)objectID {
+    NSManagedObject* managedObject = nil;
+    if (self.managedObjectContext) {
+        NSError *managedObjectError = nil;
+        managedObject = [self.managedObjectContext existingObjectWithID:objectID
+                                                                  error:&managedObjectError];
+        if (managedObjectError) {
+            ALSLog(ALLoggerSeverityError, @"Error while fetching NSManagedObject %@", managedObjectError);
+            return nil;
+        }
+    }
+    return managedObject;
+}
+
+-(NSManagedObject *)insertNewObjectForEntityForName:(NSString *) entityName {
+    if (self.managedObjectContext) {
+        return [NSEntityDescription insertNewObjectForEntityForName:entityName inManagedObjectContext:self.managedObjectContext];
+    }
+    return nil;
+}
+
+-(void)deleteObject:(NSManagedObject *) managedObject {
+    if (self.managedObjectContext) {
+        [self.managedObjectContext deleteObject:managedObject];
+    }
+}
+-(NSManagedObject *)insertNewObjectForEntityForName:(NSString *)entityName withManagedObjectContext:(NSManagedObjectContext *) context {
+    if (context) {
+        return [NSEntityDescription insertNewObjectForEntityForName:entityName inManagedObjectContext:context];
+    }
+    return nil;
+}
+
+-(NSBatchUpdateResult *)executeRequestForNSBatchUpdateResult:(NSBatchUpdateRequest *)updateRequest withError:(NSError **)fetchError {
+    NSBatchUpdateResult *batchUpdateResult = nil;
+    if (self.managedObjectContext) {
+        batchUpdateResult = (NSBatchUpdateResult *)[self.managedObjectContext executeRequest:updateRequest error:fetchError];
+    }
+    return batchUpdateResult;
 }
 
 @end

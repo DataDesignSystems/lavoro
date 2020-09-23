@@ -120,6 +120,11 @@
 
 -(NSMutableDictionary *)getMetaDataDictionary:(NSString *)string
 {
+
+    if (!string) {
+        return nil;
+    }
+
     NSData * data = [string dataUsingEncoding:NSUTF8StringEncoding];
     NSPropertyListFormat format;
     NSMutableDictionary * dictionary;
@@ -166,6 +171,14 @@
     return  self.type == BROADCAST;
 }
 
+-(BOOL)isOpenGroup {
+    return self.type == OPEN;
+}
+
+-(BOOL)isGroupOfTwo {
+    return self.type == GROUP_OF_TWO;
+}
+
 -(BOOL)isPartOfCategory:(NSString*)category{
     
     if( _metadata && [_metadata  valueForKey:AL_CATEGORY] ){
@@ -180,6 +193,10 @@
         return ([ [_metadata  valueForKey:AL_CONTEXT_BASED_CHAT] isEqualToString:@"true"]);
     }
     return NO;
+}
+
+-(BOOL)isDeleted {
+    return self.deletedAtTime != nil && self.deletedAtTime.intValue > 0;
 }
 
 + (CONVERSATION_CATEGORY)getConversationCategory:(NSDictionary *)metadata

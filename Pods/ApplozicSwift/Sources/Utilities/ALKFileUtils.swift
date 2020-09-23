@@ -26,7 +26,7 @@ class ALKFileUtils: NSObject {
 
         let filePath = getDocumentDirectory(fileName: fileName).path
 
-        guard let size = try? FileManager.default.attributesOfItem(atPath: filePath)[FileAttributeKey.size], let fileSize = size as? UInt64
+        guard let size = ((try? FileManager.default.attributesOfItem(atPath: filePath)[FileAttributeKey.size]) as Any??), let fileSize = size as? UInt64
         else {
             return ""
         }
@@ -57,16 +57,6 @@ class ALKFileUtils: NSObject {
     func getDocumentDirectory(fileName: String) -> URL {
         let docDirPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         return docDirPath.appendingPathComponent(fileName)
-    }
-
-    func isSupportedFileType(filePath: String?) -> Bool {
-        guard filePath != nil else {
-            return false
-        }
-
-        let pathExtension = getDocumentDirectory(fileName: filePath ?? "").pathExtension
-        let fileTypes = ["docx", "pdf", "doc", "java", "js", "txt", "html", "xlsx", "xls", "ppt", "pptx"]
-        return fileTypes.contains(pathExtension)
     }
 
     func getThumbnail(filePath: URL) -> UIImage? {

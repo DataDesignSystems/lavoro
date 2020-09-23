@@ -329,8 +329,6 @@ UIViewController * modalCon;
                                            self.mBubleImageView.frame.size.width - IMAGE_VIEW_PADDING_WIDTH,
                                            imageViewHeight);
 
-        [self.mMessageStatusImageView setHidden:NO];
-
         if(alMessage.message.length > 0)
         {
             [self.imageWithText setHidden:NO];
@@ -397,28 +395,11 @@ UIViewController * modalCon;
                                                 self.mImageView.frame.origin.y + self.mImageView.frame.size.height/2.0 - DOWNLOAD_RETRY_PADDING_Y,
                                                 90, 40);
 
-    if ([alMessage isSentMessage] && ((self.channel && self.channel.type != OPEN) || self.contact))
-    {
+    if ([alMessage isSentMessage] && ((self.channel && self.channel.type != OPEN) || !self.channel)) {
 
         self.mMessageStatusImageView.hidden = NO;
-        NSString * imageName;
-
-        switch (alMessage.status.intValue) {
-            case DELIVERED_AND_READ :{
-                imageName = @"ic_action_read.png";
-            }break;
-            case DELIVERED:{
-                imageName = @"ic_action_message_delivered.png";
-            }break;
-            case SENT:{
-                imageName = @"ic_action_message_sent.png";
-            }break;
-            default:{
-                imageName = @"ic_action_about.png";
-            }break;
-        }
+        NSString * imageName = [self getMessageStatusIconName:self.mMessage];
         self.mMessageStatusImageView.image = [ALUtilityClass getImageFromFramworkBundle:imageName];
-
     }
 
     self.imageWithText.text = alMessage.message;
@@ -444,7 +425,7 @@ UIViewController * modalCon;
     else
     {
         if(alMessage.fileMeta.thumbnailFilePath == nil){
-            [self.delegate thumbnailDownload:alMessage.key];
+            [self.delegate thumbnailDownloadWithMessageObject:alMessage];
         }else{
 
             NSURL *documentDirectory =  [ALUtilityClass getApplicationDirectoryWithFilePath:alMessage.fileMeta.thumbnailFilePath];

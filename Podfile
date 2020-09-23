@@ -14,7 +14,7 @@ target 'Lavoro' do
   pod 'KVKCalendar'
   pod 'SnapKit', '~> 5.0.0'
   pod 'MaterialComponents/BottomSheet'
-  pod 'ApplozicSwift'
+  pod 'ApplozicSwift', :git=> 'https://github.com/manish-cs/ApplozicSwift.git'
   pod 'Alamofire', '~> 5.2'
   pod 'SwiftMessages'
   pod 'NVActivityIndicatorView'
@@ -23,4 +23,12 @@ target 'Lavoro' do
   pod 'InputBarAccessoryView'
   pod 'GooglePlaces'
   pod 'QRCodeReader.swift', '~> 10.1.0'
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
+    end
+  end
 end

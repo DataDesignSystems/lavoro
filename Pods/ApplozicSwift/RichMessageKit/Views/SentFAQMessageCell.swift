@@ -68,7 +68,7 @@ public class SentFAQMessageCell: UITableViewCell {
     fileprivate lazy var stateViewWidth = stateView.widthAnchor.constraint(equalToConstant: 0)
     fileprivate lazy var stateViewHeight = stateView.heightAnchor.constraint(equalToConstant: 0)
 
-    fileprivate lazy var messageView = MessageView(
+    fileprivate lazy var messageView = ALMessageView(
         bubbleStyle: MessageTheme.sentMessage.bubble,
         messageStyle: MessageTheme.sentMessage.message,
         maxWidth: Config.maxWidth

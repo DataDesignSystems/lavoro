@@ -92,7 +92,7 @@
 		13B531B6248BFD8300C6C8FF /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B531B5248BFD8300C6C8FF /* LoginService.swift */; };
 		13B531B8248BFDD500C6C8FF /* BaseModuleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B531B7248BFDD500C6C8FF /* BaseModuleService.swift */; };
 		13B531BA248BFF0E00C6C8FF /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B531B9248BFF0E00C6C8FF /* Validation.swift */; };
-		13B531BD248C040000C6C8FF /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B531BC248C040000C6C8FF /* MessageView.swift */; };
+		13B531BD248C040000C6C8FF /* MessageViewAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B531BC248C040000C6C8FF /* MessageViewAlert.swift */; };
 		13B531BF248C1C7C00C6C8FF /* String+Exts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B531BE248C1C7C00C6C8FF /* String+Exts.swift */; };
 		13B531C1248C260B00C6C8FF /* BaseFacebookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B531C0248C260B00C6C8FF /* BaseFacebookViewController.swift */; };
 		13BA4E212498E96B002AA103 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BA4E202498E96B002AA103 /* UserService.swift */; };
@@ -246,7 +246,7 @@
 		13B531B5248BFD8300C6C8FF /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		13B531B7248BFDD500C6C8FF /* BaseModuleService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseModuleService.swift; sourceTree = "<group>"; };
 		13B531B9248BFF0E00C6C8FF /* Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
-		13B531BC248C040000C6C8FF /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
+		13B531BC248C040000C6C8FF /* MessageViewAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewAlert.swift; sourceTree = "<group>"; };
 		13B531BE248C1C7C00C6C8FF /* String+Exts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Exts.swift"; sourceTree = "<group>"; };
 		13B531C0248C260B00C6C8FF /* BaseFacebookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFacebookViewController.swift; sourceTree = "<group>"; };
 		13BA4E202498E96B002AA103 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
@@ -581,7 +581,7 @@
 				13D05808245D755B00227E15 /* BaseNavigationViewController.swift */,
 				1327EB782466A61900BA4805 /* UIButton+Exts.swift */,
 				13B531B9248BFF0E00C6C8FF /* Validation.swift */,
-				13B531BC248C040000C6C8FF /* MessageView.swift */,
+				13B531BC248C040000C6C8FF /* MessageViewAlert.swift */,
 				13B531BE248C1C7C00C6C8FF /* String+Exts.swift */,
 				13C54C042493F51600CE1AF6 /* UIImage+Exts.swift */,
 				13C54C192496331500CE1AF6 /* Constants.swift */,
@@ -1119,7 +1119,7 @@
 				1378AA892459E75700131BEB /* AppDelegate.swift in Sources */,
 				13C54C102496168700CE1AF6 /* LoginChatUser.swift in Sources */,
 				1378AAAD2459FFEC00131BEB /* UIColor+Exts.swift in Sources */,
-				13B531BD248C040000C6C8FF /* MessageView.swift in Sources */,
+				13B531BD248C040000C6C8FF /* MessageViewAlert.swift in Sources */,
 				13D057E4245C9DF800227E15 /* IGCache.swift in Sources */,
 				13D057EA245C9DF800227E15 /* IGStoryPreviewView.swift in Sources */,
 				13D0579F245C7B2D00227E15 /* Feed.swift in Sources */,
@@ -1370,7 +1370,7 @@
 				CODE_SIGN_ENTITLEMENTS = Lavoro/Lavoro.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = D6B8D9KYF4;
 				INFOPLIST_FILE = Lavoro/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1378,6 +1378,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 5.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.scott.lavoro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1394,7 +1395,7 @@
 				CODE_SIGN_ENTITLEMENTS = Lavoro/Lavoro.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = D6B8D9KYF4;
 				INFOPLIST_FILE = Lavoro/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1402,6 +1403,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 5.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.scott.lavoro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Lavoro AppStore";

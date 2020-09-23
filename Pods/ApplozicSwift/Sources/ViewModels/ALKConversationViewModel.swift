@@ -434,6 +434,8 @@ open class ALKConversationViewModel: NSObject, Localizable {
                         .rowHeight(model: model)
                         .cached(with: cacheIdentifier)
             }
+        case .form:
+            return 0
         }
     }
 
@@ -502,14 +504,26 @@ open class ALKConversationViewModel: NSObject, Localizable {
             notificationView.noDataConnectionNotificationView()
             return
         }
-        /// For email attachments url is to be used directly
-        if message.source == emailSourceType, let url = message.fileMetaInfo?.url {
+        // if ALApplozicSettings.isS3StorageServiceEnabled or ALApplozicSettings.isGoogleCloudServiceEnabled is true its private url we wont be able to download it directly.
+        let serviceEnabled = ALApplozicSettings.isS3StorageServiceEnabled() || ALApplozicSettings.isGoogleCloudServiceEnabled()
+
+        if let url = message.fileMetaInfo?.url,
+            !serviceEnabled {
             let httpManager = ALKHTTPManager()
             httpManager.downloadDelegate = view as? ALKHTTPManagerDownloadDelegate
             let task = ALKDownloadTask(downloadUrl: url, fileName: message.fileMetaInfo?.name)
             task.identifier = message.identifier
             task.totalBytesExpectedToDownload = message.size
             httpManager.downloadImage(task: task)
+            httpManager.downloadCompleted = { [weak self] task in
+                guard let weakSelf = self, let identifier = task.identifier else { return }
+                var msg = weakSelf.messageForRow(identifier: identifier)
+                if ThumbnailIdentifier.hasPrefix(in: identifier) {
+                    msg?.fileMetaInfo?.thumbnailFilePath = task.filePath
+                } else {
+                    msg?.filePath = task.filePath
+                }
+            }
             return
         }
         ALMessageClientService().downloadImageUrl(message.fileMetaInfo?.blobKey) { fileUrl, error in
@@ -639,7 +653,7 @@ open class ALKConversationViewModel: NSObject, Localizable {
 
     open func updateSendStatus(message: ALMessage) {
         let filteredList = alMessages.filter { $0 == message }
-        if let alMessage = filteredList.first, let index = alMessages.index(of: alMessage) {
+        if let alMessage = filteredList.first, let index = alMessages.firstIndex(of: alMessage) {
             alMessage.sentToServer = true
             alMessages[index] = alMessage
             messageModels[index] = alMessage.messageModel
@@ -794,17 +808,21 @@ open class ALKConversationViewModel: NSObject, Localizable {
         let clientService = ALMessageClientService()
         let messageService = ALMessageDBService()
         let alHandler = ALDBHandler.sharedInstance()
-        var dbMessage: DB_Message?
-        do {
-            dbMessage = try messageService.getMeesageBy(alMessage.msgDBObjectId) as? DB_Message
-        } catch {}
-        dbMessage?.inProgress = 1
-        dbMessage?.isUploadFailed = 0
-        do {
-            try alHandler?.managedObjectContext.save()
-        } catch {}
-        print("content type: ", alMessage.fileMeta.contentType)
-        print("file path: ", alMessage.imageFilePath)
+        guard let dbMessage = messageService.getMeesageBy(alMessage.msgDBObjectId) as? DB_Message else {
+            return
+        }
+
+        dbMessage.inProgress = 1
+        dbMessage.isUploadFailed = 0
+
+        let error = alHandler?.saveContext()
+        if error != nil {
+            print("Not saved due to error \(String(describing: error))")
+            return
+        }
+
+        print("content type: ", alMessage.fileMeta.contentType ?? "")
+        print("file path: ", alMessage.imageFilePath ?? "")
         clientService.sendPhoto(forUserInfo: alMessage.dictionary(), withCompletion: {
             urlStr, error in
             guard error == nil, let urlStr = urlStr, let url = URL(string: urlStr) else {
@@ -834,13 +852,8 @@ open class ALKConversationViewModel: NSObject, Localizable {
         let alMessage = alMessages[indexPath.section]
         let messageService = ALMessageDBService()
         let alHandler = ALDBHandler.sharedInstance()
-        var dbMessage: DB_Message?
-        do {
-            dbMessage = try messageService.getMeesageBy(alMessage.msgDBObjectId) as? DB_Message
-        } catch {
-            NSLog("Message not found")
-        }
-        guard let dbMessagePresent = dbMessage, let message = messageService.createMessageEntity(dbMessagePresent) else { return }
+        guard let dbMessage = messageService.getMeesageBy(alMessage.msgDBObjectId) as? DB_Message,
+            let message = messageService.createMessageEntity(dbMessage) else { return }
 
         guard let fileInfo = responseDict as? [String: Any] else { return }
         if ALApplozicSettings.isS3StorageServiceEnabled() {
@@ -850,10 +863,11 @@ open class ALKConversationViewModel: NSObject, Localizable {
             message.fileMeta.populate(fileMeta)
         }
         message.status = NSNumber(integerLiteral: Int(SENT.rawValue))
-        do {
-            try alHandler?.managedObjectContext.save()
-        } catch {
-            NSLog("Not saved due to error")
+
+        let error = alHandler?.saveContext()
+        if error != nil {
+            print("Not saved due to error \(String(describing: error))")
+            return
         }
 
         send(alMessage: message) {
@@ -927,17 +941,16 @@ open class ALKConversationViewModel: NSObject, Localizable {
         let clientService = ALMessageClientService()
         let messageService = ALMessageDBService()
         let alHandler = ALDBHandler.sharedInstance()
-        var dbMessage: DB_Message?
-        do {
-            dbMessage = try messageService.getMeesageBy(alMessage.msgDBObjectId) as? DB_Message
-        } catch {
+
+        guard let dbMessage = messageService.getMeesageBy(alMessage.msgDBObjectId) as? DB_Message else {
             return
         }
-        dbMessage?.inProgress = 1
-        dbMessage?.isUploadFailed = 0
-        do {
-            try alHandler?.managedObjectContext.save()
-        } catch {
+
+        dbMessage.inProgress = 1
+        dbMessage.isUploadFailed = 0
+        let error = alHandler?.saveContext()
+        if error != nil {
+            print("Not saved due to error \(String(describing: error))")
             return
         }
         NSLog("content type: ", alMessage.fileMeta.contentType)
@@ -964,15 +977,16 @@ open class ALKConversationViewModel: NSObject, Localizable {
         let clientService = ALMessageClientService()
         let messageService = ALMessageDBService()
         let alHandler = ALDBHandler.sharedInstance()
-        var dbMessage: DB_Message?
-        do {
-            dbMessage = try messageService.getMeesageBy(alMessage.msgDBObjectId) as? DB_Message
-        } catch {}
-        dbMessage?.inProgress = 1
-        dbMessage?.isUploadFailed = 0
-        do {
-            try alHandler?.managedObjectContext.save()
-        } catch {}
+        guard let dbMessage = messageService.getMeesageBy(alMessage.msgDBObjectId) as? DB_Message else {
+            return
+        }
+        dbMessage.inProgress = 1
+        dbMessage.isUploadFailed = 0
+        let error = alHandler?.saveContext()
+        if error != nil {
+            print("Not saved due to error \(String(describing: error))")
+            return
+        }
         NSLog("content type: ", alMessage.fileMeta.contentType)
         NSLog("file path: ", alMessage.imageFilePath)
         clientService.sendPhoto(forUserInfo: alMessage.dictionary(), withCompletion: {
@@ -1072,7 +1086,7 @@ open class ALKConversationViewModel: NSObject, Localizable {
     }
 
     open func getIndexpathFor(message: ALKMessageModel) -> IndexPath? {
-        guard let index = messageModels.index(of: message)
+        guard let index = messageModels.firstIndex(of: message)
         else { return nil }
         return IndexPath(row: 0, section: index)
     }
@@ -1342,6 +1356,27 @@ open class ALKConversationViewModel: NSObject, Localizable {
         return names
     }
 
+    func sendFile(at url: URL, fileName: String, metadata: [AnyHashable: Any]?) -> (ALMessage?, IndexPath?) {
+        var fileData: Data?
+        do {
+            fileData = try Data(contentsOf: url)
+        } catch {
+            print("Failed to read the content of the file at path: \(url) due to error: \(error.localizedDescription)")
+        }
+        guard fileData != nil else { return (nil, nil) }
+        guard let alMessage = processAttachment(
+            filePath: url,
+            text: "",
+            contentType: Int(ALMESSAGE_CONTENT_ATTACHMENT),
+            metadata: metadata,
+            fileName: fileName
+        ) else {
+            return (nil, nil)
+        }
+        addToWrapper(message: alMessage)
+        return (alMessage, IndexPath(row: 0, section: messageModels.count - 1))
+    }
+
     // MARK: - Private Methods
 
     private func updateGroupInfo(
@@ -1505,20 +1540,27 @@ open class ALKConversationViewModel: NSObject, Localizable {
         return info
     }
 
-    private func processAttachment(filePath: URL, text _: String, contentType: Int, isVideo _: Bool = false, metadata: [AnyHashable: Any]?) -> ALMessage? {
+    private func processAttachment(
+        filePath: URL,
+        text _: String,
+        contentType: Int,
+        isVideo _: Bool = false,
+        metadata: [AnyHashable: Any]?,
+        fileName: String? = nil
+    ) -> ALMessage? {
         let alMessage = getMessageToPost()
         alMessage.metadata = modfiedMessageMetadata(alMessage: alMessage, metadata: metadata)
         alMessage.contentType = Int16(contentType)
         alMessage.fileMeta = getFileMetaInfo()
         alMessage.imageFilePath = filePath.lastPathComponent
-        alMessage.fileMeta.name = String(format: "AUD-5-%@", filePath.lastPathComponent)
-        if let contactId = contactId {
+        alMessage.fileMeta.name = fileName ?? String(format: "AUD-5-%@", filePath.lastPathComponent)
+        if fileName == nil, let contactId = contactId {
             alMessage.fileMeta.name = String(format: "%@-5-%@", contactId, filePath.lastPathComponent)
         }
         let pathExtension = filePath.pathExtension
         let uti = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, pathExtension as NSString, nil)?.takeRetainedValue()
         let mimetype = (UTTypeCopyPreferredTagWithClass(uti!, kUTTagClassMIMEType)?.takeRetainedValue()) as String?
-        alMessage.fileMeta.contentType = mimetype
+        alMessage.fileMeta.contentType = mimetype ?? "application/zip"
         if contentType == ALMESSAGE_CONTENT_VCARD {
             alMessage.fileMeta.contentType = "text/x-vcard"
         }
@@ -1531,15 +1573,18 @@ open class ALKConversationViewModel: NSObject, Localizable {
 
         let dbHandler = ALDBHandler.sharedInstance()
         let messageService = ALMessageDBService()
-        let messageEntity = messageService.createMessageEntityForDBInsertion(with: alMessage)
-        do {
-            try dbHandler?.managedObjectContext.save()
-        } catch {
-            NSLog("Not saved due to error")
+
+        guard let messageEntity = messageService.createMessageEntityForDBInsertion(with: alMessage) else {
             return nil
         }
-        alMessage.msgDBObjectId = messageEntity?.objectID
-        return alMessage
+        let error = dbHandler?.saveContext()
+
+        if error == nil {
+            alMessage.msgDBObjectId = messageEntity.objectID
+            return alMessage
+        }
+        print("Not saved due to error \(String(describing: error))")
+        return nil
     }
 
     private func createJson(dict: [String: String]) -> String? {
@@ -1581,7 +1626,7 @@ open class ALKConversationViewModel: NSObject, Localizable {
         if !filteredList.isEmpty {
             let message = filteredList.first
             message?.status = status as NSNumber
-            guard let model = message?.messageModel, let index = messageModels.index(of: model) else { return }
+            guard let model = message?.messageModel, let index = messageModels.firstIndex(of: model) else { return }
             messageModels[index] = model
             delegate?.updateMessageAt(indexPath: IndexPath(row: 0, section: index))
         }

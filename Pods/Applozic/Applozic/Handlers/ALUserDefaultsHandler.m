@@ -111,6 +111,12 @@
         ALSLog(ALLoggerSeverityError, @"Failed to remove password from the store : %@",
                [passError description]);
     }
+    NSError *authTokenError;
+    [store removeValueFor:AL_AUTHENTICATION_TOKEN error:&authTokenError];
+    if (authTokenError != nil) {
+        ALSLog(ALLoggerSeverityError, @"Failed to remove auth token from the store : %@",
+               [authTokenError description]);
+    }
 }
 
 +(void) setApnDeviceToken:(NSString *)apnDeviceToken
@@ -892,7 +898,62 @@
     return [userDefaults boolForKey:AL_DISABLE_USER_CHAT];
 }
 
-+(NSUserDefaults *)getUserDefaults{
++(void)setAuthToken:(NSString*)authToken {
+    SecureStore *store = [ALUserDefaultsHandler getSecureStore];
+    NSError *authTokenError;
+    [store setValue:authToken for:AL_AUTHENTICATION_TOKEN error:&authTokenError];
+    if (authTokenError != nil) {
+        ALSLog(ALLoggerSeverityError, @"Failed to save auth token in the store : %@",
+               [authTokenError description]);
+    }
+}
+
++(NSString*)getAuthToken {
+    SecureStore *store = [ALUserDefaultsHandler getSecureStore];
+    NSError *authTokenError;
+    NSString *authTokenInStore = [store getValueFor:AL_AUTHENTICATION_TOKEN error:&authTokenError];
+    if (authTokenError != nil) {
+        ALSLog(ALLoggerSeverityError, @"Failed to get auth token from the store : %@",
+               [authTokenError description]);
+        return nil;
+    }
+    return authTokenInStore;
+}
+
++(void)setAuthTokenCreatedAtTime:(NSNumber *) createdAtTime {
+    NSUserDefaults *userDefaults = ALUserDefaultsHandler.getUserDefaults;
+    [userDefaults setDouble:[createdAtTime doubleValue] forKey:AL_AUTHENTICATION_TOKEN_CREATED_TIME];
+    [userDefaults synchronize];
+}
+
++(NSNumber *)getAuthTokenCreatedAtTime {
+    NSUserDefaults *userDefaults = ALUserDefaultsHandler.getUserDefaults;
+    return [userDefaults valueForKey:AL_AUTHENTICATION_TOKEN_CREATED_TIME];
+}
+
++(void)setAuthTokenValidUptoInMins:(NSNumber *) validUptoInMins {
+    NSUserDefaults *userDefaults = ALUserDefaultsHandler.getUserDefaults;
+    [userDefaults setDouble:[validUptoInMins doubleValue] forKey:AL_AUTHENTICATION_TOKEN_VALID_UPTO_MINS];
+    [userDefaults synchronize];
+}
+
++(NSNumber *)getAuthTokenValidUptoMins {
+    NSUserDefaults *userDefaults = ALUserDefaultsHandler.getUserDefaults;
+    return [userDefaults valueForKey:AL_AUTHENTICATION_TOKEN_VALID_UPTO_MINS];
+}
+
++(void)setInitialMessageListCallDone:(BOOL)flag {
+    NSUserDefaults *userDefaults = ALUserDefaultsHandler.getUserDefaults;
+    [userDefaults setBool:flag forKey:AL_INITIAL_MESSAGE_LIST_CALL];
+    [userDefaults synchronize];
+}
+
++(BOOL)isInitialMessageListCallDone {
+    NSUserDefaults *userDefaults = ALUserDefaultsHandler.getUserDefaults;
+    return [userDefaults boolForKey:AL_INITIAL_MESSAGE_LIST_CALL];
+}
+
++(NSUserDefaults *)getUserDefaults {
     return [[NSUserDefaults alloc] initWithSuiteName:AL_DEFAULT_APP_GROUP];
 }
 

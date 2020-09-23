@@ -8,7 +8,7 @@
 import UIKit
 
 /// Its a view that displays text on top of a bubble.
-public class MessageView: UIView {
+public class ALMessageView: UIView {
     enum ConstraintIdentifier {
         enum BubbleView {
             static let height = "BubbleViewViewHeight"
@@ -71,7 +71,7 @@ public class MessageView: UIView {
     /// - Parameter text: Text to be displayed in the view.
     public func update(model: String) {
         /// Set frame size.
-        let height = MessageView.rowHeight(model: model, maxWidth: maxWidth, font: messageStyle.font, padding: bubbleStyle.padding)
+        let height = ALMessageView.rowHeight(model: model, maxWidth: maxWidth, font: messageStyle.font, padding: bubbleStyle.padding)
         frame.size = CGSize(width: maxWidth, height: height)
 
         messageLabel.text = model

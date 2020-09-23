@@ -91,7 +91,7 @@ public class ReceivedImageMessageCell: UITableViewCell {
         return label
     }()
 
-    fileprivate lazy var messageView = MessageView(
+    fileprivate lazy var messageView = ALMessageView(
         bubbleStyle: MessageTheme.receivedMessage.bubble,
         messageStyle: MessageTheme.receivedMessage.message,
         maxWidth: Config.maxWidth

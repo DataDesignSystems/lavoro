@@ -173,7 +173,7 @@ class ALKPhotoCell: ALKChatBaseCell<ALKMessageViewModel>,
         NSLog("Messages with attachment: ", messages)
 
         guard let viewModel = viewModel as? ALKMessageModel,
-            let currentIndex = messageModels.index(of: viewModel) else { return }
+            let currentIndex = messageModels.firstIndex(of: viewModel) else { return }
         vc?.viewModel = ALKMediaViewerViewModel(messages: messageModels, currentIndex: currentIndex, localizedStringFileName: localizedStringFileName)
         UIViewController.topViewController()?.present(nav!, animated: true, completion: {
             button.isEnabled = true
@@ -379,11 +379,10 @@ class ALKPhotoCell: ALKChatBaseCell<ALKMessageViewModel>,
         guard let dbMessage = ALMessageDBService().getMessageByKey("key", value: messageKey) as? DB_Message else { return }
         dbMessage.fileMetaInfo.thumbnailFilePath = filePath
 
-        let alHandler = ALDBHandler.sharedInstance()
-        do {
-            try alHandler?.managedObjectContext.save()
-        } catch {
-            NSLog("Not saved due to error")
+        let dbHandler = ALDBHandler.sharedInstance()
+        let error =  dbHandler?.saveContext()
+        if error != nil {
+            print("Not saved due to error \(String(describing: error))")
         }
     }
 
