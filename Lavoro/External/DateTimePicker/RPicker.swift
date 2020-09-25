@@ -206,6 +206,7 @@ class RPickerController: UIViewController {
         stackView.axis  = NSLayoutConstraint.Axis.vertical
         stackView.distribution = UIStackView.Distribution.fill
         stackView.alignment = UIStackView.Alignment.center
+        stackView.backgroundColor = .white
         stackView.spacing = 0.0
         
         stackView.addArrangedSubview(lineLabel)
@@ -240,6 +241,11 @@ class RPickerController: UIViewController {
         picker.minimumDate = minDate
         picker.maximumDate = maxDate
         picker.date = selectedDate
+        if #available(iOS 13.4, *) {
+            picker.preferredDatePickerStyle = .wheels
+        } else {
+            // Fallback on earlier versions
+        }
         picker.datePickerMode = datePickerMode
 
         return picker
