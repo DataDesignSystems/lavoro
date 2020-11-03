@@ -22,10 +22,11 @@ class ScheduleService: BaseModuleService {
             completionHandler(false, "")
             return
         }
-        var params = [ScheduleService.message: message, ScheduleService.googleId: placeId, ScheduleService.startTime: startTime.toUTCString(dateFormat: "yyyy-MM-dd hh:mm:ss"), ScheduleService.endTime: endTime.toUTCString(dateFormat: "yyyy-MM-dd hh:mm:ss")]
+        var params = [ScheduleService.message: message, ScheduleService.googleId: placeId, ScheduleService.startTime: startTime.toUTCString(dateFormat: "yyyy-MM-dd HH:mm:ss"), ScheduleService.endTime: endTime.toUTCString(dateFormat: "yyyy-MM-dd HH:mm:ss")]
         if let calendarId = calendarId {
             params[ScheduleService.calendarId] = calendarId
         }
+
         NS.getRequest(with: .addToMyCalendar, parameters: params,  authToken: true) { [weak self] (response) in
             switch response.result {
             case .success(let json):

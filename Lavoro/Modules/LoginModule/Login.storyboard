@@ -855,6 +855,11 @@
             <point key="canvasLocation" x="2388.4057971014495" y="846.42857142857144"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="slN-cG-Khv">
+            <size key="intrinsicContentSize" width="354" height="42.80078125"/>
+        </designable>
+    </designables>
     <inferredMetricsTieBreakers>
         <segue reference="vLo-Ph-5U7"/>
     </inferredMetricsTieBreakers>
