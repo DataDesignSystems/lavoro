@@ -42,6 +42,8 @@ class CheckInProfile {
 }
 
 public struct FeedComment {
+    public let id: String
+    public let commentId: String
     public let username: String
     public let name: String
     public let avatar: String
@@ -49,6 +51,8 @@ public struct FeedComment {
     public let displayTime: String
     
     init(with json:[String: Any]) {
+        self.id = json["id"] as? String ?? ""
+        self.commentId = json["comment_id"] as? String ?? ""
         let fullname = ((json["first"] as? String ?? "") + " " + (json["last"] as? String ?? "")).trimmingCharacters(in: .whitespacesAndNewlines)
         self.name = fullname.isEmpty ? (json["username"] as? String ?? "") : fullname
         self.avatar = json["avatar"] as? String ?? ""

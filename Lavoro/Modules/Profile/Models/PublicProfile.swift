@@ -36,13 +36,17 @@ public struct PublicProfile {
 }
 
 public struct Comment {
+    public let commentId: String
+    public let commentorId: String
     public let username: String
     public let name: String
     public let avatar: String
     public let comment: String
     public let displayTime: String
-    
+
     init(with json:[String: Any]) {
+        self.commentId = json["comment_id"] as? String ?? ""
+        self.commentorId = json["commentor_id"] as? String ?? ""
         let fullname = ((json["first"] as? String ?? "") + " " + (json["last"] as? String ?? "")).trimmingCharacters(in: .whitespacesAndNewlines)
         self.name = fullname.isEmpty ? (json["username"] as? String ?? "") : fullname
         self.avatar = json["avatar"] as? String ?? ""

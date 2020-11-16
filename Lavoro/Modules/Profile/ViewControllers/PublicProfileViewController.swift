@@ -201,6 +201,23 @@ class PublicProfileViewController: BaseViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         .lightContent
     }
+    
+    @objc func moreButtonTap( button: UIButton) {
+        let comment = publicProfile?.comments[button.tag]
+        guard let id = comment?.commentId, !id.isEmpty else {
+            return
+        }
+        reportUser(with: id, postType: .publicProfileComment) { [weak self] (success, message) in
+            if success {
+                self?.fetchData()
+                MessageViewAlert.showSuccess(with: message ?? "")
+            } else {
+                if let message = message, message.count > 0 {
+                    MessageViewAlert.showError(with: message)
+                }
+            }
+        }
+    }
 }
 
 extension PublicProfileViewController: UITableViewDataSource, UITableViewDelegate {
@@ -215,6 +232,8 @@ extension PublicProfileViewController: UITableViewDataSource, UITableViewDelegat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath) as! PublicProfileTableViewCell
         cell.setupCell(with: publicProfile?.comments[indexPath.row])
+        cell.moreButton.tag = indexPath.row
+        cell.moreButton.addTarget(self, action: #selector(moreButtonTap), for: .touchUpInside)
         return cell
     }
     

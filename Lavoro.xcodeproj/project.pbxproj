@@ -154,6 +154,9 @@
 		13D05802245CA0B000227E15 /* IGHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D05801245CA0B000227E15 /* IGHomeViewModel.swift */; };
 		13D05807245CB14A00227E15 /* WorkCheckInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D05806245CB14900227E15 /* WorkCheckInViewController.swift */; };
 		13D05809245D755B00227E15 /* BaseNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D05808245D755B00227E15 /* BaseNavigationViewController.swift */; };
+		DA843EE4256126FD001950D7 /* ReportContentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA843EE3256126FD001950D7 /* ReportContentService.swift */; };
+		DA843EE7256130C8001950D7 /* ReportContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA843EE6256130C8001950D7 /* ReportContentViewController.swift */; };
+		DA843EFC25615259001950D7 /* RegisterationAcceptTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA843EFB25615259001950D7 /* RegisterationAcceptTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -308,6 +311,9 @@
 		13D05806245CB14900227E15 /* WorkCheckInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkCheckInViewController.swift; sourceTree = "<group>"; };
 		13D05808245D755B00227E15 /* BaseNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationViewController.swift; sourceTree = "<group>"; };
 		628B0437F4A76385A5B384A6 /* Pods-Lavoro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lavoro.debug.xcconfig"; path = "Target Support Files/Pods-Lavoro/Pods-Lavoro.debug.xcconfig"; sourceTree = "<group>"; };
+		DA843EE3256126FD001950D7 /* ReportContentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportContentService.swift; sourceTree = "<group>"; };
+		DA843EE6256130C8001950D7 /* ReportContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportContentViewController.swift; sourceTree = "<group>"; };
+		DA843EFB25615259001950D7 /* RegisterationAcceptTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterationAcceptTableViewCell.swift; sourceTree = "<group>"; };
 		FD31EEAD4AE9165735295736 /* Pods_Lavoro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lavoro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -390,6 +396,7 @@
 				136F3249245B032E006939ED /* OnboardingCollectionViewCell.swift */,
 				136F324A245B032E006939ED /* RegisterationTextTableViewCell.swift */,
 				136F324B245B032E006939ED /* RegisterationImageTableViewCell.swift */,
+				DA843EFB25615259001950D7 /* RegisterationAcceptTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -508,6 +515,7 @@
 				137BA476249BBC0E007EFE51 /* PublicProfileViewController.swift */,
 				13825523249E1B6E004BF327 /* SearchViewController.swift */,
 				13825525249E708B004BF327 /* UpdateTaglineViewController.swift */,
+				DA843EE6256130C8001950D7 /* ReportContentViewController.swift */,
 				1395003F24B0E2E900DFBD26 /* SendGroupMessageViewController.swift */,
 				1312C13824C2DD9000837FED /* BlacklistViewController.swift */,
 			);
@@ -654,6 +662,7 @@
 				13B531B7248BFDD500C6C8FF /* BaseModuleService.swift */,
 				1382B7A0248F9C6B0032BE49 /* ImageService.swift */,
 				13BA4E202498E96B002AA103 /* UserService.swift */,
+				DA843EE3256126FD001950D7 /* ReportContentService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1166,6 +1175,7 @@
 				13825524249E1B6E004BF327 /* SearchViewController.swift in Sources */,
 				13BA4E212498E96B002AA103 /* UserService.swift in Sources */,
 				1317B8282460A42400AD9AC8 /* WorkLocationTableViewCell.swift in Sources */,
+				DA843EFC25615259001950D7 /* RegisterationAcceptTableViewCell.swift in Sources */,
 				136F3284245B4D42006939ED /* UIDate+Exts.swift in Sources */,
 				13D05802245CA0B000227E15 /* IGHomeViewModel.swift in Sources */,
 				136EBDA02468034400C27589 /* AddScheduleViewController.swift in Sources */,
@@ -1183,6 +1193,7 @@
 				13D057E9245C9DF800227E15 /* IGRetryButton.swift in Sources */,
 				1382551F249D13C4004BF327 /* UIScreen+Exts.swift in Sources */,
 				1317B82424609D6300AD9AC8 /* WorkLocation.swift in Sources */,
+				DA843EE7256130C8001950D7 /* ReportContentViewController.swift in Sources */,
 				13D057FE245CA09B00227E15 /* IGStoryListCell.swift in Sources */,
 				13CEEBEC24A8885B00C963CD /* ScannerOverlay.swift in Sources */,
 				13C5083124D5DB2400ABA776 /* WhoIsWorkingService.swift in Sources */,
@@ -1217,6 +1228,7 @@
 				1317B81E2460963600AD9AC8 /* MyWorkLocationsViewController.swift in Sources */,
 				137938C72468125200AB2C46 /* AddScheduleType.swift in Sources */,
 				1317B82E2463142900AD9AC8 /* OtherUser.swift in Sources */,
+				DA843EE4256126FD001950D7 /* ReportContentService.swift in Sources */,
 				136F3260245B032F006939ED /* RegisterationViewController.swift in Sources */,
 				13C54C1A2496331500CE1AF6 /* Constants.swift in Sources */,
 				13574E922493D0A600DC1DDF /* RPicker.swift in Sources */,
@@ -1369,21 +1381,21 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Lavoro/Lavoro.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = D6B8D9KYF4;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Lavoro/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 5.7;
+				MARKETING_VERSION = 6.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.scott.lavoro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1403,12 +1415,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 5.7;
+				MARKETING_VERSION = 6.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.scott.lavoro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Lavoro AppStore";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

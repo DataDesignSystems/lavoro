@@ -45,5 +45,7 @@ struct NetworkConfig {
         case getMyCalendar = "api/get-my-calendar/"
         case removeFromMyCalendar = "api/remove-from-my-calendar/"
         case getWhosWorkingListByDate = "api/get-whos-working-list-by-date/"
+        case reportAbuse = "api/report-abuse/"
+
     }
 }

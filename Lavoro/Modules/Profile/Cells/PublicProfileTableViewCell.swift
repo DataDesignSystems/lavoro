@@ -13,6 +13,7 @@ class PublicProfileTableViewCell: UITableViewCell {
     @IBOutlet weak var commentsLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var userImage: UIImageView!
+    @IBOutlet weak var moreButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -36,6 +37,6 @@ class PublicProfileTableViewCell: UITableViewCell {
             userImage.sd_setImage(with: url, completed: nil)
         }
         timeLabel.text = comment.displayTime
+        moreButton.isHidden = (comment.commentorId == AuthUser.getAuthUser()?.id)
     }
-
 }

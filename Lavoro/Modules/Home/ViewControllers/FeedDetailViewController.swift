@@ -208,6 +208,23 @@ class FeedDetailViewController: BaseViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         .lightContent
     }
+    
+    @objc func moreButtonTap( button: UIButton) {
+        let comment = checkInProfile?.comments[button.tag]
+        guard let id = comment?.commentId else {
+            return
+        }
+        reportUser(with: id, postType: .feedDetailComment) { [weak self] (success, message) in
+            if success {
+                self?.fetchData()
+                MessageViewAlert.showSuccess(with: message ?? "")
+            } else {
+                if let message = message, message.count > 0 {
+                    MessageViewAlert.showError(with: message)
+                }
+            }
+        }
+    }
 }
 
 extension FeedDetailViewController {
@@ -235,6 +252,8 @@ extension FeedDetailViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath) as! FeedCommentTableViewCell
         cell.setupCell(with: checkInProfile?.comments[indexPath.row])
+        cell.moreButton.tag = indexPath.row
+        cell.moreButton.addTarget(self, action: #selector(moreButtonTap), for: .touchUpInside)
         return cell
     }
     

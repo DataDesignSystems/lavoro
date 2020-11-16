@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -823,6 +823,47 @@
                                             <outlet property="textField" destination="slN-cG-Khv" id="2vx-CR-Gwf"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="registerationAcceptCell" rowHeight="111" id="OrI-Pc-Psy" customClass="RegisterationAcceptTableViewCell" customModule="Lavoro" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="484" width="414" height="111"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OrI-Pc-Psy" id="NHN-oc-8KA">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="111"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cP0-Yv-scU">
+                                                    <rect key="frame" x="36" y="55" width="342" height="44"/>
+                                                    <color key="backgroundColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="44" id="up8-JC-RTd"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <state key="normal" title="Register">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
+                                                </button>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="CCg-pR-SNs">
+                                                    <rect key="frame" x="36" y="8" width="362" height="39"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <color key="textColor" systemColor="labelColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                </textView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="cP0-Yv-scU" firstAttribute="leading" secondItem="NHN-oc-8KA" secondAttribute="leading" constant="36" id="0Q9-U7-7e7"/>
+                                                <constraint firstItem="CCg-pR-SNs" firstAttribute="top" secondItem="NHN-oc-8KA" secondAttribute="top" constant="8" id="9hv-BV-h2F"/>
+                                                <constraint firstAttribute="bottom" secondItem="cP0-Yv-scU" secondAttribute="bottom" constant="12" id="IEw-sd-KUs"/>
+                                                <constraint firstItem="cP0-Yv-scU" firstAttribute="top" secondItem="CCg-pR-SNs" secondAttribute="bottom" constant="8" id="O5X-Lv-aZz"/>
+                                                <constraint firstItem="CCg-pR-SNs" firstAttribute="leading" secondItem="NHN-oc-8KA" secondAttribute="leading" constant="36" id="kQ9-83-bUJ"/>
+                                                <constraint firstItem="cP0-Yv-scU" firstAttribute="centerX" secondItem="NHN-oc-8KA" secondAttribute="centerX" id="rIc-hp-kf8"/>
+                                                <constraint firstAttribute="trailing" secondItem="CCg-pR-SNs" secondAttribute="trailing" constant="16" id="xCp-9t-RTl"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="registerButton" destination="cP0-Yv-scU" id="qhC-6y-rQv"/>
+                                            <outlet property="termsNconditionsTextView" destination="CCg-pR-SNs" id="gxc-AI-vdd"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="Of6-PU-NkQ" id="EVs-q9-sgF"/>
@@ -847,6 +888,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="iNn-nZ-K9n"/>
                     <connections>
+                        <outlet property="saveButton" destination="u7Q-tc-Ux4" id="8ZK-LR-zFi"/>
                         <outlet property="tableView" destination="FHc-rI-3Ke" id="KVV-KQ-vwc"/>
                     </connections>
                 </viewController>
@@ -861,7 +903,7 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="vLo-Ph-5U7"/>
+        <segue reference="XC3-m1-2II"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="fbIcon" width="20" height="20"/>
@@ -871,6 +913,9 @@
         <image name="lavoroLogo" width="323" height="92"/>
         <image name="onboarding_1" width="375" height="812"/>
         <image name="phoneIcon" width="14" height="20"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

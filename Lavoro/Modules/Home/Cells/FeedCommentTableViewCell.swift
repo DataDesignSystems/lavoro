@@ -13,6 +13,7 @@ class FeedCommentTableViewCell: UITableViewCell {
     @IBOutlet weak var commentsLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var userImage: UIImageView!
+    @IBOutlet weak var moreButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -36,6 +37,7 @@ class FeedCommentTableViewCell: UITableViewCell {
             userImage.sd_setImage(with: url, completed: nil)
         }
         timeLabel.text = comment.displayTime
+        moreButton.isHidden = (comment.id == AuthUser.getAuthUser()?.id)
     }
 
 }

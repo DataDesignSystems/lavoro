@@ -26,6 +26,22 @@ class NetworkService {
         }
     }
     
+    func postRequest(with endpoint: NetworkConfig.Endpoint, parameters: [String: String], authToken: Bool = false, completionHandler: @escaping ((AFDataResponse<Any>) -> ())) {
+        let token = AuthUser.getAuthUser()?.authToken ?? ""
+        guard let url = URL(string: NetworkConfig.baseURL + endpoint.rawValue + (authToken ? token : "")) else {
+            return
+        }
+        AF.request(url, method: .post, parameters: parameters).responseJSON { response in
+            switch response.result {
+            case .success(let json):
+                print(json)
+            case .failure(let error):
+                print(error)
+            }
+            completionHandler(response)
+        }
+    }
+    
     func uploadImage(endpoint: NetworkConfig.Endpoint = .imageUpload, data: Data, imageName: String = "file", authToken: Bool = true, completionHandler: @escaping ((AFDataResponse<Any>) -> ())) {
         let token = AuthUser.getAuthUser()?.authToken ?? ""
         guard let url = URL(string: NetworkConfig.baseURL + endpoint.rawValue + (authToken ? token : "")) else {

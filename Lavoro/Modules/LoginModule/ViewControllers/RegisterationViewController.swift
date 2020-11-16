@@ -24,6 +24,7 @@ enum Fields: String {
 
 class RegisterationViewController: BaseViewController {
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var saveButton: UIButton!
     var user = User()
     var textFieldPlacehoders: [Fields] = [.username, .firstname, .lastname, .password, .email, .phone, .gender, .dob] // ["Username", "Password", "Email", "Phone", "Gender", "Date of birth"]
     let loginService = LoginService()
@@ -47,6 +48,7 @@ class RegisterationViewController: BaseViewController {
     }
     
     func loadUserData() {
+        saveButton.isHidden = !isEditingProfile
         if let authUser = AuthUser.getAuthUser() {
             user.username = authUser.username
             user.password = ""
@@ -142,7 +144,7 @@ class RegisterationViewController: BaseViewController {
 }
 extension RegisterationViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1 + textFieldPlacehoders.count
+        return 1 + textFieldPlacehoders.count + (isEditingProfile ? 0 : 1)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -156,7 +158,7 @@ extension RegisterationViewController: UITableViewDataSource {
             }
             cell.imageSelectionButton.addTarget(self, action: #selector(imageSelectionButton(button:)), for: .touchUpInside)
             return cell
-        } else {
+        } else if indexPath.row <= textFieldPlacehoders.count {
             let cell = tableView.dequeueReusableCell(withIdentifier: "registerationTextCell", for: indexPath) as! RegisterationTextTableViewCell
             cell.textField.isSecureTextEntry = false
             cell.textField.keyboardType = .default
@@ -192,6 +194,11 @@ extension RegisterationViewController: UITableViewDataSource {
             cell.delegate = self
             cell.setupCell(with: text, index: indexPath.row - 1)
             return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "registerationAcceptCell", for: indexPath) as! RegisterationAcceptTableViewCell
+            cell.setupCell()
+            cell.registerButton.addTarget(self, action: #selector(saveButtonAction), for: .touchUpInside)
+            return cell
         }
     }
 }
@@ -199,8 +206,12 @@ extension RegisterationViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 {
             return 260
+        } else if indexPath.row <= textFieldPlacehoders.count {
+            return 75
+        } else {
+            return 120// UITableView.automaticDimension
         }
-        return 75
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

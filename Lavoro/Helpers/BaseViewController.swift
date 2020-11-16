@@ -14,6 +14,7 @@ import IQKeyboardManagerSwift
 class BaseViewController: UIViewController {
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let userService = UserService()
+    let reportContentService = ReportContentService()
     var activityIndicatorView: NVActivityIndicatorView = NVActivityIndicatorView(frame: CGRect.zero, type: .circleStrokeSpin, color: UIColor(hexString: "#FF2D55"), padding: 12.0)
     let chatManager = ALChatManager(applicationKey: ALChatManager.applicationId)
 
@@ -129,6 +130,62 @@ class BaseViewController: UIViewController {
     func disableKeyboardManager() {
         IQKeyboardManager.shared.enable = false
         IQKeyboardManager.shared.enableAutoToolbar = false
+    }
+    
+    func reportUser(with id: String, postType: PostType, completionHandler: @escaping ((Bool, String?) -> ())) {
+        let actionSheetController = UIAlertController(title: nil, message: "Please select", preferredStyle: .actionSheet)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action -> Void in
+        }
+        actionSheetController.addAction(cancelAction)
+        
+        let reportPost = UIAlertAction(title: "Report Post For Objectionable Content", style: .default) { [weak self] action -> Void in
+            let storyBoard: UIStoryboard = UIStoryboard(name: "Profile", bundle: nil)
+            let viewController = storyBoard.instantiateViewController(withIdentifier: "ReportContentViewController") as! ReportContentViewController
+            viewController.reportButtonTitle = "Report Post For Objectionable Content"
+            viewController.onComplete = { [weak self] comments in
+                self?.showLoadingView()
+                self?.reportContentService.reportAbuse(with: id, postType: postType, blockAllUsers: false, abuseType: .report, comments: comments, completionHandler: { [weak self] (success, message) in
+                    self?.stopLoadingView()
+                    completionHandler(success, message)
+                })
+            }
+            self?.tabBarController?.present(viewController, animated: true, completion: nil)
+        }
+        actionSheetController.addAction(reportPost)
+
+        
+        let blockPost = UIAlertAction(title: "Block This Post", style: .default) { [weak self] action -> Void in
+            let storyBoard: UIStoryboard = UIStoryboard(name: "Profile", bundle: nil)
+            let viewController = storyBoard.instantiateViewController(withIdentifier: "ReportContentViewController") as! ReportContentViewController
+            viewController.reportButtonTitle = "Block This Post"
+            viewController.onComplete = { [weak self] comments in
+                self?.showLoadingView()
+                self?.reportContentService.reportAbuse(with: id, postType: postType, blockAllUsers: false, abuseType: .block, comments: comments, completionHandler: { [weak self] (success, message) in
+                    self?.stopLoadingView()
+                    completionHandler(success, message)
+                })
+            }
+            self?.tabBarController?.present(viewController, animated: true, completion: nil)
+        }
+        actionSheetController.addAction(blockPost)
+        
+        let blockUser = UIAlertAction(title: "Block This User", style: .default) { [weak self] action -> Void in
+            
+            let storyBoard: UIStoryboard = UIStoryboard(name: "Profile", bundle: nil)
+            let viewController = storyBoard.instantiateViewController(withIdentifier: "ReportContentViewController") as! ReportContentViewController
+            viewController.reportButtonTitle = "Block This User"
+            viewController.onComplete = { [weak self] comments in
+                self?.showLoadingView()
+                self?.reportContentService.reportAbuse(with: id, postType: postType, blockAllUsers: true, abuseType: .block, comments: comments, completionHandler: { [weak self] (success, message) in
+                    self?.stopLoadingView()
+                    completionHandler(success, message)
+                })
+            }
+            self?.tabBarController?.present(viewController, animated: true, completion: nil)
+        }
+        actionSheetController.addAction(blockUser)
+
+        self.present(actionSheetController, animated: true, completion: nil)
     }
 }
 extension BaseViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {

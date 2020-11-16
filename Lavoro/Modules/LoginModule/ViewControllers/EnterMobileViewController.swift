@@ -36,7 +36,7 @@ class EnterMobileViewController: BaseFacebookViewController {
     
     
     func testNumber() {
-        self.phoneNumberTextField.text = "2243238312"
+        self.phoneNumberTextField.text =  "9852059701"//2243238312"
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -71,10 +71,12 @@ class EnterMobileViewController: BaseFacebookViewController {
     
     @IBAction func facebookLoginTap() {
         self.facebookLogin { [weak self] (success, authUser, isNewUser) in
-            if isNewUser {
-                self?.performSegue(withIdentifier: "registerFlow", sender: self)
-            } else {
-                self?.appDelegate.presentUserFLow()
+            if success {
+                if isNewUser {
+                    self?.performSegue(withIdentifier: "registerFlow", sender: self)
+                } else {
+                    self?.appDelegate.presentUserFLow()
+                }
             }
         }
     }

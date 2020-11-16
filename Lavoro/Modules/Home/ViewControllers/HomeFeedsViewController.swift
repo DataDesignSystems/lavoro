@@ -146,6 +146,20 @@ class HomeFeedsViewController: BaseViewController {
             }
         }
     }
+    
+    @objc func moreButtonTap( button: UIButton) {
+        let feed = feeds[button.tag]
+        reportUser(with: feed.id, postType: .feed) { [weak self] (success, message) in
+            if success {
+                self?.fetchData()
+                MessageViewAlert.showSuccess(with: message ?? "")
+            } else {
+                if let message = message, message.count > 0 {
+                    MessageViewAlert.showError(with: message)
+                }
+            }
+        }
+    }
 
     @IBAction func editProfile() {
         let storyboard = UIStoryboard(name: "Profile", bundle: nil)
@@ -211,6 +225,7 @@ class HomeFeedsViewController: BaseViewController {
         }
     }
 }
+
 extension HomeFeedsViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -228,6 +243,8 @@ extension HomeFeedsViewController: UITableViewDataSource {
         cell.commentButton.addTarget(self, action: #selector(showFeedDetailButtonTap), for: .touchUpInside)
         cell.likeButton.tag = indexPath.row
         cell.likeButton.addTarget(self, action: #selector(likeButtonTap), for: .touchUpInside)
+        cell.moreButton.tag = indexPath.row
+        cell.moreButton.addTarget(self, action: #selector(moreButtonTap), for: .touchUpInside)
         return cell
     }
 }

@@ -25,6 +25,7 @@ class CheckInFeedTableViewCell: UITableViewCell {
     @IBOutlet weak var message: UILabel!
     @IBOutlet weak var headerHeightConstraints: NSLayoutConstraint!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var moreButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -81,5 +82,6 @@ class CheckInFeedTableViewCell: UITableViewCell {
             activityIndicator.startAnimating()
         }
         likeButton.isSelected = object.isLiked
+        moreButton.isHidden = (object.user.id == AuthUser.getAuthUser()?.id)
     }
 }
