@@ -138,7 +138,8 @@ class BaseViewController: UIViewController {
         }
         actionSheetController.addAction(cancelAction)
         
-        let reportPost = UIAlertAction(title: "Report Post For Objectionable Content", style: .default) { [weak self] action -> Void in
+        let reportPostTitle = (postType == .feed) ? "Report Post For Objectionable Content" : "Report Comment For Objectionable Content"
+        let reportPost = UIAlertAction(title: reportPostTitle, style: .default) { [weak self] action -> Void in
             let storyBoard: UIStoryboard = UIStoryboard(name: "Profile", bundle: nil)
             let viewController = storyBoard.instantiateViewController(withIdentifier: "ReportContentViewController") as! ReportContentViewController
             viewController.reportButtonTitle = "Report Post For Objectionable Content"
@@ -153,8 +154,8 @@ class BaseViewController: UIViewController {
         }
         actionSheetController.addAction(reportPost)
 
-        
-        let blockPost = UIAlertAction(title: "Block This Post", style: .default) { [weak self] action -> Void in
+        let blockPostTitle = (postType == .feed) ? "Block This Post" : "Block This Comment"
+        let blockPost = UIAlertAction(title: blockPostTitle, style: .default) { [weak self] action -> Void in
             let storyBoard: UIStoryboard = UIStoryboard(name: "Profile", bundle: nil)
             let viewController = storyBoard.instantiateViewController(withIdentifier: "ReportContentViewController") as! ReportContentViewController
             viewController.reportButtonTitle = "Block This Post"
