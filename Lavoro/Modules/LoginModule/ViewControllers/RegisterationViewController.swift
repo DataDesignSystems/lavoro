@@ -180,6 +180,8 @@ extension RegisterationViewController: UITableViewDataSource {
                 text = user.phone
                 if let authUser = AuthUser.getAuthUser(), authUser.phone.count > 8 {
                     cell.textField.isUserInteractionEnabled = false
+                } else {
+                    cell.textField.isUserInteractionEnabled = true
                 }
             case .gender:
                 text = user.gender

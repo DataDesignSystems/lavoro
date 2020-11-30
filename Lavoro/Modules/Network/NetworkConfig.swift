@@ -16,6 +16,7 @@ struct NetworkConfig {
         case pinRequest = "api/send-pin-request/0/"
         case pinValidation = "api/validate-pin-request/0/"
         case facebookAuthentication = "api/facebook-login/0/"
+        case appleAuthentication = "api/apple-login/0/"
         case updateUserAccountType = "api/update-user-account-type/"
         case updateUserProfile = "api/update-user-profile/"
         case imageUpload = "api/upload-image/"

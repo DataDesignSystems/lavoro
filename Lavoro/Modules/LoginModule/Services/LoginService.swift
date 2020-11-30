@@ -16,6 +16,7 @@ class LoginService: BaseModuleService {
     static let firstName: String = "first"
     static let lastName: String = "last"
     static let facebookToken: String = "facebookToken"
+    static let appleToken: String = "appleToken"
     static let userTypeId: String = "userTypeId"
     static let username: String = "username"
     static let gender: String = "gender"
@@ -76,6 +77,29 @@ class LoginService: BaseModuleService {
     func facebookAuthenticate(with user: FBUser, completionHandler: @escaping ((Bool, String?, AuthUser?, Bool?) -> ())) {
         let params = [LoginService.firstName:user.firstName, LoginService.lastName:user.lastName, LoginService.email:user.email, LoginService.facebookToken:user.token].compactMapValues({ $0 })
         NS.getRequest(with: .facebookAuthentication, parameters: params) { [weak self] (response) in
+            switch response.result {
+            case .success(let json):
+                if self?.getCode(from: json) == 201 {
+                    if let data = json as? [String: Any], let dataObj = data["data"] as? [String: Any], let profileData = dataObj["profile"]  as? [String: Any] {
+                        let isNewUser = !(profileData["didRegister"] as? Bool ?? false)
+                        let authUser = AuthUser(json: profileData, token: self?.getToken(from: json) ?? "")
+                        authUser.saveUser()
+                        completionHandler(true, self?.getMessage(from: json), authUser, isNewUser)
+                    } else {
+                        completionHandler(false, self?.getMessage(from: json), nil, nil)
+                    }
+                } else {
+                    completionHandler(false, self?.getMessage(from: json), nil, nil)
+                }
+            case .failure( _):
+                completionHandler(false, "", nil, nil)
+            }
+        }
+    }
+    
+    func appleAuthenticate(with userIdentifier: String, firstName: String, lastName: String, email: String, completionHandler: @escaping ((Bool, String?, AuthUser?, Bool?) -> ())) {
+        let params = [LoginService.firstName:firstName, LoginService.lastName:lastName, LoginService.email:email, LoginService.appleToken:userIdentifier].compactMapValues({ $0 })
+        NS.getRequest(with: .appleAuthentication, parameters: params) { [weak self] (response) in
             switch response.result {
             case .success(let json):
                 if self?.getCode(from: json) == 201 {

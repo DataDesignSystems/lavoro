@@ -59,7 +59,7 @@
                                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pI3-t0-bCI">
-                                                    <rect key="frame" x="16" y="505" width="381" height="41"/>
+                                                    <rect key="frame" x="16" y="485" width="381" height="41"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="34"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -68,7 +68,7 @@
                                             <constraints>
                                                 <constraint firstItem="CC7-TY-6ns" firstAttribute="top" secondItem="F4H-yg-vin" secondAttribute="top" id="0KD-1D-vpo"/>
                                                 <constraint firstAttribute="bottom" secondItem="2nr-3a-9a0" secondAttribute="bottom" id="Mzi-AY-1I7"/>
-                                                <constraint firstAttribute="bottom" secondItem="pI3-t0-bCI" secondAttribute="bottom" constant="300" id="Svl-uq-BDo"/>
+                                                <constraint firstAttribute="bottom" secondItem="pI3-t0-bCI" secondAttribute="bottom" constant="320" id="Svl-uq-BDo"/>
                                                 <constraint firstAttribute="trailing" secondItem="2nr-3a-9a0" secondAttribute="trailing" id="ZOz-Wc-sNR"/>
                                                 <constraint firstAttribute="bottom" secondItem="CC7-TY-6ns" secondAttribute="bottom" id="bL3-41-G8A"/>
                                                 <constraint firstItem="CC7-TY-6ns" firstAttribute="leading" secondItem="F4H-yg-vin" secondAttribute="leading" id="fh1-tG-me2"/>
@@ -97,6 +97,9 @@
                                     <segue destination="oCi-1T-kfk" kind="show" id="IYb-uf-jdh"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tBo-hz-IOc" customClass="ASAuthorizationAppleIDButton">
+                                <rect key="frame" x="30" y="628" width="354" height="44"/>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kK5-08-rf3">
                                 <rect key="frame" x="30" y="740" width="354" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -119,7 +122,7 @@
                                     <constraint firstAttribute="height" constant="44" id="3yb-RI-bKh"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                <inset key="imageEdgeInsets" minX="-48" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <inset key="imageEdgeInsets" minX="-12" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <state key="normal" title="Connect with Facebook" image="fbIcon">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -128,7 +131,7 @@
                                 </connections>
                             </button>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="YDl-vU-lTb">
-                                <rect key="frame" x="146" y="624.5" width="122.5" height="27.5"/>
+                                <rect key="frame" x="146" y="588.5" width="122.5" height="27.5"/>
                                 <color key="currentPageIndicatorTintColor" red="1" green="0.1764705882352941" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                             </pageControl>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lavoroLogo" translatesAutoresizingMaskIntoConstraints="NO" id="7h7-7z-zDq">
@@ -139,12 +142,15 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="kK5-08-rf3" firstAttribute="leading" secondItem="rc0-XO-475" secondAttribute="leading" constant="30" id="34o-VS-6Gg"/>
+                            <constraint firstItem="tBo-hz-IOc" firstAttribute="height" secondItem="s6e-yl-XaP" secondAttribute="height" id="5db-mJ-j3x"/>
+                            <constraint firstItem="tBo-hz-IOc" firstAttribute="bottom" secondItem="s6e-yl-XaP" secondAttribute="top" constant="-12" id="9nY-zW-9az"/>
                             <constraint firstItem="7h7-7z-zDq" firstAttribute="top" secondItem="rc0-XO-475" secondAttribute="top" constant="72" id="EBm-M0-OYH"/>
                             <constraint firstItem="YDl-vU-lTb" firstAttribute="centerX" secondItem="Vag-bi-QF6" secondAttribute="centerX" id="Em5-69-AwG"/>
                             <constraint firstAttribute="trailing" secondItem="I6e-Gq-iiw" secondAttribute="trailing" id="Ext-cE-93b"/>
-                            <constraint firstItem="s6e-yl-XaP" firstAttribute="top" secondItem="YDl-vU-lTb" secondAttribute="bottom" constant="32" id="FDT-TZ-4kI"/>
+                            <constraint firstItem="tBo-hz-IOc" firstAttribute="top" secondItem="YDl-vU-lTb" secondAttribute="bottom" constant="12" id="FDT-TZ-4kI"/>
                             <constraint firstItem="djS-PJ-URp" firstAttribute="centerX" secondItem="Vag-bi-QF6" secondAttribute="centerX" id="LGX-Uo-PYF"/>
                             <constraint firstItem="s6e-yl-XaP" firstAttribute="centerX" secondItem="Vag-bi-QF6" secondAttribute="centerX" id="MXr-dy-PgD"/>
+                            <constraint firstItem="tBo-hz-IOc" firstAttribute="trailing" secondItem="s6e-yl-XaP" secondAttribute="trailing" id="N3B-f5-A87"/>
                             <constraint firstItem="kK5-08-rf3" firstAttribute="top" secondItem="s6e-yl-XaP" secondAttribute="bottom" constant="12" id="Ovc-m1-2UZ"/>
                             <constraint firstItem="s6e-yl-XaP" firstAttribute="leading" secondItem="rc0-XO-475" secondAttribute="leading" constant="30" id="T2I-pF-DPG"/>
                             <constraint firstItem="rc0-XO-475" firstAttribute="bottom" secondItem="djS-PJ-URp" secondAttribute="bottom" constant="16" id="ZUO-7q-2dB"/>
@@ -154,12 +160,14 @@
                             <constraint firstAttribute="bottom" secondItem="I6e-Gq-iiw" secondAttribute="bottom" id="hlM-va-3ZM"/>
                             <constraint firstItem="I6e-Gq-iiw" firstAttribute="leading" secondItem="Vag-bi-QF6" secondAttribute="leading" id="if8-OQ-Lnj"/>
                             <constraint firstItem="I6e-Gq-iiw" firstAttribute="top" secondItem="Vag-bi-QF6" secondAttribute="top" id="rma-n4-4L7"/>
+                            <constraint firstItem="tBo-hz-IOc" firstAttribute="leading" secondItem="s6e-yl-XaP" secondAttribute="leading" id="rth-RP-ngy"/>
                             <constraint firstItem="7h7-7z-zDq" firstAttribute="leading" secondItem="rc0-XO-475" secondAttribute="leading" constant="24" id="sZ9-tr-hoe"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="jsL-qf-jlf"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="authorizationButton" destination="tBo-hz-IOc" id="Wxu-sF-2Uf"/>
                         <outlet property="collectionView" destination="I6e-Gq-iiw" id="XMl-wS-MSv"/>
                         <outlet property="fbButton" destination="s6e-yl-XaP" id="j0M-7V-E8W"/>
                         <outlet property="pageControl" destination="YDl-vU-lTb" id="Ee7-VF-tbf"/>

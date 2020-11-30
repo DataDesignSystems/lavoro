@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AuthenticationServices
 
 class OnboardingViewController: BaseFacebookViewController {
     @IBOutlet weak var collectionView: UICollectionView!
@@ -16,6 +17,7 @@ class OnboardingViewController: BaseFacebookViewController {
     let onboardingInfo = OnboardingInfo.getOnboardingInfo()
     @IBOutlet weak var pageControl: UIPageControl!
     var work: DispatchWorkItem?
+    @IBOutlet weak var  authorizationButton: ASAuthorizationAppleIDButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,8 +59,11 @@ class OnboardingViewController: BaseFacebookViewController {
     }
     
     func setupView() {
+        collectionView.automaticallyAdjustsScrollIndicatorInsets = false
+        authorizationButton.addTarget(self, action: #selector(handleAuthorizationAppleIDButtonPress), for: .touchUpInside)
         phoneButton.setLayer(cornerRadius: 6.0)
         fbButton.setLayer(cornerRadius: 6.0)
+        authorizationButton.setLayer(cornerRadius: 6.0)
         let prefix = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17, weight: .regular), NSAttributedString.Key.foregroundColor: UIColor(hexString: "7AFFFFFF")]
         let suffix = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17, weight: .regular), NSAttributedString.Key.foregroundColor: UIColor(hexString: "FFFFFFFF")]
         let string = NSMutableAttributedString(string: "Already have an account? ", attributes: prefix)
@@ -117,5 +122,126 @@ extension OnboardingViewController: UICollectionViewDelegate {
 extension OnboardingViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: UIScreen.main.bounds.width , height: UIScreen.main.bounds.height)
+    }
+}
+
+extension OnboardingViewController {
+    func performExistingAccountSetupFlows() {
+        // Prepare requests for both Apple ID and password providers.
+        let requests = [ASAuthorizationAppleIDProvider().createRequest(),
+                        ASAuthorizationPasswordProvider().createRequest()]
+        
+        // Create an authorization controller with the given requests.
+        let authorizationController = ASAuthorizationController(authorizationRequests: requests)
+        authorizationController.delegate = self
+        authorizationController.presentationContextProvider = self
+        authorizationController.performRequests()
+    }
+    
+    @IBAction
+    func handleAuthorizationAppleIDButtonPress() {
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        let request = appleIDProvider.createRequest()
+        request.requestedScopes = [.fullName, .email]
+        
+        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        authorizationController.delegate = self
+        authorizationController.presentationContextProvider = self
+        authorizationController.performRequests()
+    }
+}
+
+extension OnboardingViewController: ASAuthorizationControllerDelegate {
+    /// - Tag: did_complete_authorization
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        switch authorization.credential {
+        case let appleIDCredential as ASAuthorizationAppleIDCredential:
+            
+            // Create an account in your system.
+            let userIdentifier = appleIDCredential.user
+            let fullName = appleIDCredential.fullName
+            let email = appleIDCredential.email
+            
+            // For the purpose of this demo app, store the `userIdentifier` in the keychain.
+            if let email = email {
+                self.saveUserInKeychain(userIdentifier, fullName: fullName, email: email)
+            }
+            let firstName = try? KeychainItem(service: "com.scott.lavoro", account: "firstName").readItem()
+            let lastName = try? KeychainItem(service: "com.scott.lavoro", account: "lastName").readItem()
+            let emailK = try? KeychainItem(service: "com.scott.lavoro", account: "email").readItem()
+            self.showResultViewController(userIdentifier: userIdentifier, firstName: firstName ?? "", lastName: lastName ?? "", email: emailK ?? "")
+
+        
+        case let passwordCredential as ASPasswordCredential:
+        
+            // Sign in using an existing iCloud Keychain credential.
+            let username = passwordCredential.user
+            let password = passwordCredential.password
+            
+            DispatchQueue.main.async {
+                
+            }
+            
+        default:
+            break
+        }
+    }
+    
+    private func saveUserInKeychain(_ userIdentifier: String, fullName: PersonNameComponents?, email: String?) {
+        do {
+            try KeychainItem(service: "com.scott.lavoro", account: "userIdentifier").saveItem(userIdentifier)
+        } catch {
+            print("Unable to save userIdentifier to keychain.")
+        }
+        
+        if let firstName = fullName?.givenName {
+            do {
+                try KeychainItem(service: "com.scott.lavoro", account: "firstName").saveItem(firstName)
+            } catch {
+                print("Unable to save first to keychain.")
+            }
+        }
+        if let lastName = fullName?.familyName {
+            do {
+                try KeychainItem(service: "com.scott.lavoro", account: "lastName").saveItem(lastName)
+            } catch {
+                print("Unable to save familyName to keychain.")
+            }
+        }
+        
+        if let email = email, !email.isEmpty {
+            do {
+                try KeychainItem(service: "com.scott.lavoro", account: "email").saveItem(email)
+            } catch {
+                print("Unable to save email to keychain.")
+            }
+        }
+    }
+    
+    private func showResultViewController(userIdentifier: String, firstName: String, lastName: String, email: String?) {
+        guard let email = email else {
+            return
+        }
+        appleLogin(userIdentifier: userIdentifier, firstName: firstName, lastName: lastName, email: email) { [weak self] (success, authUser, isNewUser) in
+            if success {
+                if isNewUser {
+                    self?.performSegue(withIdentifier: "registerFlow", sender: self)
+                } else {
+                    self?.appDelegate.presentUserFLow()
+                }
+            }
+        }
+    }
+    
+    /// - Tag: did_complete_error
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        // Handle error.
+    }
+}
+
+extension OnboardingViewController: ASAuthorizationControllerPresentationContextProviding {
+    /// - Tag: provide_presentation_anchor
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return self.view.window!
     }
 }

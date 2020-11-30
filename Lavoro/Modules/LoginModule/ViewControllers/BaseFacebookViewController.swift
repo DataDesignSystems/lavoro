@@ -69,4 +69,23 @@ class BaseFacebookViewController: BaseViewController {
         MessageViewAlert.showError(with: Validation.Error.genericError.rawValue)
         completionHandler(false, nil, true)
     }
+    
+    func appleLogin(userIdentifier: String, firstName: String, lastName: String, email: String, completionHandler: @escaping ((Bool, AuthUser?, Bool) -> ())) {
+        self.showLoadingView()
+        self.loginService.appleAuthenticate(with: userIdentifier, firstName: firstName, lastName: lastName, email: email) { [weak self] (success, message, authUser, isNewUser) in
+            self?.stopLoadingView()
+            if success {
+                if isNewUser ?? true {
+                    completionHandler(success, authUser, isNewUser ?? true)
+                } else {
+                    MessageViewAlert.showSuccess(with: message ?? Validation.SuccessMessage.loginSuccessfull.rawValue)
+                    completionHandler(success, authUser, false)
+                }
+            } else if message?.isEmpty ?? true {
+                self?.handleError(message: Validation.Error.genericError.rawValue, completionHandler: completionHandler)
+            } else {
+                self?.handleError(message: message ?? "", completionHandler: completionHandler)
+            }
+        }
+    }
 }
