@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -98,7 +98,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tBo-hz-IOc" customClass="ASAuthorizationAppleIDButton">
-                                <rect key="frame" x="30" y="628" width="354" height="44"/>
+                                <rect key="frame" x="30" y="684" width="354" height="44"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kK5-08-rf3">
                                 <rect key="frame" x="30" y="740" width="354" height="44"/>
@@ -115,7 +115,7 @@
                                     <segue destination="kwB-gf-hZB" kind="show" id="2lQ-Wd-QxR"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s6e-yl-XaP">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s6e-yl-XaP">
                                 <rect key="frame" x="30" y="684" width="354" height="44"/>
                                 <color key="backgroundColor" red="0.047058823529411764" green="0.40000000000000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -131,7 +131,7 @@
                                 </connections>
                             </button>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="YDl-vU-lTb">
-                                <rect key="frame" x="146" y="588.5" width="122.5" height="27.5"/>
+                                <rect key="frame" x="146" y="644.5" width="122.5" height="27.5"/>
                                 <color key="currentPageIndicatorTintColor" red="1" green="0.1764705882352941" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                             </pageControl>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lavoroLogo" translatesAutoresizingMaskIntoConstraints="NO" id="7h7-7z-zDq">
@@ -143,7 +143,7 @@
                         <constraints>
                             <constraint firstItem="kK5-08-rf3" firstAttribute="leading" secondItem="rc0-XO-475" secondAttribute="leading" constant="30" id="34o-VS-6Gg"/>
                             <constraint firstItem="tBo-hz-IOc" firstAttribute="height" secondItem="s6e-yl-XaP" secondAttribute="height" id="5db-mJ-j3x"/>
-                            <constraint firstItem="tBo-hz-IOc" firstAttribute="bottom" secondItem="s6e-yl-XaP" secondAttribute="top" constant="-12" id="9nY-zW-9az"/>
+                            <constraint firstItem="tBo-hz-IOc" firstAttribute="bottom" secondItem="kK5-08-rf3" secondAttribute="top" constant="-12" id="9nY-zW-9az"/>
                             <constraint firstItem="7h7-7z-zDq" firstAttribute="top" secondItem="rc0-XO-475" secondAttribute="top" constant="72" id="EBm-M0-OYH"/>
                             <constraint firstItem="YDl-vU-lTb" firstAttribute="centerX" secondItem="Vag-bi-QF6" secondAttribute="centerX" id="Em5-69-AwG"/>
                             <constraint firstAttribute="trailing" secondItem="I6e-Gq-iiw" secondAttribute="trailing" id="Ext-cE-93b"/>
@@ -231,7 +231,7 @@
                                     <action selector="requestOTPTap" destination="kwB-gf-hZB" eventType="touchUpInside" id="JOb-Lz-5JG"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iMQ-ZK-tKS">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iMQ-ZK-tKS">
                                 <rect key="frame" x="94" y="781" width="226" height="30"/>
                                 <state key="normal" title="Already have an account? Sign In"/>
                                 <connections>
@@ -911,7 +911,7 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="XC3-m1-2II"/>
+        <segue reference="vLo-Ph-5U7"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="fbIcon" width="20" height="20"/>

@@ -234,7 +234,7 @@ extension RegisterationViewController: UITableViewDelegate {
             self.navigationController!.present(alertController, animated: true, completion: nil)
         case .dob:
             let selectedDate = user.dob.toDate(dateFormat: "YYYY-MM-dd") ?? Date()
-            RPicker.selectDate(title: "Select Date", cancelText: "Cancel", selectedDate: selectedDate, maxDate: Date(), didSelectDate: { [weak self] (selectedDate) in
+            RPicker.selectDate(title: "Select Date", cancelText: "Cancel", selectedDate: selectedDate, didSelectDate: { [weak self] (selectedDate) in
                 self?.user.dob = selectedDate.toString(dateFormat: "YYYY-MM-dd")
                 tableView.reloadData()
             })
