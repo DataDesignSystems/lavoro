@@ -57,17 +57,17 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>Allow Camera</string>
+	<string>This app requires use of your camera to capture an image for your profile. This app also uses your camera to scan QR bar codes designed for this app. The camera can also be used for chats and messaging.</string>
 	<key>NSContactsUsageDescription</key>
-	<string>Allow Contacts</string>
+	<string>This app would like to access your contacts for messaging and inviting to use the Lavoro app.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Allow location sharing!!</string>
+	<string>This app uses your location to find points of interest near you when searching for restaurants, bars, and other points of interests.</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Allow MicroPhone</string>
+	<string>This app uses your microphone for voice to text when using our messaging system.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Allow write access</string>
+	<string>This app is asking for access to use your photo library so images can be added to your public avatar and chat messages.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Allow Photos</string>
+	<string>This app is asking for access to use your photo library so images can be added to your public avatar and chat messages.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>

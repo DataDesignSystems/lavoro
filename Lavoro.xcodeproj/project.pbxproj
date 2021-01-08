@@ -1386,7 +1386,7 @@
 				CODE_SIGN_ENTITLEMENTS = Lavoro/Lavoro.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 0;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = D6B8D9KYF4;
 				INFOPLIST_FILE = Lavoro/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1394,7 +1394,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 6.1;
+				MARKETING_VERSION = 6.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.scott.lavoro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1411,7 +1411,7 @@
 				CODE_SIGN_ENTITLEMENTS = Lavoro/Lavoro.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 0;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = D6B8D9KYF4;
 				INFOPLIST_FILE = Lavoro/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1419,7 +1419,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 6.1;
+				MARKETING_VERSION = 6.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.scott.lavoro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
